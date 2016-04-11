@@ -1,0 +1,1071 @@
+// copyright gudTECH
+// example channel module webhook schema
+{
+    "$schema": "http://json-schema.org/draft-04/hyper-schema",
+    "title": "Channel Integration API",
+    "id": "channel-webhook-api",
+    "description": "schema for retailops webhook channel integrations",
+    "stability": "prototype",
+    "strictProperties": true,
+    "type": [
+        "object"
+    ],
+    "definitions": {
+        "client_id": {
+            "type": "integer",
+            "description": "RetailOPS client id",
+            "example": 497 
+        },
+        "ticket": {
+            "type": "string",
+            "description": "authorization ticket",
+            "example": "1,1,0,1456437061,315576060,111,WEIhLHAyXHpjZA27OdENwAn1_fHx8fGA-ekng7lhkAvc27Uhnxgd4PZx4VnR_SJ-K85M_5dTAChTXgI3RsmGvfTbaOZ1_U-YJw3G0w1UVWFZ2EC83wjO6bmp91VZdR0tT_b2R1kK4qO1QTJrBk53ZyIuidsOa13lihh8VMgAvSDqCnTwxV2NVV7oN4v-h_tQtpUvklfbW1bnULR3bbaDvoOlb1CVQ_3BdNdo1MaAh-JxrRjf7MkzcHQYs3dN0GuaBZ1KBHvLdrLmGerNYv2p6AMC-fu8YeuukUU3Q6RL9AtF5AA6TPhfwfBM5r05B7QZiSEGySF65FCcfQFT_6lMxQ"
+        },
+        //this order object my be replaceable by channel_order definition  
+        "order": {
+            "type": [
+                "object"
+            ],
+            "description": "order object",
+            "properties": {
+                "shipping_amt": {
+                    "type": "integer",
+                    "example": "3"
+                },
+                "calc_mode": { 
+                    "type": "string",
+                    "example": "order"
+                },
+                "channel_date_created": {
+                    //EX 1460142547,
+                },
+                "payment":  { 
+                    "type": "object",
+                    "params": {
+                        "channel_refnum": {
+                            "type": "integer"
+                            //EX "496"
+                        },
+                        "payment_type": {
+                            "type": "string"
+                            //"Visa"   
+                        }
+                    },
+                    "amount": {
+                        "type": "number"
+                        //EX "1.32"
+                    },
+                    "payment_type": { // had to change response to payment_type from type because "type" is a resrved keyword in JOSN schema
+                        "type": "string"
+                        // EX "charge"
+                    }
+                },
+                "tax_amt": {
+                    "type": "number"
+                    //EX "0.07",
+                },
+                "bill_addr": { 
+                    "$ref": "#/definitions/address"
+                },
+                "gift_message": {
+                    "type": "string"
+                },
+                 "ship_addr": {
+                    "$ref": "#/definitions/address"
+                },
+                "channel_refnum": {
+                    "type": "integer" 
+                    //"496"
+                },
+                "customer": {
+                    "$ref": "#/definitions/customer"
+                },
+                "discount_amt": {
+                    "type": "integer"
+                    //0
+                },
+                "shipcode": {
+                    "type": "string"
+                    //"Ground (5-7 days)"
+                },
+                "ip_address": {
+                    "type": "string"
+                    //"68.7.2.222"
+                },
+                "attributes": {
+                    "type": "string" // is this correct type?
+                    //????
+                },
+                "items": {
+                    "type": [
+                        "array"
+                    ],
+                    "items": {
+                        "$ref": "#/definitions/order_item" //return a list of order items
+                    }
+                }
+            }
+        },
+        "order_item":{
+            "type": [
+                "object"
+            ],
+            "description": "order item",
+            "properties": {
+                "channel_refnum": {
+                     "type": "integer"
+                    //"0"
+                },
+                "sku": {
+                     "type": "integer"
+                    //"299"
+                },
+                "unit_tax": {
+                     "type": "number" 
+                    //0
+                },
+                "quantity": {
+                     "type": "integer"
+                    //1
+                },
+                "sku_title": {
+                     "type": "sring"
+                    //"test"
+                },
+                "unit_price": {
+                     "type": "number"
+                    //"1"
+                }
+            }
+        },
+        "address": {
+            "type": [
+                "object"
+            ],
+            "description": "adress object",
+            "properties": {
+                "state_match": {
+                    "type": "string"
+                    // "CA"
+                },
+                "country_match": {
+                    "type": "string"
+                    //"US United States"
+                },
+                "last_name": {
+                    "type": "string"
+                    //"Schell"
+                },
+                "address2": {
+                    "type": "string"
+                    //""   
+                },
+                "city": {
+                    "type": "string"
+                    //"San Diego"
+                },
+                "postal_code": {
+                    "type": "string"
+                    //"92101"
+                },
+                "address1": {
+                    "type": "string"
+                    //"123 Main St"
+                },
+                "company": {
+                    "type": "string"
+                    //EX "gudTECH"
+                },
+                "first_name": {
+                    "type": "string"
+                    //EX "Justin"
+                }
+            }
+        },
+        "customer": {
+            "type": "object",
+            "description": "customer object",
+            "properties": {
+                "email_address": {
+                    "type": "string"
+                    //"justin@gudtech.com"
+                },
+                "phone_number": {
+                    "type": "string"
+                    //"5555555555"
+                },
+                "first_name": {
+                    "type": "string"
+                    //"Justin"
+                },
+                "last_name": {
+                    "type": "string"
+                    //"Schell"
+                }
+            }
+        },
+        "channel": {
+            "type": "object",
+            "description": "channel object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "example": "21"   
+                },
+                "params": {
+                    "type": "object",
+                    "properties": {
+                        "StoreID": {
+                            "type": "string", 
+                            "example": "yhst-18909142938879050075142"
+                        },
+                        "next_order_refnum": {
+                            "type": "integer", 
+                            "example": 496
+                        },
+                        "order_ack_status_id": {
+                            "type": "string", 
+                            "example": "32"
+                        },
+                        "order_fulfilled_status_id": {
+                            "type": "string", 
+                            "example": "34"
+                        },
+                        "order_in_filfillment_status_id": {
+                            "type": "string", 
+                            "example": "33"
+                        },
+                        /*
+                         * the following properties are described / used by order_complete
+                         */
+                        "email_return": {
+                            "type": "integer" //bool 
+                        },
+                        "inv_suspended_instock": {
+                            "type": "integer" //bool? 
+                        },
+                        "unset_other_media": {
+                            "type": "integer" //bool? 
+                        },
+                        "import_order_attrs": {
+                            "type": "string" //NOTE doublecheck, example had empty string
+                        },
+                        "base_uri": {
+                            "type": "string", //TODO might need to define 
+                            "example": "http://172.16.4.130/magento1921"
+                        },
+                        "express_configurable_super_links":{
+                            "type": "integer" //bool? 
+                        },
+                        "unset_other_attributes": {
+                            "type": "integer" //bool? 
+                        },
+                        "push_cancel": {
+                            "type": "integer" //bool? 
+                        },
+                        "inv_suspended_mode": {
+                            "type": "integer" //bool? NOTE: noty sure of type bnecause example was "NULL"
+                        },
+                        "email_invoice": {
+                            "type": "integer" //bool? 
+                        },
+                        "email_tracking": {
+                            "type": "integer" //bool? 
+                        },
+                        /*
+                        * required params for Catpush Transmit
+                        */
+                        "breakdown_inventory": {
+                            "type": "integer" //bool? 
+                        },
+                        "tenant": {
+                            "type": "string",
+                            "example": "14961"
+                        },
+                        "appKey": {
+                            "type": "string",
+                            "example":"dripclub.retailops.0.1.0.Release"
+                        }
+                    } 
+                } 
+            }
+        },
+        "channel_payment": {
+            "type": "object",
+            "description": "channel payment object",
+            "properties": {
+                "channel_id": {
+                    "type": "integer"
+                    //12
+                },
+                "captures_are_external": {
+                    "type": "integer"
+                    //1
+                },
+                "unsettled": {
+                    "type": "integer"
+                    //0
+                },
+                "settled": {
+                    "type": "integer"
+                    // 35
+                },
+                "charged": {
+                    "type": "integer"
+                    // 35
+                },
+                "captured": {
+                    "type": "integer"   
+                    // 0
+                },
+                "captures_are_deferred": {
+                    "type": "integer"
+                    // 0
+                },
+                "voided": {
+                    "type": "integer"
+                    // 0
+                },
+                "id": {
+                    "type": "string"
+                    // "6"
+                },
+                "method": {
+                    "type": "string"
+                    // "channel"
+                },
+                "credited": {
+                    "type": "integer"
+                    // 0
+                },
+                "module": {
+                    "type": "string"
+                    // "Channel"
+                },
+                "available": {
+                    "type": "integer"
+                    // 35
+                }
+            }
+        },
+        "shipment": {
+             "type": [
+                "object"
+            ],
+            "description": "shipment object",
+            "properties": {
+                "id": {
+                    "type": "string" 
+                },
+                "packages": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/package"
+                    }
+                }
+            }
+        },
+        "package": {
+            "type": [
+                "object"
+            ],
+            "description": "package object",
+            "properties": {
+                "class_name": {
+                    "type": "string",
+                    "example": "Standard"
+                },
+                "carrier_code": {
+                    "type": "string", 
+                    "example": "WILLCALL"
+                },
+                "carrier_name": {
+                    "type": "string",
+                    "example": "WillCall"
+                },
+                "tracking_number": {
+                    "type": "string" //NOTE: is this correct type? example was "null"
+                    //null
+                },
+                "mapped_shipcode": {
+                    "type": "string" //NOTE: is this correct type? example was "null"
+                    // null
+                },
+                "date_shipped": {
+                    "type": "string", 
+                    "example": "2016-04-08T21:13:11Z"
+                },
+                "carrier_class_code": {
+                    "tyepe": "string",
+                    "example": "WILLCALL"
+                },
+                "weight":{ 
+                    "type": "string", 
+                    "example": "1"
+                },
+                "id": {
+                    "type": "string", 
+                    "example": "370"
+                },
+                "carrier_class_name": {
+                    "type": "string", 
+                    "example": "WillCall Standard"
+                },
+                "ship_items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ship_item" 
+                    }
+                }
+            }
+        },
+        "ship_item": {
+            "type": "object",
+            "description": "shipment item object",
+            "properties": { 
+                "item_giftwrap_amt": {
+                    "type": "integer"   
+                },
+                "quantity": {
+                    "type": "integer"   
+                },
+                "item_product_amt": {
+                    "type": "string"   
+                },
+                "item_recycling_amt": {
+                    "type": "integer"   
+                },
+                "channel_refnum": {
+                    "type": "string"   
+                },
+                "item_shipping_tax_amt": {
+                    "type": "integer"   
+                },
+                "item_subtotal_amt": {
+                    "type": "integer"   
+                },
+                "sku_num": {
+                    "type": "string"   
+                },
+                "item_tax_amt":{
+                    "type": "integer"   
+                },
+                "id": {
+                    "type": "string"   
+                },
+                "item_shipping_amt": {
+                    "type": "integer"   
+                },
+                "channel_order_refnum": {
+                    "type": "string"   
+                },
+                "item_giftwrap_tax_amt": {
+                    "type": "integer"   
+                }
+            }
+        },
+        "channel_order": {
+            "type": [
+                "object"
+            ],
+            "description": "channel order object",
+            "properties": {
+                "channel_refnum": {
+                    "type": "string"
+                },
+                "channel_payment": {
+                    "type": "array",
+                    "items": { 
+                        "$ref": "#/definitions/channel_payment"
+                    }
+                },
+                "grand_total": {
+                    "type": "string"
+                    // "65"
+                },
+                "unshipped_items_ref": {
+                    "type": "array",
+                    "items": {
+                        // TODO: what type will array contain? order_item id's???? items will need to be defined!
+                    }   
+                },
+                "payment_series_id": {
+                    "type": "string"
+                    // "2573"
+                },
+                "from_counterparty_rate": {
+                    "type": "integer"                            
+                    // 1
+                },
+                "ship_service_name": {
+                    "type": "string"
+                    // "Will Call"
+                },
+                "shipments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/shipment"
+                    }
+                },
+                "id": {
+                    "type": "string" //note this was defined as string in example. Should it be an int?
+                    // "4898"
+                },
+                "payment_status": {
+                    "type": "object",
+                    "$ref": "#/definitions/payment_status" 
+                }
+            }
+        },
+        "payment_status": {
+            "type": "object",
+            "description": "status of channel order payment",
+            "properties": {
+                "success": {
+                    "type": "integer"
+                },
+                "unsettled_external": {
+                    "type": "integer"
+                },
+                "unsettled_deferred": {
+                    "type": "integer"
+                },
+                "unsettled": {
+                    "type": "integer"
+                },
+                "settled": {
+                    "type": "integer"
+                },
+                "charged": {
+                    "type": "integer"
+                },
+                "captured": {
+                    "type": "integer"
+                },
+                "authed": {
+                    "type": "integer"
+                },
+                "credited": {
+                    "type": "integer"
+                },
+                "available": {
+                    "type": "integer"
+                },
+                "by_account": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/payment_by_account" 
+                    }
+                }
+            }
+        },
+        "payment_by_account": {
+            "type": "object",
+            "description": "payment by account for channel order",
+            "properties": {
+                "channel_id": {
+                    "type": "integer"
+                },
+                "captures_are_external": {
+                    "type": "integer"
+                },
+                "unsettled": {
+                    "type": "integer"
+                },
+                "settled": {
+                    "type": "integer"
+                },
+                "charged": {
+                    "type": "integer"
+                },
+                "captured": {
+                    "type": "integer"
+                },
+                "captures_are_deferred": {
+                    "type": "integer"
+                },
+                "voided": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "credited":{
+                    "type": "integer"
+                },
+                "module": {
+                    "type": "string"
+                },
+                "available": {
+                    "type": "integer"
+                }
+            } 
+        }
+    },
+    "links": [ //The Links array is where we define service endpoints
+        {
+            "description": "Retreive an order.", // Order_Fetch request
+            "method": "POST",
+            "rel": "instances", // TODO: check proper use of rel keywords: "create, destroy, self, instances, or update"
+            "href": "/order/fetch",
+            "title": "Fetch",
+            "schema": {
+                "properties": {
+                    "headers": {
+                        "type": "object",
+                        "properties": {
+                            "client_id": {
+                                "$ref": "#/definitions/client_id" 
+                            },
+                            "ticket": {
+                                "$ref": "#/definitions/ticket"
+                            }
+                        },
+                        "required": [
+                            "client_id",
+                            "ticket"
+                        ]
+                    },
+                    "version": {
+                        "type": "integer"
+                    },
+                    "action": { 
+                        "type": "string",
+                        "example": "Aabaco.orderpull.order_fetch" //DO we need action to be defined by third party?
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "single": {
+                                "type": "integer"
+                            },
+                            "order": { //TODO: double check structure of order in this method
+                                "type": "object",
+                                "properties": {
+                                    "channel_refnum": {
+                                        "type": "integer"
+                                    }
+                                }
+                            },
+                            "client_id": {
+                                "type": "integer"
+                            },
+                            "channel": {
+                                "type": "object",
+                                "properties": {
+                                    "params": {
+                                        "type": "object",
+                                        "properties": {
+                                            "StoreID": {
+                                                "type": "string"
+                                            },
+                                            "next_order_refnum": {
+                                                "type": "integer"
+                                            },
+                                            "order_ack_status_id": {
+                                                "type": "string"
+                                            },
+                                            "order_fulfilled_status_id": {
+                                                "type": "string"
+                                            },
+                                            "order_in_filfillment_status_id": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "id": {
+                                        "type": "integer"
+                                    }
+                                }
+                            },
+                            "page_state": {
+                                "type": "null"
+                            },
+                            "max_page_size": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                },
+                "required": [
+                    "headers",
+                    "version",
+                    "action",
+                    "data"
+                ]
+            }, 
+            "targetSchema": { 
+                "type": "object",
+                "properties":  {
+                    "next_page_state": {
+                        "type": "integer" 
+                    },
+                    "next_order_refnum": {
+                        "type": "integer" 
+                    },
+                    "orders": {    
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/order" 
+                        }
+                    }   
+                }
+            }
+        }, // end Order_Fetch request
+        {
+            "description": "Order Acknowledgement request",// Order_Ack request
+            "method": "POST",
+            "rel": "fetch",//create, destroy, self, instances, or update
+            "href": "your_service_endpoint.com/order/acknowledge",
+            "schema": {
+                "properties": {
+                    "headers": {
+                        "type": "object",
+                        "properties": {
+                            "client_id": {
+                                "$ref": "#/definitions/client_id" 
+                            },
+                            "ticket": {
+                                "$ref": "#/definitions/ticket"
+                            }
+                        },
+                        "required": [
+                            "client_id",
+                            "ticket"
+                        ]
+                    },
+                    "version": {
+                        "type": "integer"
+                    },
+                    "action": {
+                        "type": "string",
+                        "description": "name of RetailOPS action",
+                        "example":  "Aabaco.orderpull.order_ack" 
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "order": {
+                                "acks": [ //TODO define acks array (array of order ids)
+                                    "496"
+                                ]
+                            },
+                            "client_id": {
+                                "$ref": "#/definitions/client_id"
+                            },
+                            "channel": {
+                                "$ref": "#/definitions/channel"
+                            }
+                        }
+                    } 
+                }
+            },
+            "targetSchema": { //"Order Ack response"
+                "type": "object",
+                "properties":  {
+                    "events": { 
+                        "type": "array" 
+                        //What should the events array contain?, example was empty
+                    }
+                }
+            } 
+        },
+        {
+            "description": "Order Cancel request",
+            "method": "POST",
+            "rel": "fetch",
+            "href": "your_service_endpoint.com/order/cancel",
+            "properties": {
+                "headers": {
+                    "type": "object",
+                    "properties": {
+                        "client_id": {
+                            "$ref": "#/definitions/client_id" 
+                        },
+                        "ticket": {
+                            "$ref": "#/definitions/ticket"
+                        }
+                    },
+                    "required": [
+                        "client_id",
+                        "ticket"
+                    ]
+                },
+                "version": {
+                    "type": "integer"
+                },
+                "action": {
+                    "type": "string",
+                    "description": "name of RetailOPS action",
+                    "example":  "MagentoExtension.order.order_cancel" 
+                },
+                 "data": {
+                    "type": "object",
+                    "properties": {
+                        "order": {
+                            "type": "object",
+                            "$ref": "#/definitions/channel_order"
+                        },
+                        "channel": {
+                            "type": "object",
+                            "$ref": "#/definitions/channel"
+                            //TODO: define reguired channel params for this method!
+                            }
+                    }
+                 }
+            },
+            "targetSchema": {
+                "type": "object",
+                "properties":  {
+                    "events": { 
+                        "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "handle": {
+                                        "type": "string",
+                                        "example": "channel_cancel"
+                                    }
+                                }
+                            }   
+                    }
+                }
+            }
+        }, 
+        {
+            "description": "Order Complete request",
+            "method": "POST",
+            "rel": "fetch",
+            "href": "your_service_endpoint.com/order/complete",
+            "schema": {
+                "properties": {
+                    "headers": {
+                        "type": "object",
+                        "properties": {
+                            "client_id": {
+                                "$ref": "#/definitions/client_id" 
+                            },
+                            "ticket": {
+                                "$ref": "#/definitions/ticket"
+                            }
+                        },
+                        "required": [
+                            "client_id",
+                            "ticket"
+                        ]
+                    },
+                    "version": {
+                        "type": "integer"
+                    },
+                    "action": { 
+                        "type": "string",
+                        "example": "MagentoExtension.order.order_complete" 
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "order": {
+                                "type": "object",
+                                "$ref": "#/definitions/channel_order"
+                            },
+                            "channel": {
+                                 "type": "object",
+                                 "$ref": "#/definitions/channel" //TODO: define rewuired channel params for this method
+                            } 
+                        } 
+                    }
+                }
+            },
+            "targetSchema": {
+                "type": "object",
+                "properties":  {
+                    "events": {
+                        "type": "array",
+                        "items": {
+                            "handle": {
+                                "type": "string",
+                                "example": "channel_complete"
+                            }
+                        } 
+                    }
+                }
+            }
+        },
+        {
+            "description": "Catpush Config request",
+            "method": "POST",
+            "rel": "instances", //TODO: check rel
+            "href": "your_service_endpoint.com/catpush/config",
+            "schema": {
+                "properties": {
+                    "headers": {
+                        "type": "object",
+                        "properties": {
+                            "client_id": {
+                                "$ref": "#/definitions/client_id" 
+                            },
+                            "ticket": {
+                                "$ref": "#/definitions/ticket"
+                            }
+                        },
+                        "required": [
+                            "client_id",
+                            "ticket"
+                        ]
+                    },
+                    "version": {
+                        "type": "integer"
+                    },
+                    "action": { 
+                        "type": "string",
+                        "example": "Mozu.product.catpush_config" 
+                    },
+                    "data": {
+                        //TODO: check if anything should go in data, example passed empty object
+                    }
+                }
+            },
+            "targetSchema": {
+                "type": "object",
+                "properties": {
+                    "fanout": {
+                        "type": "string",
+                        "example": "relatives" 
+                    }
+                } 
+            }
+        },
+        {
+            "description": "Catpush Transmit request",
+            "method": "POST",
+            "rel": "instances",//TODO: check proper rel
+            "href": "your_service_endpoint.com/catpush/transmit",
+            "schema": {
+                "properties": {
+                    "headers": {
+                        "type": "object",
+                        "properties": {
+                            "client_id": {
+                                "$ref": "#/definitions/client_id" 
+                            },
+                            "ticket": {
+                                "$ref": "#/definitions/ticket"
+                            }
+                        },
+                        "required": [
+                            "client_id",
+                            "ticket"
+                        ]
+                    },
+                    "version": {
+                        "type": "integer"
+                    },
+                    "action": { 
+                        "type": "string",
+                        "example": "Mozu.product.catpush_transmit" 
+                    },
+                    "data": {
+                        "feed": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "Product": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/product" //TODO: define product object
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "client_id": {
+                            "$ref": "#/definitions/client_id"
+                        },
+                        "channel": {
+                            "$ref": "#/definitions/channel" //TODO: define required channel params for this request method
+                        }
+                    }
+                }
+            },
+            "targetSchema": {
+                // TODO: define Catpush Transmit response
+            }
+        },
+        {
+            "description": "Invpush Transmit request",
+            "method": "POST",
+            "rel": "instances",
+            "href": "your_service_endpoint.com/invpush/",
+            "schema": {
+                "properties": {
+                    
+                }
+            },
+            "targetSchema": {
+                // TODO: define Invpush Transmit response
+            }
+        },
+        {
+            "description": "Capture Channel Payments request",
+            "method": "POST",
+            "rel": "instances",
+            "href": "your_service_endpoint.com/payments/capture",
+            "schema": {
+                "properties": {
+                    
+                }
+            },
+            "targetSchema": {
+                // TODO: define Channel Payments response
+            }
+        },
+        {
+            "description": "Shipment Submit request",
+            "method": "POST",
+            "rel": "push",
+            "href": "your_service_endpoint.com/shipment/submit",
+            "schema": {
+                "properties": {
+                    
+                }
+            },
+            "targetSchema": {
+                // TODO: define Shipment Submit response
+            }
+        },
+        {
+            "description": "Items Returned request",
+            "method": "POST",
+            "rel": "push",
+            "href": "your_service_endpoint.com/order/items/return",
+            "schema": {
+                "properties": {
+                    
+                }
+            },
+            "targetSchema": {
+                // TODO: define Items Returned response
+            }
+        },
+        {
+            "description": "Writeback request",
+            "method": "POST",
+            "rel": "push",
+            "href": "your_service_endpoint.com/payments/writeback",
+            "schema": {
+                "properties": {
+                    
+                }
+            },
+            "targetSchema": {
+                // TODO: define Writeback response
+            }
+        }
+    ] // "links" end
+}
