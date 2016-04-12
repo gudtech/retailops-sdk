@@ -847,6 +847,67 @@
                 }
             }
         },
+        "writeback_request_item": {
+            "type": ["object"],
+            "description": "line item in line_item array of writeback request",
+            "properties": {
+                "apportioned_ship_amt": {
+                    "type": ["string"],
+                    "description": "???",
+                    "example": "5"
+                },
+                "estimated_extended_cost": {
+                    "type": ["string"],
+                    "description": "??",
+                    "example": "0.00"
+                },
+                "sku": {
+                    "type": ["string"],
+                    "description": "sku number",
+                    "example": "132"
+                },
+                "quantity": {
+                    "type": ["string"],
+                    "description": "quantity",
+                    "example": "2"
+                },
+                "estimated_ship_date": {
+                    "type": ["integer"],
+                    "description": "estimated ship date in unix time",
+                    "example": 1460151590
+                },
+                "direct_ship_amt": {
+                    "type": ["string"],
+                    "description": "number of items direct-shipped(?)",
+                    "example": "5"
+                },
+                "corr": {
+                    "type":  ["string"],
+                    "description": "????",
+                    "example": "7397"
+                },
+                "removed": {
+                    "type": ["integer"], //not sure if correct, example was "NULL"
+                    "description": "??",
+                    "example": null
+                },
+                "estimated_cost": {
+                    "type": ["string"],
+                    "description": "estimated cost of shipment(?)",
+                    "example": "0"
+                },
+                "estimated_unit_cost": {
+                    "type": ["string"],
+                    "description": "estimated unit cost", 
+                    "example": "0"
+                },
+                "unit_price": {
+                    "type": ["string"],
+                    "description": "unit price",
+                    "example": "30"
+                }
+            }
+        },
         "credit_items_ref": {
             "type": ["object"],
             "description": "credited item ref",
@@ -939,7 +1000,7 @@
             }
         }
     },
-    "links": [ //The Links array is where we define service endpoints
+    "links": [ 
         {
             "description": "Retreive an order.", // Order_Fetch request
             "method": "POST",
@@ -1030,11 +1091,11 @@
                     }   
                 }
             }
-        }, // end Order_Fetch request
+        }, 
         {
-            "description": "Order Acknowledgement request",// Order_Ack request
+            "description": "Order Acknowledgement request",
             "method": "POST",
-            "rel": "fetch",//create, destroy, self, instances, or update
+            "rel": "fetch",
             "href": "your_service_endpoint.com/order/acknowledge",
             "schema": {
                 "properties": {
@@ -1065,11 +1126,11 @@
                         "type": ["object"],
                         "properties": {
                             "order": {
-                                "acks": { //TODO define acks array (array of order ids)
+                                "acks": { 
                                     "type" : ["array"],
-                                    "description": "array of order_ack_status_ids", //todo check that this is corrcet description
+                                    "description": "array of order_ack_status_ids", 
                                     "items": {
-                                        "type": ["string"] //acks in example were passed in string array
+                                        "type": ["string"] 
                                     }
                                 }
                             },
@@ -1077,7 +1138,7 @@
                                 "$ref": "#/definitions/client_id"
                             },
                             "channel": {
-                                "$ref": "#/definitions/channel"//,TODO: define required params for this request
+                                "$ref": "#/definitions/channel" //,TODO: define required params for this request
                                 // "required": [
                                 //     "StoreID",
                                 //     "next_order_refnum",
@@ -1090,7 +1151,7 @@
                     } 
                 }
             },
-            "targetSchema": { //"Order Ack response"
+            "targetSchema": { 
                 "type": ["object"],
                 "properties":  {
                     "events": {
@@ -1142,7 +1203,6 @@
                         "channel": {
                             "type": ["object"],
                             "$ref": "#/definitions/channel"
-                            //TODO: define reguired channel params for this method!
                             }
                     }
                  }
@@ -1233,7 +1293,7 @@
         {
             "description": "Catpush Config request",
             "method": "POST",
-            "rel": "instances", //TODO: check rel
+            "rel": "instances", 
             "href": "your_service_endpoint.com/catpush/config",
             "schema": {
                 "properties": {
@@ -1260,7 +1320,6 @@
                         "example": "Mozu.product.catpush_config" 
                     },
                     "data": {
-                        //TODO: check if anything should go in data, example passed empty object
                     }
                 }
             },
@@ -1277,7 +1336,7 @@
         {
             "description": "Catpush Transmit request",
             "method": "POST",
-            "rel": "instances",//TODO: check proper rel
+            "rel": "instances", 
             "href": "your_service_endpoint.com/catpush/transmit",
             "schema": {
                 "properties": {
@@ -1721,7 +1780,81 @@
             "href": "your_service_endpoint.com/payments/writeback",
             "schema": {
                 "properties": {
-                    
+                    "headers": {
+                        "type": ["object"],
+                        "properties": {
+                            "client_id": {
+                                "$ref": "#/definitions/client_id" 
+                            },
+                            "ticket": {
+                                "$ref": "#/definitions/ticket"
+                            }
+                        },
+                        "required": [
+                            "client_id",
+                            "ticket"
+                        ]
+                    },
+                    "version": {
+                        "type": ["integer"],
+                        "description": "Version number of API action",
+                        "example": 1
+                    },
+                    "action": { 
+                        "type": ["string"],
+                        "description": "name of api action",
+                        "example": "MagentoExtension.order.writeback" 
+                    },
+                    "data": {
+                        "type": ["object"],
+                        "properties": {
+                            "rmas": {
+                                "type": ["array"],
+                                "items": {
+                                    "type": ["object"]//not sure what type is posted in the RMAS array
+                                }
+                            },
+                            "line_items": {
+                                "type": ["array"],
+                                "description": "line items in writeback request",
+                                "items": {
+                                    "$ref": "#/definitions/writeback_request_item"
+                                }
+                            },
+                            "order_info": {
+                                "type": ["object"],
+                                "description": "",
+                                "properties": {
+                                    "shipping_amt": {
+                                        "type": ["string"],
+                                        "description": "",
+                                        "example": "5"
+                                    },
+                                    "discount_amt": {
+                                        "type": ["string"],
+                                        "description": "",
+                                        "example": "0"
+                                    },
+                                    "tax_amt": {
+                                        "type": ["string"],
+                                        "description": "",
+                                        "example": "0"
+                                    },
+                                    "direct_tax_amt": {
+                                        "type": ["string"],
+                                        "description": "",
+                                        "example": "0"
+                                    }
+                                }
+                            },
+                            "order":{
+                                "$ref": "#/definitions/channel_order"
+                            },
+                            "channel":{
+                                "$ref": "#/definitions/channel"
+                            }
+                        }
+                    }
                 }
             },
             "targetSchema": {
@@ -1761,5 +1894,5 @@
                 }
             }
         }
-    ] // "links" end
+    ]
 }
