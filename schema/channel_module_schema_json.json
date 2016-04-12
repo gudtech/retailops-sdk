@@ -1,5 +1,3 @@
-// copyright gudTECH
-// example channel module webhook schema
 {
     "$schema": "http://json-schema.org/draft-04/hyper-schema",
     "title": "Channel Integration API",
@@ -37,64 +35,66 @@
                     "example": "order"
                 },
                 "channel_date_created": {
-                    //EX 1460142547,
+                    "type": "string", 
+                    "example": "1460142547"
                 },
                 "payment":  { 
                     "type": "object",
                     "params": {
                         "channel_refnum": {
-                            "type": "integer"
-                            //EX "496"
+                            "type": "integer",
+                            "example":  "496"
                         },
                         "payment_type": {
-                            "type": "string"
-                            //"Visa"   
+                            "type": "string",
+                            "example": "Visa"   
                         }
                     },
                     "amount": {
-                        "type": "number"
-                        //EX "1.32"
+                        "type": "number",
+                        "example": "1.32"
                     },
                     "payment_type": { // had to change response to payment_type from type because "type" is a resrved keyword in JOSN schema
-                        "type": "string"
-                        // EX "charge"
+                        "type": "string",
+                        "example": "charge"
                     }
                 },
                 "tax_amt": {
-                    "type": "number"
-                    //EX "0.07",
+                    "type": "number",
+                    "example": "0.07"
                 },
                 "bill_addr": { 
                     "$ref": "#/definitions/address"
                 },
                 "gift_message": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Happy Birthday!"
                 },
                  "ship_addr": {
                     "$ref": "#/definitions/address"
                 },
                 "channel_refnum": {
-                    "type": "integer" 
-                    //"496"
+                    "type": "string",
+                    "example": "496"
                 },
                 "customer": {
                     "$ref": "#/definitions/customer"
                 },
                 "discount_amt": {
-                    "type": "integer"
-                    //0
+                    "type": "integer",
+                    "example": 0
                 },
                 "shipcode": {
-                    "type": "string"
-                    //"Ground (5-7 days)"
+                    "type": "string",
+                    "example": "Ground (5-7 days)"
                 },
                 "ip_address": {
-                    "type": "string"
-                    //"68.7.2.222"
+                    "type": "string",
+                    "example": "68.7.2.222"
                 },
                 "attributes": {
-                    "type": "string" // is this correct type?
-                    //????
+                    "type": "string" ,
+                    "example": "" //NOTE: not sure of type 
                 },
                 "items": {
                     "type": [
@@ -106,35 +106,35 @@
                 }
             }
         },
-        "order_item":{
+        "order_item": {
             "type": [
                 "object"
             ],
             "description": "order item",
             "properties": {
                 "channel_refnum": {
-                     "type": "integer"
-                    //"0"
+                    "type": "integer",
+                    "example": 88
                 },
                 "sku": {
-                     "type": "integer"
-                    //"299"
+                     "type": "integer",
+                    "example": "299"
                 },
                 "unit_tax": {
-                     "type": "number" 
-                    //0
+                     "type": "number",
+                    "example": 0 
                 },
                 "quantity": {
-                     "type": "integer"
-                    //1
+                     "type": "integer",
+                    "example": 1
                 },
                 "sku_title": {
-                     "type": "sring"
-                    //"test"
+                     "type": "string",
+                    "example": "test"
                 },
                 "unit_price": {
-                     "type": "number"
-                    //"1"
+                     "type": "number",
+                    "example": "1"
                 }
             }
         },
@@ -145,40 +145,40 @@
             "description": "adress object",
             "properties": {
                 "state_match": {
-                    "type": "string"
-                    // "CA"
+                    "type": "string",
+                    "example": "CA"
                 },
                 "country_match": {
-                    "type": "string"
-                    //"US United States"
+                    "type": "string",
+                    "example": "US United States"
                 },
                 "last_name": {
-                    "type": "string"
-                    //"Schell"
+                    "type": "string",
+                    "example": "Schell"
                 },
                 "address2": {
-                    "type": "string"
-                    //""   
+                    "type": "string",
+                    "example": ""   
                 },
                 "city": {
-                    "type": "string"
-                    //"San Diego"
+                    "type": "string",
+                    "example": "San Diego"
                 },
                 "postal_code": {
-                    "type": "string"
-                    //"92101"
+                    "type": "string",
+                    "example": "92101"
                 },
                 "address1": {
-                    "type": "string"
-                    //"123 Main St"
+                    "type": "string",
+                    "example": "123 Main St"
                 },
                 "company": {
-                    "type": "string"
-                    //EX "gudTECH"
+                    "type": "string",
+                    "example": "gudTECH"
                 },
                 "first_name": {
-                    "type": "string"
-                    //EX "Justin"
+                    "type": "string",
+                    "example": "Justin"
                 }
             }
         },
@@ -187,20 +187,20 @@
             "description": "customer object",
             "properties": {
                 "email_address": {
-                    "type": "string"
-                    //"justin@gudtech.com"
+                    "type": "string",
+                    "example": "justin@gudtech.com" //TODO: specify email format for validation 
                 },
                 "phone_number": {
-                    "type": "string"
-                    //"5555555555"
+                    "type": "string",
+                    "example": "(555) 555-5555" //TODO: specify phone number format for validation
                 },
                 "first_name": {
-                    "type": "string"
-                    //"Justin"
+                    "type": "string",
+                    "example": "Justin"
                 },
                 "last_name": {
-                    "type": "string"
-                    //"Schell"
+                    "type": "string",
+                    "example": "Schell"
                 }
             }
         },
@@ -210,7 +210,7 @@
             "properties": {
                 "id": {
                     "type": "string",
-                    "example": "21"   
+                    "example": "12"   
                 },
                 "params": {
                     "type": "object",
@@ -239,38 +239,48 @@
                          * the following properties are described / used by order_complete
                          */
                         "email_return": {
-                            "type": "integer" //bool 
+                            "type": "integer",
+                            "example": 0 //bool 
                         },
                         "inv_suspended_instock": {
-                            "type": "integer" //bool? 
+                            "type": "integer",
+                            "example":  0 //bool? 
                         },
                         "unset_other_media": {
-                            "type": "integer" //bool? 
+                            "type": "integer",
+                            "example": 0 //bool? 
                         },
                         "import_order_attrs": {
-                            "type": "string" //NOTE doublecheck, example had empty string
+                            "type": "string",//NOTE doublecheck, example had empty string
+                            "example":  "" 
                         },
                         "base_uri": {
                             "type": "string", //TODO might need to define 
-                            "example": "http://172.16.4.130/magento1921"
+                            "example": "http://172.16.4.130/magento1921" //TODO regex format for uri's?
                         },
                         "express_configurable_super_links":{
-                            "type": "integer" //bool? 
+                            "type": "integer",
+                            "example": 0 //bool? 
                         },
                         "unset_other_attributes": {
-                            "type": "integer" //bool? 
+                            "type": "integer",
+                            "example": 0 //bool? 
                         },
                         "push_cancel": {
-                            "type": "integer" //bool? 
+                            "type": "integer",
+                            "example": 0 //bool? 
                         },
                         "inv_suspended_mode": {
-                            "type": "integer" //bool? NOTE: noty sure of type bnecause example was "NULL"
+                            "type": "integer", //NOTE: not sure of type because example was "NULL"
+                            "example": "" //bool? 
                         },
                         "email_invoice": {
-                            "type": "integer" //bool? 
+                            "type": "integer" , //NOTE: not sure of type because example was "NULL"
+                            "example": 0 //bool? 
                         },
                         "email_tracking": {
-                            "type": "integer" //bool? 
+                            "type": "integer" , //NOTE: not sure of type because example was "NULL"
+                            "example": 0 //bool? 
                         },
                         /*
                         * required params for Catpush Transmit
@@ -284,7 +294,7 @@
                         },
                         "appKey": {
                             "type": "string",
-                            "example":"dripclub.retailops.0.1.0.Release"
+                            "example":"testco.key.0.1.2.Release"
                         }
                     } 
                 } 
@@ -295,56 +305,56 @@
             "description": "channel payment object",
             "properties": {
                 "channel_id": {
-                    "type": "integer"
-                    //12
+                    "type": "integer",
+                    "example": 12
                 },
                 "captures_are_external": {
-                    "type": "integer"
-                    //1
+                    "type": "integer",
+                    "example": 1 //bool?
                 },
                 "unsettled": {
-                    "type": "integer"
-                    //0
+                    "type": "integer",
+                    "example": 0 //bool?
                 },
                 "settled": {
-                    "type": "integer"
-                    // 35
+                    "type": "integer",
+                    "example": 35 
                 },
                 "charged": {
-                    "type": "integer"
-                    // 35
+                    "type": "integer",
+                    "example": 35 
                 },
                 "captured": {
-                    "type": "integer"   
-                    // 0
+                    "type": "integer",
+                    "example": 0 //bool
                 },
                 "captures_are_deferred": {
-                    "type": "integer"
-                    // 0
+                    "type": "integer",
+                    "example": 0 //bool
                 },
                 "voided": {
-                    "type": "integer"
-                    // 0
+                    "type": "integer",
+                    "example": 0 //bool
                 },
                 "id": {
-                    "type": "string"
-                    // "6"
+                    "type": "string",
+                    "example": "6"
                 },
                 "method": {
-                    "type": "string"
-                    // "channel"
+                    "type": "string",
+                    "example": "channel"
                 },
                 "credited": {
-                    "type": "integer"
-                    // 0
+                    "type": "integer",
+                    "example": 0 //bool
                 },
                 "module": {
-                    "type": "string"
-                    // "Channel"
+                    "type": "string",
+                    "example": "Channel"
                 },
                 "available": {
-                    "type": "integer"
-                    // 35
+                    "type": "integer",
+                    "example": 35
                 }
             }
         },
@@ -355,7 +365,8 @@
             "description": "shipment object",
             "properties": {
                 "id": {
-                    "type": "string" 
+                    "type": "string",
+                    "example": "10987"
                 },
                 "packages": {
                     "type": "array",
@@ -384,24 +395,24 @@
                     "example": "WillCall"
                 },
                 "tracking_number": {
-                    "type": "string" //NOTE: is this correct type? example was "null"
-                    //null
+                    "type": "string", //NOTE: is this correct type? example was "null"
+                    "example": "ZX1981719100X"
                 },
                 "mapped_shipcode": {
-                    "type": "string" //NOTE: is this correct type? example was "null"
-                    // null
+                    "type": "string", //NOTE: is this correct type? example was "null"
+                    "example": "?"
                 },
                 "date_shipped": {
                     "type": "string", 
                     "example": "2016-04-08T21:13:11Z"
                 },
                 "carrier_class_code": {
-                    "tyepe": "string",
+                    "type": "string",
                     "example": "WILLCALL"
                 },
                 "weight":{ 
                     "type": "string", 
-                    "example": "1"
+                    "example": "1.0"
                 },
                 "id": {
                     "type": "string", 
@@ -424,43 +435,56 @@
             "description": "shipment item object",
             "properties": { 
                 "item_giftwrap_amt": {
-                    "type": "integer"   
+                    "type": "integer",
+                    "example": 0 //bool?   
                 },
                 "quantity": {
-                    "type": "integer"   
+                    "type": "integer",
+                    "example": 1   
                 },
                 "item_product_amt": {
-                    "type": "string"   
+                    "type": "string",
+                    "example": "30"   
                 },
                 "item_recycling_amt": {
-                    "type": "integer"   
+                    "type": "integer",
+                    "example": 0   
                 },
                 "channel_refnum": {
-                    "type": "string"   
+                    "type": "string",
+                    "example": "88"   
                 },
                 "item_shipping_tax_amt": {
-                    "type": "integer"   
+                    "type": "integer",
+                    "example": 0   
                 },
                 "item_subtotal_amt": {
-                    "type": "integer"   
+                    "type": "integer",
+                    "example": 30   
                 },
                 "sku_num": {
-                    "type": "string"   
+                    "type": "string",
+                    "example": "132"   
                 },
                 "item_tax_amt":{
-                    "type": "integer"   
+                    "type": "integer",
+                    "example": 0   
                 },
                 "id": {
-                    "type": "string"   
+                    "type": "string",
+                    "example": "7396"   
                 },
                 "item_shipping_amt": {
-                    "type": "integer"   
+                    "type": "integer",
+                    "example": 5   
                 },
                 "channel_order_refnum": {
-                    "type": "string"   
+                    "type": "string",
+                    "example": "100000084"   
                 },
                 "item_giftwrap_tax_amt": {
-                    "type": "integer"   
+                    "type": "integer",
+                    "example": 0   
                 }
             }
         },
@@ -471,7 +495,8 @@
             "description": "channel order object",
             "properties": {
                 "channel_refnum": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "100000084"
                 },
                 "channel_payment": {
                     "type": "array",
@@ -480,8 +505,8 @@
                     }
                 },
                 "grand_total": {
-                    "type": "string"
-                    // "65"
+                    "type": "string",
+                    "example": "35"
                 },
                 "unshipped_items_ref": {
                     "type": "array",
@@ -490,16 +515,16 @@
                     }   
                 },
                 "payment_series_id": {
-                    "type": "string"
-                    // "2573"
+                    "type": "string",
+                    "example": "2573"
                 },
                 "from_counterparty_rate": {
-                    "type": "integer"                            
-                    // 1
+                    "type": "integer",
+                    "example": 1 //bool?
                 },
                 "ship_service_name": {
-                    "type": "string"
-                    // "Will Call"
+                    "type": "string",
+                    "example": "Will Call"
                 },
                 "shipments": {
                     "type": "array",
@@ -508,8 +533,8 @@
                     }
                 },
                 "id": {
-                    "type": "string" //note this was defined as string in example. Should it be an int?
-                    // "4898"
+                    "type": "string", 
+                    "example": "4898"
                 },
                 "payment_status": {
                     "type": "object",
@@ -522,85 +547,108 @@
             "description": "status of channel order payment",
             "properties": {
                 "success": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 1 //bool?
                 },
                 "unsettled_external": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 0 //bool?
                 },
                 "unsettled_deferred": {
-                    "type": "integer"
-                },
-                "unsettled": {
-                    "type": "integer"
-                },
-                "settled": {
-                    "type": "integer"
-                },
-                "charged": {
-                    "type": "integer"
-                },
-                "captured": {
-                    "type": "integer"
-                },
-                "authed": {
-                    "type": "integer"
-                },
-                "credited": {
-                    "type": "integer"
-                },
-                "available": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 0 //bool?
                 },
                 "by_account": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/payment_by_account" 
+                        "$ref": "#/definitions/by_account" 
                     }
+                },
+                "unsettled": {
+                    "type": "integer",
+                    "example": 0 //bool?
+                },
+                "settled": {
+                    "type": "integer",
+                    "example": 35 
+                },
+                "charged": {
+                    "type": "integer",
+                    "example": 35 
+                },
+                "captured": {
+                    "type": "integer",
+                    "example": 0 //bool?
+                },
+                "authed": {
+                    "type": "integer",
+                    "example": 0 //bool?
+                },
+                "credited": {
+                    "type": "integer",
+                    "example": 0 //bool?
+                },
+                "available": {
+                    "type": "integer",
+                    "example": 35 
                 }
             }
         },
-        "payment_by_account": {
+        "by_account": {
             "type": "object",
-            "description": "payment by account for channel order",
+            "description": "account for channel order",
             "properties": {
                 "channel_id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 12
                 },
                 "captures_are_external": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 1 //bool?
                 },
                 "unsettled": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 0 //bool?
                 },
                 "settled": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 35 
                 },
                 "charged": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 35
                 },
                 "captured": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 0 //bool?
                 },
                 "captures_are_deferred": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 0 //bool
                 },
                 "voided": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 0 //bool?
                 },
                 "id": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "6"
                 },
                 "method": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "channel"
                 },
                 "credited":{
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 0 //bool?
                 },
                 "module": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Channel"
                 },
                 "available": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 35
                 }
             } 
         }
