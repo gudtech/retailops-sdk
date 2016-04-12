@@ -352,7 +352,7 @@
             }
         },
         "shipment": {
-             "type": ["object"],
+            "type": ["object"],
             "description": "shipment object",
             "properties": {
                 "id": {
@@ -648,6 +648,19 @@
                     "description": "event type", 
                     "example": "channel_catpush_fail"
                 },
+                "secondary": {
+                    "type": ["object"],
+                    "properties": {
+                        "id": {
+                            "type": ["string"],
+                            "example": "66"
+                        },
+                        "concept": {
+                            "type": ["string"],
+                            "example": "sku" 
+                        }
+                    }
+                },
                 "data": {
                     "type": ["object"],
                     "properties": { 
@@ -791,6 +804,46 @@
                     "type": ["integer"],
                     "description": "????",
                     "example": 5 
+                }
+            }
+        },
+        "writeback_line_item": {
+            "type": ["object"],
+            "description": "line item in writeback response",
+            "properties": {
+                "corr": {
+                    "type": ["string"],    
+                    "description": "???",
+                    "example": "7397"
+                },
+                "ship_amt":{
+                    "type": ["integer"],     
+                    "description": "amount shipped",
+                    "example": 5
+                },
+                "shiptax_amt": {
+                    "type": ["number"],
+                    "description": "shipment tax",
+                    "example": 0
+                },
+                "unit_tax": {
+                    "type": ["number"],
+                    "description": "unit tax",
+                    "example": 0
+                },
+                "discount_amt": {
+                    "type": ["integer"],
+                    "description": "Amount of discount",
+                    "example": 0
+                },
+                "refnum": {
+                    "type": ["string"],
+                    "description": "order reference number(?)",
+                    "example": "89"
+                },
+                "quantity": {
+                    "type": ["string"],
+                    "example": "2"
                 }
             }
         }
@@ -1267,7 +1320,16 @@
                 }
             },
             "targetSchema": {
-                // TODO: define Invpush Transmit response
+                "type": ["object"],
+                "properties": {
+                    "events": {
+                        "type": ["array"],
+                        "description": "array of events in response",
+                        "items": {  
+                            "$ref": "#/definitions/event" 
+                        }
+                    }
+                }
             }
         },
         {
@@ -1277,11 +1339,71 @@
             "href": "your_service_endpoint.com/payments/capture",
             "schema": {
                 "properties": {
-                    
+                    "headers": {
+                        "type": ["object"],
+                        "properties": {
+                            "client_id": {
+                                "$ref": "#/definitions/client_id" 
+                            },
+                            "ticket": {
+                                "$ref": "#/definitions/ticket"
+                            }
+                        },
+                        "required": [
+                            "client_id",
+                            "ticket"
+                        ]
+                    },
+                    "version": {
+                        "type": ["integer"],
+                        "description": "Version number of API action",
+                        "example": 1
+                    },
+                    "action": { 
+                        "type": ["string"],
+                        "description": "name of api action",
+                        "example": "Spree.order.capture_channel_payments" 
+                    },
+                    "data": {
+                        "type": ["object"],
+                        "properties": {
+                            "order": {
+                                "type": ["object"],
+                                "$ref": "#/definitions/channel_order"
+                            },
+                            "channel": {
+                                "type": ["object"],
+                                "$ref": "#/definitions/channel"
+                                //todo: define required channel params for this method
+                                // "required": [
+                                //     "email_return",
+                                //     "inv_suspended_instock",
+                                //     "unset_other_media",
+                                //     "import_order_attrs",
+                                //     "base_uri",
+                                //     "express_configurable_super_links",
+                                //     "unset_other_attributes",
+                                //     "push_cancel",
+                                //     "inv_suspended_mode",
+                                //     "email_invoice",
+                                //     "email_tracking"
+                                // ]
+                            }
+                        }
+                    }
                 }
             },
-            "targetSchema": {
-                // TODO: define Channel Payments response
+            "targetSchema": { //NOTE the response example that I was given was an empty object "{}", so I'm just putting standard response here
+                "type": ["object"],
+                "properties": {
+                    "events": {
+                        "type": ["array"],
+                        "description": "array of events in response",
+                        "items": {  
+                            "$ref": "#/definitions/event" 
+                        }
+                    }
+                }
             }
         },
         {
@@ -1291,11 +1413,61 @@
             "href": "your_service_endpoint.com/shipment/submit",
             "schema": {
                 "properties": {
-                    
+                    "headers": {
+                        "type": ["object"],
+                        "properties": {
+                            "client_id": {
+                                "$ref": "#/definitions/client_id" 
+                            },
+                            "ticket": {
+                                "$ref": "#/definitions/ticket"
+                            }
+                        },
+                        "required": [
+                            "client_id",
+                            "ticket"
+                        ]
+                    },
+                    "version": {
+                        "type": ["integer"],
+                        "description": "Version number of API action",
+                        "example": 1
+                    },
+                    "action": { 
+                        "type": ["string"],
+                        "description": "name of api action",
+                        "example": "Aabaco.order.shipment_submit" 
+                    },
+                    "data": {
+                        "type": ["object"],
+                        "properties": {
+                            "shipment": {
+                                "type": ["object"],
+                                "$ref": "#/definitions/shipment"
+                            },
+                            "order": {
+                                "type": ["object"],
+                                "$ref": "#/definitions/channel_order"
+                            },
+                            "channel": {
+                                "type": ["object"],
+                                "$ref": "#/definitions/channel"
+                            }
+                        }
+                    }
                 }
             },
             "targetSchema": {
-                // TODO: define Shipment Submit response
+               "type": ["object"],
+                "properties": {
+                    "events": {
+                        "type": ["array"],
+                        "description": "array of events in response",
+                        "items": {  
+                            "$ref": "#/definitions/event" 
+                        }
+                    }
+                }
             }
         },
         {
@@ -1305,11 +1477,66 @@
             "href": "your_service_endpoint.com/order/items/return",
             "schema": {
                 "properties": {
-                    
+                    "headers": {
+                        "type": ["object"],
+                        "properties": {
+                            "client_id": {
+                                "$ref": "#/definitions/client_id" 
+                            },
+                            "ticket": {
+                                "$ref": "#/definitions/ticket"
+                            }
+                        },
+                        "required": [
+                            "client_id",
+                            "ticket"
+                        ]
+                    },
+                    "version": {
+                        "type": ["integer"],
+                        "description": "Version number of API action",
+                        "example": 1
+                    },
+                    "action": { 
+                        "type": ["string"],
+                        "description": "name of api action",
+                        "example": "MagentoExtension.order.items_returned" 
+                    },
+                    "data": {
+                        "type": ["object"],
+                        "properties": {
+                            "order": {
+                                "type": ["object"],
+                                "$ref": "#/definitions/channel_order"
+                            },
+                            "channel": {
+                                "type": ["object"],
+                                "$ref": "#/definitions/channel"
+                            }
+                        }
+                    }
                 }
             },
             "targetSchema": {
-                // TODO: define Items Returned response
+               "type": ["object"],
+                "properties": {
+                    "events": {
+                        "type": ["array"],
+                        "description": "array of events in response",
+                        "items": {  
+                            "$ref": "#/definitions/event" 
+                        }
+                    },
+                    "return": {
+                        "type": ["object"],
+                        "properties": {
+                            "channel_store_credit_amount": {
+                                "type": ["number"],
+                                "example": 0.0
+                            }
+                        }
+                    }
+                }
             }
         },
         {
@@ -1323,7 +1550,40 @@
                 }
             },
             "targetSchema": {
-                // TODO: define Writeback response
+                "type": ["object"],
+                "properties": {
+                    "line_items": {
+                        "type": ["array"],
+                        "items": {
+                            "$ref": "#/definitions/writeback_line_item"
+                        }
+                    },
+                    "values": {
+                        "type": ["object"],
+                        "properties": {
+                            "shipping_amt":{
+                                "type": ["number"],
+                                "description": "cost(?) of shipping",
+                                "example": 0
+                            },
+                            "tax_amt": {
+                                "type": ["number"],
+                                "description": "amount of tax",
+                                "example": 0
+                            },
+                            "discount_amt": {
+                                "type": ["number"],
+                                "description": "amount of discount",
+                                "example": 0
+                            },
+                            "tax_pct": {
+                                "type": ["number"],
+                                "description": "percentage of tax",
+                                "example": 0
+                            }
+                        }
+                    }
+                }
             }
         }
     ] // "links" end
