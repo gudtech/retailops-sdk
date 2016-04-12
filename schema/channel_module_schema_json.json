@@ -846,6 +846,97 @@
                     "example": "2"
                 }
             }
+        },
+        "credit_items_ref": {
+            "type": ["object"],
+            "description": "credited item ref",
+            "properties": {
+                "sku": {
+                    "type": ["string"],
+                    "description": "sku id",
+                    "example": "132"
+                },
+                "item_shipping_tax_amt": {
+                    "type": ["string"],
+                    "description": "??",
+                    "example": "0"
+                },
+                "credit_item_refnum": {
+                    "type": ["string"],
+                    "description": "ref number of returned item being credited",
+                    "example": "return_item 90"
+                },
+                "item_tax_amt": {
+                    "type": ["string"],
+                    "description": "??",
+                    "example": "0"
+                },
+                "channel_order_refnum": {
+                    "type": ["string"],
+                    "description": "channel order ref num",    
+                    "example": "100000084"
+                },
+                "item_shipping_amt": {
+                    "type": ["string"],
+                    "description": "item shipped amount",
+                    "example": "0"
+                },
+                "item_restock_fee_amt": {
+                    "type": ["string"],
+                    "description": "item restock fee",
+                    "example": "0"
+                },
+                "channel_id": {
+                    "type": ["string"],
+                    "description": "channel id",
+                    "example": "12"
+                },
+                "item_giftwrap_amt": {
+                    "type": ["string"],
+                    "description": "item giftwrap cost(?)",
+                    "example": "0"
+                },
+                "channel_item_refnum": {
+                    "type": ["string"],
+                    "description": "channel item ref num",
+                    "example": "88"
+                },
+                "quantity": {
+                    "type": ["string"],
+                    "description": "quantity",
+                    "example": "1"
+                },
+                "reason": {
+                    "type": ["string"],
+                    "description": "return reason",
+                    "example": "CustomerReturn"
+                },
+                "item_product_amt": {
+                    "type": ["string"],
+                    "description": "????",
+                    "example": "30"
+                },
+                "item_recycling_amt": {
+                    "type": ["string"],
+                    "description": "????",
+                    "example": "0"
+                },
+                "item_subtotal_amt": {
+                    "type": ["string"],
+                    "description": "???",
+                    "example": "30"
+                },
+                "item_credit_amt": {
+                    "type": ["string"],
+                    "description": "???",
+                    "example": "30"
+                },
+                "item_giftwrap_tax_amt": {
+                    "type": ["string"],
+                    "description": "???",
+                    "example": "0"
+                }
+            }
         }
     },
     "links": [ //The Links array is where we define service endpoints
@@ -1512,6 +1603,90 @@
                             "channel": {
                                 "type": ["object"],
                                 "$ref": "#/definitions/channel"
+                            },
+                            "return": {
+                                "type": ["object"],
+                                "properties": {
+                                    "shipping_amt": {
+                                        "type": ["string"],
+                                        "description": "amount shipped",
+                                        "example": "0"
+                                    },
+                                    "subtotal_amt": {
+                                        "type": ["string"],
+                                        "description": "??",
+                                        "example": "30"
+                                    },
+                                    "product_amt": {
+                                        "type": ["string"],
+                                        "description": "amount of product returned(?)",
+                                        "example": "30"
+                                    },
+                                    "refund_amt": {
+                                        "type": ["string"],
+                                        "description": "amount refunded(?) or... items refund applied to(?)",
+                                        "example": "30"
+                                    },
+                                    "tax_amt": {
+                                        "type": ["string"],
+                                        "description": "tax amount on returned items(?)",
+                                        "example": "0"
+                                    },
+                                    "rma_id": {
+                                        "type": ["string"],
+                                        "description": "ID of RMA",
+                                        "example": "null"
+                                    },
+                                    "refund_action": {
+                                        "type": ["string"],
+                                        "description": "action name of refund(?)",
+                                        "example": "refund"
+                                    },
+                                    "discount_amt": {
+                                        "type": ["string"],
+                                        "description": "amount of applied discount(?)",
+                                        "example": "0"
+                                    },
+                                    "credit_items_ref": {
+                                        "type": ["array"],
+                                        "items": {
+                                           "$ref": "#/definitions/credit_items_ref"
+                                        }
+                                    },
+                                    "id": {
+                                        "type": ["string"],
+                                        "description": "ID of return",
+                                        "example": "87"
+                                    },
+                                    "items": { //NOTE: may need to change name of this property because "items is a reserved keyword in JSON schema"
+                                        "type": ["array"],
+                                        "items": {
+                                            "type": ["object"],
+                                            "properties": {
+                                                "channel_refnum": {
+                                                    "type": ["string"],
+                                                    "description": "channel reference number",
+                                                    "example": "88"
+                                                },
+                                                "order_item_id": {
+                                                    "type": ["string"],
+                                                    "description": "order item id",
+                                                    "example": "7396"
+                                                },
+                                                "sku": {
+                                                    "type": ["string"],
+                                                    "description": "sku number",
+                                                    "example": "132"
+                                                },
+                                                "quantity": {
+                                                    "type": ["string"],
+                                                    "description": "quantity of return",
+                                                    "example": "1"
+                                                }
+                                            }
+                                        }
+                                    }    
+                                }
                             }
                         }
                     }
