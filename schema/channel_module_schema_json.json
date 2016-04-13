@@ -12,14 +12,14 @@
         "client_id": {
             "type": ["integer"],
             "description": "RetailOPS client id",
-            "example": 497 
+            "example": 497
         },
         "ticket": {
             "type": ["string"],
             "description": "authorization ticket",
             "example": "1,1,0,1456437061,315576060,111,WEIhLHAyXHpjZA27OdENwAn1_fHx8fGA-ekng7lhkAvc27Uhnxgd4PZx4VnR_SJ-K85M_5dTAChTXgI3RsmGvfTbaOZ1_U-YJw3G0w1UVWFZ2EC83wjO6bmp91VZdR0tT_b2R1kK4qO1QTJrBk53ZyIuidsOa13lihh8VMgAvSDqCnTwxV2NVV7oN4v-h_tQtpUvklfbW1bnULR3bbaDvoOlb1CVQ_3BdNdo1MaAh-JxrRjf7MkzcHQYs3dN0GuaBZ1KBHvLdrLmGerNYv2p6AMC-fu8YeuukUU3Q6RL9AtF5AA6TPhfwfBM5r05B7QZiSEGySF65FCcfQFT_6lMxQ"
         },
-        //this order object my be replaceable by channel_order definition  
+        //this order object my be replaceable by channel_order definition
         "order": {
             "type": ["object"],
             "description": "order object",
@@ -28,15 +28,15 @@
                     "type": "integer",
                     "example": "3"
                 },
-                "calc_mode": { 
+                "calc_mode": {
                     "type": ["string"],
                     "example": "order"
                 },
                 "channel_date_created": {
-                    "type": ["string"], 
+                    "type": ["string"],
                     "example": "1460142547"
                 },
-                "payment":  { 
+                "payment":  {
                     "type": ["object"],
                     "params": {
                         "channel_refnum": {
@@ -45,7 +45,7 @@
                         },
                         "payment_type": {
                             "type": ["string"],
-                            "example": "Visa"   
+                            "example": "Visa"
                         }
                     },
                     "amount": {
@@ -61,7 +61,7 @@
                     "type": ["number"],
                     "example": "0.07"
                 },
-                "bill_addr": { 
+                "bill_addr": {
                     "$ref": "#/definitions/address"
                 },
                 "gift_message": {
@@ -92,7 +92,7 @@
                 },
                 "attributes": {
                     "type": ["string"] ,
-                    "example": "" //NOTE: not sure of type 
+                    "example": "" //NOTE: not sure of type
                 },
                 "items": {
                     "type": ["array"],
@@ -116,7 +116,7 @@
                 },
                 "unit_tax": {
                      "type": ["number"],
-                    "example": 0 
+                    "example": 0
                 },
                 "quantity": {
                      "type": ["integer"],
@@ -150,7 +150,7 @@
                 },
                 "address2": {
                     "type": ["string"],
-                    "example": ""   
+                    "example": ""
                 },
                 "city": {
                     "type": ["string"],
@@ -180,7 +180,7 @@
             "properties": {
                 "email_address": {
                     "type": ["string"],
-                    "example": "justin@gudtech.com" //TODO: specify email format for validation 
+                    "example": "justin@gudtech.com" //TODO: specify email format for validation
                 },
                 "phone_number": {
                     "type": ["string"],
@@ -202,29 +202,29 @@
             "properties": {
                 "id": {
                     "type": ["string"],
-                    "example": "12"   
+                    "example": "12"
                 },
                 "params": {
                     "type": ["object"],
                     "properties": {
                         "StoreID": {
-                            "type": "string", 
+                            "type": "string",
                             "example": "yhst-18909142938879050075142"
                         },
                         "next_order_refnum": {
-                            "type": ["integer"], 
+                            "type": ["integer"],
                             "example": 496
                         },
                         "order_ack_status_id": {
-                            "type": ["string"], 
+                            "type": ["string"],
                             "example": "32"
                         },
                         "order_fulfilled_status_id": {
-                            "type": ["string"], 
+                            "type": ["string"],
                             "example": "34"
                         },
                         "order_in_filfillment_status_id": {
-                            "type": ["string"], 
+                            "type": ["string"],
                             "example": "33"
                         },
                         /*
@@ -232,54 +232,54 @@
                          */
                         "email_return": {
                             "type": ["integer"],
-                            "example": 0 //bool 
+                            "example": 0 //bool
                         },
                         "inv_suspended_instock": {
                             "type": ["integer"],
-                            "example":  0 //bool? 
+                            "example":  0 //bool?
                         },
                         "unset_other_media": {
                             "type": ["integer"],
-                            "example": 0 //bool? 
+                            "example": 0 //bool?
                         },
                         "import_order_attrs": {
                             "type": ["string"],//NOTE doublecheck, example had empty string
-                            "example":  "" 
+                            "example":  ""
                         },
                         "base_uri": {
-                            "type": ["string"], //TODO might need to define 
-                            "format": "uri", 
+                            "type": ["string"], //TODO might need to define
+                            "format": "uri",
                             "example": "http://172.16.4.130/magento1921" //TODO regex format for uri's?
                         },
                         "express_configurable_super_links":{
                             "type": ["integer"],
-                            "example": 0 //bool? 
+                            "example": 0 //bool?
                         },
                         "unset_other_attributes": {
                             "type": ["integer"],
-                            "example": 0 //bool? 
+                            "example": 0 //bool?
                         },
                         "push_cancel": {
                             "type": ["integer"],
-                            "example": 0 //bool? 
+                            "example": 0 //bool?
                         },
                         "inv_suspended_mode": {
                             "type": ["integer"], //NOTE: not sure of type because example was "NULL"
-                            "example": "" //bool? 
+                            "example": "" //bool?
                         },
                         "email_invoice": {
                             "type": ["integer"] , //NOTE: not sure of type because example was "NULL"
-                            "example": 0 //bool? 
+                            "example": 0 //bool?
                         },
                         "email_tracking": {
                             "type": ["integer"] , //NOTE: not sure of type because example was "NULL"
-                            "example": 0 //bool? 
+                            "example": 0 //bool?
                         },
                         /*
                         * required params for Catpush Transmit
                         */
                         "breakdown_inventory": {
-                            "type": ["integer"] //bool? 
+                            "type": ["integer"] //bool?
                         },
                         "tenant": {
                             "type": ["string"],
@@ -289,8 +289,8 @@
                             "type": ["string"],
                             "example":"testco.key.0.1.2.Release"
                         }
-                    } 
-                } 
+                    }
+                }
             }
         },
         "channel_payment": {
@@ -311,11 +311,11 @@
                 },
                 "settled": {
                     "type": ["integer"],
-                    "example": 35 
+                    "example": 35
                 },
                 "charged": {
                     "type": ["integer"],
-                    "example": 35 
+                    "example": 35
                 },
                 "captured": {
                     "type": ["integer"],
@@ -376,7 +376,7 @@
                     "example": "Standard"
                 },
                 "carrier_code": {
-                    "type": ["string"], 
+                    "type": ["string"],
                     "example": "WILLCALL"
                 },
                 "carrier_name": {
@@ -392,29 +392,29 @@
                     "example": "?"
                 },
                 "date_shipped": {
-                    "type": ["string"], 
+                    "type": ["string"],
                     "example": "2016-04-08T21:13:11Z"
                 },
                 "carrier_class_code": {
                     "type": ["string"],
                     "example": "WILLCALL"
                 },
-                "weight":{ 
-                    "type": ["string"], 
+                "weight":{
+                    "type": ["string"],
                     "example": "1.0"
                 },
                 "id": {
-                    "type": ["string"], 
+                    "type": ["string"],
                     "example": "370"
                 },
                 "carrier_class_name": {
-                    "type": ["string"], 
+                    "type": ["string"],
                     "example": "WillCall Standard"
                 },
                 "ship_items": {
                     "type": ["array"],
                     "items": {
-                        "$ref": "#/definitions/ship_item" 
+                        "$ref": "#/definitions/ship_item"
                     }
                 }
             }
@@ -422,58 +422,58 @@
         "ship_item": {
             "type": ["object"],
             "description": "shipment item object",
-            "properties": { 
+            "properties": {
                 "item_giftwrap_amt": {
                     "type": ["integer"],
-                    "example": 0 //bool?   
+                    "example": 0 //bool?
                 },
                 "quantity": {
                     "type": ["integer"],
-                    "example": 1   
+                    "example": 1
                 },
                 "item_product_amt": {
                     "type": ["string"],
-                    "example": "30"   
+                    "example": "30"
                 },
                 "item_recycling_amt": {
                     "type": ["integer"],
-                    "example": 0   
+                    "example": 0
                 },
                 "channel_refnum": {
                     "type": ["string"],
-                    "example": "88"   
+                    "example": "88"
                 },
                 "item_shipping_tax_amt": {
                     "type": ["integer"],
-                    "example": 0   
+                    "example": 0
                 },
                 "item_subtotal_amt": {
                     "type": ["integer"],
-                    "example": 30   
+                    "example": 30
                 },
                 "sku_num": {
                     "type": ["string"],
-                    "example": "132"   
+                    "example": "132"
                 },
                 "item_tax_amt":{
                     "type": ["integer"],
-                    "example": 0   
+                    "example": 0
                 },
                 "id": {
                     "type": ["string"],
-                    "example": "7396"   
+                    "example": "7396"
                 },
                 "item_shipping_amt": {
                     "type": ["integer"],
-                    "example": 5   
+                    "example": 5
                 },
                 "channel_order_refnum": {
                     "type": ["string"],
-                    "example": "100000084"   
+                    "example": "100000084"
                 },
                 "item_giftwrap_tax_amt": {
                     "type": ["integer"],
-                    "example": 0   
+                    "example": 0
                 }
             }
         },
@@ -487,7 +487,7 @@
                 },
                 "channel_payment": {
                     "type": ["array"],
-                    "items": { 
+                    "items": {
                         "$ref": "#/definitions/channel_payment"
                     }
                 },
@@ -499,7 +499,7 @@
                     "type": ["array"],
                     "items": {
                         // TODO: what type will array contain? order_item id's???? items will need to be defined!
-                    }   
+                    }
                 },
                 "payment_series_id": {
                     "type": ["string"],
@@ -520,12 +520,12 @@
                     }
                 },
                 "id": {
-                    "type": ["string"], 
+                    "type": ["string"],
                     "example": "4898"
                 },
                 "payment_status": {
                     "type": ["object"],
-                    "$ref": "#/definitions/payment_status" 
+                    "$ref": "#/definitions/payment_status"
                 }
             }
         },
@@ -548,7 +548,7 @@
                 "by_account": {
                     "type": ["array"],
                     "items": {
-                        "$ref": "#/definitions/by_account" 
+                        "$ref": "#/definitions/by_account"
                     }
                 },
                 "unsettled": {
@@ -557,11 +557,11 @@
                 },
                 "settled": {
                     "type": ["integer"],
-                    "example": 35 
+                    "example": 35
                 },
                 "charged": {
                     "type": ["integer"],
-                    "example": 35 
+                    "example": 35
                 },
                 "captured": {
                     "type": ["integer"],
@@ -577,7 +577,7 @@
                 },
                 "available": {
                     "type": ["integer"],
-                    "example": 35 
+                    "example": 35
                 }
             }
         },
@@ -599,7 +599,7 @@
                 },
                 "settled": {
                     "type": ["integer"],
-                    "example": 35 
+                    "example": 35
                 },
                 "charged": {
                     "type": ["integer"],
@@ -637,7 +637,7 @@
                     "type": ["integer"],
                     "example": 35
                 }
-            } 
+            }
         },
         "event": {
             "type": ["object"],
@@ -645,7 +645,7 @@
             "properties": {
                 "handle": {
                     "type": ["string"],
-                    "description": "event type", 
+                    "description": "event type",
                     "example": "channel_catpush_fail"
                 },
                 "secondary": {
@@ -657,25 +657,25 @@
                         },
                         "concept": {
                             "type": ["string"],
-                            "example": "sku" 
+                            "example": "sku"
                         }
                     }
                 },
                 "data": {
                     "type": ["object"],
-                    "properties": { 
+                    "properties": {
                         "sub_code": {
                             "type": ["string"],
                             "example": ""
                         },
                         "status": {
-                            "type": ["integer"], 
+                            "type": ["integer"],
                             "description": "http status code(?)",
                             "exxample": 400
                             },
                         "is_failure": {
                             "type": "integer",
-                            "description": "boolean success value represented as integer (0, 1)", 
+                            "description": "boolean success value represented as integer (0, 1)",
                             "example": 1
                         },
                         "request_url": {
@@ -692,7 +692,7 @@
                             "example": "[{\"name\":\"ParameterName\",\"value\":\"PackagWeight.Unit\"}]",
                         "code": {
                             "type": ["string"],
-                            "description": "error code", 
+                            "description": "error code",
                             "example": "MISSING_OR_INVALID_PARAMETER"
                         },
                         "message": {
@@ -710,29 +710,29 @@
                 "sku":{
                     "type": ["string"],
                     "description": "sku number",
-                    "example": "53" 
+                    "example": "53"
                 },
                 "id": {
                     "type": ["string"],
                     "description": "inv id (?)",
-                    "example": "66" 
+                    "example": "66"
                 },
                 "concept": {
                     "type": ["string"],
                     "description": "retailops record type(?)",
-                    "example": "sku" 
+                    "example": "sku"
                 },
                 "qty_breakdown": {
                     "type": ["array"],
                     "description": "??",
                     "items": {
                         "$ref": "#/definitions/inv_qty_breakdown_item"
-                    } 
+                    }
                 },
                 "qty_available": {
                     "type": ["integer"],
                     "description": "quantity of available",
-                    "example": 24 
+                    "example": 24
                 }
             }
         },
@@ -770,7 +770,7 @@
                 "est_ship": {
                     "type": ["string"],
                     "description": "estimated ship date",
-                    "example": "2016-04-22T11:02:47-07:00" 
+                    "example": "2016-04-22T11:02:47-07:00"
                 },
                 "reserving_orders": {
                     "type": ["array"],
@@ -784,7 +784,7 @@
                     "description": "vendor providing sku",
                     "example": "002_Acme Corp"
                 }
-            } 
+            }
         },
         "zone": {
             "type": ["object"],
@@ -803,7 +803,7 @@
                 "npick": {
                     "type": ["integer"],
                     "description": "????",
-                    "example": 5 
+                    "example": 5
                 }
             }
         },
@@ -812,12 +812,12 @@
             "description": "line item in writeback response",
             "properties": {
                 "corr": {
-                    "type": ["string"],    
+                    "type": ["string"],
                     "description": "???",
                     "example": "7397"
                 },
                 "ship_amt":{
-                    "type": ["integer"],     
+                    "type": ["integer"],
                     "description": "amount shipped",
                     "example": 5
                 },
@@ -898,7 +898,7 @@
                 },
                 "estimated_unit_cost": {
                     "type": ["string"],
-                    "description": "estimated unit cost", 
+                    "description": "estimated unit cost",
                     "example": "0"
                 },
                 "unit_price": {
@@ -934,7 +934,7 @@
                 },
                 "channel_order_refnum": {
                     "type": ["string"],
-                    "description": "channel order ref num",    
+                    "description": "channel order ref num",
                     "example": "100000084"
                 },
                 "item_shipping_amt": {
@@ -1000,7 +1000,7 @@
             }
         }
     },
-    "links": [ 
+    "links": [
         {
             "description": "Retreive an order.", // Order_Fetch request
             "method": "POST",
@@ -1013,7 +1013,7 @@
                         "type": ["object"],
                         "properties": {
                             "client_id": {
-                                "$ref": "#/definitions/client_id" 
+                                "$ref": "#/definitions/client_id"
                             },
                             "ticket": {
                                 "$ref": "#/definitions/ticket"
@@ -1027,7 +1027,7 @@
                     "version": {
                         "type": ["integer"]
                     },
-                    "action": { 
+                    "action": {
                         "type": ["string"],
                         "example": "Aabaco.orderpull.order_fetch" //DO we need action to be defined by third party?
                     },
@@ -1056,7 +1056,7 @@
                                     "order_ack_status_id",
                                     "order_fulfilled_status_id",
                                     "order_in_filfillment_status_id"
-                                ] 
+                                ]
                             },
                             "page_state": {
                                 "type": ["integer"] //TODO: double check this type, example was NULL
@@ -1073,25 +1073,25 @@
                     "action",
                     "data"
                 ]
-            }, 
-            "targetSchema": { 
+            },
+            "targetSchema": {
                 "type": ["object"],
                 "properties":  {
                     "next_page_state": {
-                        "type": ["integer"] 
+                        "type": ["integer"]
                     },
                     "next_order_refnum": {
-                        "type": ["integer"] 
+                        "type": ["integer"]
                     },
-                    "orders": {    
+                    "orders": {
                         "type": ["array"],
                         "items": {
-                            "$ref": "#/definitions/order" 
+                            "$ref": "#/definitions/order"
                         }
-                    }   
+                    }
                 }
             }
-        }, 
+        },
         {
             "description": "Order Acknowledgement request",
             "method": "POST",
@@ -1103,7 +1103,7 @@
                         "type": ["object"],
                         "properties": {
                             "client_id": {
-                                "$ref": "#/definitions/client_id" 
+                                "$ref": "#/definitions/client_id"
                             },
                             "ticket": {
                                 "$ref": "#/definitions/ticket"
@@ -1120,17 +1120,17 @@
                     "action": {
                         "type": ["string"],
                         "description": "name of RetailOPS action",
-                        "example":  "Aabaco.orderpull.order_ack" 
+                        "example":  "Aabaco.orderpull.order_ack"
                     },
                     "data": {
                         "type": ["object"],
                         "properties": {
                             "order": {
-                                "acks": { 
+                                "acks": {
                                     "type" : ["array"],
-                                    "description": "array of order_ack_status_ids", 
+                                    "description": "array of order_ack_status_ids",
                                     "items": {
-                                        "type": ["string"] 
+                                        "type": ["string"]
                                     }
                                 }
                             },
@@ -1148,21 +1148,21 @@
                                 // ]
                             }
                         }
-                    } 
+                    }
                 }
             },
-            "targetSchema": { 
+            "targetSchema": {
                 "type": ["object"],
                 "properties":  {
                     "events": {
                         "type": ["array"],
                         "description": "array of events in response",
-                        "items": {  
-                            "$ref": "#/definitions/event" 
+                        "items": {
+                            "$ref": "#/definitions/event"
                         }
                     }
                 }
-            } 
+            }
         },
         {
             "description": "Order Cancel request",
@@ -1174,7 +1174,7 @@
                     "type": ["object"],
                     "properties": {
                         "client_id": {
-                            "$ref": "#/definitions/client_id" 
+                            "$ref": "#/definitions/client_id"
                         },
                         "ticket": {
                             "$ref": "#/definitions/ticket"
@@ -1191,7 +1191,7 @@
                 "action": {
                     "type": ["string"],
                     "description": "name of RetailOPS action",
-                    "example":  "MagentoExtension.order.order_cancel" 
+                    "example":  "MagentoExtension.order.order_cancel"
                 },
                  "data": {
                     "type": ["object"],
@@ -1213,13 +1213,13 @@
                     "events": {
                         "type": ["array"],
                         "description": "array of events in response",
-                        "items": {  
-                            "$ref": "#/definitions/event" 
+                        "items": {
+                            "$ref": "#/definitions/event"
                         }
                     }
                 }
             }
-        }, 
+        },
         {
             "description": "Order Complete request",
             "method": "POST",
@@ -1231,7 +1231,7 @@
                         "type": ["object"],
                         "properties": {
                             "client_id": {
-                                "$ref": "#/definitions/client_id" 
+                                "$ref": "#/definitions/client_id"
                             },
                             "ticket": {
                                 "$ref": "#/definitions/ticket"
@@ -1245,9 +1245,9 @@
                     "version": {
                         "type": ["integer"]
                     },
-                    "action": { 
+                    "action": {
                         "type": ["string"],
-                        "example": "MagentoExtension.order.order_complete" 
+                        "example": "MagentoExtension.order.order_complete"
                     },
                     "data": {
                         "type": ["object"],
@@ -1271,9 +1271,9 @@
                                     "inv_suspended_mode",
                                     "email_invoice",
                                     "email_tracking"
-                                ] 
-                            } 
-                        } 
+                                ]
+                            }
+                        }
                     }
                 }
             },
@@ -1283,8 +1283,8 @@
                     "events": {
                         "type": ["array"],
                         "description": "array of events in response",
-                        "items": {  
-                            "$ref": "#/definitions/event" 
+                        "items": {
+                            "$ref": "#/definitions/event"
                         }
                     }
                 }
@@ -1293,7 +1293,7 @@
         {
             "description": "Catpush Config request",
             "method": "POST",
-            "rel": "instances", 
+            "rel": "instances",
             "href": "your_service_endpoint.com/catpush/config",
             "schema": {
                 "properties": {
@@ -1301,7 +1301,7 @@
                         "type": ["object"],
                         "properties": {
                             "client_id": {
-                                "$ref": "#/definitions/client_id" 
+                                "$ref": "#/definitions/client_id"
                             },
                             "ticket": {
                                 "$ref": "#/definitions/ticket"
@@ -1315,9 +1315,9 @@
                     "version": {
                         "type": ["integer"]
                     },
-                    "action": { 
+                    "action": {
                         "type": ["string"],
-                        "example": "Mozu.product.catpush_config" 
+                        "example": "Mozu.product.catpush_config"
                     },
                     "data": {
                     }
@@ -1328,15 +1328,15 @@
                 "properties": {
                     "fanout": {
                         "type": ["string"],
-                        "example": "relatives" 
+                        "example": "relatives"
                     }
-                } 
+                }
             }
         },
         {
             "description": "Catpush Transmit request",
             "method": "POST",
-            "rel": "instances", 
+            "rel": "instances",
             "href": "your_service_endpoint.com/catpush/transmit",
             "schema": {
                 "properties": {
@@ -1344,7 +1344,7 @@
                         "type": ["object"],
                         "properties": {
                             "client_id": {
-                                "$ref": "#/definitions/client_id" 
+                                "$ref": "#/definitions/client_id"
                             },
                             "ticket": {
                                 "$ref": "#/definitions/ticket"
@@ -1358,9 +1358,9 @@
                     "version": {
                         "type": ["integer"]
                     },
-                    "action": { 
+                    "action": {
                         "type": ["string"],
-                        "example": "Mozu.product.catpush_transmit" 
+                        "example": "Mozu.product.catpush_transmit"
                     },
                     "data": {
                         "feed": {
@@ -1399,8 +1399,8 @@
                     "events": {
                         "type": ["array"],
                         "description": "array of events in response",
-                        "items": {  
-                            "$ref": "#/definitions/event" 
+                        "items": {
+                            "$ref": "#/definitions/event"
                         }
                     }
                 }
@@ -1417,7 +1417,7 @@
                         "type": ["object"],
                         "properties": {
                             "client_id": {
-                                "$ref": "#/definitions/client_id" 
+                                "$ref": "#/definitions/client_id"
                             },
                             "ticket": {
                                 "$ref": "#/definitions/ticket"
@@ -1433,10 +1433,10 @@
                         "description": "Version number of API action",
                         "example": 1
                     },
-                    "action": { 
+                    "action": {
                         "type": ["string"],
                         "description": "name of api action",
-                        "example": "Mozu.inventory.invpush_transmit" 
+                        "example": "Mozu.inventory.invpush_transmit"
                     },
                     "data": {
                         "type": ["object"],
@@ -1448,7 +1448,7 @@
                                         "type": ["array"],
                                         "description": "array of inventory items",
                                         "items": {
-                                            "$ref": "#/definitions/inventory_item" 
+                                            "$ref": "#/definitions/inventory_item"
                                         }
                                     },
                                     "client_id": {
@@ -1462,11 +1462,11 @@
                                         //     "appKey"
                                         // ]
                                     }
-                                } 
+                                }
                             }
                         }
                     }
-                    
+
                 }
             },
             "targetSchema": {
@@ -1475,8 +1475,8 @@
                     "events": {
                         "type": ["array"],
                         "description": "array of events in response",
-                        "items": {  
-                            "$ref": "#/definitions/event" 
+                        "items": {
+                            "$ref": "#/definitions/event"
                         }
                     }
                 }
@@ -1493,7 +1493,7 @@
                         "type": ["object"],
                         "properties": {
                             "client_id": {
-                                "$ref": "#/definitions/client_id" 
+                                "$ref": "#/definitions/client_id"
                             },
                             "ticket": {
                                 "$ref": "#/definitions/ticket"
@@ -1509,10 +1509,10 @@
                         "description": "Version number of API action",
                         "example": 1
                     },
-                    "action": { 
+                    "action": {
                         "type": ["string"],
                         "description": "name of api action",
-                        "example": "Spree.order.capture_channel_payments" 
+                        "example": "Spree.order.capture_channel_payments"
                     },
                     "data": {
                         "type": ["object"],
@@ -1549,8 +1549,8 @@
                     "events": {
                         "type": ["array"],
                         "description": "array of events in response",
-                        "items": {  
-                            "$ref": "#/definitions/event" 
+                        "items": {
+                            "$ref": "#/definitions/event"
                         }
                     }
                 }
@@ -1567,7 +1567,7 @@
                         "type": ["object"],
                         "properties": {
                             "client_id": {
-                                "$ref": "#/definitions/client_id" 
+                                "$ref": "#/definitions/client_id"
                             },
                             "ticket": {
                                 "$ref": "#/definitions/ticket"
@@ -1583,10 +1583,10 @@
                         "description": "Version number of API action",
                         "example": 1
                     },
-                    "action": { 
+                    "action": {
                         "type": ["string"],
                         "description": "name of api action",
-                        "example": "Aabaco.order.shipment_submit" 
+                        "example": "Aabaco.order.shipment_submit"
                     },
                     "data": {
                         "type": ["object"],
@@ -1613,8 +1613,8 @@
                     "events": {
                         "type": ["array"],
                         "description": "array of events in response",
-                        "items": {  
-                            "$ref": "#/definitions/event" 
+                        "items": {
+                            "$ref": "#/definitions/event"
                         }
                     }
                 }
@@ -1631,7 +1631,7 @@
                         "type": ["object"],
                         "properties": {
                             "client_id": {
-                                "$ref": "#/definitions/client_id" 
+                                "$ref": "#/definitions/client_id"
                             },
                             "ticket": {
                                 "$ref": "#/definitions/ticket"
@@ -1647,10 +1647,10 @@
                         "description": "Version number of API action",
                         "example": 1
                     },
-                    "action": { 
+                    "action": {
                         "type": ["string"],
                         "description": "name of api action",
-                        "example": "MagentoExtension.order.items_returned" 
+                        "example": "MagentoExtension.order.items_returned"
                     },
                     "data": {
                         "type": ["object"],
@@ -1744,7 +1744,7 @@
                                                 }
                                             }
                                         }
-                                    }    
+                                    }
                                 }
                             }
                         }
@@ -1757,8 +1757,8 @@
                     "events": {
                         "type": ["array"],
                         "description": "array of events in response",
-                        "items": {  
-                            "$ref": "#/definitions/event" 
+                        "items": {
+                            "$ref": "#/definitions/event"
                         }
                     },
                     "return": {
@@ -1784,7 +1784,7 @@
                         "type": ["object"],
                         "properties": {
                             "client_id": {
-                                "$ref": "#/definitions/client_id" 
+                                "$ref": "#/definitions/client_id"
                             },
                             "ticket": {
                                 "$ref": "#/definitions/ticket"
@@ -1800,10 +1800,10 @@
                         "description": "Version number of API action",
                         "example": 1
                     },
-                    "action": { 
+                    "action": {
                         "type": ["string"],
                         "description": "name of api action",
-                        "example": "MagentoExtension.order.writeback" 
+                        "example": "MagentoExtension.order.writeback"
                     },
                     "data": {
                         "type": ["object"],
