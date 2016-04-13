@@ -12,53 +12,64 @@
         "client_id": {
             "type": ["integer"],
             "description": "RetailOPS client id",
-            "example": 497
+            "readOnly": true,
+            "format": "uuid",
+            "example": "497"
         },
         "ticket": {
             "type": ["string"],
-            "description": "authorization ticket",
+            "description": "RetailOPS authorization ticket",
+            "readOnly": true,
             "example": "1,1,0,1456437061,315576060,111,WEIhLHAyXHpjZA27OdENwAn1_fHx8fGA-ekng7lhkAvc27Uhnxgd4PZx4VnR_SJ-K85M_5dTAChTXgI3RsmGvfTbaOZ1_U-YJw3G0w1UVWFZ2EC83wjO6bmp91VZdR0tT_b2R1kK4qO1QTJrBk53ZyIuidsOa13lihh8VMgAvSDqCnTwxV2NVV7oN4v-h_tQtpUvklfbW1bnULR3bbaDvoOlb1CVQ_3BdNdo1MaAh-JxrRjf7MkzcHQYs3dN0GuaBZ1KBHvLdrLmGerNYv2p6AMC-fu8YeuukUU3Q6RL9AtF5AA6TPhfwfBM5r05B7QZiSEGySF65FCcfQFT_6lMxQ"
         },
-        //this order object my be replaceable by channel_order definition
         "order": {
             "type": ["object"],
             "description": "order object",
             "properties": {
                 "shipping_amt": {
                     "type": "integer",
+                    "description": "",
                     "example": "3"
                 },
                 "calc_mode": {
                     "type": ["string"],
+                    "description": "",
                     "example": "order"
                 },
                 "channel_date_created": {
                     "type": ["string"],
+                    "description": "date channel created (in Unix time)",
                     "example": "1460142547"
                 },
                 "payment":  {
                     "type": ["object"],
+                    "description": "payment object",
                     "params": {
                         "channel_refnum": {
                             "type": ["integer"],
+                            "description": "channel reference number",
                             "example":  "496"
                         },
                         "payment_type": {
                             "type": ["string"],
+                            "description": "method of payment",
                             "example": "Visa"
                         }
                     },
                     "amount": {
                         "type": ["number"],
+                        "description": "amount paid",
                         "example": "1.32"
                     },
-                    "payment_type": { // had to change response to payment_type from type because "type" is a resrved keyword in JOSN schema
+                    "payment_type": {
                         "type": ["string"],
+                        "description": "type of payment",
                         "example": "charge"
                     }
                 },
                 "tax_amt": {
                     "type": ["number"],
+                    "description": "amount of tax applied",
                     "example": "0.07"
                 },
                 "bill_addr": {
@@ -66,6 +77,7 @@
                 },
                 "gift_message": {
                     "type": ["string"],
+                    "description": "gift message supplied by customer",
                     "example": "Happy Birthday!"
                 },
                  "ship_addr": {
@@ -73,6 +85,7 @@
                 },
                 "channel_refnum": {
                     "type": ["string"],
+                    "description": "channel reference number",
                     "example": "496"
                 },
                 "customer": {
@@ -80,24 +93,28 @@
                 },
                 "discount_amt": {
                     "type": ["integer"],
+                    "description": "",
                     "example": 0
                 },
                 "shipcode": {
                     "type": ["string"],
+                    "description": "",
                     "example": "Ground (5-7 days)"
                 },
                 "ip_address": {
                     "type": ["string"],
+                    "description": "originating IP address of order",
                     "example": "68.7.2.222"
                 },
                 "attributes": {
                     "type": ["string"] ,
-                    "example": "" //NOTE: not sure of type
+                    "description": "",
+                    "example": ""
                 },
-                "items": {
+                "order_items": {
                     "type": ["array"],
                     "items": {
-                        "$ref": "#/definitions/order_item" //return a list of order items
+                        "$ref": "#/definitions/order_item"
                     }
                 }
             }
@@ -108,27 +125,33 @@
             "properties": {
                 "channel_refnum": {
                     "type": ["integer"],
+                    "description": "",
                     "example": 88
                 },
                 "sku": {
                      "type": ["integer"],
-                    "example": "299"
+                     "description": "",
+                     "example": "299"
                 },
                 "unit_tax": {
                      "type": ["number"],
-                    "example": 0
+                     "description": "",
+                     "example": 0
                 },
                 "quantity": {
                      "type": ["integer"],
-                    "example": 1
+                     "description": "",
+                     "example": 1
                 },
                 "sku_title": {
                      "type": ["string"],
-                    "example": "test"
+                     "description": "",
+                     "example": "test"
                 },
                 "unit_price": {
                      "type": ["number"],
-                    "example": "1"
+                     "description": "",
+                     "example": "1"
                 }
             }
         },
@@ -138,60 +161,73 @@
             "properties": {
                 "state_match": {
                     "type": ["string"],
+                    "description": "state",
                     "example": "CA"
                 },
                 "country_match": {
                     "type": ["string"],
+                    "description": "Country",
                     "example": "US United States"
                 },
                 "last_name": {
                     "type": ["string"],
+                    "description": "Last Name",
                     "example": "Schell"
                 },
                 "address2": {
                     "type": ["string"],
-                    "example": ""
+                    "description": "Adress 2nd line",
+                    "example": "Suite 100"
                 },
                 "city": {
                     "type": ["string"],
+                    "description": "City",
                     "example": "San Diego"
                 },
                 "postal_code": {
                     "type": ["string"],
+                    "description": "Postal Code",
                     "example": "92101"
                 },
                 "address1": {
                     "type": ["string"],
+                    "description": "Adress 1st line",
                     "example": "123 Main St"
                 },
                 "company": {
                     "type": ["string"],
+                    "description": "Company",
                     "example": "gudTECH"
                 },
                 "first_name": {
                     "type": ["string"],
+                    "description": "First Name",
                     "example": "Justin"
                 }
             }
         },
         "customer": {
             "type": ["object"],
-            "description": "customer object",
+            "description": "A customer",
             "properties": {
                 "email_address": {
                     "type": ["string"],
-                    "example": "justin@gudtech.com" //TODO: specify email format for validation
+                    "description": "Cusstomer email address",
+                    "example": "justin@gudtech.com"
                 },
                 "phone_number": {
                     "type": ["string"],
-                    "example": "(555) 555-5555" //TODO: specify phone number format for validation
+                    "description": "phone",
+                    "example": "(555) 555-5555"
                 },
                 "first_name": {
                     "type": ["string"],
+                    "description": "First Name",
                     "example": "Justin"
                 },
                 "last_name": {
                     "type": ["string"],
+                    "description": "Last Name",
                     "example": "Schell"
                 }
             }
@@ -202,6 +238,7 @@
             "properties": {
                 "id": {
                     "type": ["string"],
+                    "format": "uuid",
                     "example": "12"
                 },
                 "params": {
@@ -209,84 +246,97 @@
                     "properties": {
                         "StoreID": {
                             "type": "string",
+                            "description": "Store ID",
                             "example": "yhst-18909142938879050075142"
                         },
                         "next_order_refnum": {
                             "type": ["integer"],
+                            "description": "next order reference number",
                             "example": 496
                         },
                         "order_ack_status_id": {
                             "type": ["string"],
+                            "description": "order acknowledgement status id",
                             "example": "32"
                         },
                         "order_fulfilled_status_id": {
                             "type": ["string"],
+                            "description": "order fulfilled status id",
                             "example": "34"
                         },
                         "order_in_filfillment_status_id": {
                             "type": ["string"],
+                            "description": "order in fulfillment status id",
                             "example": "33"
                         },
-                        /*
-                         * the following properties are described / used by order_complete
-                         */
                         "email_return": {
                             "type": ["integer"],
-                            "example": 0 //bool
+                            "description": "boolean?",
+                            "example": 0
                         },
                         "inv_suspended_instock": {
                             "type": ["integer"],
-                            "example":  0 //bool?
+                            "description": "boolean?",
+                            "example":  0
                         },
                         "unset_other_media": {
                             "type": ["integer"],
-                            "example": 0 //bool?
+                            "description": "boolean?",
+                            "example": 0
                         },
                         "import_order_attrs": {
-                            "type": ["string"],//NOTE doublecheck, example had empty string
+                            "type": ["string"],
+                            "description": "Note: is string the correct type for this property? also need an example",
                             "example":  ""
                         },
                         "base_uri": {
-                            "type": ["string"], //TODO might need to define
+                            "type": ["string"],
                             "format": "uri",
-                            "example": "http://172.16.4.130/magento1921" //TODO regex format for uri's?
+                            "description": "base URI for channel",
+                            "example": "http://172.16.4.130/magento1921"
                         },
                         "express_configurable_super_links":{
                             "type": ["integer"],
-                            "example": 0 //bool?
+                            "description": "boolean?",
+                            "example": 0
                         },
                         "unset_other_attributes": {
                             "type": ["integer"],
-                            "example": 0 //bool?
+                            "description": "boolean?",
+                            "example": 0
                         },
                         "push_cancel": {
                             "type": ["integer"],
-                            "example": 0 //bool?
+                            "description": "boolean?",
+                            "example": 0
                         },
                         "inv_suspended_mode": {
-                            "type": ["integer"], //NOTE: not sure of type because example was "NULL"
-                            "example": "" //bool?
+                            "type": ["integer"],
+                            "description": "boolean? NOTE: example given was NULL",
+                            "example": 0
                         },
                         "email_invoice": {
-                            "type": ["integer"] , //NOTE: not sure of type because example was "NULL"
-                            "example": 0 //bool?
+                            "type": ["integer"],
+                            "description": "boolean? NOTE: example given was NULL",
+                            "example": 0
                         },
                         "email_tracking": {
-                            "type": ["integer"] , //NOTE: not sure of type because example was "NULL"
-                            "example": 0 //bool?
+                            "type": ["integer"],
+                            "description": "boolean?",
+                            "example": 0
                         },
-                        /*
-                        * required params for Catpush Transmit
-                        */
                         "breakdown_inventory": {
-                            "type": ["integer"] //bool?
+                            "type": ["integer"],
+                            "description": "boolean?"
                         },
                         "tenant": {
                             "type": ["string"],
+                            "description": "channel tenant id(?)",
                             "example": "14961"
                         },
                         "appKey": {
                             "type": ["string"],
+                            "description": "application key",
                             "example":"testco.key.0.1.2.Release"
                         }
                     }
@@ -299,54 +349,67 @@
             "properties": {
                 "channel_id": {
                     "type": ["integer"],
+                    "description": "Channel ID",
                     "example": 12
                 },
                 "captures_are_external": {
                     "type": ["integer"],
-                    "example": 1 //bool?
+                    "description": "boolean?",
+                    "example": 1
                 },
                 "unsettled": {
                     "type": ["integer"],
-                    "example": 0 //bool?
+                    "description": "boolean?",
+                    "example": 0
                 },
                 "settled": {
                     "type": ["integer"],
+                    "description": "??",
                     "example": 35
                 },
                 "charged": {
                     "type": ["integer"],
+                    "description": "??",
                     "example": 35
                 },
                 "captured": {
                     "type": ["integer"],
-                    "example": 0 //bool
+                    "description": "boolean?",
+                    "example": 0
                 },
                 "captures_are_deferred": {
                     "type": ["integer"],
-                    "example": 0 //bool
+                    "description": "boolean?",
+                    "example": 0
                 },
                 "voided": {
                     "type": ["integer"],
-                    "example": 0 //bool
+                    "description": "boolean?",
+                    "example": 0
                 },
                 "id": {
                     "type": ["string"],
+                    "description": "ID (Of what? The payment?)",
                     "example": "6"
                 },
                 "method": {
                     "type": ["string"],
+                    "description": "boolean?",
                     "example": "channel"
                 },
                 "credited": {
                     "type": ["integer"],
-                    "example": 0 //bool
+                    "description": "boolean?",
+                    "example": 0
                 },
                 "module": {
                     "type": ["string"],
+                    "description": "Module name",
                     "example": "Channel"
                 },
                 "available": {
                     "type": ["integer"],
+                    "description": "???",
                     "example": 35
                 }
             }
@@ -357,10 +420,12 @@
             "properties": {
                 "id": {
                     "type": ["string"],
+                    "description": "Shipment ID",
                     "example": "10987"
                 },
                 "packages": {
                     "type": ["array"],
+                    "description": "Array of packages in this shipment",
                     "items": {
                         "$ref": "#/definitions/package"
                     }
@@ -369,50 +434,61 @@
         },
         "package": {
             "type": ["object"],
-            "description": "package object",
+            "description": "package in shipment",
             "properties": {
                 "class_name": {
                     "type": ["string"],
+                    "description": "ship class name(?)",
                     "example": "Standard"
                 },
                 "carrier_code": {
                     "type": ["string"],
+                    "description": "Carrier Code",
                     "example": "WILLCALL"
                 },
                 "carrier_name": {
                     "type": ["string"],
+                    "description": "Carrier Name",
                     "example": "WillCall"
                 },
                 "tracking_number": {
-                    "type": ["string"], //NOTE: is this correct type? example was "null"
+                    "type": ["string"],
+                    "description": "Package Tracking Number",
                     "example": "ZX1981719100X"
                 },
                 "mapped_shipcode": {
-                    "type": ["string"], //NOTE: is this correct type? example was "null"
-                    "example": "?"
+                    "type": ["string"],
+                    "description": "Mapped Ship Code",
+                    "example": "????"
                 },
                 "date_shipped": {
                     "type": ["string"],
+                    "description": "Date Package Shipped",
                     "example": "2016-04-08T21:13:11Z"
                 },
                 "carrier_class_code": {
                     "type": ["string"],
+                    "description": "Carrier Class Code",
                     "example": "WILLCALL"
                 },
                 "weight":{
                     "type": ["string"],
+                    "description": "Package Weight",
                     "example": "1.0"
                 },
                 "id": {
                     "type": ["string"],
+                    "description": "Package ID",
                     "example": "370"
                 },
                 "carrier_class_name": {
                     "type": ["string"],
+                    "description": "Carrier Class Name",
                     "example": "WillCall Standard"
                 },
                 "ship_items": {
                     "type": ["array"],
+                    "description": "Array of Items in This Shipment",
                     "items": {
                         "$ref": "#/definitions/ship_item"
                     }
@@ -421,58 +497,71 @@
         },
         "ship_item": {
             "type": ["object"],
-            "description": "shipment item object",
+            "description": "Item in shipment",
             "properties": {
                 "item_giftwrap_amt": {
                     "type": ["integer"],
-                    "example": 0 //bool?
+                    "description": "Amount paid for giftwrap, or amount of wrapped items???",
+                    "example": 0
                 },
                 "quantity": {
                     "type": ["integer"],
+                    "description": "Quantity of item",
                     "example": 1
                 },
                 "item_product_amt": {
                     "type": ["string"],
+                    "description": "???",
                     "example": "30"
                 },
                 "item_recycling_amt": {
                     "type": ["integer"],
+                    "description": "????",
                     "example": 0
                 },
                 "channel_refnum": {
                     "type": ["string"],
+                    "description": "Channel Reference Number",
                     "example": "88"
                 },
                 "item_shipping_tax_amt": {
                     "type": ["integer"],
+                    "description": "Amount of tax charged? if so we need to change type to 'number' in order to support floats",
                     "example": 0
                 },
                 "item_subtotal_amt": {
                     "type": ["integer"],
+                    "description": "Subtotal of order value? if so we need to change type to 'number' in order to support floats",
                     "example": 30
                 },
                 "sku_num": {
                     "type": ["string"],
+                    "description": "Sku number",
                     "example": "132"
                 },
                 "item_tax_amt":{
                     "type": ["integer"],
+                    "description": "????",
                     "example": 0
                 },
                 "id": {
                     "type": ["string"],
+                    "description": "item ID",
                     "example": "7396"
                 },
                 "item_shipping_amt": {
                     "type": ["integer"],
+                    "description": "Cost of shipping? if so we need to change type to 'number' in order to support floats",
                     "example": 5
                 },
                 "channel_order_refnum": {
                     "type": ["string"],
+                    "description": "Channel order reference number",
                     "example": "100000084"
                 },
                 "item_giftwrap_tax_amt": {
                     "type": ["integer"],
+                    "description": "Amount of tax for giftwrap? if so need to change type to 'number' in order to support floats",
                     "example": 0
                 }
             }
@@ -483,10 +572,12 @@
             "properties": {
                 "channel_refnum": {
                     "type": ["string"],
+                    "description": "Channel reference number",
                     "example": "100000084"
                 },
                 "channel_payment": {
                     "type": ["array"],
+                    "description": "array of payment objects",
                     "items": {
                         "$ref": "#/definitions/channel_payment"
                     }
@@ -497,34 +588,41 @@
                 },
                 "unshipped_items_ref": {
                     "type": ["array"],
+                    "description": "array of ID's unshipped items. Need to cjheck type of items in array (integers?)",
                     "items": {
-                        // TODO: what type will array contain? order_item id's???? items will need to be defined!
+                        "type": ["integer"]
                     }
                 },
                 "payment_series_id": {
                     "type": ["string"],
+                    "description": "Payment series ID",
                     "example": "2573"
                 },
                 "from_counterparty_rate": {
                     "type": ["integer"],
-                    "example": 1 //bool?
+                    "description": "Counterparty rate (boolean? if supposed to be $ value, change type to 'number')",
+                    "example": 1
                 },
                 "ship_service_name": {
                     "type": ["string"],
+                    "description": "Shipping service name",
                     "example": "Will Call"
                 },
                 "shipments": {
                     "type": ["array"],
+                    "description": "Array of shipments",
                     "items": {
                         "$ref": "#/definitions/shipment"
                     }
                 },
                 "id": {
                     "type": ["string"],
+                    "description": "Order ID",
                     "example": "4898"
                 },
                 "payment_status": {
                     "type": ["object"],
+                    "description": "Payment status object",
                     "$ref": "#/definitions/payment_status"
                 }
             }
@@ -535,48 +633,59 @@
             "properties": {
                 "success": {
                     "type": ["integer"],
-                    "example": 1 //bool?
+                    "description": "Payment successful? (boolean?)",
+                    "example": 1
                 },
                 "unsettled_external": {
                     "type": ["integer"],
-                    "example": 0 //bool?
+                    "description": "boolean?",
+                    "example": 0
                 },
                 "unsettled_deferred": {
                     "type": ["integer"],
-                    "example": 0 //bool?
+                    "description": "boolean?",
+                    "example": 0
                 },
                 "by_account": {
                     "type": ["array"],
+                    "description": "Array of payment info by account",
                     "items": {
                         "$ref": "#/definitions/by_account"
                     }
                 },
                 "unsettled": {
                     "type": ["integer"],
-                    "example": 0 //bool?
+                    "description": "boolean?",
+                    "example": 0
                 },
                 "settled": {
                     "type": ["integer"],
+                    "description": "number of payments settled or $ amount of payment that has been settled? if $ change type to 'number'",
                     "example": 35
                 },
                 "charged": {
                     "type": ["integer"],
+                    "description": "Amount charged? if so change type to 'number' to support floats",
                     "example": 35
                 },
                 "captured": {
                     "type": ["integer"],
-                    "example": 0 //bool?
+                    "description": "boolean?",
+                    "example": 0
                 },
                 "authed": {
                     "type": ["integer"],
-                    "example": 0 //bool?
+                    "description": "boolean?",
+                    "example": 0
                 },
                 "credited": {
                     "type": ["integer"],
-                    "example": 0 //bool?
+                    "description": "boolean?",
+                    "example": 0
                 },
                 "available": {
                     "type": ["integer"],
+                    "description": "?",
                     "example": 35
                 }
             }
@@ -587,18 +696,22 @@
             "properties": {
                 "channel_id": {
                     "type": ["integer"],
+                    "description": "Channel ID",
                     "example": 12
                 },
                 "captures_are_external": {
                     "type": ["integer"],
-                    "example": 1 //bool?
+                    "description": "boolean?",
+                    "example": 1
                 },
                 "unsettled": {
                     "type": ["integer"],
-                    "example": 0 //bool?
+                    "description": "?",
+                    "example": 0
                 },
                 "settled": {
                     "type": ["integer"],
+                    "description": "?",
                     "example": 35
                 },
                 "charged": {
@@ -607,34 +720,42 @@
                 },
                 "captured": {
                     "type": ["integer"],
-                    "example": 0 //bool?
+                    "description": "?",
+                    "example": 0
                 },
                 "captures_are_deferred": {
                     "type": ["integer"],
-                    "example": 0 //bool
+                    "description": "boolean?",
+                    "example": 0
                 },
                 "voided": {
                     "type": ["integer"],
-                    "example": 0 //bool?
+                    "description": "boolean?",
+                    "example": 0
                 },
                 "id": {
                     "type": ["string"],
+                    "description": "account id?",
                     "example": "6"
                 },
                 "method": {
                     "type": ["string"],
+                    "description": "method",
                     "example": "channel"
                 },
                 "credited":{
                     "type": ["integer"],
-                    "example": 0 //bool?
+                    "description": "boolean?",
+                    "example": 0
                 },
                 "module": {
                     "type": ["string"],
+                    "description": "module",
                     "example": "Channel"
                 },
                 "available": {
                     "type": ["integer"],
+                    "description": "?",
                     "example": 35
                 }
             }
@@ -683,8 +804,12 @@
                             "format": "uri",
                             "description": "request url for this service action",
                             "example": "https://t14961.sandbox.mozu.com/api/commerce/catalog/admin/products/PP20?responseFields=",
-                        "items": { //NOTE: this my conflict with schema "items" keyword. may need to be renamed
-                            "type": ["array"] //TODO: need to check type
+                        "data_items": {
+                            "type": ["array"],
+                            "description": "(key was originally named items, had to be changed to avoid schema conflict) What types are in the array?",
+                            "items": {
+
+                            }
                         },
                         "additonal": {
                             "type": ["string"],
@@ -887,8 +1012,8 @@
                     "example": "7397"
                 },
                 "removed": {
-                    "type": ["integer"], //not sure if correct, example was "NULL"
-                    "description": "??",
+                    "type": ["integer"],
+                    "description": "TODO: check type, supplied example was 'NULL'",
                     "example": null
                 },
                 "estimated_cost": {
@@ -998,14 +1123,109 @@
                     "example": "0"
                 }
             }
+        },
+        "product": {
+            "type": ["object"],
+            "description": "product information",
+            "properties": {
+                "object_data": {
+                    "type": ["object"],
+                    "properties": {
+                        "source_type": {
+                            "type": ["string"],
+                            "description": "source of product info",
+                            "example": "ProductFamily"
+                        },
+                        "id": {
+                            "type": ["string"],
+                            "description": "",
+                            "example": "20"
+                        }
+                    }
+                },
+                "feed_data": {
+                    "type": ["object"],
+                    "description": "",
+                    "properties": {
+                        "Publishing": {
+                            "type": ["object"],
+                            "description": "",
+                            "properties": {
+                                "State": {
+                                    "type": ["string"],
+                                    "description": "publishing state of product",
+                                    "example": "Draft"
+                                },
+                                "Publish Set Code": {
+                                    "type": ["string"],
+                                    "description": "",
+                                    "example": "publish-set-1"
+                                }
+                            }
+                        },
+                        "Global": {
+                            "type": ["object"],
+                            "description": "",
+                            "example": "",
+                            "properties": {
+                                "Extras": {
+                                    "type": ["array"],
+                                    "description": "array of extras",
+                                    "items": {
+                                        "Extra": {
+                                            "type": ["object"],
+                                            "properties": {
+                                                "Input Type": {
+                                                    "type": ["string"],
+                                                    "description": "input type",
+                                                    "example": "TextBox"
+                                                },
+                                                "Data Type": {
+                                                    "type": ["string"],
+                                                    "description": "input data type",
+                                                    "example": "String"
+                                                },
+                                                "Value Type": {
+                                                    "type": ["String"],
+                                                    "description": "value type",
+                                                    "example": "ShopperEntered"
+                                                },
+                                                "Attribute Values": {
+                                                    "type": ["array"],
+                                                    "items": {
+
+                                                    }
+                                                },
+                                                "Attribute Name": {
+                                                    "type": ["string"],
+                                                    "description": "",
+                                                    "example": "Monogram"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "Options": {
+                                    "type": ["array"],
+                                    "items": {
+
+                                    }
+                                },
+                                "Shipping": {
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
         }
     },
     "links": [
         {
-            "description": "Retreive an order.", // Order_Fetch request
-            "method": "POST",
-            "rel": "instances", // TODO: check proper use of rel keywords: "create, destroy, self, instances, or update"
-            "href": "/order/fetch",
+            "description": "Retreive orders.",
+            "method": "GET",
             "title": "Fetch",
             "schema": {
                 "properties": {
@@ -1025,44 +1245,55 @@
                         ]
                     },
                     "version": {
-                        "type": ["integer"]
+                        "type": ["integer"],
+                        "description": "",
+                        "example": 1
                     },
                     "action": {
                         "type": ["string"],
-                        "example": "Aabaco.orderpull.order_fetch" //DO we need action to be defined by third party?
+                        "description": "",
+                        "example": "Aabaco.orderpull.order_fetch"
                     },
                     "data": {
                         "type": ["object"],
                         "properties": {
                             "single": {
-                                "type": ["integer"]
+                                "type": ["integer"],
+                                "description": "",
+                                "example": 0
                             },
-                            "order": { //TODO: double check structure of order in this method
+                            "order": {
                                 "type": ["object"],
                                 "properties": {
                                     "channel_refnum": {
-                                        "type": ["integer"]
+                                        "type": ["integer"],
+                                        "description": "channel order reference number",
+                                        "example": ""
                                     }
-                                }
+                                },
+                                "required": [
+                                    "channel_refnum"
+                                ]
                             },
                             "client_id": {
-                                "type": ["integer"]
+                                "type": ["integer"],
+                                "description": "RetailOPS client id",
+                                "example": 1
                             },
                             "channel": {
                                 "type": ["object"],
-                                "required": [
-                                    "StoreID",
-                                    "next_order_refnum",
-                                    "order_ack_status_id",
-                                    "order_fulfilled_status_id",
-                                    "order_in_filfillment_status_id"
-                                ]
+                                "description": "",
+                                "$ref": "#/definitions/channel"
                             },
                             "page_state": {
-                                "type": ["integer"] //TODO: double check this type, example was NULL
+                                "type": ["integer"],
+                                "description": "",
+                                "example": null
                             },
                             "max_page_size": {
-                                "type": ["integer"]
+                                "type": ["integer"],
+                                "description": "",
+                                "example": 50
                             }
                         }
                     }
@@ -1078,10 +1309,14 @@
                 "type": ["object"],
                 "properties":  {
                     "next_page_state": {
-                        "type": ["integer"]
+                        "type": ["integer"],
+                        "description": "",
+                        "example": 0
                     },
                     "next_order_refnum": {
-                        "type": ["integer"]
+                        "type": ["integer"],
+                        "description": "",
+                        "example": 497
                     },
                     "orders": {
                         "type": ["array"],
@@ -1095,8 +1330,6 @@
         {
             "description": "Order Acknowledgement request",
             "method": "POST",
-            "rel": "fetch",
-            "href": "your_service_endpoint.com/order/acknowledge",
             "schema": {
                 "properties": {
                     "headers": {
@@ -1115,7 +1348,9 @@
                         ]
                     },
                     "version": {
-                        "type": ["integer"]
+                        "type": ["integer"],
+                        "description": "API version",
+                        "example": 1
                     },
                     "action": {
                         "type": ["string"],
@@ -1138,14 +1373,7 @@
                                 "$ref": "#/definitions/client_id"
                             },
                             "channel": {
-                                "$ref": "#/definitions/channel" //,TODO: define required params for this request
-                                // "required": [
-                                //     "StoreID",
-                                //     "next_order_refnum",
-                                //     "order_ack_status_id",
-                                //     "order_fulfilled_status_id",
-                                //     "order_in_filfillment_status_id"
-                                // ]
+                                "$ref": "#/definitions/channel"
                             }
                         }
                     }
@@ -1167,8 +1395,6 @@
         {
             "description": "Order Cancel request",
             "method": "POST",
-            "rel": "fetch",
-            "href": "your_service_endpoint.com/order/cancel",
             "properties": {
                 "headers": {
                     "type": ["object"],
@@ -1186,7 +1412,9 @@
                     ]
                 },
                 "version": {
-                    "type": ["integer"]
+                    "type": ["integer"],
+                    "description": "API version",
+                    "example": 1
                 },
                 "action": {
                     "type": ["string"],
@@ -1223,8 +1451,6 @@
         {
             "description": "Order Complete request",
             "method": "POST",
-            "rel": "fetch",
-            "href": "your_service_endpoint.com/order/complete",
             "schema": {
                 "properties": {
                     "headers": {
@@ -1293,8 +1519,6 @@
         {
             "description": "Catpush Config request",
             "method": "POST",
-            "rel": "instances",
-            "href": "your_service_endpoint.com/catpush/config",
             "schema": {
                 "properties": {
                     "headers": {
@@ -1336,8 +1560,6 @@
         {
             "description": "Catpush Transmit request",
             "method": "POST",
-            "rel": "instances",
-            "href": "your_service_endpoint.com/catpush/transmit",
             "schema": {
                 "properties": {
                     "headers": {
@@ -1356,40 +1578,18 @@
                         ]
                     },
                     "version": {
-                        "type": ["integer"]
+                        "type": ["integer"],
+                        "description": "API version",
+                        "example": 1
                     },
                     "action": {
                         "type": ["string"],
+                        "description": "",
                         "example": "Mozu.product.catpush_transmit"
                     },
                     "data": {
-                        "feed": {
-                            "type": ["object"],
-                            "properties": {
-                                "data": {
-                                    "type": ["object"],
-                                    "properties": {
-                                        "Product": {
-                                            "type": ["array"],
-                                            "items": {
-                                                "$ref": "#/definitions/product" //TODO: define product object
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "client_id": {
-                            "$ref": "#/definitions/client_id"
-                        },
-                        "channel": {
-                            "$ref": "#/definitions/channel" //TODO: define required channel params for this request method
-                            // "required": [
-                            //     "breakdown_inventory",
-                            //     "tenant",
-                            //     "appKey"
-                            // ]
-                        }
+                        "type": ["object"],
+                        "description": "payload required by channel for feed catalog push. Must be defined by integrator (JSON)"
                     }
                 }
             },
@@ -1409,8 +1609,6 @@
         {
             "description": "Invpush Transmit request",
             "method": "POST",
-            "rel": "instances",
-            "href": "your_service_endpoint.com/invpush/",
             "schema": {
                 "properties": {
                     "headers": {
@@ -1455,12 +1653,7 @@
                                         "$ref": "#/definitions/client_id"
                                     },
                                     "channel" : {
-                                        "$ref": "#/definitions/channel" //TODO: define required channel params for this request method
-                                        // "required": [
-                                        //     "breakdown_inventory",
-                                        //     "tenant",
-                                        //     "appKey"
-                                        // ]
+                                        "$ref": "#/definitions/channel"
                                     }
                                 }
                             }
@@ -1485,8 +1678,6 @@
         {
             "description": "Capture Channel Payments request",
             "method": "POST",
-            "rel": "instances",
-            "href": "your_service_endpoint.com/payments/capture",
             "schema": {
                 "properties": {
                     "headers": {
@@ -1518,32 +1709,16 @@
                         "type": ["object"],
                         "properties": {
                             "order": {
-                                "type": ["object"],
                                 "$ref": "#/definitions/channel_order"
                             },
                             "channel": {
-                                "type": ["object"],
                                 "$ref": "#/definitions/channel"
-                                //todo: define required channel params for this method
-                                // "required": [
-                                //     "email_return",
-                                //     "inv_suspended_instock",
-                                //     "unset_other_media",
-                                //     "import_order_attrs",
-                                //     "base_uri",
-                                //     "express_configurable_super_links",
-                                //     "unset_other_attributes",
-                                //     "push_cancel",
-                                //     "inv_suspended_mode",
-                                //     "email_invoice",
-                                //     "email_tracking"
-                                // ]
                             }
                         }
                     }
                 }
             },
-            "targetSchema": { //NOTE the response example that I was given was an empty object "{}", so I'm just putting standard response here
+            "targetSchema": {
                 "type": ["object"],
                 "properties": {
                     "events": {
@@ -1559,8 +1734,6 @@
         {
             "description": "Shipment Submit request",
             "method": "POST",
-            "rel": "push",
-            "href": "your_service_endpoint.com/shipment/submit",
             "schema": {
                 "properties": {
                     "headers": {
@@ -1592,15 +1765,12 @@
                         "type": ["object"],
                         "properties": {
                             "shipment": {
-                                "type": ["object"],
                                 "$ref": "#/definitions/shipment"
                             },
                             "order": {
-                                "type": ["object"],
                                 "$ref": "#/definitions/channel_order"
                             },
                             "channel": {
-                                "type": ["object"],
                                 "$ref": "#/definitions/channel"
                             }
                         }
@@ -1623,8 +1793,6 @@
         {
             "description": "Items Returned request",
             "method": "POST",
-            "rel": "push",
-            "href": "your_service_endpoint.com/order/items/return",
             "schema": {
                 "properties": {
                     "headers": {
@@ -1656,11 +1824,9 @@
                         "type": ["object"],
                         "properties": {
                             "order": {
-                                "type": ["object"],
                                 "$ref": "#/definitions/channel_order"
                             },
                             "channel": {
-                                "type": ["object"],
                                 "$ref": "#/definitions/channel"
                             },
                             "return": {
@@ -1717,7 +1883,7 @@
                                         "description": "ID of return",
                                         "example": "87"
                                     },
-                                    "items": { //NOTE: may need to change name of this property because "items is a reserved keyword in JSON schema"
+                                    "items": {
                                         "type": ["array"],
                                         "items": {
                                             "type": ["object"],
@@ -1776,8 +1942,6 @@
         {
             "description": "Writeback request",
             "method": "POST",
-            "rel": "push",
-            "href": "your_service_endpoint.com/payments/writeback",
             "schema": {
                 "properties": {
                     "headers": {
@@ -1811,7 +1975,7 @@
                             "rmas": {
                                 "type": ["array"],
                                 "items": {
-                                    "type": ["object"]//not sure what type is posted in the RMAS array
+                                    "type": ["object"]
                                 }
                             },
                             "line_items": {
@@ -1895,4 +2059,6 @@
             }
         }
     ]
+}
+}
 }
