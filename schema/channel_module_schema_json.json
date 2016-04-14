@@ -802,7 +802,8 @@
                             "type": ["string"],
                             "format": "uri",
                             "description": "request url for this service action",
-                            "example": "https://t14961.sandbox.mozu.com/api/commerce/catalog/admin/products/PP20?responseFields=",
+                            "example": "https://t14961.sandbox.mozu.com/api/commerce/catalog/admin/products/PP20?responseFields="
+                        },
                         "data_items": {
                             "type": ["array"],
                             "description": "(key was originally named items, had to be changed to avoid schema conflict) What types are in the array?",
@@ -813,7 +814,8 @@
                         "additonal": {
                             "type": ["string"],
                             "description": "additional information re: missing or invalid parameters",
-                            "example": "[{\"name\":\"ParameterName\",\"value\":\"PackagWeight.Unit\"}]",
+                            "example": "[{\"name\":\"ParameterName\",\"value\":\"PackagWeight.Unit\"}]"
+                        },
                         "code": {
                             "type": ["string"],
                             "description": "error code",
@@ -822,7 +824,8 @@
                         "message": {
                             "type": ["string"],
                             "description": "descriptive error message",
-                            "example": "Missing or invalid parameter: PackagWeight.Unit Invalid unit of measurement specified try (lbs)"}
+                            "example": "Missing or invalid parameter: PackagWeight.Unit Invalid unit of measurement specified try (lbs)"
+                        }
                     }
                 }
             }
@@ -1228,6 +1231,7 @@
             "title": "Fetch",
             "href": "",
             "rel": "self",
+            "title": "Order",
             "schema": {
                 "properties": {
                     "headers": {
@@ -1299,12 +1303,7 @@
                         }
                     }
                 },
-                "required": [
-                    "headers",
-                    "version",
-                    "action",
-                    "data"
-                ]
+                "type": ["object"]
             },
             "targetSchema": {
                 "type": ["object"],
@@ -1333,6 +1332,7 @@
             "method": "POST",
             "href": "",
             "rel": "self",
+            "title": "Order_Ack",
             "schema": {
                 "properties": {
                     "headers": {
@@ -1380,7 +1380,8 @@
                             }
                         }
                     }
-                }
+                },
+                "type": ["object"]
             },
             "targetSchema": {
                 "type": ["object"],
@@ -1458,6 +1459,7 @@
             "method": "POST",
             "href": "",
             "rel": "self",
+            "title": "Order_Complete",
             "schema": {
                 "properties": {
                     "headers": {
@@ -1508,7 +1510,8 @@
                             }
                         }
                     }
-                }
+                },
+                "type": ["object"]
             },
             "targetSchema": {
                 "type": ["object"],
@@ -1528,6 +1531,7 @@
             "method": "POST",
             "href": "",
             "rel": "self",
+            "title": "Catpush_Config",
             "schema": {
                 "properties": {
                     "headers": {
@@ -1554,7 +1558,8 @@
                     },
                     "data": {
                     }
-                }
+                },
+                "type": ["object"]
             },
             "targetSchema": {
                 "type": ["object"],
@@ -1602,7 +1607,8 @@
                         "type": ["object"],
                         "description": "payload required by channel for feed catalog push. Must be defined by integrator (JSON)"
                     }
-                }
+                },
+                "type": ["object"]
             },
             "targetSchema": {
                 "type": ["object"],
@@ -1672,8 +1678,8 @@
                             }
                         }
                     }
-
-                }
+                },
+                "type": ["object"]
             },
             "targetSchema": {
                 "type": ["object"],
@@ -1731,7 +1737,8 @@
                             }
                         }
                     }
-                }
+                },
+                "type": ["object"]
             },
             "targetSchema": {
                 "type": ["object"],
@@ -1792,7 +1799,8 @@
                             }
                         }
                     }
-                }
+                },
+                "type": ["object"]
             },
             "targetSchema": {
                "type": ["object"],
@@ -1934,7 +1942,8 @@
                             }
                         }
                     }
-                }
+                },
+                "type": ["object"]
             },
             "targetSchema": {
                "type": ["object"],
@@ -2080,6 +2089,4 @@
             }
         }
     ]
-}
-}
 }
