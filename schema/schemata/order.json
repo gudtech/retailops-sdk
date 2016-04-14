@@ -1,0 +1,541 @@
+{
+  "$schema": "http://json-schema.org/draft-04/hyper-schema",
+  "title": "Order",
+  "description": "order resource for RetailOPS webhook API",
+  "stability": "prototype",
+  "strictProperties": true,
+  "type": [
+    "object"
+  ],
+  "definitions": {
+      "identity": {
+          "$ref": "/schemata/order#/definitions/client_id"
+      },
+      "headers": {
+            "type": ["object"],
+            "description": "request header information",
+            "properties": {
+                "client_id": {
+                  "description": "RetailOPS client id",
+                  "readOnly": true,
+                  "type": ["integer"],
+                  "example": "497"
+                },
+                "ticket": {
+                    "type": ["string"],
+                    "description": "RetailOPS authorization ticket",
+                    "readOnly": true,
+                    "example": "1,1,0,1456437061,315576060,111,WEIhLHAyXHpjZA27OdENwAn1_fHx8fGA-ekng7lhkAvc27Uhnxgd4PZx4VnR_SJ-K85M_5dTAChTXgI3RsmGvfTbaOZ1_U-YJw3G0w1UVWFZ2EC83wjO6bmp91VZdR0tT_b2R1kK4qO1QTJrBk53ZyIuidsOa13lihh8VMgAvSDqCnTwxV2NVV7oN4v-h_tQtpUvklfbW1bnULR3bbaDvoOlb1CVQ_3BdNdo1MaAh-JxrRjf7MkzcHQYs3dN0GuaBZ1KBHvLdrLmGerNYv2p6AMC-fu8YeuukUU3Q6RL9AtF5AA6TPhfwfBM5r05B7QZiSEGySF65FCcfQFT_6lMxQ"
+                }
+            }
+        },
+        "version": {
+            "type": ["integer"],
+            "description": "RetailOPS api action version",
+            "example": 1
+        },
+        "action": {
+            "type": ["string"],
+            "description": "RetailOPS api action name",
+            "example": "testco.orderpull.order_fetch"
+        },
+        "channel": {
+            "type": ["object"],
+            "description": "channel",
+            "properties": {
+                "id": {
+                    "type": ["integer"],
+                    "example": 21
+                },
+                "params": {
+                    "type": ["object"],
+                    "properties": {
+                        "StoreID": {
+                            "type": "string",
+                            "description": "Store ID",
+                            "example": "yhst-18909142938879050075142"
+                        },
+                        "next_order_refnum": {
+                            "type": ["integer"],
+                            "description": "next order reference number",
+                            "example": 496
+                        },
+                        "order_ack_status_id": {
+                            "type": ["string"],
+                            "description": "order acknowledgement status id",
+                            "example": "32"
+                        },
+                        "order_fulfilled_status_id": {
+                            "type": ["string"],
+                            "description": "order fulfilled status id",
+                            "example": "34"
+                        },
+                        "order_in_filfillment_status_id": {
+                            "type": ["string"],
+                            "description": "order in fulfillment status id",
+                            "example": "33"
+                        }
+                    }
+                }
+            }
+        },
+        "client_id": {
+            "type": ["integer"],
+            "description": "RetailOPS client id",
+            "example": 1
+        },
+        "page_state": {
+            "type": ["integer"],
+            "description": "",
+            "example": null
+        },
+        "max_page_size": {
+            "type": ["integer"],
+            "description": "maximum number of records to include in paged response",
+            "example": 50
+        },
+        "shipping_amt": {
+            "type":["string"],
+            "description": "",
+            "example": "0.25"
+        },
+        "calc_mode": {
+            "type": ["string"],
+            "description": "calculation mode",
+            "example": "order"
+        },
+        "channel_date_created": {
+            "type": ["integer"],
+            "description": "date created expressed unix time",
+            "example": 1460142547
+        },
+        "channel_refnum": {
+            "type": ["string"],
+            "description": "channel reference number",
+            "example": "496"
+        },
+        "payment_type": {
+            "type": ["string"],
+            "description": "payment type",
+            "example": "Visa"
+        },
+        "amount": {
+            "type": ["string"],
+            "description": "payment amount",
+            "example": "1.32"
+        },
+        "payment_method": {
+            "type": ["string"],
+            "description": "payment method",
+            "example": "charge"
+        },
+        "tax_amt": {
+            "type": ["string"],
+            "description": "tax amount",
+            "example": "0.07"
+        },
+        "address": {
+            "type": ["object"],
+            "description": "address",
+            "properties": {
+                "state_match": {
+                    "type": ["string"],
+                    "description": "state",
+                    "example": "CA"
+                },
+                "country_match": {
+                    "type": ["string"],
+                    "description": "Country",
+                    "example": "US United States"
+                },
+                "last_name": {
+                    "type": ["string"],
+                    "description": "Last Name",
+                    "example": "Smith"
+                },
+                "address2": {
+                    "type": ["string"],
+                    "description": "Address second line",
+                    "example": "suite 100"
+                },
+                "city": {
+                    "type": ["string"],
+                    "description": "City",
+                    "example": "San Diego"
+                },
+                "postal_code": {
+                    "type": ["string"],
+                    "description": "Postal Code",
+                    "example": "92101"
+                },
+                "address1": {
+                    "type": ["string"],
+                    "description": "Address line one",
+                    "example": "123 Main St"
+                },
+                "company": {
+                    "type": ["string"],
+                    "description": "Company name",
+                    "example": "gudTECH"
+                },
+                "first_name": {
+                    "type": ["string"],
+                    "description": "First Name",
+                    "example": "John"
+                }
+            }
+          },
+        "gift_message": {
+          "type": ["string"],
+          "description": "gift message",
+          "example": "Happy Birthday"
+        },
+        "customer": {
+          "type": ["object"],
+          "description": "customer",
+          "properties": {
+            "email_address": {
+                "type": ["string"],
+                "description": "Customer email address",
+                "example": "john@gudtech.com"
+            },
+            "phone_number": {
+                "type": ["string"],
+                "description": "customer phone",
+                "example": "5555555555"
+            },
+            "first_name": {
+                "type": ["string"],
+                "description": "Firest name",
+                "example": "John"
+            },
+            "last_name": {
+                "type": ["string"],
+                "description": "last name",
+                "example": "Smith"
+            }
+        }
+        },
+        "discount_amt": {
+          "type": ["integer"],
+          "description": "amount discounted",
+          "example": 0
+        },
+        "shipcode": {
+          "type": ["string"],
+          "description": "shipping code",
+          "example": "Ground (5-7 days)"
+        },
+        "ip_address": {
+          "type": ["string"],
+          "description": "ip address used to place order",
+          "example": "68.7.2.222"
+        },
+        "attributes": {
+          "type": ["object"],
+          "description": "sku attributes",
+          "properties": {}
+        },
+        "sku": {
+          "type": ["string"],
+          "description": "sku number",
+          "example": "299"
+        },
+        "unit_tax": {
+          "type": ["integer"],
+          "description": "unit tax",
+          "example": 0
+        },
+        "quantity": {
+          "type": ["integer"],
+          "description": "quantity of sku in order",
+          "example": 1
+        },
+        "sku_title": {
+          "type": ["string"],
+          "description": "sku title",
+          "example": "test"
+        },
+        "unit_price": {
+          "type": ["string"],
+          "description": "unit price for sku",
+          "example": "1"
+        }
+    },
+"links": [
+    {
+        "description": "Order fetch request.",
+        "href": "/orders",
+        "method": "GET",
+        "rel": "instances",
+        "schema": {
+            "type": ["object"],
+            "properties": {
+                "headers": {
+                    "$ref": "/schemata/order#/definitions/headers"
+                },
+                "version": {
+                    "$ref": "/schemata/order#/definitions/version"
+                },
+                "action": {
+                    "$ref": "/schemata/order#/definitions/action"
+                },
+                "data": {
+                    "type": ["object"],
+                    "properties": {
+                        "single": {
+                            "type": ["integer"],
+                            "description": "requesting single order? (boolean?)",
+                            "example": 0
+                        },
+                        "order": {
+                            "type": ["object"],
+                            "properties": {
+                                "channel_refnum": {
+                                    "type": ["integer"],
+                                    "description": "channel order reference number",
+                                    "example": ""
+                                }
+                            }
+                        },
+                        "client_id": {
+                            "$ref": "/schemata/order#/definitions/client_id"
+                        },
+                        "channel": {
+                            "$ref": "/schemata/order#/definitions/channel"
+                        },
+                        "page_state": {
+                            "$ref": "/schemata/order#/definitions/page_state"
+                        },
+                        "max_page_size": {
+                            "$ref": "/schemata/order#/definitions/max_page_size"
+                        }
+                    }
+                }
+            },
+            "required": [
+                "headers",
+                "version",
+                "action",
+                "data"
+            ]
+        },
+        "targetSchema": {
+            "type": "object",
+            "properties":  {
+                "next_page_state":{
+                    "type": ["integer"],
+                    "example": 0
+                },
+                "next_order_refnum": {
+                    "type": ["integer"],
+                    "description": "next order reference number",
+                    "example": 496
+                },
+                "orders": {
+                    "type": ["array"],
+                    "items": {
+                        "type": ["object"],
+                        "properties": {
+                            "shipping_amt": {
+                                "$ref": "/schemata/order#/definitions/shipping_amt"
+                            },
+                            "calc_mode": {
+                                "$ref": "/schemata/order#/definitions/calc_mode"
+                            },
+                            "channel_date_created": {
+                                "$ref": "/schemata/order#/definitions/channel_date_created"
+                            },
+                            "payment": {
+                                "type": ["array"],
+                                "items": {
+                                    "type": ["object"],
+                                    "properties": {
+                                        "params": {
+                                            "type": ["object"],
+                                            "properties": {
+                                                "channel_refnum": {
+                                                    "$ref": "/schemata/order#/definitions/channel_refnum"
+                                                },
+                                                "payment_type": {
+                                                    "$ref": "/schemata/order#/definitions/payment_type"
+                                                }
+                                            }
+                                        },
+                                        "amount": {
+                                            "$ref": "/schemata/order#/definitions/amount"
+                                        },
+                                        "type": {
+                                            "$ref": "/schemata/order#/definitions/payment_method"
+                                        }
+                                    }
+                                }
+                            },
+                            "tax_amt": {
+                                "$ref": "/schemata/order#/definitions/tax_amt"
+                            },
+                            "bill_addr": {
+                                "$ref": "/schemata/order#/definitions/address"
+                            },
+                            "gift_message": {
+                                "$ref": "/schemata/order#/definitions/gift_message"
+                            },
+                            "ship_addr": {
+                                "$ref": "/schemata/order#/definitions/address"
+                            },
+                            "channel_refnum": {
+                                "$ref": "/schemata/order#/definitions/channel_refnum"
+                            },
+                            "customer": {
+                                "$ref": "/schemata/order#/definitions/customer"
+                            },
+                            "discount_amt": {
+                                "$ref": "/schemata/order#/definitions/discount_amt"
+                            },
+                            "shipcode": {
+                                "$ref": "/schemata/order#/definitions/shipcode"
+                            },
+                            "ip_address": {
+                                "$ref": "/schemata/order#/definitions/ip_address"
+                            },
+                            "attributes": {
+                                "$ref": "/schemata/order#/definitions/attributes"
+                            },
+                            "items": {
+                                "type": ["array"],
+                                "items": {
+                                    "type": ["object"],
+                                    "properties": {
+                                        "channel_refnum": {
+                                            "$ref": "/schemata/order#/definitions/channel_refnum"
+                                        },
+                                        "sku": {
+                                            "$ref": "/schemata/order#/definitions/sku"
+                                        },
+                                        "unit_tax": {
+                                            "$ref": "/schemata/order#/definitions/unit_tax"
+                                        },
+                                        "quantity": {
+                                            "$ref": "/schemata/order#/definitions/quantity"
+                                        },
+                                        "sku_title": {
+                                            "$ref": "/schemata/order#/definitions/sku_title"
+                                        },
+                                        "unit_price": {
+                                            "$ref": "/schemata/order#/definitions/unit_price"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "title": "Fetch"
+    },
+    {
+        "description": "Order Acknowledgement request.",
+        "href": "/orders/order_ack",
+        "method": "GET",
+        "rel": "self",
+        "schema": {
+            "type": ["object"],
+            "properties": {
+                "headers": {
+                    "$ref": "/schemata/order#/definitions/headers"
+                },
+                "version": {
+                    "$ref": "/schemata/order#/definitions/version"
+                },
+                "action": {
+                    "$ref": "/schemata/order#/definitions/action"
+                },
+                "data": {
+                    
+                }
+            }
+        },
+        "targetSchema": {},
+        "title": "order_ack"
+    }
+],
+"properties": {
+      "headers": {
+          "$ref": "/schemata/order#/definitions/headers"
+      },
+      "version": {
+          "$ref": "/schemata/order#/definitions/version"
+      },
+      "channel": {
+          "$ref": "/schemata/order#/definitions/channel"
+      },
+      "page_state": {
+          "$ref": "/schemata/order#/definitions/page_state"
+      },
+      "max_page_size": {
+          "$ref": "/schemata/order#/definitions/max_page_size"
+      },
+      "shipping_amt": {
+          "$ref": "/schemata/order#/definitions/shipping_amt"
+      },
+      "calc_mode": {
+          "$ref": "/schemata/order#/definitions/calc_mode"
+      },
+      "channel_date_created": {
+          "$ref": "/schemata/order#/definitions/channel_date_created"
+      },
+      "channel_refnum": {
+          "$ref": "/schemata/order#/definitions/channel_refnum"
+      },
+      "payment_type": {
+          "$ref": "/schemata/order#/definitions/payment_type"
+      },
+      "amount": {
+          "$ref": "/schemata/order#/definitions/amount"
+      },
+      "payment_method": {
+          "$ref": "/schemata/order#/definitions/payment_method"
+      },
+      "tax_amt": {
+          "$ref": "/schemata/order#/definitions/tax_amt"
+      },
+      "address": {
+          "$ref": "/schemata/order#/definitions/address"
+      },
+      "gift_message": {
+        "$ref": "/schemata/order#/definitions/gift_message"
+      },
+      "customer": {
+          "$ref": "/schemata/order#/definitions/customer"
+      },
+      "discount_amt": {
+        "$ref": "/schemata/order#/definitions/discount_amt"
+      },
+      "shipcode": {
+        "$ref": "/schemata/order#/definitions/shipcode"
+      },
+      "ip_address": {
+        "$ref": "/schemata/order#/definitions/ip_address"
+      },
+      "attributes": {
+        "$ref": "/schemata/order#/definitions/attributes"
+      },
+      "sku": {
+        "$ref": "/schemata/order#/definitions/sku"
+      },
+      "unit_tax": {
+        "$ref": "/schemata/order#/definitions/unit_tax"
+      },
+      "quantity": {
+        "$ref": "/schemata/order#/definitions/quantity"
+      },
+      "sku_title": {
+        "$ref": "/schemata/order#/definitions/sku_title"
+      },
+      "unit_price": {
+         "$ref": "/schemata/order#/definitions/unit_price"
+      }
+},
+  "id": "schemata/order"
+}

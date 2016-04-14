@@ -1,0 +1,118 @@
+{
+  "$schema": "http://json-schema.org/draft-04/hyper-schema",
+  "title": "Inventory",
+  "description": "channel inventory methods",
+  "stability": "prototype",
+  "strictProperties": true,
+  "type": [
+    "object"
+  ],
+  "definitions": {
+    "id": {
+      "description": "unique identifier of inventory",
+      "readOnly": true,
+      "format": "uuid",
+      "type": [
+        "string"
+      ]
+    },
+    "name": {
+      "description": "unique name of inventory",
+      "readOnly": true,
+      "type": [
+        "string"
+      ]
+    },
+    "identity": {
+      "anyOf": [
+        {
+          "$ref": "/schemata/inventory#/definitions/id"
+        },
+        {
+          "$ref": "/schemata/inventory#/definitions/name"
+        }
+      ]
+    },
+    "created_at": {
+      "description": "when inventory was created",
+      "format": "date-time",
+      "type": [
+        "string"
+      ]
+    },
+    "updated_at": {
+      "description": "when inventory was updated",
+      "format": "date-time",
+      "type": [
+        "string"
+      ]
+    }
+  },
+  "links": [
+    {
+      "description": "Create a new inventory.",
+      "href": "/inventorys",
+      "method": "POST",
+      "rel": "create",
+      "schema": {
+        "properties": {
+            
+        },
+        "type": [
+          "object"
+        ]
+      },
+      "title": "Create"
+    },
+    {
+      "description": "Delete an existing inventory.",
+      "href": "/inventorys/{(%2Fschemata%2Finventory%23%2Fdefinitions%2Fidentity)}",
+      "method": "DELETE",
+      "rel": "destroy",
+      "title": "Delete"
+    },
+    {
+      "description": "Info for existing inventory.",
+      "href": "/inventorys/{(%2Fschemata%2Finventory%23%2Fdefinitions%2Fidentity)}",
+      "method": "GET",
+      "rel": "self",
+      "title": "Info"
+    },
+    {
+      "description": "List existing inventorys.",
+      "href": "/inventorys",
+      "method": "GET",
+      "rel": "instances",
+      "title": "List"
+    },
+    {
+      "description": "Update an existing inventory.",
+      "href": "/inventorys/{(%2Fschemata%2Finventory%23%2Fdefinitions%2Fidentity)}",
+      "method": "PATCH",
+      "rel": "update",
+      "schema": {
+        "properties": {
+        },
+        "type": [
+          "object"
+        ]
+      },
+      "title": "Update"
+    }
+  ],
+  "properties": {
+    "created_at": {
+      "$ref": "/schemata/inventory#/definitions/created_at"
+    },
+    "id": {
+      "$ref": "/schemata/inventory#/definitions/id"
+    },
+    "name": {
+      "$ref": "/schemata/inventory#/definitions/name"
+    },
+    "updated_at": {
+      "$ref": "/schemata/inventory#/definitions/updated_at"
+    }
+  },
+  "id": "schemata/inventory"
+}
