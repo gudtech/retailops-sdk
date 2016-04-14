@@ -1,7 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-04/hyper-schema",
     "title": "Channel Integration API",
-    "id": "channel-webhook-api",
     "description": "schema for retailops webhook channel integrations",
     "stability": "prototype",
     "strictProperties": true,
@@ -828,42 +827,30 @@
                 }
             }
         },
-        "inventory_item": {
+        "zone": {
             "type": ["object"],
-            "description": "inventory items",
+            "description": "RetailOPS Facility Zone",
             "properties": {
-                "sku":{
+                "zone": {
                     "type": ["string"],
-                    "description": "sku number",
-                    "example": "53"
+                    "description": "zone name",
+                    "example": "Default"
                 },
-                "id": {
-                    "type": ["string"],
-                    "description": "inv id (?)",
-                    "example": "66"
-                },
-                "concept": {
-                    "type": ["string"],
-                    "description": "retailops record type(?)",
-                    "example": "sku"
-                },
-                "qty_breakdown": {
-                    "type": ["array"],
-                    "description": "??",
-                    "items": {
-                        "$ref": "#/definitions/inv_qty_breakdown_item"
-                    }
-                },
-                "qty_available": {
+                "pick": {
                     "type": ["integer"],
-                    "description": "quantity of available",
-                    "example": 24
+                    "description": "number of picks in zone",
+                    "example": 0
+                },
+                "npick": {
+                    "type": ["integer"],
+                    "description": "",
+                    "example": 5
                 }
             }
         },
         "inv_qty_breakdown_item": {
             "type": ["object"],
-            "description": "??",
+            "description": "",
             "properties": {
                 "sku": {
                     "type": ["string"],
@@ -911,24 +898,36 @@
                 }
             }
         },
-        "zone": {
+        "inventory_item": {
             "type": ["object"],
-            "description": "RetailOPS Facility Zone",
+            "description": "inventory items",
             "properties": {
-                "zone": {
+                "sku":{
                     "type": ["string"],
-                    "description": "zone name",
-                    "example": "Default"
+                    "description": "sku number",
+                    "example": "53"
                 },
-                "pick": {
-                    "type": ["integer"],
-                    "description": "number of picks in zone",
-                    "example": 0
+                "id": {
+                    "type": ["string"],
+                    "description": "inv id (?)",
+                    "example": "66"
                 },
-                "npick": {
+                "concept": {
+                    "type": ["string"],
+                    "description": "retailops record type(?)",
+                    "example": "sku"
+                },
+                "qty_breakdown": {
+                    "type": ["array"],
+                    "description": "??",
+                    "items": {
+                        "$ref": "#/definitions/inv_qty_breakdown_item"
+                    }
+                },
+                "qty_available": {
                     "type": ["integer"],
-                    "description": "????",
-                    "example": 5
+                    "description": "quantity of available",
+                    "example": 24
                 }
             }
         },
@@ -1227,6 +1226,8 @@
             "description": "Retreive orders.",
             "method": "GET",
             "title": "Fetch",
+            "href": "",
+            "rel": "self",
             "schema": {
                 "properties": {
                     "headers": {
@@ -1330,6 +1331,8 @@
         {
             "description": "Order Acknowledgement request",
             "method": "POST",
+            "href": "",
+            "rel": "self",
             "schema": {
                 "properties": {
                     "headers": {
@@ -1395,6 +1398,8 @@
         {
             "description": "Order Cancel request",
             "method": "POST",
+            "href": "",
+            "rel": "self",
             "properties": {
                 "headers": {
                     "type": ["object"],
@@ -1451,6 +1456,8 @@
         {
             "description": "Order Complete request",
             "method": "POST",
+            "href": "",
+            "rel": "self",
             "schema": {
                 "properties": {
                     "headers": {
@@ -1519,6 +1526,8 @@
         {
             "description": "Catpush Config request",
             "method": "POST",
+            "href": "",
+            "rel": "self",
             "schema": {
                 "properties": {
                     "headers": {
@@ -1560,6 +1569,8 @@
         {
             "description": "Catpush Transmit request",
             "method": "POST",
+            "href": "",
+            "rel": "self",
             "schema": {
                 "properties": {
                     "headers": {
@@ -1609,6 +1620,8 @@
         {
             "description": "Invpush Transmit request",
             "method": "POST",
+            "href": "",
+            "rel": "self",
             "schema": {
                 "properties": {
                     "headers": {
@@ -1678,6 +1691,8 @@
         {
             "description": "Capture Channel Payments request",
             "method": "POST",
+            "href": "",
+            "rel": "self",
             "schema": {
                 "properties": {
                     "headers": {
@@ -1734,6 +1749,8 @@
         {
             "description": "Shipment Submit request",
             "method": "POST",
+            "href": "",
+            "rel": "self",
             "schema": {
                 "properties": {
                     "headers": {
@@ -1793,6 +1810,8 @@
         {
             "description": "Items Returned request",
             "method": "POST",
+            "href": "",
+            "rel": "self",
             "schema": {
                 "properties": {
                     "headers": {
@@ -1942,6 +1961,8 @@
         {
             "description": "Writeback request",
             "method": "POST",
+            "href": "",
+            "rel": "self",
             "schema": {
                 "properties": {
                     "headers": {
