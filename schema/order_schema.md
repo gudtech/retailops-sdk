@@ -58,7 +58,7 @@ Order fetch request.
 GET /orders
 ```
 
-#### Optional Parameters
+#### Required Parameters
 
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
@@ -77,6 +77,7 @@ GET /orders
 | **headers:client_id** | *integer* | RetailOPS client id | `"497"` |
 | **headers:ticket** | *string* | RetailOPS authorization ticket | `"1,1,0,1456437061,315576060,111,WEIhLHAyXHpjZA27OdENwAn1_fHx8fGA-ekng7lhkAvc27Uhnxgd4PZx4VnR_SJ-K85M_5dTAChTXgI3RsmGvfTbaOZ1_U-YJw3G0w1UVWFZ2EC83wjO6bmp91VZdR0tT_b2R1kK4qO1QTJrBk53ZyIuidsOa13lihh8VMgAvSDqCnTwxV2NVV7oN4v-h_tQtpUvklfbW1bnULR3bbaDvoOlb1CVQ_3BdNdo1MaAh-JxrRjf7MkzcHQYs3dN0GuaBZ1KBHvLdrLmGerNYv2p6AMC-fu8YeuukUU3Q6RL9AtF5AA6TPhfwfBM5r05B7QZiSEGySF65FCcfQFT_6lMxQ"` |
 | **version** | *integer* | RetailOPS api action version | `1` |
+
 
 
 #### Curl Example
