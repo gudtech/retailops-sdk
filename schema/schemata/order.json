@@ -474,7 +474,13 @@
                         }
                     }
                 }
-            }
+            },
+            "required": [
+                "headers",
+                "version",
+                "action",
+                "data"
+            ]
         },
         "targetSchema": {
             "type": ["object"],
