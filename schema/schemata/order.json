@@ -452,11 +452,41 @@
                     "$ref": "/schemata/order#/definitions/action"
                 },
                 "data": {
-                    
+                    "type": ["object"],
+                    "properties": {
+                        "order": {
+                            "type": ["object"],
+                            "properties": {
+                                "acks": {
+                                    "type": ["array"],
+                                    "description": "array of order IDs",
+                                    "items": {
+                                        "type": ["string"]
+                                    }
+                                }
+                            }
+                        },
+                        "client_id": {
+                            "$ref": "/schemata/order#/definitions/client_id"
+                        },
+                        "channel": {
+                            "$ref": "/schemata/order#/definitions/channel"
+                        }
+                    }
                 }
             }
         },
-        "targetSchema": {},
+        "targetSchema": {
+            "type": ["object"],
+            "properties": {
+                "events": {
+                    "type": ["array"],
+                    "items": {
+                        "type": ["object"]
+                    }
+                }
+            }
+        },
         "title": "order_ack"
     }
 ],
