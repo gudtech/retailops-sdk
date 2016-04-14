@@ -178,4 +178,64 @@ HTTP/1.1 200 OK
 }
 ```
 
+### Order order_ack
+
+Order Acknowledgement request.
+
+```
+GET /orders/order_ack
+```
+
+#### Optional Parameters
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **action** | *string* | RetailOPS api action name | `"testco.orderpull.order_fetch"` |
+| **data:channel:id** | *integer* |  | `21` |
+| **data:channel:params:StoreID** | *string* | Store ID | `"yhst-18909142938879050075142"` |
+| **data:channel:params:next_order_refnum** | *integer* | next order reference number | `496` |
+| **data:channel:params:order_ack_status_id** | *string* | order acknowledgement status id | `"32"` |
+| **data:channel:params:order_fulfilled_status_id** | *string* | order fulfilled status id | `"34"` |
+| **data:channel:params:order_in_filfillment_status_id** | *string* | order in fulfillment status id | `"33"` |
+| **data:client_id** | *integer* | RetailOPS client id | `1` |
+| **data:order:acks** | *array* | array of order IDs | `[null]` |
+| **headers:client_id** | *integer* | RetailOPS client id | `"497"` |
+| **headers:ticket** | *string* | RetailOPS authorization ticket | `"1,1,0,1456437061,315576060,111,WEIhLHAyXHpjZA27OdENwAn1_fHx8fGA-ekng7lhkAvc27Uhnxgd4PZx4VnR_SJ-K85M_5dTAChTXgI3RsmGvfTbaOZ1_U-YJw3G0w1UVWFZ2EC83wjO6bmp91VZdR0tT_b2R1kK4qO1QTJrBk53ZyIuidsOa13lihh8VMgAvSDqCnTwxV2NVV7oN4v-h_tQtpUvklfbW1bnULR3bbaDvoOlb1CVQ_3BdNdo1MaAh-JxrRjf7MkzcHQYs3dN0GuaBZ1KBHvLdrLmGerNYv2p6AMC-fu8YeuukUU3Q6RL9AtF5AA6TPhfwfBM5r05B7QZiSEGySF65FCcfQFT_6lMxQ"` |
+| **version** | *integer* | RetailOPS api action version | `1` |
+
+
+#### Curl Example
+
+```bash
+$ curl -n https://yoursite.com/orders/order_ack
+ -G \
+  -d headers[client_id]=497 \
+  -d headers[ticket]=1%2C1%2C0%2C1456437061%2C315576060%2C111%2CWEIhLHAyXHpjZA27OdENwAn1_fHx8fGA-ekng7lhkAvc27Uhnxgd4PZx4VnR_SJ-K85M_5dTAChTXgI3RsmGvfTbaOZ1_U-YJw3G0w1UVWFZ2EC83wjO6bmp91VZdR0tT_b2R1kK4qO1QTJrBk53ZyIuidsOa13lihh8VMgAvSDqCnTwxV2NVV7oN4v-h_tQtpUvklfbW1bnULR3bbaDvoOlb1CVQ_3BdNdo1MaAh-JxrRjf7MkzcHQYs3dN0GuaBZ1KBHvLdrLmGerNYv2p6AMC-fu8YeuukUU3Q6RL9AtF5AA6TPhfwfBM5r05B7QZiSEGySF65FCcfQFT_6lMxQ \
+  -d version=1 \
+  -d action=testco.orderpull.order_fetch \
+  -d data[order][acks][]= \
+  -d data[client_id]=1 \
+  -d data[channel][id]=21 \
+  -d data[channel][params][StoreID]=yhst-18909142938879050075142 \
+  -d data[channel][params][next_order_refnum]=496 \
+  -d data[channel][params][order_ack_status_id]=32 \
+  -d data[channel][params][order_fulfilled_status_id]=34 \
+  -d data[channel][params][order_in_filfillment_status_id]=33
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 200 OK
+```
+
+```json
+{
+  "events": [
+    null
+  ]
+}
+```
+
 
