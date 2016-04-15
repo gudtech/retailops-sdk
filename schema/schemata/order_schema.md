@@ -4,22 +4,6 @@ Stability: `prototype`
 
 event structure returned in responses
 
-### Attributes
-
-| Name | Type | Description | Example |
-| ------- | ------- | ------- | ------- |
-| **data:additonal** | *string* | additional information re: missing or invalid parameters | `"[{\"name\":\"ParameterName\",\"value\":\"PackagWeight.Unit\"}]"` |
-| **data:code** | *string* | error code | `"MISSING_OR_INVALID_PARAMETER"` |
-| **data:data_items** | *array* | (key was originally named items, had to be changed to avoid schema conflict) What types are in the array? | `[null]` |
-| **data:is_failure** | *integer* | boolean success value represented as integer (0, 1) | `1` |
-| **data:message** | *string* | descriptive error message | `"Missing or invalid parameter: PackagWeight.Unit Invalid unit of measurement specified try (lbs)"` |
-| **data:request_url** | *uri* | request url for this service action | `"https://t14961.sandbox.mozu.com/api/commerce/catalog/admin/products/PP20?responseFields="` |
-| **data:status** | *integer* | http status code(?) | `42` |
-| **data:sub_code** | *string* |  | `""` |
-| **handle** | *string* | event type | `"channel_catpush_fail"` |
-| **secondary:concept** | *string* |  | `"sku"` |
-| **secondary:id** | *string* |  | `"66"` |
-
 
 ## <a name="resource-order">Order</a>
 
@@ -459,7 +443,25 @@ HTTP/1.1 200 OK
 ```json
 {
   "events": [
-    null
+    {
+      "handle": "channel_catpush_fail",
+      "secondary": {
+        "id": "66",
+        "concept": "sku"
+      },
+      "data": {
+        "sub_code": "",
+        "status": 42,
+        "is_failure": 1,
+        "request_url": "https://t14961.sandbox.mozu.com/api/commerce/catalog/admin/products/PP20?responseFields=",
+        "data_items": [
+          null
+        ],
+        "additonal": "[{\"name\":\"ParameterName\",\"value\":\"PackagWeight.Unit\"}]",
+        "code": "MISSING_OR_INVALID_PARAMETER",
+        "message": "Missing or invalid parameter: PackagWeight.Unit Invalid unit of measurement specified try (lbs)"
+      }
+    }
   ]
 }
 ```

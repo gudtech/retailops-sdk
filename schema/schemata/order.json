@@ -1243,7 +1243,7 @@
                     "events": {
                         "type": ["array"],
                         "items": {
-                            "$ref": "/schemata/event#/definitions/"
+                            "$ref": "/schemata/event#/definitions/event"
                         }
                     }
                 }
