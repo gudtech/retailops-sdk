@@ -615,7 +615,7 @@
                     }
                 }
             },
-            "title": "Fetch"
+            "title": "order_fetch"
         },
         {
             "description": "Order Acknowledgement request.",
@@ -899,7 +899,7 @@
                     }
                 }
             },
-            "title": "Order Complete"
+            "title": "order_complete"
         },
         {
             "description": "Order Cancel request.",
@@ -964,24 +964,6 @@
                                             "type": [
                                                 "object"
                                             ],
-                                            "properties": {
-                                                "id": {
-                                                    "type": [
-                                                        "string"
-                                                    ],
-                                                    "description": "shipment ID",
-                                                    "example": "100000084"
-                                                },
-                                                "packages": {
-                                                    "type": [
-                                                        "array"
-                                                    ],
-                                                    "description": "array of packages included in this shipment",
-                                                    "items": {
-                                                        "$ref": "/schemata/order#/definitions/package"
-                                                    }
-                                                }
-                                            }
                                         }
                                     },
                                     "id": {
@@ -1107,7 +1089,7 @@
                     }
                 }
             },
-            "title": "Order Cancel"
+            "title": "order_cancel"
         }
     ],
     "properties": {

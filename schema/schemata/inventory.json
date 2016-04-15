@@ -1,118 +1,281 @@
 {
-  "$schema": "http://json-schema.org/draft-04/hyper-schema",
-  "title": "Inventory",
-  "description": "channel inventory methods",
-  "stability": "prototype",
-  "strictProperties": true,
-  "type": [
-    "object"
-  ],
-  "definitions": {
-    "id": {
-      "description": "unique identifier of inventory",
-      "readOnly": true,
-      "format": "uuid",
-      "type": [
-        "string"
-      ]
-    },
-    "name": {
-      "description": "unique name of inventory",
-      "readOnly": true,
-      "type": [
-        "string"
-      ]
-    },
-    "identity": {
-      "anyOf": [
-        {
-          "$ref": "/schemata/inventory#/definitions/id"
+    "$schema": "http://json-schema.org/draft-04/hyper-schema",
+    "title": "Inventory",
+    "description": "channel inventory methods",
+    "stability": "prototype",
+    "strictProperties": true,
+    "type": [
+        "object"
+    ],
+    "definitions": {
+        "identity": {
+            "$ref": "/schemata/channel#/definitions/channel/definitions/id"
         },
-        {
-          "$ref": "/schemata/inventory#/definitions/name"
+        "concept": {
+            "type": [
+                "string"
+            ],
+            "description": "",
+            "example": "sku"
+        },
+        "zone": {
+            "type": [
+                "object"
+            ],
+            "description": "facilty zone",
+            "properties": {
+                "zone": {
+                    "type": [
+                        "string"
+                    ],
+                    "description": "zone name",
+                    "example": "default"
+                },
+                "pick": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "",
+                    "example": 0
+                },
+                "npick": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "",
+                    "example": 5
+                }
+            }
+        },
+        "facility": {
+            "type": [
+                "string"
+            ],
+            "description": "facility name",
+            "example": "testco"
+        },
+        "sku": {
+            "type": [
+                "object"
+            ],
+            "description": "product sku",
+            "definitions": {
+                "sku_num": {
+                    "type": [
+                        "string"
+                    ],
+                    "description": "sku number (id)",
+                    "example": "53"
+                },
+                "sellable": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "number of units available to sale",
+                    "example": 5
+                },
+                "unclaimed": {
+                    "type": [
+                        "integer"
+                    ],
+                    "desciption": "unclaimed units",
+                    "example": 0
+                },
+                "zones": {
+                    "type": [
+                        "array"
+                    ],
+                    "description": "",
+                    "items": {
+                        "$ref": "/schemata/inventory#/definitions/zone"
+                    }
+                },
+                "facility": {
+                    "$ref": "/schemata/inventory#/definitions/facility"
+                },
+                "est_ship": {
+                    "type": [
+                        "string"
+                    ],
+                    "description": "estimated ship date",
+                    "example": "2016-04-22T11:02:47-07:00"
+                },
+                "vendor": {
+                    "type": [
+                        "string"
+                    ],
+                    "description": "vendor name",
+                    "example": "002_Acme Corp"
+                },
+                "qty_available": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "quantity available",
+                    "example": 24
+                },
+                "breakdown_inventory": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "",
+                    "example": 0
+                }
+            },
+            "properties": {
+                "sku_num": {
+                    "$ref": "/schemata/inventory#/definitions/sku/definitions/sku_num"
+                },
+                "sellable": {
+                    "$ref": "/schemata/inventory#/definitions/sku/definitions/sellable"
+                },
+                "unclaimed": {
+                    "$ref": "/schemata/inventory#/definitions/sku/definitions/unclaimed"
+                },
+                "zones": {
+                    "$ref": "/schemata/inventory#/definitions/sku/definitions/zones"
+                },
+                "facility": {
+                    "$ref": "/schemata/inventory#/definitions/facility"
+                },
+                "est_ship": {
+                    "$ref": "/schemata/inventory#/definitions/sku/definitions/est_ship"
+                },
+                "vendor": {
+                    "$ref": "/schemata/inventory#/definitions/sku/definitions/vendor"
+                },
+                "qty_available": {
+                    "$ref": "/schemata/inventory#/definitions/sku/definitions/qty_available"
+                },
+                "breakdown_inventory": {
+                    "$ref": "/schemata/inventory#/definitions/sku/definitions/breakdown_inventory"
+                }
+            }
         }
-      ]
     },
-    "created_at": {
-      "description": "when inventory was created",
-      "format": "date-time",
-      "type": [
-        "string"
-      ]
-    },
-    "updated_at": {
-      "description": "when inventory was updated",
-      "format": "date-time",
-      "type": [
-        "string"
-      ]
-    }
-  },
-  "links": [
-    {
-      "description": "Create a new inventory.",
-      "href": "/inventorys",
-      "method": "POST",
-      "rel": "create",
-      "schema": {
-        "properties": {
-            
-        },
-        "type": [
-          "object"
-        ]
-      },
-      "title": "Create"
-    },
-    {
-      "description": "Delete an existing inventory.",
-      "href": "/inventorys/{(%2Fschemata%2Finventory%23%2Fdefinitions%2Fidentity)}",
-      "method": "DELETE",
-      "rel": "destroy",
-      "title": "Delete"
-    },
-    {
-      "description": "Info for existing inventory.",
-      "href": "/inventorys/{(%2Fschemata%2Finventory%23%2Fdefinitions%2Fidentity)}",
-      "method": "GET",
-      "rel": "self",
-      "title": "Info"
-    },
-    {
-      "description": "List existing inventorys.",
-      "href": "/inventorys",
-      "method": "GET",
-      "rel": "instances",
-      "title": "List"
-    },
-    {
-      "description": "Update an existing inventory.",
-      "href": "/inventorys/{(%2Fschemata%2Finventory%23%2Fdefinitions%2Fidentity)}",
-      "method": "PATCH",
-      "rel": "update",
-      "schema": {
-        "properties": {
-        },
-        "type": [
-          "object"
-        ]
-      },
-      "title": "Update"
-    }
-  ],
-  "properties": {
-    "created_at": {
-      "$ref": "/schemata/inventory#/definitions/created_at"
-    },
-    "id": {
-      "$ref": "/schemata/inventory#/definitions/id"
-    },
-    "name": {
-      "$ref": "/schemata/inventory#/definitions/name"
-    },
-    "updated_at": {
-      "$ref": "/schemata/inventory#/definitions/updated_at"
-    }
-  },
-  "id": "schemata/inventory"
+    "links": [
+        {
+            "description": "inventory push.",
+            "href": "/inventory",
+            "method": "POST",
+            "rel": "create",
+            "schema": {
+                "type": [
+                    "object"
+                ],
+                "properties": {
+                    "headers": {
+                        "$ref": "/schemata/order#/definitions/headers"
+                    },
+                    "version": {
+                        "$ref": "/schemata/order#/definitions/version"
+                    },
+                    "action": {
+                        "$ref": "/schemata/order#/definitions/action"
+                    },
+                    "data": {
+                        "type": [
+                            "object"
+                        ],
+                        "properties": {
+                            "inventory": {
+                                "type": [
+                                    "object"
+                                ],
+                                "properties": {
+                                    "data": {
+                                        "type": [
+                                            "object"
+                                        ],
+                                        "properties": {
+                                            "sku": {
+                                                "$ref": "/schemata/order#/definitions/sku/definitions/sku_num"
+                                            },
+                                            "id": {
+                                                "$ref": "/schemata/channel#/definitions/channel/definitions/id"
+                                            },
+                                            "concept": {
+                                                "$ref": "/schemata/inventory#/definitions/concept"
+                                            },
+                                            "qty_breakdown": {
+                                                "type": [
+                                                    "array"
+                                                ],
+                                                "description": "inventory quantities",
+                                                "items": {
+                                                    "type": [
+                                                        "object"
+                                                    ],
+                                                    "properties": {
+                                                        "est_ship": {
+                                                            "$ref": "/schemata/order#/definitions/sku/definitions/est_ship"
+                                                        },
+                                                        "reserving_orders": {
+                                                            "type": [
+                                                                "array"
+                                                            ],
+                                                            "description": "order ids",
+                                                            "items": {
+                                                                "type": [
+                                                                    "string"
+                                                                ]
+                                                            }
+                                                        },
+                                                        "sellable": {
+                                                            "$ref": "/schemata/order#/definitions/sku/definitions/sellable"
+                                                        },
+                                                        "unclaimed": {
+                                                            "$ref": "/schemata/order#/definitions/sku/definitions/unclaimed"
+                                                        },
+                                                        "vendor": {
+                                                            "$ref": "/schemata/order#/definitions/sku/definitions/vendor"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "qty_available": {
+                                                "$ref": "/schemata/order#/definitions/sku/definitions/qty_available"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "client_id": {
+                                "$ref": "/schemata/channel#/definitions/channel/definitions/client_id"
+                            },
+                            "channel": {
+                                "type": [
+                                    "object"
+                                ],
+                                "properties": {
+                                    "params": {
+                                        "type": [
+                                            "object"
+                                        ],
+                                        "properties": {
+                                            "breakdown_inventory": {
+                                                "$ref": "/schemata/inventory#/definitions/sku/definitions/breakdown_inventory"
+                                            },
+                                            "tenant": {
+                                                "$ref": "/schemata/channel#/definitions/channel/definitions/tenant"
+                                            },
+                                            "appKey": {
+                                                "$ref": "/schemata/channel#/definitions/channel/definitions/appKey"
+                                            }
+                                        }
+                                    },
+                                    "id": {
+                                        "$ref": "/schemata/channel#/definitions/channel/definitions/id"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "title": "inv_push"
+        }
+    ],
+    "properties": {},
+    "id": "schemata/inventory"
 }

@@ -17,11 +17,26 @@
             ],
             "description": "channel",
             "definitions": {
+                "client_id": {
+                    "type": ["integer"],
+                    "description": "client ID",
+                    "example": 1
+                },
                 "id": {
                     "type": [
                         "integer"
                     ],
                     "example": 21
+                },
+                "appKey": {
+                    "type": ["string"],
+                    "description": "application key",
+                    "example": "acme_co.retailops.0.1.0.Release"
+                },
+                "tenant": {
+                    "type": ["string"],
+                    "description": "tenant ID",
+                    "example": "15394"
                 },
                 "StoreID": {
                     "type": "string",
