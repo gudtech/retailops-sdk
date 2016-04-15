@@ -1,3 +1,10 @@
+## <a name="resource-channel">Channel</a>
+
+Stability: `prototype`
+
+channel properties
+
+
 ## <a name="resource-event">Event</a>
 
 Stability: `prototype`
@@ -309,7 +316,25 @@ HTTP/1.1 200 OK
 ```json
 {
   "events": [
-    null
+    {
+      "handle": "channel_catpush_fail",
+      "secondary": {
+        "id": "66",
+        "concept": "sku"
+      },
+      "data": {
+        "sub_code": "",
+        "status": 42,
+        "is_failure": 1,
+        "request_url": "https://t14961.sandbox.mozu.com/api/commerce/catalog/admin/products/PP20?responseFields=",
+        "data_items": [
+          null
+        ],
+        "additonal": "[{\"name\":\"ParameterName\",\"value\":\"PackagWeight.Unit\"}]",
+        "code": "MISSING_OR_INVALID_PARAMETER",
+        "message": "Missing or invalid parameter: PackagWeight.Unit Invalid unit of measurement specified try (lbs)"
+      }
+    }
   ]
 }
 ```

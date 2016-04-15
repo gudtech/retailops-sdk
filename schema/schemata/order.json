@@ -1020,9 +1020,7 @@
                             "array"
                         ],
                         "items": {
-                            "type": [
-                                "object"
-                            ]
+                            "$ref": "/schemata/event#/definitions/event"
                         }
                     }
                 }
@@ -1189,7 +1187,7 @@
                                 ],
                                 "properties": {
                                     "id": {
-                                        "$ref": "/schemata/order#/definitions/channel/definitions/id"
+                                        "$ref": "/schemata/channel#/definitions/channel/definitions/id"
                                     },
                                     "params": {
                                         "type": [
@@ -1197,37 +1195,37 @@
                                         ],
                                         "properties": {
                                             "email_return": {
-                                                "$ref": "/schemata/order#/definitions/channel/definitions/email_return"
+                                                "$ref": "/schemata/channel#/definitions/channel/definitions/email_return"
                                             },
                                             "inv_suspended_instock": {
-                                                "$ref": "/schemata/order#/definitions/channel/definitions/inv_suspended_instock"
+                                                "$ref": "/schemata/channel#/definitions/channel/definitions/inv_suspended_instock"
                                             },
                                             "unset_other_media": {
-                                                "$ref": "/schemata/order#/definitions/channel/definitions/unset_other_media"
+                                                "$ref": "/schemata/channel#/definitions/channel/definitions/unset_other_media"
                                             },
                                             "import_order_attrs": {
-                                                "$ref": "/schemata/order#/definitions/channel/definitions/import_order_attrs"
+                                                "$ref": "/schemata/channel#/definitions/channel/definitions/import_order_attrs"
                                             },
                                             "base_uri": {
-                                                "$ref": "/schemata/order#/definitions/channel/definitions/base_uri"
+                                                "$ref": "/schemata/channel#/definitions/channel/definitions/base_uri"
                                             },
                                             "express_configurable_super_links": {
-                                                "$ref": "/schemata/order#/definitions/channel/definitions/express_configurable_super_links"
+                                                "$ref": "/schemata/channel#/definitions/channel/definitions/express_configurable_super_links"
                                             },
                                             "unset_other_attributes": {
-                                                "$ref": "/schemata/order#/definitions/channel/definitions/unset_other_attributes"
+                                                "$ref": "/schemata/channel#/definitions/channel/definitions/unset_other_attributes"
                                             },
                                             "push_cancel": {
-                                                "$ref": "/schemata/order#/definitions/channel/definitions/push_cancel"
+                                                "$ref": "/schemata/channel#/definitions/channel/definitions/push_cancel"
                                             },
                                             "inv_suspended_mode": {
-                                                "$ref": "/schemata/order#/definitions/channel/definitions/inv_suspended_mode"
+                                                "$ref": "/schemata/channel#/definitions/channel/definitions/inv_suspended_mode"
                                             },
                                             "email_invoice": {
-                                                "$ref": "/schemata/order#/definitions/channel/definitions/email_invoice"
+                                                "$ref": "/schemata/channel#/definitions/channel/definitions/email_invoice"
                                             },
                                             "email_tracking": {
-                                                "$ref": "/schemata/order#/definitions/channel/definitions/email_tracking"
+                                                "$ref": "/schemata/channel#/definitions/channel/definitions/email_tracking"
                                             }
                                         }
                                     }
@@ -1241,7 +1239,9 @@
                 "type": "object",
                 "properties": {
                     "events": {
-                        "type": ["array"],
+                        "type": [
+                            "array"
+                        ],
                         "items": {
                             "$ref": "/schemata/event#/definitions/event"
                         }
