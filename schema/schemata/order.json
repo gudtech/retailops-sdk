@@ -49,190 +49,6 @@
             "description": "RetailOPS api action name",
             "example": "testco.orderpull.order_fetch"
         },
-        "channel": {
-            "type": [
-                "object"
-            ],
-            "description": "channel",
-            "definitions": {
-                "id": {
-                    "type": [
-                        "integer"
-                    ],
-                    "example": 21
-                },
-                "StoreID": {
-                    "type": "string",
-                    "description": "Store ID",
-                    "example": "yhst-18909142938879050075142"
-                },
-                "next_order_refnum": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "next order reference number",
-                    "example": 496
-                },
-                "order_ack_status_id": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "order acknowledgement status id",
-                    "example": "32"
-                },
-                "order_fulfilled_status_id": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "order fulfilled status id",
-                    "example": "34"
-                },
-                "order_in_filfillment_status_id": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "order in fulfillment status id",
-                    "example": "33"
-                },
-                "email_return": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean?",
-                    "example": 0
-                },
-                "inv_suspended_instock": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean?",
-                    "example": 0
-                },
-                "unset_other_media": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean?",
-                    "example": 0
-                },
-                "import_order_attrs": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "",
-                    "example": ""
-                },
-                "base_uri": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "uri",
-                    "example": "http://172.16.4.130/magento1921"
-                },
-                "express_configurable_super_links": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean?",
-                    "example": 0
-                },
-                "unset_other_attributes": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean?",
-                    "example": 0
-                },
-                "push_cancel": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean?",
-                    "example": 0
-                },
-                "inv_suspended_mode": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "",
-                    "example": null
-                },
-                "email_invoice": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean?",
-                    "example": 0
-                },
-                "email_tracking": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean?",
-                    "example": 0
-                }
-            },
-            "properties": {
-                "id": {
-                    "$ref": "/schemata/order#/definitions/channel/definitions/id"
-                },
-                "params": {
-                    "type": [
-                        "object"
-                    ],
-                    "properties": {
-                        "StoreID": {
-                            "$ref": "/schemata/order#/definitions/channel/definitions/StoreID"
-                        },
-                        "next_order_refnum": {
-                            "$ref": "/schemata/order#/definitions/channel/definitions/next_order_refnum"
-                        },
-                        "order_ack_status_id": {
-                            "$ref": "/schemata/order#/definitions/channel/definitions/order_ack_status_id"
-                        },
-                        "order_fulfilled_status_id": {
-                            "$ref": "/schemata/order#/definitions/channel/definitions/order_fulfilled_status_id"
-                        },
-                        "order_in_filfillment_status_id": {
-                            "$ref": "/schemata/order#/definitions/channel/definitions/order_in_filfillment_status_id"
-                        },
-                        "email_return": {
-                            "$ref": "/schemata/order#/definitions/channel/definitions/email_return"
-                        },
-                        "inv_suspended_instock": {
-                            "$ref": "/schemata/order#/definitions/channel/definitions/inv_suspended_instock"
-                        },
-                        "unset_other_media": {
-                            "$ref": "/schemata/order#/definitions/channel/definitions/unset_other_media"
-                        },
-                        "import_order_attrs": {
-                            "$ref": "/schemata/order#/definitions/channel/definitions/import_order_attrs"
-                        },
-                        "base_uri": {
-                            "$ref": "/schemata/order#/definitions/channel/definitions/base_uri"
-                        },
-                        "express_configurable_super_links": {
-                            "$ref": "/schemata/order#/definitions/channel/definitions/express_configurable_super_links"
-                        },
-                        "unset_other_attributes": {
-                            "$ref": "/schemata/order#/definitions/channel/definitions/unset_other_attributes"
-                        },
-                        "push_cancel": {
-                            "$ref": "/schemata/order#/definitions/channel/definitions/push_cancel"
-                        },
-                        "inv_suspended_mode": {
-                            "$ref": "/schemata/order#/definitions/channel/definitions/inv_suspended_mode"
-                        },
-                        "email_invoice": {
-                            "$ref": "/schemata/order#/definitions/channel/definitions/email_invoice"
-                        },
-                        "email_tracking": {
-                            "$ref": "/schemata/order#/definitions/channel/definitions/email_tracking"
-                        }
-                    }
-                }
-            }
-        },
         "client_id": {
             "type": [
                 "integer"
@@ -487,156 +303,6 @@
             "description": "unit price for sku",
             "example": "1"
         },
-        "channel_payment": {
-            "type": [
-                "object"
-            ],
-            "description": "payment info for channel",
-            "definitions": {
-                "channel_id": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "channel ID",
-                    "example": 12
-                },
-                "authed": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "",
-                    "example": 0
-                },
-                "captures_are_external": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean?",
-                    "example": 1
-                },
-                "unsettled": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "",
-                    "example": 0
-                },
-                "settled": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "",
-                    "example": 35
-                },
-                "charged": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "",
-                    "example": 35
-                },
-                "captured": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "",
-                    "example": 0
-                },
-                "captures_are_deferred": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "",
-                    "example": 0
-                },
-                "voided": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "",
-                    "example": 0
-                },
-                "id": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "",
-                    "example": "6"
-                },
-                "method": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "",
-                    "example": "channel"
-                },
-                "credited": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "",
-                    "example": 0
-                },
-                "module": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "",
-                    "example": "Channel"
-                },
-                "available": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "",
-                    "example": 35
-                }
-            },
-            "properties": {
-                "channel_id": {
-                    "$ref": "/schemata/order#/definitions/channel_payment/definitions/channel_id"
-                },
-                "authed": {
-                    "$ref": "/schemata/order#/definitions/channel_payment/definitions/authed"
-                },
-                "captures_are_external": {
-                    "$ref": "/schemata/order#/definitions/channel_payment/definitions/captures_are_external"
-                },
-                "unsettled": {
-                    "$ref": "/schemata/order#/definitions/channel_payment/definitions/unsettled"
-                },
-                "settled": {
-                    "$ref": "/schemata/order#/definitions/channel_payment/definitions/settled"
-                },
-                "charged": {
-                    "$ref": "/schemata/order#/definitions/channel_payment/definitions/charged"
-                },
-                "captured": {
-                    "$ref": "/schemata/order#/definitions/channel_payment/definitions/captured"
-                },
-                "captures_are_deferred": {
-                    "$ref": "/schemata/order#/definitions/channel_payment/definitions/captures_are_deferred"
-                },
-                "voided": {
-                    "$ref": "/schemata/order#/definitions/channel_payment/definitions/voided"
-                },
-                "id": {
-                    "$ref": "/schemata/order#/definitions/channel_payment/definitions/id"
-                },
-                "method": {
-                    "$ref": "/schemata/order#/definitions/channel_payment/definitions/method"
-                },
-                "credited": {
-                    "$ref": "/schemata/order#/definitions/channel_payment/definitions/credited"
-                },
-                "module": {
-                    "$ref": "/schemata/order#/definitions/channel_payment/definitions/module"
-                },
-                "available": {
-                    "$ref": "/schemata/order#/definitions/channel_payment/definitions/available"
-                }
-            }
-        },
         "grand_total": {
             "type": [
                 "string"
@@ -801,7 +467,7 @@
                                 "$ref": "/schemata/order#/definitions/client_id"
                             },
                             "channel": {
-                                "$ref": "/schemata/order#/definitions/channel"
+                                "$ref": "/schemata/channel#/definitions/channel"
                             },
                             "page_state": {
                                 "$ref": "/schemata/order#/definitions/page_state"
@@ -998,7 +664,7 @@
                                 "$ref": "/schemata/order#/definitions/client_id"
                             },
                             "channel": {
-                                "$ref": "/schemata/order#/definitions/channel"
+                                "$ref": "/schemata/channel#/definitions/channel"
                             }
                         }
                     }
@@ -1030,7 +696,7 @@
         {
             "description": "Order Complete request.",
             "href": "/orders/complete",
-            "method": "GET",
+            "method": "POST",
             "rel": "self",
             "schema": {
                 "type": [
@@ -1057,7 +723,7 @@
                                 ],
                                 "properties": {
                                     "channel_payment": {
-                                        "$ref": "/schemata/order#/definitions/channel_payment"
+                                        "$ref": "/schemata/channel#/definitions/channel_payment"
                                     },
                                     "grand_total": {
                                         "$ref": "/schemata/order#/definitions/grand_total"
@@ -1065,9 +731,6 @@
                                     "unshipped_items_ref": {
                                         "type": [
                                             "array"
-                                        ],
-                                        "examnple": [
-                                            "335"
                                         ],
                                         "items": {
                                             "$ref": "/schemata/order#/definitions/channel_refnum"
@@ -1127,25 +790,13 @@
                                         "description": "payment status",
                                         "properties": {
                                             "success": {
-                                                "type": [
-                                                    "integer"
-                                                ],
-                                                "description": "boolean value indicating success of payment",
-                                                "example": 1
+                                                "$ref": "/schemata/channel#/definitions/channel_payment/definitions/success"
                                             },
                                             "unsettled_external": {
-                                                "type": [
-                                                    "integer"
-                                                ],
-                                                "description": "",
-                                                "example": 0
+                                                "$ref": "/schemata/channel#/definitions/channel_payment/definitions/unsettled_external"
                                             },
                                             "unsettled_deferred": {
-                                                "type": [
-                                                    "integer"
-                                                ],
-                                                "description": "",
-                                                "example": 0
+                                                "$ref": "/schemata/channel#/definitions/channel_payment/definitions/unsettled_deferred"
                                             },
                                             "by_account": {
                                                 "type": [
@@ -1153,29 +804,29 @@
                                                 ],
                                                 "description": "payment status by account",
                                                 "items": {
-                                                    "$ref": "/schemata/order#/definitions/channel_payment"
+                                                    "$ref": "/schemata/channel#/definitions/channel_payment"
                                                 }
                                             },
                                             "unsettled": {
-                                                "$ref": "/schemata/order#/definitions/channel_payment/definitions/unsettled"
+                                                "$ref": "/schemata/channel#/definitions/channel_payment/definitions/unsettled"
                                             },
                                             "settled": {
-                                                "$ref": "/schemata/order#/definitions/channel_payment/definitions/settled"
+                                                "$ref": "/schemata/channel#/definitions/channel_payment/definitions/settled"
                                             },
                                             "charged": {
-                                                "$ref": "/schemata/order#/definitions/channel_payment/definitions/charged"
+                                                "$ref": "/schemata/channel#/definitions/channel_payment/definitions/charged"
                                             },
                                             "captured": {
-                                                "$ref": "/schemata/order#/definitions/channel_payment/definitions/captured"
+                                                "$ref": "/schemata/channel#/definitions/channel_payment/definitions/captured"
                                             },
                                             "authed": {
-                                                "$ref": "/schemata/order#/definitions/channel_payment/definitions/authed"
+                                                "$ref": "/schemata/channel#/definitions/channel_payment/definitions/authed"
                                             },
                                             "credited": {
-                                                "$ref": "/schemata/order#/definitions/channel_payment/definitions/credited"
+                                                "$ref": "/schemata/channel#/definitions/channel_payment/definitions/credited"
                                             },
                                             "available": {
-                                                "$ref": "/schemata/order#/definitions/channel_payment/definitions/available"
+                                                "$ref": "/schemata/channel#/definitions/channel_payment/definitions/available"
                                             }
                                         }
                                     }
@@ -1249,6 +900,214 @@
                 }
             },
             "title": "Order Complete"
+        },
+        {
+            "description": "Order Cancel request.",
+            "href": "/orders/cancel",
+            "method": "POST",
+            "rel": "self",
+            "schema": {
+                "type": [
+                    "object"
+                ],
+                "properties": {
+                    "headers": {
+                        "$ref": "/schemata/order#/definitions/headers"
+                    },
+                    "version": {
+                        "$ref": "/schemata/order#/definitions/version"
+                    },
+                    "action": {
+                        "$ref": "/schemata/order#/definitions/action"
+                    },
+                    "data": {
+                        "type": [
+                            "object"
+                        ],
+                        "properties": {
+                            "order": {
+                                "type": [
+                                    "object"
+                                ],
+                                "properties": {
+                                    "channel_payment": {
+                                        "$ref": "/schemata/channel#/definitions/channel_payment"
+                                    },
+                                    "grand_total": {
+                                        "$ref": "/schemata/order#/definitions/grand_total"
+                                    },
+                                    "unshipped_items_ref": {
+                                        "type": [
+                                            "array"
+                                        ],
+                                        "items": {
+                                            "$ref": "/schemata/order#/definitions/channel_refnum"
+                                        }
+                                    },
+                                    "payment_series_id": {
+                                        "$ref": "/schemata/order#/definitions/payment_series_id"
+                                    },
+                                    "from_counterparty_rate": {
+                                        "$ref": "/schemata/order#/definitions/from_counterparty_rate"
+                                    },
+                                    "ship_service_name": {
+                                        "$ref": "/schemata/order#/definitions/ship_service_name"
+                                    },
+                                    "channel_refnum": {
+                                        "$ref": "/schemata/order#/definitions/channel_refnum"
+                                    },
+                                    "shipments": {
+                                        "type": [
+                                            "array"
+                                        ],
+                                        "items": {
+                                            "type": [
+                                                "object"
+                                            ],
+                                            "properties": {
+                                                "id": {
+                                                    "type": [
+                                                        "string"
+                                                    ],
+                                                    "description": "shipment ID",
+                                                    "example": "100000084"
+                                                },
+                                                "packages": {
+                                                    "type": [
+                                                        "array"
+                                                    ],
+                                                    "description": "array of packages included in this shipment",
+                                                    "items": {
+                                                        "$ref": "/schemata/order#/definitions/package"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "id": {
+                                        "type": [
+                                            "string"
+                                        ],
+                                        "description": "order ID",
+                                        "example": "4897"
+                                    },
+                                    "payment_status": {
+                                        "type": [
+                                            "object"
+                                        ],
+                                        "description": "payment status",
+                                        "properties": {
+                                            "success": {
+                                                "$ref": "/schemata/channel#/definitions/channel_payment/definitions/success"
+                                            },
+                                            "unsettled_external": {
+                                                "$ref": "/schemata/channel#/definitions/channel_payment/definitions/unsettled_external"
+                                            },
+                                            "unsettled_deferred": {
+                                                "$ref": "/schemata/channel#/definitions/channel_payment/definitions/unsettled_deferred"
+                                            },
+                                            "by_account": {
+                                                "type": [
+                                                    "array"
+                                                ],
+                                                "description": "payment status by account",
+                                                "items": {
+                                                    "$ref": "/schemata/channel#/definitions/channel_payment"
+                                                }
+                                            },
+                                            "unsettled": {
+                                                "$ref": "/schemata/channel#/definitions/channel_payment/definitions/unsettled"
+                                            },
+                                            "settled": {
+                                                "$ref": "/schemata/channel#/definitions/channel_payment/definitions/settled"
+                                            },
+                                            "charged": {
+                                                "$ref": "/schemata/channel#/definitions/channel_payment/definitions/charged"
+                                            },
+                                            "captured": {
+                                                "$ref": "/schemata/channel#/definitions/channel_payment/definitions/captured"
+                                            },
+                                            "authed": {
+                                                "$ref": "/schemata/channel#/definitions/channel_payment/definitions/authed"
+                                            },
+                                            "credited": {
+                                                "$ref": "/schemata/channel#/definitions/channel_payment/definitions/credited"
+                                            },
+                                            "available": {
+                                                "$ref": "/schemata/channel#/definitions/channel_payment/definitions/available"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "channel": {
+                                "type": [
+                                    "object"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "$ref": "/schemata/channel#/definitions/channel/definitions/id"
+                                    },
+                                    "params": {
+                                        "type": [
+                                            "object"
+                                        ],
+                                        "properties": {
+                                            "email_return": {
+                                                "$ref": "/schemata/channel#/definitions/channel/definitions/email_return"
+                                            },
+                                            "inv_suspended_instock": {
+                                                "$ref": "/schemata/channel#/definitions/channel/definitions/inv_suspended_instock"
+                                            },
+                                            "unset_other_media": {
+                                                "$ref": "/schemata/channel#/definitions/channel/definitions/unset_other_media"
+                                            },
+                                            "import_order_attrs": {
+                                                "$ref": "/schemata/channel#/definitions/channel/definitions/import_order_attrs"
+                                            },
+                                            "base_uri": {
+                                                "$ref": "/schemata/channel#/definitions/channel/definitions/base_uri"
+                                            },
+                                            "express_configurable_super_links": {
+                                                "$ref": "/schemata/channel#/definitions/channel/definitions/express_configurable_super_links"
+                                            },
+                                            "unset_other_attributes": {
+                                                "$ref": "/schemata/channel#/definitions/channel/definitions/unset_other_attributes"
+                                            },
+                                            "push_cancel": {
+                                                "$ref": "/schemata/channel#/definitions/channel/definitions/push_cancel"
+                                            },
+                                            "inv_suspended_mode": {
+                                                "$ref": "/schemata/channel#/definitions/channel/definitions/inv_suspended_mode"
+                                            },
+                                            "email_invoice": {
+                                                "$ref": "/schemata/channel#/definitions/channel/definitions/email_invoice"
+                                            },
+                                            "email_tracking": {
+                                                "$ref": "/schemata/channel#/definitions/channel/definitions/email_tracking"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "targetSchema": {
+                "type": "object",
+                "properties": {
+                    "events": {
+                        "type": [
+                            "array"
+                        ],
+                        "items": {
+                            "$ref": "/schemata/event#/definitions/event"
+                        }
+                    }
+                }
+            },
+            "title": "Order Cancel"
         }
     ],
     "properties": {
@@ -1257,9 +1116,6 @@
         },
         "version": {
             "$ref": "/schemata/order#/definitions/version"
-        },
-        "channel": {
-            "$ref": "/schemata/order#/definitions/channel"
         },
         "page_state": {
             "$ref": "/schemata/order#/definitions/page_state"
@@ -1326,9 +1182,6 @@
         },
         "unit_price": {
             "$ref": "/schemata/order#/definitions/unit_price"
-        },
-        "channel_payment": {
-            "$ref": "/schemata/order#/definitions/channel_payment"
         },
         "grand_total": {
             "$ref": "/schemata/order#/definitions/grand_total"

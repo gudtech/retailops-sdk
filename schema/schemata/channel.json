@@ -194,6 +194,186 @@
                     }
                 }
             }
+        },
+        "channel_payment": {
+            "type": [
+                "object"
+            ],
+            "description": "payment info for channel",
+            "definitions": {
+                "success": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "boolean value indicating success of payment",
+                    "example": 1
+                },
+                "unsettled_external": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "",
+                    "example": 0
+                },
+                "unsettled_deferred": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "",
+                    "example": 0
+                },
+                "channel_id": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "channel ID",
+                    "example": 12
+                },
+                "authed": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "",
+                    "example": 0
+                },
+                "captures_are_external": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "boolean?",
+                    "example": 1
+                },
+                "unsettled": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "",
+                    "example": 0
+                },
+                "settled": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "",
+                    "example": 35
+                },
+                "charged": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "",
+                    "example": 35
+                },
+                "captured": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "",
+                    "example": 0
+                },
+                "captures_are_deferred": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "",
+                    "example": 0
+                },
+                "voided": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "",
+                    "example": 0
+                },
+                "id": {
+                    "type": [
+                        "string"
+                    ],
+                    "description": "",
+                    "example": "6"
+                },
+                "method": {
+                    "type": [
+                        "string"
+                    ],
+                    "description": "",
+                    "example": "channel"
+                },
+                "credited": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "",
+                    "example": 0
+                },
+                "module": {
+                    "type": [
+                        "string"
+                    ],
+                    "description": "",
+                    "example": "Channel"
+                },
+                "available": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "",
+                    "example": 35
+                }
+            },
+            "properties": {
+                "success": {
+                    "$ref": "/schemata/channel#/definitions/channel_payment/definitions/success"
+                },
+                "unsettled_external": {
+                    "$ref": "/schemata/channel#/definitions/channel_payment/definitions/unsettled_external"
+                },
+                "unsettled_deferred": {
+                    "$ref": "/schemata/channel#/definitions/channel_payment/definitions/unsettled_deferred"
+                },
+                "channel_id": {
+                    "$ref": "/schemata/channel#/definitions/channel_payment/definitions/channel_id"
+                },
+                "authed": {
+                    "$ref": "/schemata/channel#/definitions/channel_payment/definitions/authed"
+                },
+                "captures_are_external": {
+                    "$ref": "/schemata/channel#/definitions/channel_payment/definitions/captures_are_external"
+                },
+                "unsettled": {
+                    "$ref": "/schemata/channel#/definitions/channel_payment/definitions/unsettled"
+                },
+                "settled": {
+                    "$ref": "/schemata/channel#/definitions/channel_payment/definitions/settled"
+                },
+                "charged": {
+                    "$ref": "/schemata/channel#/definitions/channel_payment/definitions/charged"
+                },
+                "captured": {
+                    "$ref": "/schemata/channel#/definitions/channel_payment/definitions/captured"
+                },
+                "captures_are_deferred": {
+                    "$ref": "/schemata/channel#/definitions/channel_payment/definitions/captures_are_deferred"
+                },
+                "voided": {
+                    "$ref": "/schemata/channel#/definitions/channel_payment/definitions/voided"
+                },
+                "id": {
+                    "$ref": "/schemata/channel#/definitions/channel_payment/definitions/id"
+                },
+                "method": {
+                    "$ref": "/schemata/channel#/definitions/channel_payment/definitions/method"
+                },
+                "credited": {
+                    "$ref": "/schemata/channel#/definitions/channel_payment/definitions/credited"
+                },
+                "module": {
+                    "$ref": "/schemata/channel#/definitions/channel_payment/definitions/module"
+                },
+                "available": {
+                    "$ref": "/schemata/channel#/definitions/channel_payment/definitions/available"
+                }
+            }
         }
     },
     "links": [],
