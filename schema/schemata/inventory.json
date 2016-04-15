@@ -189,7 +189,7 @@
                                         ],
                                         "properties": {
                                             "sku": {
-                                                "$ref": "/schemata/order#/definitions/sku/definitions/sku_num"
+                                                "$ref": "/schemata/inventory#/definitions/sku/definitions/sku_num"
                                             },
                                             "id": {
                                                 "$ref": "/schemata/channel#/definitions/channel/definitions/id"
@@ -208,7 +208,7 @@
                                                     ],
                                                     "properties": {
                                                         "est_ship": {
-                                                            "$ref": "/schemata/order#/definitions/sku/definitions/est_ship"
+                                                            "$ref": "/schemata/inventory#/definitions/sku/definitions/est_ship"
                                                         },
                                                         "reserving_orders": {
                                                             "type": [
@@ -222,19 +222,19 @@
                                                             }
                                                         },
                                                         "sellable": {
-                                                            "$ref": "/schemata/order#/definitions/sku/definitions/sellable"
+                                                            "$ref": "/schemata/inventory#/definitions/sku/definitions/sellable"
                                                         },
                                                         "unclaimed": {
-                                                            "$ref": "/schemata/order#/definitions/sku/definitions/unclaimed"
+                                                            "$ref": "/schemata/inventory#/definitions/sku/definitions/unclaimed"
                                                         },
                                                         "vendor": {
-                                                            "$ref": "/schemata/order#/definitions/sku/definitions/vendor"
+                                                            "$ref": "/schemata/inventory#/definitions/sku/definitions/vendor"
                                                         }
                                                     }
                                                 }
                                             },
                                             "qty_available": {
-                                                "$ref": "/schemata/order#/definitions/sku/definitions/qty_available"
+                                                "$ref": "/schemata/inventory#/definitions/sku/definitions/qty_available"
                                             }
                                         }
                                     }
