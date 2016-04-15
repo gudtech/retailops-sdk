@@ -331,6 +331,30 @@
             "description": "name of shipping service",
             "example": "Will Call"
         },
+        "shipment": {
+            "type": [
+                "object"
+            ],
+            "description": "shipment object",
+            "properties": {
+                "id": {
+                    "type": [
+                        "string"
+                    ],
+                    "description": "Shipment ID",
+                    "example": "10987"
+                },
+                "packages": {
+                    "type": [
+                        "array"
+                    ],
+                    "description": "Array of packages in this shipment",
+                    "items": {
+                        "$ref": "/schemata/order#/definitions/package"
+                    }
+                }
+            }
+        },
         "package": {
             "type": [
                 "object"
@@ -620,7 +644,7 @@
         {
             "description": "Order Acknowledgement request.",
             "href": "/orders/order_ack",
-            "method": "GET",
+            "method": "POST",
             "rel": "self",
             "schema": {
                 "type": [
@@ -1077,7 +1101,9 @@
                 }
             },
             "targetSchema": {
-                "type": "object",
+                "type": [
+                    "object"
+                ],
                 "properties": {
                     "events": {
                         "type": [

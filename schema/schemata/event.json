@@ -109,7 +109,7 @@
                                 "string"
                             ],
                             "description": "descriptive error message",
-                            "example": "Missing or invalid parameter: PackagWeight.Unit Invalid unit of measurement specified try (lbs)"
+                            "example": "Error: ident c1.channel-55-api_auth not found"
                         }
                     }
                 }
