@@ -1237,6 +1237,17 @@
                     }
                 }
             },
+            "targetSchema": {
+                "type": "object",
+                "properties": {
+                    "events": {
+                        "type": ["array"],
+                        "items": {
+                            "$ref": "/schemata/event#/definitions/"
+                        }
+                    }
+                }
+            },
             "title": "Order Complete"
         }
     ],

@@ -1,3 +1,26 @@
+## <a name="resource-event">Event</a>
+
+Stability: `prototype`
+
+event structure returned in responses
+
+### Attributes
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **data:additonal** | *string* | additional information re: missing or invalid parameters | `"[{\"name\":\"ParameterName\",\"value\":\"PackagWeight.Unit\"}]"` |
+| **data:code** | *string* | error code | `"MISSING_OR_INVALID_PARAMETER"` |
+| **data:data_items** | *array* | (key was originally named items, had to be changed to avoid schema conflict) What types are in the array? | `[null]` |
+| **data:is_failure** | *integer* | boolean success value represented as integer (0, 1) | `1` |
+| **data:message** | *string* | descriptive error message | `"Missing or invalid parameter: PackagWeight.Unit Invalid unit of measurement specified try (lbs)"` |
+| **data:request_url** | *uri* | request url for this service action | `"https://t14961.sandbox.mozu.com/api/commerce/catalog/admin/products/PP20?responseFields="` |
+| **data:status** | *integer* | http status code(?) | `42` |
+| **data:sub_code** | *string* |  | `""` |
+| **handle** | *string* | event type | `"channel_catpush_fail"` |
+| **secondary:concept** | *string* |  | `"sku"` |
+| **secondary:id** | *string* |  | `"66"` |
+
+
 ## <a name="resource-order">Order</a>
 
 Stability: `prototype`
@@ -435,87 +458,9 @@ HTTP/1.1 200 OK
 
 ```json
 {
-  "headers": {
-    "client_id": "497",
-    "ticket": "1,1,0,1456437061,315576060,111,WEIhLHAyXHpjZA27OdENwAn1_fHx8fGA-ekng7lhkAvc27Uhnxgd4PZx4VnR_SJ-K85M_5dTAChTXgI3RsmGvfTbaOZ1_U-YJw3G0w1UVWFZ2EC83wjO6bmp91VZdR0tT_b2R1kK4qO1QTJrBk53ZyIuidsOa13lihh8VMgAvSDqCnTwxV2NVV7oN4v-h_tQtpUvklfbW1bnULR3bbaDvoOlb1CVQ_3BdNdo1MaAh-JxrRjf7MkzcHQYs3dN0GuaBZ1KBHvLdrLmGerNYv2p6AMC-fu8YeuukUU3Q6RL9AtF5AA6TPhfwfBM5r05B7QZiSEGySF65FCcfQFT_6lMxQ"
-  },
-  "version": 1,
-  "channel": {
-    "id": 21,
-    "params": {
-      "StoreID": "yhst-18909142938879050075142",
-      "next_order_refnum": 496,
-      "order_ack_status_id": "32",
-      "order_fulfilled_status_id": "34",
-      "order_in_filfillment_status_id": "33",
-      "email_return": 0,
-      "inv_suspended_instock": 0,
-      "unset_other_media": 0,
-      "import_order_attrs": "",
-      "base_uri": "http://172.16.4.130/magento1921",
-      "express_configurable_super_links": 0,
-      "unset_other_attributes": 0,
-      "push_cancel": 0,
-      "inv_suspended_mode": null,
-      "email_invoice": 0,
-      "email_tracking": 0
-    }
-  },
-  "page_state": null,
-  "max_page_size": 50,
-  "shipping_amt": "0.25",
-  "calc_mode": "order",
-  "channel_date_created": 1460142547,
-  "channel_refnum": "496",
-  "payment_type": "Visa",
-  "amount": "1.32",
-  "payment_method": "charge",
-  "tax_amt": "0.07",
-  "address": {
-    "state_match": "CA",
-    "country_match": "US United States",
-    "last_name": "Smith",
-    "address2": "suite 100",
-    "city": "San Diego",
-    "postal_code": "92101",
-    "address1": "123 Main St",
-    "company": "gudTECH",
-    "first_name": "John"
-  },
-  "gift_message": "Happy Birthday",
-  "customer": {
-    "email_address": "john@gudtech.com",
-    "phone_number": "5555555555",
-    "first_name": "John",
-    "last_name": "Smith"
-  },
-  "discount_amt": 0,
-  "shipcode": "Ground (5-7 days)",
-  "ip_address": "68.7.2.222",
-  "attributes": {
-  },
-  "sku": "299",
-  "unit_tax": 0,
-  "quantity": 1,
-  "sku_title": "test",
-  "unit_price": "1",
-  "channel_payment": {
-    "channel_id": 12,
-    "authed": 0,
-    "captures_are_external": 1,
-    "unsettled": 0,
-    "settled": 35,
-    "charged": 35,
-    "captured": 0,
-    "captures_are_deferred": 0,
-    "voided": 0,
-    "id": "6",
-    "method": "channel",
-    "credited": 0,
-    "module": "Channel",
-    "available": 35
-  },
-  "grand_total": "35"
+  "events": [
+    null
+  ]
 }
 ```
 
