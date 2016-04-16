@@ -12,7 +12,50 @@
     },
     "links": [
         {
-            "description": "Create a new catalog.",
+            "description": "catalog push config",
+            "href": "/catalogs",
+            "method": "POST",
+            "rel": "self",
+            "schema": {
+                "type": [
+                    "object"
+                ],
+                "properties": {
+                    "headers": {
+                        "$ref": "/schemata/order#/definitions/headers"
+                    },
+                    "version": {
+                        "$ref": "/schemata/order#/definitions/version"
+                    },
+                    "action": {
+                        "$ref": "/schemata/order#/definitions/action"
+                    },
+                    "data": {
+                        "type": [
+                            "object"
+                        ],
+                        "description": "data passed in this object is dependent on the requirements of a specific integration",
+                        "properties": {}
+                    }
+                }
+            },
+            "targetSchema": {
+                "type": [
+                    "object"
+                ],
+                "properties": {
+                    "fanout": {
+                        "type": [
+                            "string"
+                        ],
+                        "example": "relatives"
+                    }
+                }
+            },
+            "title": "cat_push_config"
+        },
+        {
+            "description": "transmit skus to store catalog.",
             "href": "/catalogs",
             "method": "POST",
             "rel": "create",
@@ -34,7 +77,8 @@
                         "type": [
                             "object"
                         ],
-                        "description": "data passed in this object is dependent on the requirements of a specific integration"
+                        "description": "data passed in this object is dependent on the requirements of a specific integration",
+                        "properties": {}
                     }
                 }
             },
