@@ -14,7 +14,6 @@
                 "integer"
             ],
             "description": "RetailOPS client id",
-            "format": "uuid",
             "example": "497"
         },
         "ticket": {
@@ -31,7 +30,9 @@
             "description": "order object",
             "properties": {
                 "shipping_amt": {
-                    "type": "integer",
+                    "type": [
+                        "integer"
+                    ],
                     "description": "",
                     "example": "3"
                 },
@@ -60,7 +61,7 @@
                                 "integer"
                             ],
                             "description": "channel reference number",
-                            "example": "496"
+                            "example": 496
                         },
                         "payment_type": {
                             "type": [
@@ -75,7 +76,7 @@
                             "number"
                         ],
                         "description": "amount paid",
-                        "example": "1.32"
+                        "example": 1.32
                     },
                     "payment_type": {
                         "type": [
@@ -90,10 +91,10 @@
                         "number"
                     ],
                     "description": "amount of tax applied",
-                    "example": "0.07"
+                    "example": 0.07
                 },
                 "bill_addr": {
-                    "$ref": "#/definitions/address"
+                    "$ref": "/schemata/retailops-channel-integration-api#/definitions/address"
                 },
                 "gift_message": {
                     "type": [
@@ -103,7 +104,7 @@
                     "example": "Happy Birthday!"
                 },
                 "ship_addr": {
-                    "$ref": "#/definitions/address"
+                    "$ref": "/schemata/retailops-channel-integration-api#/definitions/address"
                 },
                 "channel_refnum": {
                     "type": [
@@ -113,7 +114,7 @@
                     "example": "496"
                 },
                 "customer": {
-                    "$ref": "#/definitions/customer"
+                    "$ref": "/schemata/retailops-channel-integration-api#/definitions/customer"
                 },
                 "discount_amt": {
                     "type": [
@@ -148,7 +149,7 @@
                         "array"
                     ],
                     "items": {
-                        "$ref": "#/definitions/order_item"
+                        "$ref": "/schemata/retailops-channel-integration-api#/definitions/order_item"
                     }
                 }
             }
@@ -171,7 +172,7 @@
                         "integer"
                     ],
                     "description": "",
-                    "example": "299"
+                    "example": 299
                 },
                 "unit_tax": {
                     "type": [
@@ -199,7 +200,7 @@
                         "number"
                     ],
                     "description": "",
-                    "example": "1"
+                    "example": 1
                 }
             }
         },
@@ -228,7 +229,7 @@
                         "string"
                     ],
                     "description": "Last Name",
-                    "example": "Schell"
+                    "example": "Smith"
                 },
                 "address2": {
                     "type": [
@@ -270,7 +271,7 @@
                         "string"
                     ],
                     "description": "First Name",
-                    "example": "Justin"
+                    "example": "John"
                 }
             }
         },
@@ -285,7 +286,7 @@
                         "string"
                     ],
                     "description": "Cusstomer email address",
-                    "example": "justin@gudtech.com"
+                    "example": "John@gudtech.com"
                 },
                 "phone_number": {
                     "type": [
@@ -299,14 +300,14 @@
                         "string"
                     ],
                     "description": "First Name",
-                    "example": "Justin"
+                    "example": "John"
                 },
                 "last_name": {
                     "type": [
                         "string"
                     ],
                     "description": "Last Name",
-                    "example": "Schell"
+                    "example": "Smith"
                 }
             }
         },
@@ -321,7 +322,6 @@
                         "string"
                     ],
                     "description": "",
-                    "format": "uuid",
                     "example": "12"
                 },
                 "params": {
@@ -394,7 +394,6 @@
                             "type": [
                                 "string"
                             ],
-                            "format": "uri",
                             "description": "base URI for channel",
                             "example": "http://172.16.4.130/magento1921"
                         },
@@ -444,7 +443,8 @@
                             "type": [
                                 "integer"
                             ],
-                            "description": "boolean?"
+                            "description": "boolean?",
+                            "example": 0
                         },
                         "tenant": {
                             "type": [
@@ -580,7 +580,7 @@
                     ],
                     "description": "Array of packages in this shipment",
                     "items": {
-                        "$ref": "#/definitions/package"
+                        "$ref": "/schemata/retailops-channel-integration-api#/definitions/package"
                     }
                 }
             }
@@ -667,7 +667,7 @@
                     ],
                     "description": "Array of Items in This Shipment",
                     "items": {
-                        "$ref": "#/definitions/ship_item"
+                        "$ref": "/schemata/retailops-channel-integration-api#/definitions/ship_item"
                     }
                 }
             }
@@ -790,7 +790,7 @@
                     ],
                     "description": "array of payment objects",
                     "items": {
-                        "$ref": "#/definitions/channel_payment"
+                        "$ref": "/schemata/retailops-channel-integration-api#/definitions/channel_payment"
                     }
                 },
                 "grand_total": {
@@ -805,9 +805,6 @@
                     ],
                     "description": "array of ID's unshipped items. Need to cjheck type of items in array (integers?)",
                     "items": {
-                        "type": [
-                            "integer"
-                        ]
                     }
                 },
                 "payment_series_id": {
@@ -837,7 +834,7 @@
                     ],
                     "description": "Array of shipments",
                     "items": {
-                        "$ref": "#/definitions/shipment"
+                        "$ref": "/schemata/retailops-channel-integration-api#/definitions/shipment"
                     }
                 },
                 "id": {
@@ -848,7 +845,7 @@
                     "example": "4898"
                 },
                 "payment_status": {
-                    "$ref": "#/definitions/payment_status"
+                    "$ref": "/schemata/retailops-channel-integration-api#/definitions/payment_status"
                 }
             }
         },
@@ -885,7 +882,7 @@
                     ],
                     "description": "Array of payment info by account",
                     "items": {
-                        "$ref": "#/definitions/by_account"
+                        "$ref": "/schemata/retailops-channel-integration-api#/definitions/by_account"
                     }
                 },
                 "unsettled": {
@@ -1057,12 +1054,14 @@
                             "type": [
                                 "string"
                             ],
+                            "description": "",
                             "example": "66"
                         },
                         "concept": {
                             "type": [
                                 "string"
                             ],
+                            "description": "",
                             "example": "sku"
                         }
                     }
@@ -1076,6 +1075,7 @@
                             "type": [
                                 "string"
                             ],
+                            "description": "",
                             "example": ""
                         },
                         "status": {
@@ -1094,7 +1094,6 @@
                             "type": [
                                 "string"
                             ],
-                            "format": "uri",
                             "description": "request url for this service action",
                             "example": "https://t14961.sandbox.mozu.com/api/commerce/catalog/admin/products/PP20?responseFields="
                         },
@@ -1147,7 +1146,7 @@
                     "type": [
                         "integer"
                     ],
-                    "description": "number of picks in zone",
+                    "description": "",
                     "example": 0
                 },
                 "npick": {
@@ -1192,7 +1191,7 @@
                     ],
                     "description": "inventory zones",
                     "items": {
-                        "$ref": "#/definitions/zone"
+                        "$ref": "/schemata/retailops-channel-integration-api#/definitions/zone"
                     }
                 },
                 "facility": {
@@ -1217,7 +1216,9 @@
                     "items": {
                         "type": [
                             "integer"
-                        ]
+                        ],
+                        "description": "",
+                        "example": 123
                     }
                 },
                 "vendor": {
@@ -1262,7 +1263,7 @@
                     ],
                     "description": "??",
                     "items": {
-                        "$ref": "#/definitions/inv_qty_breakdown_item"
+                        "$ref": "/schemata/retailops-channel-integration-api#/definitions/inv_qty_breakdown_item"
                     }
                 },
                 "qty_available": {
@@ -1326,7 +1327,8 @@
                     "type": [
                         "string"
                     ],
-                    "example": "2"
+                    "example": "2",
+                    "description": ""
                 }
             }
         },
@@ -1390,7 +1392,7 @@
                         "integer"
                     ],
                     "description": "TODO: check type, supplied example was 'NULL'",
-                    "example": null
+                    "example": 0
                 },
                 "estimated_cost": {
                     "type": [
@@ -1640,7 +1642,10 @@
                                                     "type": [
                                                         "array"
                                                     ],
-                                                    "items": {}
+                                                    "description": "",
+                                                    "items": {
+                                                        "type": ["string"]
+                                                    }
                                                 },
                                                 "Attribute Name": {
                                                     "type": [
@@ -1657,9 +1662,16 @@
                                     "type": [
                                         "array"
                                     ],
-                                    "items": {}
+                                    "description": "",
+                                    "items": {
+                                        "type": ["string"]
+                                    }
                                 },
-                                "Shipping": {}
+                                "Shipping": {
+                                    "type": ["array"],
+                                    "description": "",
+                                    "items": {}
+                                }
                             }
                         }
                     }
@@ -1682,10 +1694,10 @@
                         ],
                         "properties": {
                             "client_id": {
-                                "$ref": "#/definitions/client_id"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/client_id"
                             },
                             "ticket": {
-                                "$ref": "#/definitions/ticket"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/ticket"
                             }
                         }
                     },
@@ -1741,7 +1753,7 @@
                                     "object"
                                 ],
                                 "description": "",
-                                "$ref": "#/definitions/channel"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/channel"
                             },
                             "page_state": {
                                 "type": [
@@ -1788,7 +1800,7 @@
                             "array"
                         ],
                         "items": {
-                            "$ref": "#/definitions/order"
+                            "$ref": "/schemata/retailops-channel-integration-api#/definitions/order"
                         }
                     }
                 }
@@ -1808,10 +1820,10 @@
                         ],
                         "properties": {
                             "client_id": {
-                                "$ref": "#/definitions/client_id"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/client_id"
                             },
                             "ticket": {
-                                "$ref": "#/definitions/ticket"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/ticket"
                             }
                         }
                     },
@@ -1848,10 +1860,10 @@
                                 }
                             },
                             "client_id": {
-                                "$ref": "#/definitions/client_id"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/client_id"
                             },
                             "channel": {
-                                "$ref": "#/definitions/channel"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/channel"
                             }
                         }
                     }
@@ -1871,7 +1883,7 @@
                         ],
                         "description": "array of events in response",
                         "items": {
-                            "$ref": "#/definitions/event"
+                            "$ref": "/schemata/retailops-channel-integration-api#/definitions/event"
                         }
                     }
                 }
@@ -1890,10 +1902,10 @@
                     ],
                     "properties": {
                         "client_id": {
-                            "$ref": "#/definitions/client_id"
+                            "$ref": "/schemata/retailops-channel-integration-api#/definitions/client_id"
                         },
                         "ticket": {
-                            "$ref": "#/definitions/ticket"
+                            "$ref": "/schemata/retailops-channel-integration-api#/definitions/ticket"
                         }
                     }
                 },
@@ -1917,10 +1929,10 @@
                     ],
                     "properties": {
                         "order": {
-                            "$ref": "#/definitions/channel_order"
+                            "$ref": "/schemata/retailops-channel-integration-api#/definitions/channel_order"
                         },
                         "channel": {
-                            "$ref": "#/definitions/channel"
+                            "$ref": "/schemata/retailops-channel-integration-api#/definitions/channel"
                         }
                     }
                 }
@@ -1936,7 +1948,7 @@
                         ],
                         "description": "array of events in response",
                         "items": {
-                            "$ref": "#/definitions/event"
+                            "$ref": "/schemata/retailops-channel-integration-api#/definitions/event"
                         }
                     }
                 }
@@ -1956,10 +1968,10 @@
                         ],
                         "properties": {
                             "client_id": {
-                                "$ref": "#/definitions/client_id"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/client_id"
                             },
                             "ticket": {
-                                "$ref": "#/definitions/ticket"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/ticket"
                             }
                         }
                     },
@@ -1983,10 +1995,10 @@
                                 "type": [
                                     "object"
                                 ],
-                                "$ref": "#/definitions/channel_order"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/channel_order"
                             },
                             "channel": {
-                                "$ref": "#/definitions/channel"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/channel"
                             }
                         }
                     }
@@ -2006,7 +2018,7 @@
                         ],
                         "description": "array of events in response",
                         "items": {
-                            "$ref": "#/definitions/event"
+                            "$ref": "/schemata/retailops-channel-integration-api#/definitions/event"
                         }
                     }
                 }
@@ -2026,10 +2038,10 @@
                         ],
                         "properties": {
                             "client_id": {
-                                "$ref": "#/definitions/client_id"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/client_id"
                             },
                             "ticket": {
-                                "$ref": "#/definitions/ticket"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/ticket"
                             }
                         }
                     },
@@ -2078,10 +2090,10 @@
                         ],
                         "properties": {
                             "client_id": {
-                                "$ref": "#/definitions/client_id"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/client_id"
                             },
                             "ticket": {
-                                "$ref": "#/definitions/ticket"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/ticket"
                             }
                         }
                     },
@@ -2121,7 +2133,7 @@
                         ],
                         "description": "array of events in response",
                         "items": {
-                            "$ref": "#/definitions/event"
+                            "$ref": "/schemata/retailops-channel-integration-api#/definitions/event"
                         }
                     }
                 }
@@ -2141,10 +2153,10 @@
                         ],
                         "properties": {
                             "client_id": {
-                                "$ref": "#/definitions/client_id"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/client_id"
                             },
                             "ticket": {
-                                "$ref": "#/definitions/ticket"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/ticket"
                             }
                         }
                     },
@@ -2178,14 +2190,14 @@
                                         ],
                                         "description": "array of inventory items",
                                         "items": {
-                                            "$ref": "#/definitions/inventory_item"
+                                            "$ref": "/schemata/retailops-channel-integration-api#/definitions/inventory_item"
                                         }
                                     },
                                     "client_id": {
-                                        "$ref": "#/definitions/client_id"
+                                        "$ref": "/schemata/retailops-channel-integration-api#/definitions/client_id"
                                     },
                                     "channel": {
-                                        "$ref": "#/definitions/channel"
+                                        "$ref": "/schemata/retailops-channel-integration-api#/definitions/channel"
                                     }
                                 }
                             }
@@ -2207,7 +2219,7 @@
                         ],
                         "description": "array of events in response",
                         "items": {
-                            "$ref": "#/definitions/event"
+                            "$ref": "/schemata/retailops-channel-integration-api#/definitions/event"
                         }
                     }
                 }
@@ -2227,10 +2239,10 @@
                         ],
                         "properties": {
                             "client_id": {
-                                "$ref": "#/definitions/client_id"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/client_id"
                             },
                             "ticket": {
-                                "$ref": "#/definitions/ticket"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/ticket"
                             }
                         }
                     },
@@ -2254,10 +2266,10 @@
                         ],
                         "properties": {
                             "order": {
-                                "$ref": "#/definitions/channel_order"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/channel_order"
                             },
                             "channel": {
-                                "$ref": "#/definitions/channel"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/channel"
                             }
                         }
                     }
@@ -2277,7 +2289,7 @@
                         ],
                         "description": "array of events in response",
                         "items": {
-                            "$ref": "#/definitions/event"
+                            "$ref": "/schemata/retailops-channel-integration-api#/definitions/event"
                         }
                     }
                 }
@@ -2297,10 +2309,10 @@
                         ],
                         "properties": {
                             "client_id": {
-                                "$ref": "#/definitions/client_id"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/client_id"
                             },
                             "ticket": {
-                                "$ref": "#/definitions/ticket"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/ticket"
                             }
                         }
                     },
@@ -2324,13 +2336,13 @@
                         ],
                         "properties": {
                             "shipment": {
-                                "$ref": "#/definitions/shipment"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/shipment"
                             },
                             "order": {
-                                "$ref": "#/definitions/channel_order"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/channel_order"
                             },
                             "channel": {
-                                "$ref": "#/definitions/channel"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/channel"
                             }
                         }
                     }
@@ -2350,7 +2362,7 @@
                         ],
                         "description": "array of events in response",
                         "items": {
-                            "$ref": "#/definitions/event"
+                            "$ref": "/schemata/retailops-channel-integration-api#/definitions/event"
                         }
                     }
                 }
@@ -2373,10 +2385,10 @@
                         ],
                         "properties": {
                             "client_id": {
-                                "$ref": "#/definitions/client_id"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/client_id"
                             },
                             "ticket": {
-                                "$ref": "#/definitions/ticket"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/ticket"
                             }
                         }
                     },
@@ -2400,10 +2412,10 @@
                         ],
                         "properties": {
                             "order": {
-                                "$ref": "#/definitions/channel_order"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/channel_order"
                             },
                             "channel": {
-                                "$ref": "#/definitions/channel"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/channel"
                             },
                             "return": {
                                 "type": [
@@ -2471,7 +2483,7 @@
                                             "array"
                                         ],
                                         "items": {
-                                            "$ref": "#/definitions/credit_items_ref"
+                                            "$ref": "/schemata/retailops-channel-integration-api#/definitions/credit_items_ref"
                                         }
                                     },
                                     "id": {
@@ -2538,7 +2550,7 @@
                         ],
                         "description": "array of events in response",
                         "items": {
-                            "$ref": "#/definitions/event"
+                            "$ref": "/schemata/retailops-channel-integration-api#/definitions/event"
                         }
                     },
                     "return": {
@@ -2564,7 +2576,9 @@
             "rel": "self",
             "title": "writeback_request",
             "schema": {
-                "type": ["object"],
+                "type": [
+                    "object"
+                ],
                 "properties": {
                     "headers": {
                         "type": [
@@ -2572,10 +2586,10 @@
                         ],
                         "properties": {
                             "client_id": {
-                                "$ref": "#/definitions/client_id"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/client_id"
                             },
                             "ticket": {
-                                "$ref": "#/definitions/ticket"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/ticket"
                             }
                         }
                     },
@@ -2613,7 +2627,7 @@
                                     "array"
                                 ],
                                 "items": {
-                                    "$ref": "#/definitions/writeback_request_item"
+                                    "$ref": "/schemata/retailops-channel-integration-api#/definitions/writeback_request_item"
                                 }
                             },
                             "order_info": {
@@ -2652,10 +2666,10 @@
                                 }
                             },
                             "order": {
-                                "$ref": "#/definitions/channel_order"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/channel_order"
                             },
                             "channel": {
-                                "$ref": "#/definitions/channel"
+                                "$ref": "/schemata/retailops-channel-integration-api#/definitions/channel"
                             }
                         }
                     }
@@ -2671,7 +2685,7 @@
                             "array"
                         ],
                         "items": {
-                            "$ref": "#/definitions/writeback_line_item"
+                            "$ref": "/schemata/retailops-channel-integration-api#/definitions/writeback_line_item"
                         }
                     },
                     "values": {
@@ -2713,5 +2727,5 @@
             }
         }
     ],
-    "id": "schema/channel"
+    "id": "schemata/retailops-channel-integration-api"
 }

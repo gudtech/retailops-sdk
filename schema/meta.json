@@ -1,9 +1,0 @@
-{
-  "description": "RetailOPS Webhook API",
-    "id": "channel-webhook-api",
-    "links": [{
-      "href": "https://yoursite.com",
-      "rel": "self"
-    }],
-    "title": "Channel Integration API"
-}
