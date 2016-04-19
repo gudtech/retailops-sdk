@@ -449,7 +449,7 @@
         {
             "description": "Order fetch request.",
             "href": "/orders",
-            "method": "GET",
+            "method": "POST",
             "rel": "instances",
             "schema": {
                 "type": [

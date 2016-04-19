@@ -807,7 +807,7 @@ order resource for RetailOPS webhook API
 Order fetch request.
 
 ```
-GET /orders
+POST /orders
 ```
 
 #### Required Parameters
@@ -846,32 +846,46 @@ GET /orders
 #### Curl Example
 
 ```bash
-$ curl -n https://yoursite.com/orders
- -G \
-  -d headers[client_id]=497 \
-  -d headers[ticket]=1%2C1%2C0%2C1456437061%2C315576060%2C111%2CWEIhLHAyXHpjZA27OdENwAn1_fHx8fGA-ekng7lhkAvc27Uhnxgd4PZx4VnR_SJ-K85M_5dTAChTXgI3RsmGvfTbaOZ1_U-YJw3G0w1UVWFZ2EC83wjO6bmp91VZdR0tT_b2R1kK4qO1QTJrBk53ZyIuidsOa13lihh8VMgAvSDqCnTwxV2NVV7oN4v-h_tQtpUvklfbW1bnULR3bbaDvoOlb1CVQ_3BdNdo1MaAh-JxrRjf7MkzcHQYs3dN0GuaBZ1KBHvLdrLmGerNYv2p6AMC-fu8YeuukUU3Q6RL9AtF5AA6TPhfwfBM5r05B7QZiSEGySF65FCcfQFT_6lMxQ \
-  -d version=1 \
-  -d action=testco.orderpull.order_fetch \
-  -d data[single]=0 \
-  -d data[order][channel_refnum]=496 \
-  -d data[client_id]=1 \
-  -d data[channel][id]=21 \
-  -d data[channel][params][StoreID]=yhst-18909142938879050075142 \
-  -d data[channel][params][next_order_refnum]=496 \
-  -d data[channel][params][order_ack_status_id]=32 \
-  -d data[channel][params][order_fulfilled_status_id]=34 \
-  -d data[channel][params][order_in_filfillment_status_id]=33 \
-  -d data[channel][params][email_return]=0 \
-  -d data[channel][params][inv_suspended_instock]=0 \
-  -d data[channel][params][unset_other_media]=0 \
-  -d data[channel][params][import_order_attrs]= \
-  -d data[channel][params][base_uri]=http%3A%2F%2F172.16.4.130%2Fmagento1921 \
-  -d data[channel][params][express_configurable_super_links]=0 \
-  -d data[channel][params][unset_other_attributes]=0 \
-  -d data[channel][params][push_cancel]=0 \
-  -d data[channel][params][email_invoice]=0 \
-  -d data[channel][params][email_tracking]=0 \
-  -d data[max_page_size]=50
+$ curl -n -X POST https://yoursite.com/orders \
+  -d '{
+  "headers": {
+    "client_id": "497",
+    "ticket": "1,1,0,1456437061,315576060,111,WEIhLHAyXHpjZA27OdENwAn1_fHx8fGA-ekng7lhkAvc27Uhnxgd4PZx4VnR_SJ-K85M_5dTAChTXgI3RsmGvfTbaOZ1_U-YJw3G0w1UVWFZ2EC83wjO6bmp91VZdR0tT_b2R1kK4qO1QTJrBk53ZyIuidsOa13lihh8VMgAvSDqCnTwxV2NVV7oN4v-h_tQtpUvklfbW1bnULR3bbaDvoOlb1CVQ_3BdNdo1MaAh-JxrRjf7MkzcHQYs3dN0GuaBZ1KBHvLdrLmGerNYv2p6AMC-fu8YeuukUU3Q6RL9AtF5AA6TPhfwfBM5r05B7QZiSEGySF65FCcfQFT_6lMxQ"
+  },
+  "version": 1,
+  "action": "testco.orderpull.order_fetch",
+  "data": {
+    "single": 0,
+    "order": {
+      "channel_refnum": "496"
+    },
+    "client_id": 1,
+    "channel": {
+      "id": 21,
+      "params": {
+        "StoreID": "yhst-18909142938879050075142",
+        "next_order_refnum": 496,
+        "order_ack_status_id": "32",
+        "order_fulfilled_status_id": "34",
+        "order_in_filfillment_status_id": "33",
+        "email_return": 0,
+        "inv_suspended_instock": 0,
+        "unset_other_media": 0,
+        "import_order_attrs": "",
+        "base_uri": "http://172.16.4.130/magento1921",
+        "express_configurable_super_links": 0,
+        "unset_other_attributes": 0,
+        "push_cancel": 0,
+        "inv_suspended_mode": null,
+        "email_invoice": 0,
+        "email_tracking": 0
+      }
+    },
+    "page_state": null,
+    "max_page_size": 50
+  }
+}' \
+  -H "Content-Type: application/json"
 ```
 
 
