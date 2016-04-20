@@ -1,12 +1,12 @@
-## <a name="resource-order_settle_payment_v1">order_settle_payment</a>
+## <a name="resource-order_returned_v1">order_returned</a>
 
 Stability: `prototype`
 
-order_settle_payment method RetailOPS webhook API version 1
+order_returned method RetailOPS webhook API version 1
 
-### order_settle_payment
+### order_returned 
 
-Order settle payment method.
+Order returned method.
 
 ```
 POST /orders
@@ -16,8 +16,9 @@ POST /orders
 
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
-| **action** | *string* | RetailOPS api action name | `"order_settle_payment"` |
+| **action** | *string* | RetailOPS api action name | `"order_returned"` |
 | **data:channel:id** | *integer* |  | `21` |
+| **data:channel:params:StoreID** | *string* | Store ID | `"yhst-18909142938879050075142"` |
 | **data:channel:params:base_uri** | *string* | uri | `"http://172.16.4.130/magento1921"` |
 | **data:channel:params:email_invoice** | *integer* | boolean | `0` |
 | **data:channel:params:email_return** | *integer* | boolean | `0` |
@@ -26,6 +27,10 @@ POST /orders
 | **data:channel:params:import_order_attrs** | *string* |  | `""` |
 | **data:channel:params:inv_suspended_instock** | *integer* | boolean | `0` |
 | **data:channel:params:inv_suspended_mode** | *integer* |  | `null` |
+| **data:channel:params:next_order_refnum** | *integer* | next order reference number | `496` |
+| **data:channel:params:order_ack_status_id** | *integer* | order acknowledgement status id | `32` |
+| **data:channel:params:order_fulfilled_status_id** | *integer* | order fulfilled status id | `34` |
+| **data:channel:params:order_in_filfillment_status_id** | *integer* | order in fulfillment status id | `33` |
 | **data:channel:params:push_cancel** | *integer* | boolean | `0` |
 | **data:channel:params:unset_other_attributes** | *integer* | boolean | `0` |
 | **data:channel:params:unset_other_media** | *integer* | boolean | `0` |
@@ -49,7 +54,7 @@ POST /orders
 | **data:order:channel_refnum** | *integer* | channel reference number for order | `496` |
 | **data:order:from_counterparty_rate** | *integer* |  | `1` |
 | **data:order:grand_total** | *number* | order grandtotal | `35` |
-| **data:order:id** | *integer* | order ID | `4897` |
+| **data:order:id** | *string* | order ID | `"4897"` |
 | **data:order:payment_series_id** | *integer* | payment series ID | `2572` |
 | **data:order:payment_status:authed** | *integer* |  | `0` |
 | **data:order:payment_status:available** | *integer* |  | `35` |
@@ -63,9 +68,23 @@ POST /orders
 | **data:order:payment_status:unsettled_deferred** | *integer* |  | `0` |
 | **data:order:payment_status:unsettled_external** | *integer* |  | `0` |
 | **data:order:ship_service_name** | *string* | name of shipping service | `"Will Call"` |
-| **data:order:shipments/id** | *integer* | shipment ID | `100000084` |
+| **data:order:shipments/id** | *string* | shipment ID | `"100000084"` |
 | **data:order:shipments/packages** | *array* | array of packages included in this shipment | `[{"class_name":"Standard","carrier_code":"WILLCALL","carrier_name":"WillCall","ship_items":[null],"tracking_number":"ZX29827782929","mapped_shipcode":null,"date_shipped":"2016-04-08T21:13:11Z","carrier_class_code":"WILLCALL","weight":1,"id":370,"carrier_class_name":"WillCall Standard"}]` |
 | **data:order:unshipped_items_ref** | *array* |  | `[496]` |
+| **data:return:credit_items_ref** | *array* |  | `[{"sku":"132","item_shipping_tax_amt":"0","credit_item_refnum":"return_item 90","item_tax_amt":"0","channel_order_refnum":"100000084","item_shipping_amt":"0","item_restock_fee_amt":"0","channel_id":"12","item_giftwrap_amt":"0","channel_item_refnum":"88","quantity":"1","reason":"CustomerReturn","item_product_amt":"30","item_recycling_amt":"0","item_subtotal_amt":"30","item_credit_amt":"30","item_giftwrap_tax_amt":"0"}]` |
+| **data:return:discount_amt** | *string* | amount of applied discount(?) | `"0"` |
+| **data:return:id** | *string* | ID of return | `"87"` |
+| **data:return:items/channel_refnum** | *integer* | channel reference number for order | `496` |
+| **data:return:items/order_item_id** | *string* | order item id | `"7396"` |
+| **data:return:items/quantity** | *integer* | quantity of sku in order | `1` |
+| **data:return:items/sku** | *string* | sku number (id) | `"53"` |
+| **data:return:product_amt** | *string* | amount of product returned(?) | `"30"` |
+| **data:return:refund_action** | *string* | action name of refund(?) | `"refund"` |
+| **data:return:refund_amt** | *string* | amount refunded(?) or... items refund applied to(?) | `"30"` |
+| **data:return:rma_id** | *string* | ID of RMA | `"null"` |
+| **data:return:shipping_amt** | *string* | amount shipped | `"0"` |
+| **data:return:subtotal_amt** | *string* | ?? | `"30"` |
+| **data:return:tax_amt** | *string* | tax amount on returned items(?) | `"0"` |
 | **version** | *integer* | RetailOPS api action version | `1` |
 
 
@@ -75,7 +94,7 @@ POST /orders
 $ curl -n -X POST https://yoursite.com/orders \
   -d '{
   "version": 1,
-  "action": "order_settle_payment",
+  "action": "order_returned",
   "data": {
     "order": {
       "channel_payment": {
@@ -107,7 +126,7 @@ $ curl -n -X POST https://yoursite.com/orders \
       "channel_refnum": 496,
       "shipments": [
         {
-          "id": 100000084,
+          "id": "100000084",
           "packages": [
             {
               "class_name": "Standard",
@@ -127,7 +146,7 @@ $ curl -n -X POST https://yoursite.com/orders \
           ]
         }
       ],
-      "id": 4897,
+      "id": "4897",
       "payment_status": {
         "success": 1,
         "unsettled_external": 0,
@@ -165,6 +184,11 @@ $ curl -n -X POST https://yoursite.com/orders \
     "channel": {
       "id": 21,
       "params": {
+        "StoreID": "yhst-18909142938879050075142",
+        "next_order_refnum": 496,
+        "order_ack_status_id": 32,
+        "order_fulfilled_status_id": 34,
+        "order_in_filfillment_status_id": 33,
         "email_return": 0,
         "inv_suspended_instock": 0,
         "unset_other_media": 0,
@@ -177,6 +201,46 @@ $ curl -n -X POST https://yoursite.com/orders \
         "email_invoice": 0,
         "email_tracking": 0
       }
+    },
+    "return": {
+      "shipping_amt": "0",
+      "subtotal_amt": "30",
+      "product_amt": "30",
+      "refund_amt": "30",
+      "tax_amt": "0",
+      "rma_id": "null",
+      "refund_action": "refund",
+      "discount_amt": "0",
+      "credit_items_ref": [
+        {
+          "sku": "132",
+          "item_shipping_tax_amt": "0",
+          "credit_item_refnum": "return_item 90",
+          "item_tax_amt": "0",
+          "channel_order_refnum": "100000084",
+          "item_shipping_amt": "0",
+          "item_restock_fee_amt": "0",
+          "channel_id": "12",
+          "item_giftwrap_amt": "0",
+          "channel_item_refnum": "88",
+          "quantity": "1",
+          "reason": "CustomerReturn",
+          "item_product_amt": "30",
+          "item_recycling_amt": "0",
+          "item_subtotal_amt": "30",
+          "item_credit_amt": "30",
+          "item_giftwrap_tax_amt": "0"
+        }
+      ],
+      "id": "87",
+      "items": [
+        {
+          "channel_refnum": 496,
+          "order_item_id": "7396",
+          "sku": "53",
+          "quantity": 1
+        }
+      ]
     }
   }
 }' \

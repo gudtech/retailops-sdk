@@ -4,7 +4,7 @@ Stability: `prototype`
 
 order_cancel method RetailOPS webhook API version 1
 
-### order_cancel order_cancel
+### order_cancel
 
 Order cancel method.
 
@@ -196,5 +196,3 @@ HTTP/1.1 200 OK
   ]
 }
 ```
-
-

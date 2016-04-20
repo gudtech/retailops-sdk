@@ -4,7 +4,7 @@ Stability: `prototype`
 
 order_shipment_submit method RetailOPS webhook API version 1
 
-### order_shipment_submit order_shipment_submit
+### order_shipment_submit
 
 Order shipment submit method.
 
@@ -225,5 +225,3 @@ HTTP/1.1 200 OK
   ]
 }
 ```
-
-

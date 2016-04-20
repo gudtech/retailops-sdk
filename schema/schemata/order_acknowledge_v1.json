@@ -589,7 +589,7 @@
     },
     "links": [
         {
-            "description": "Order acknowlege method.",
+            "description": "Order acknowledge method.",
             "href": "/orders",
             "method": "POST",
             "rel": "instances",

@@ -4,9 +4,9 @@ Stability: `prototype`
 
 order_acknowledge method RetailOPS webhook API
 
-### order_acknowledge order_acknowledge
+### order_acknowledge
 
-Order acknowlege method.
+Order acknowledge method.
 
 ```
 POST /orders
@@ -112,5 +112,3 @@ HTTP/1.1 200 OK
   ]
 }
 ```
-
-

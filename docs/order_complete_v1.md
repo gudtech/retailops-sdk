@@ -4,7 +4,7 @@ Stability: `prototype`
 
 order_complete method RetailOPS webhook API version 1
 
-### order_complete order_complete
+### order_complete
 
 Order Complete method.
 
@@ -216,5 +216,3 @@ HTTP/1.1 200 OK
   ]
 }
 ```
-
-

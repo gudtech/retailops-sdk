@@ -4,7 +4,7 @@ Stability: `prototype`
 
 order_update method RetailOPS webhook API version 1
 
-### order_update order_update
+### order_update
 
 Order update method.
 
@@ -236,5 +236,3 @@ HTTP/1.1 200 OK
   ]
 }
 ```
-
-
