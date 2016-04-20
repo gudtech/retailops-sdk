@@ -28,6 +28,7 @@ RetailOps then pulls this order information, fulfills said orders, and pushes st
 - [order_settle_payment](docs/order_settle_payment_v1.md) - Cause the channel to collect/capture payment, or otherwise verify payment has been collected
 - [order_returned](docs/order_returned_v1.md) - Notify the channel that a return has been processed against the order
 
+
 ## Shipper Integrations
 
 *Coming soon*
