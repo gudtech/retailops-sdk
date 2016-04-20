@@ -409,7 +409,7 @@
                         "string"
                     ],
                     "description": "customer phone",
-                    "example": "5555555555"
+                    "example": "(619)555-5555"
                 },
                 "first_name": {
                     "type": [

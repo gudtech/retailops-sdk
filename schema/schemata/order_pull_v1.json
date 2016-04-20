@@ -14,7 +14,7 @@
                 "string"
             ],
             "description": "RetailOPS api action name",
-            "example": "testco.order_pull"
+            "example": "order_pull"
         },
         "version": {
             "type": [
@@ -32,10 +32,10 @@
         },
         "channel_refnum": {
             "type": [
-                "string"
+                "integer"
             ],
             "description": "channel reference number for order",
-            "example": "496"
+            "example": 496
         },
         "client_id": {
             "description": "RetailOPS client id",
@@ -43,7 +43,7 @@
             "type": [
                 "integer"
             ],
-            "example": "497"
+            "example": 497
         },
         "channel": {
             "type": [
@@ -73,10 +73,10 @@
                 },
                 "tenant": {
                     "type": [
-                        "string"
+                        "integer"
                     ],
                     "description": "tenant ID",
-                    "example": "15394"
+                    "example": 15394
                 },
                 "StoreID": {
                     "type": "string",
@@ -92,24 +92,24 @@
                 },
                 "order_ack_status_id": {
                     "type": [
-                        "string"
+                        "integer"
                     ],
                     "description": "order acknowledgement status id",
-                    "example": "32"
+                    "example": 32
                 },
                 "order_fulfilled_status_id": {
                     "type": [
-                        "string"
+                        "integer"
                     ],
                     "description": "order fulfilled status id",
-                    "example": "34"
+                    "example": 34
                 },
                 "order_in_filfillment_status_id": {
                     "type": [
-                        "string"
+                        "integer"
                     ],
                     "description": "order in fulfillment status id",
-                    "example": "33"
+                    "example": 33
                 },
                 "email_return": {
                     "type": [
@@ -191,7 +191,7 @@
             },
             "properties": {
                 "id": {
-                    "$ref": "/schemata/order_pull_v1#/definitions/channel/definitions/id"
+                    "$ref": "/schemata/order_update_v1#/definitions/channel/definitions/id"
                 },
                 "params": {
                     "type": [
@@ -199,52 +199,52 @@
                     ],
                     "properties": {
                         "StoreID": {
-                            "$ref": "/schemata/order_pull_v1#/definitions/channel/definitions/StoreID"
+                            "$ref": "/schemata/order_update_v1#/definitions/channel/definitions/StoreID"
                         },
                         "next_order_refnum": {
-                            "$ref": "/schemata/order_pull_v1#/definitions/channel/definitions/next_order_refnum"
+                            "$ref": "/schemata/order_update_v1#/definitions/channel/definitions/next_order_refnum"
                         },
                         "order_ack_status_id": {
-                            "$ref": "/schemata/order_pull_v1#/definitions/channel/definitions/order_ack_status_id"
+                            "$ref": "/schemata/order_update_v1#/definitions/channel/definitions/order_ack_status_id"
                         },
                         "order_fulfilled_status_id": {
-                            "$ref": "/schemata/order_pull_v1#/definitions/channel/definitions/order_fulfilled_status_id"
+                            "$ref": "/schemata/order_update_v1#/definitions/channel/definitions/order_fulfilled_status_id"
                         },
                         "order_in_filfillment_status_id": {
-                            "$ref": "/schemata/order_pull_v1#/definitions/channel/definitions/order_in_filfillment_status_id"
+                            "$ref": "/schemata/order_update_v1#/definitions/channel/definitions/order_in_filfillment_status_id"
                         },
                         "email_return": {
-                            "$ref": "/schemata/order_pull_v1#/definitions/channel/definitions/email_return"
+                            "$ref": "/schemata/order_update_v1#/definitions/channel/definitions/email_return"
                         },
                         "inv_suspended_instock": {
-                            "$ref": "/schemata/order_pull_v1#/definitions/channel/definitions/inv_suspended_instock"
+                            "$ref": "/schemata/order_update_v1#/definitions/channel/definitions/inv_suspended_instock"
                         },
                         "unset_other_media": {
-                            "$ref": "/schemata/order_pull_v1#/definitions/channel/definitions/unset_other_media"
+                            "$ref": "/schemata/order_update_v1#/definitions/channel/definitions/unset_other_media"
                         },
                         "import_order_attrs": {
-                            "$ref": "/schemata/order_pull_v1#/definitions/channel/definitions/import_order_attrs"
+                            "$ref": "/schemata/order_update_v1#/definitions/channel/definitions/import_order_attrs"
                         },
                         "base_uri": {
-                            "$ref": "/schemata/order_pull_v1#/definitions/channel/definitions/base_uri"
+                            "$ref": "/schemata/order_update_v1#/definitions/channel/definitions/base_uri"
                         },
                         "express_configurable_super_links": {
-                            "$ref": "/schemata/order_pull_v1#/definitions/channel/definitions/express_configurable_super_links"
+                            "$ref": "/schemata/order_update_v1#/definitions/channel/definitions/express_configurable_super_links"
                         },
                         "unset_other_attributes": {
-                            "$ref": "/schemata/order_pull_v1#/definitions/channel/definitions/unset_other_attributes"
+                            "$ref": "/schemata/order_update_v1#/definitions/channel/definitions/unset_other_attributes"
                         },
                         "push_cancel": {
-                            "$ref": "/schemata/order_pull_v1#/definitions/channel/definitions/push_cancel"
+                            "$ref": "/schemata/order_update_v1#/definitions/channel/definitions/push_cancel"
                         },
                         "inv_suspended_mode": {
-                            "$ref": "/schemata/order_pull_v1#/definitions/channel/definitions/inv_suspended_mode"
+                            "$ref": "/schemata/order_update_v1#/definitions/channel/definitions/inv_suspended_mode"
                         },
                         "email_invoice": {
-                            "$ref": "/schemata/order_pull_v1#/definitions/channel/definitions/email_invoice"
+                            "$ref": "/schemata/order_update_v1#/definitions/channel/definitions/email_invoice"
                         },
                         "email_tracking": {
-                            "$ref": "/schemata/order_pull_v1#/definitions/channel/definitions/email_tracking"
+                            "$ref": "/schemata/order_update_v1#/definitions/channel/definitions/email_tracking"
                         }
                     }
                 }
@@ -294,10 +294,10 @@
         },
         "amount": {
             "type": [
-                "string"
+                "number"
             ],
             "description": "payment amount",
-            "example": "1.32"
+            "example": 1.32
         },
         "payment_method": {
             "type": [
@@ -308,10 +308,10 @@
         },
         "tax_amt": {
             "type": [
-                "string"
+                "number"
             ],
             "description": "tax amount",
-            "example": "0.07"
+            "example": 0.07
         },
         "address": {
             "type": [
@@ -409,7 +409,7 @@
                         "string"
                     ],
                     "description": "customer phone",
-                    "example": "5555555555"
+                    "example": "(619)555-5555"
                 },
                 "first_name": {
                     "type": [
@@ -457,10 +457,10 @@
         },
         "sku": {
             "type": [
-                "string"
+                "integer"
             ],
             "description": "sku number",
-            "example": "299"
+            "example": 299
         },
         "unit_tax": {
             "type": [
@@ -485,11 +485,11 @@
         },
         "unit_price": {
             "type": [
-                "string"
+                "number"
             ],
             "description": "unit price for sku",
-            "example": "1"
-        }
+            "example": 1.00
+        },
     },
     "links": [
         {
