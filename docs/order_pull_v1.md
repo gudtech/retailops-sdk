@@ -2,7 +2,7 @@
 
 Stability: `prototype`
 
-order_pull method RetailOPS webhook API
+order_pull method RetailOPS webhook API, version 1
 
 ### order_pull
 
