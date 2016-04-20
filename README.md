@@ -19,7 +19,7 @@ RetailOps then pulls this order information, fulfills said orders, and pushes st
 - [catalog_get_config](docs/catalog_get_config_v1.md) - Configuration information about Catalog Push
 - catalog_push - New product information and product updates
 - inventory_push - Inventory updates
-- [order_pull](docs/order_pull_vi.md) - Fetch new orders from the channel which are ready
+- [order_pull](docs/order_pull_v1.md) - Fetch new orders from the channel which are ready
 - order_acknowledge - Mark specific fetched orders has having been picked up
 - order_update - Update channel order information to reflect order items which have been updated, added, or removed in RetailOps
 - order_cancel - Mark an order as canceled in the channel
