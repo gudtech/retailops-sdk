@@ -4,7 +4,7 @@ Stability: `prototype`
 
 order_returned method RetailOPS webhook API version 1
 
-### order_returned 
+### order_returned order_returned
 
 Order returned method.
 
@@ -54,7 +54,7 @@ POST /orders
 | **data:order:channel_refnum** | *integer* | channel reference number for order | `496` |
 | **data:order:from_counterparty_rate** | *integer* |  | `1` |
 | **data:order:grand_total** | *number* | order grandtotal | `35` |
-| **data:order:id** | *string* | order ID | `"4897"` |
+| **data:order:id** | *integer* | order ID | `4897` |
 | **data:order:payment_series_id** | *integer* | payment series ID | `2572` |
 | **data:order:payment_status:authed** | *integer* |  | `0` |
 | **data:order:payment_status:available** | *integer* |  | `35` |
@@ -68,23 +68,23 @@ POST /orders
 | **data:order:payment_status:unsettled_deferred** | *integer* |  | `0` |
 | **data:order:payment_status:unsettled_external** | *integer* |  | `0` |
 | **data:order:ship_service_name** | *string* | name of shipping service | `"Will Call"` |
-| **data:order:shipments/id** | *string* | shipment ID | `"100000084"` |
+| **data:order:shipments/id** | *integer* | shipment ID | `100000084` |
 | **data:order:shipments/packages** | *array* | array of packages included in this shipment | `[{"class_name":"Standard","carrier_code":"WILLCALL","carrier_name":"WillCall","ship_items":[null],"tracking_number":"ZX29827782929","mapped_shipcode":null,"date_shipped":"2016-04-08T21:13:11Z","carrier_class_code":"WILLCALL","weight":1,"id":370,"carrier_class_name":"WillCall Standard"}]` |
 | **data:order:unshipped_items_ref** | *array* |  | `[496]` |
-| **data:return:credit_items_ref** | *array* |  | `[{"sku":"132","item_shipping_tax_amt":"0","credit_item_refnum":"return_item 90","item_tax_amt":"0","channel_order_refnum":"100000084","item_shipping_amt":"0","item_restock_fee_amt":"0","channel_id":"12","item_giftwrap_amt":"0","channel_item_refnum":"88","quantity":"1","reason":"CustomerReturn","item_product_amt":"30","item_recycling_amt":"0","item_subtotal_amt":"30","item_credit_amt":"30","item_giftwrap_tax_amt":"0"}]` |
-| **data:return:discount_amt** | *string* | amount of applied discount(?) | `"0"` |
-| **data:return:id** | *string* | ID of return | `"87"` |
+| **data:return:credit_items_ref** | *array* |  | `[{"sku":132,"item_shipping_tax_amt":30.0,"credit_item_refnum":"return_item 90","item_tax_amt":0.0,"channel_order_refnum":100000084,"item_shipping_amt":0.0,"item_restock_fee_amt":0.0,"channel_id":12,"item_giftwrap_amt":0,"channel_item_refnum":88,"quantity":1,"reason":"CustomerReturn","item_product_amt":30.0,"item_recycling_amt":0,"item_subtotal_amt":30.0,"item_credit_amt":30.0,"item_giftwrap_tax_amt":0.0}]` |
+| **data:return:discount_amt** | *number* | amount of applied discount | `0.0` |
+| **data:return:id** | *integer* | ID of return | `87` |
 | **data:return:items/channel_refnum** | *integer* | channel reference number for order | `496` |
-| **data:return:items/order_item_id** | *string* | order item id | `"7396"` |
+| **data:return:items/order_item_id** | *integer* | order item id | `7395` |
 | **data:return:items/quantity** | *integer* | quantity of sku in order | `1` |
-| **data:return:items/sku** | *string* | sku number (id) | `"53"` |
-| **data:return:product_amt** | *string* | amount of product returned(?) | `"30"` |
-| **data:return:refund_action** | *string* | action name of refund(?) | `"refund"` |
-| **data:return:refund_amt** | *string* | amount refunded(?) or... items refund applied to(?) | `"30"` |
+| **data:return:items/sku** | *integer* | sku number (id) | `53` |
+| **data:return:product_amt** | *number* |  | `30.0` |
+| **data:return:refund_action** | *string* | action name of return | `"refund"` |
+| **data:return:refund_amt** | *number* | amount refunded | `30.0` |
 | **data:return:rma_id** | *string* | ID of RMA | `"null"` |
-| **data:return:shipping_amt** | *string* | amount shipped | `"0"` |
-| **data:return:subtotal_amt** | *string* | ?? | `"30"` |
-| **data:return:tax_amt** | *string* | tax amount on returned items(?) | `"0"` |
+| **data:return:shipping_amt** | *integer* | amount shipped | `0` |
+| **data:return:subtotal_amt** | *number* |  | `30.0` |
+| **data:return:tax_amt** | *number* | tax amount on returned items | `0.0` |
 | **version** | *integer* | RetailOPS api action version | `1` |
 
 
@@ -126,7 +126,7 @@ $ curl -n -X POST https://yoursite.com/orders \
       "channel_refnum": 496,
       "shipments": [
         {
-          "id": "100000084",
+          "id": 100000084,
           "packages": [
             {
               "class_name": "Standard",
@@ -146,7 +146,7 @@ $ curl -n -X POST https://yoursite.com/orders \
           ]
         }
       ],
-      "id": "4897",
+      "id": 4897,
       "payment_status": {
         "success": 1,
         "unsettled_external": 0,
@@ -203,41 +203,41 @@ $ curl -n -X POST https://yoursite.com/orders \
       }
     },
     "return": {
-      "shipping_amt": "0",
-      "subtotal_amt": "30",
-      "product_amt": "30",
-      "refund_amt": "30",
-      "tax_amt": "0",
+      "shipping_amt": 0,
+      "subtotal_amt": 30.0,
+      "product_amt": 30.0,
+      "refund_amt": 30.0,
+      "tax_amt": 0.0,
       "rma_id": "null",
       "refund_action": "refund",
-      "discount_amt": "0",
+      "discount_amt": 0.0,
       "credit_items_ref": [
         {
-          "sku": "132",
-          "item_shipping_tax_amt": "0",
+          "sku": 132,
+          "item_shipping_tax_amt": 30.0,
           "credit_item_refnum": "return_item 90",
-          "item_tax_amt": "0",
-          "channel_order_refnum": "100000084",
-          "item_shipping_amt": "0",
-          "item_restock_fee_amt": "0",
-          "channel_id": "12",
-          "item_giftwrap_amt": "0",
-          "channel_item_refnum": "88",
-          "quantity": "1",
+          "item_tax_amt": 0.0,
+          "channel_order_refnum": 100000084,
+          "item_shipping_amt": 0.0,
+          "item_restock_fee_amt": 0.0,
+          "channel_id": 12,
+          "item_giftwrap_amt": 0,
+          "channel_item_refnum": 88,
+          "quantity": 1,
           "reason": "CustomerReturn",
-          "item_product_amt": "30",
-          "item_recycling_amt": "0",
-          "item_subtotal_amt": "30",
-          "item_credit_amt": "30",
-          "item_giftwrap_tax_amt": "0"
+          "item_product_amt": 30.0,
+          "item_recycling_amt": 0,
+          "item_subtotal_amt": 30.0,
+          "item_credit_amt": 30.0,
+          "item_giftwrap_tax_amt": 0.0
         }
       ],
-      "id": "87",
+      "id": 87,
       "items": [
         {
           "channel_refnum": 496,
-          "order_item_id": "7396",
-          "sku": "53",
+          "order_item_id": 7395,
+          "sku": 53,
           "quantity": 1
         }
       ]
@@ -279,3 +279,5 @@ HTTP/1.1 200 OK
   ]
 }
 ```
+
+

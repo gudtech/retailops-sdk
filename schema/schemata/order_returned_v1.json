@@ -891,17 +891,17 @@
             "properties": {
                 "sku": {
                     "type": [
-                        "string"
+                        "integer"
                     ],
                     "description": "sku id",
-                    "example": "132"
+                    "example": 132
                 },
                 "item_shipping_tax_amt": {
                     "type": [
-                        "string"
+                        "number"
                     ],
-                    "description": "??",
-                    "example": "0"
+                    "description": "",
+                    "example": 30.00
                 },
                 "credit_item_refnum": {
                     "type": [
@@ -912,59 +912,59 @@
                 },
                 "item_tax_amt": {
                     "type": [
-                        "string"
+                        "number"
                     ],
-                    "description": "??",
-                    "example": "0"
+                    "description": "",
+                    "example": 0.00
                 },
                 "channel_order_refnum": {
                     "type": [
-                        "string"
+                        "integer"
                     ],
                     "description": "channel order ref num",
-                    "example": "100000084"
+                    "example": 100000084
                 },
                 "item_shipping_amt": {
                     "type": [
-                        "string"
+                        "number"
                     ],
                     "description": "item shipped amount",
-                    "example": "0"
+                    "example": 0.00
                 },
                 "item_restock_fee_amt": {
                     "type": [
-                        "string"
+                        "number"
                     ],
                     "description": "item restock fee",
-                    "example": "0"
+                    "example": 0.00
                 },
                 "channel_id": {
                     "type": [
-                        "string"
+                        "integer"
                     ],
                     "description": "channel id",
-                    "example": "12"
+                    "example": 12
                 },
                 "item_giftwrap_amt": {
                     "type": [
-                        "string"
+                        "integer"
                     ],
-                    "description": "item giftwrap cost(?)",
-                    "example": "0"
+                    "description": "item giftwrap cost",
+                    "example": 0
                 },
                 "channel_item_refnum": {
                     "type": [
-                        "string"
+                        "integer"
                     ],
                     "description": "channel item ref num",
-                    "example": "88"
+                    "example": 88
                 },
                 "quantity": {
                     "type": [
-                        "string"
+                        "integer"
                     ],
                     "description": "quantity",
-                    "example": "1"
+                    "example": 1
                 },
                 "reason": {
                     "type": [
@@ -975,47 +975,47 @@
                 },
                 "item_product_amt": {
                     "type": [
-                        "string"
+                        "number"
                     ],
-                    "description": "????",
-                    "example": "30"
+                    "description": "",
+                    "example": 30.00
                 },
                 "item_recycling_amt": {
                     "type": [
-                        "string"
+                        "integer"
                     ],
-                    "description": "????",
-                    "example": "0"
+                    "description": "",
+                    "example": 0
                 },
                 "item_subtotal_amt": {
                     "type": [
-                        "string"
+                        "number"
                     ],
-                    "description": "???",
-                    "example": "30"
+                    "description": "",
+                    "example": 30.00
                 },
                 "item_credit_amt": {
                     "type": [
-                        "string"
+                        "number"
                     ],
-                    "description": "???",
-                    "example": "30"
+                    "description": "",
+                    "example": 30.00
                 },
                 "item_giftwrap_tax_amt": {
                     "type": [
-                        "string"
+                        "number"
                     ],
-                    "description": "???",
-                    "example": "0"
+                    "description": "",
+                    "example": 0.00
                 }
             }
         },
         "sku_num": {
             "type": [
-                "string"
+                "integer"
             ],
             "description": "sku number (id)",
-            "example": "53"
+            "example": 53
         }
     },
     "links": [
@@ -1082,10 +1082,10 @@
                                             "properties": {
                                                 "id": {
                                                     "type": [
-                                                        "string"
+                                                        "integer"
                                                     ],
                                                     "description": "shipment ID",
-                                                    "example": "100000084"
+                                                    "example": 100000084
                                                 },
                                                 "packages": {
                                                     "type": [
@@ -1101,10 +1101,10 @@
                                     },
                                     "id": {
                                         "type": [
-                                            "string"
+                                            "integer"
                                         ],
                                         "description": "order ID",
-                                        "example": "4897"
+                                        "example": 4897
                                     },
                                     "payment_status": {
                                         "type": [
@@ -1165,38 +1165,38 @@
                                 "properties": {
                                     "shipping_amt": {
                                         "type": [
-                                            "string"
+                                            "integer"
                                         ],
                                         "description": "amount shipped",
-                                        "example": "0"
+                                        "example": 0
                                     },
                                     "subtotal_amt": {
                                         "type": [
-                                            "string"
+                                            "number"
                                         ],
-                                        "description": "??",
-                                        "example": "30"
+                                        "description": "",
+                                        "example": 30.00
                                     },
                                     "product_amt": {
                                         "type": [
-                                            "string"
+                                            "number"
                                         ],
-                                        "description": "amount of product returned(?)",
-                                        "example": "30"
+                                        "description": "",
+                                        "example": 30.00
                                     },
                                     "refund_amt": {
                                         "type": [
-                                            "string"
+                                            "number"
                                         ],
-                                        "description": "amount refunded(?) or... items refund applied to(?)",
-                                        "example": "30"
+                                        "description": "amount refunded",
+                                        "example": 30.00
                                     },
                                     "tax_amt": {
                                         "type": [
-                                            "string"
+                                            "number"
                                         ],
-                                        "description": "tax amount on returned items(?)",
-                                        "example": "0"
+                                        "description": "tax amount on returned items",
+                                        "example": 0.00
                                     },
                                     "rma_id": {
                                         "type": [
@@ -1209,15 +1209,15 @@
                                         "type": [
                                             "string"
                                         ],
-                                        "description": "action name of refund(?)",
+                                        "description": "action name of return",
                                         "example": "refund"
                                     },
                                     "discount_amt": {
                                         "type": [
-                                            "string"
+                                            "number"
                                         ],
-                                        "description": "amount of applied discount(?)",
-                                        "example": "0"
+                                        "description": "amount of applied discount",
+                                        "example": 0.00
                                     },
                                     "credit_items_ref": {
                                         "type": [
@@ -1229,10 +1229,10 @@
                                     },
                                     "id": {
                                         "type": [
-                                            "string"
+                                            "integer"
                                         ],
                                         "description": "ID of return",
-                                        "example": "87"
+                                        "example": 87
                                     },
                                     "items": {
                                         "type": [
@@ -1248,10 +1248,10 @@
                                                 },
                                                 "order_item_id": {
                                                     "type": [
-                                                        "string"
+                                                        "integer"
                                                     ],
                                                     "description": "order item id",
-                                                    "example": "7396"
+                                                    "example": 7395
                                                 },
                                                 "sku": {
                                                     "$ref": "/schemata/order_returned_v1#/definitions/sku_num"
