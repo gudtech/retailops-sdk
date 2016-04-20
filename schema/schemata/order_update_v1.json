@@ -39,7 +39,6 @@
         },
         "client_id": {
             "description": "RetailOPS client id",
-            "readOnly": true,
             "type": [
                 "integer"
             ],
@@ -983,21 +982,21 @@
                                                 "number"
                                             ],
                                             "description": "estimated cost of shipment",
-                                            "example": 0
+                                            "example": 0.00
                                         },
                                         "estimated_unit_cost": {
                                             "type": [
                                                 "number"
                                             ],
                                             "description": "estimated unit cost",
-                                            "example": 0
+                                            "example": 0.00
                                         },
                                         "unit_price": {
                                             "type": [
                                                 "number"
                                             ],
                                             "description": "unit price",
-                                            "example": 30
+                                            "example": 30.00
                                         }
                                     }
                                 }
@@ -1046,27 +1045,27 @@
                                         "$ref": "/schemata/order_update_v1#/definitions/channel_payment"
                                     },
                                     "grand_total": {
-                                        "$ref": "/schemata/order#/definitions/grand_total"
+                                        "$ref": "/schemata/order_update_v1#/definitions/grand_total"
                                     },
                                     "unshipped_items_ref": {
                                         "type": [
                                             "array"
                                         ],
                                         "items": {
-                                            "$ref": "/schemata/order#/definitions/channel_refnum"
+                                            "$ref": "/schemata/order_update_v1#/definitions/channel_refnum"
                                         }
                                     },
                                     "payment_series_id": {
-                                        "$ref": "/schemata/order#/definitions/payment_series_id"
+                                        "$ref": "/schemata/order_update_v1#/definitions/payment_series_id"
                                     },
                                     "from_counterparty_rate": {
-                                        "$ref": "/schemata/order#/definitions/from_counterparty_rate"
+                                        "$ref": "/schemata/order_update_v1#/definitions/from_counterparty_rate"
                                     },
                                     "ship_service_name": {
-                                        "$ref": "/schemata/order#/definitions/ship_service_name"
+                                        "$ref": "/schemata/order_update_v1#/definitions/ship_service_name"
                                     },
                                     "channel_refnum": {
-                                        "$ref": "/schemata/order#/definitions/channel_refnum"
+                                        "$ref": "/schemata/order_update_v1#/definitions/channel_refnum"
                                     },
                                     "shipments": {
                                         "type": [

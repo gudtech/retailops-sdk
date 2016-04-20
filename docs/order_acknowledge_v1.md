@@ -16,7 +16,7 @@ POST /orders
 
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
-| **action** | *string* | RetailOPS api action name | `"testco.order_acknowledge"` |
+| **action** | *string* | RetailOPS api action name | `"order_acknowledge"` |
 | **data:channel:id** | *integer* |  | `21` |
 | **data:channel:params:StoreID** | *string* | Store ID | `"yhst-18909142938879050075142"` |
 | **data:channel:params:base_uri** | *string* | uri | `"http://172.16.4.130/magento1921"` |
@@ -28,14 +28,14 @@ POST /orders
 | **data:channel:params:inv_suspended_instock** | *integer* | boolean | `0` |
 | **data:channel:params:inv_suspended_mode** | *integer* |  | `null` |
 | **data:channel:params:next_order_refnum** | *integer* | next order reference number | `496` |
-| **data:channel:params:order_ack_status_id** | *string* | order acknowledgement status id | `"32"` |
-| **data:channel:params:order_fulfilled_status_id** | *string* | order fulfilled status id | `"34"` |
-| **data:channel:params:order_in_filfillment_status_id** | *string* | order in fulfillment status id | `"33"` |
+| **data:channel:params:order_ack_status_id** | *integer* | order acknowledgement status id | `32` |
+| **data:channel:params:order_fulfilled_status_id** | *integer* | order fulfilled status id | `34` |
+| **data:channel:params:order_in_filfillment_status_id** | *integer* | order in fulfillment status id | `33` |
 | **data:channel:params:push_cancel** | *integer* | boolean | `0` |
 | **data:channel:params:unset_other_attributes** | *integer* | boolean | `0` |
 | **data:channel:params:unset_other_media** | *integer* | boolean | `0` |
-| **data:client_id** | *integer* | RetailOPS client id | `"497"` |
-| **data:order:acks** | *array* | array of order IDs | `["496"]` |
+| **data:client_id** | *integer* | RetailOPS client id | `497` |
+| **data:order:acks** | *array* | array of order IDs | `[496]` |
 | **version** | *integer* | RetailOPS api action version | `1` |
 
 
@@ -46,22 +46,22 @@ POST /orders
 $ curl -n -X POST https://yoursite.com/orders \
   -d '{
   "version": 1,
-  "action": "testco.order_acknowledge",
+  "action": "order_acknowledge",
   "data": {
     "order": {
       "acks": [
-        "496"
+        496
       ]
     },
-    "client_id": "497",
+    "client_id": 497,
     "channel": {
       "id": 21,
       "params": {
         "StoreID": "yhst-18909142938879050075142",
         "next_order_refnum": 496,
-        "order_ack_status_id": "32",
-        "order_fulfilled_status_id": "34",
-        "order_in_filfillment_status_id": "33",
+        "order_ack_status_id": 32,
+        "order_fulfilled_status_id": 34,
+        "order_in_filfillment_status_id": 33,
         "email_return": 0,
         "inv_suspended_instock": 0,
         "unset_other_media": 0,
@@ -93,7 +93,7 @@ HTTP/1.1 200 OK
     {
       "handle": "channel_catpush_fail",
       "secondary": {
-        "id": "66",
+        "id": 66,
         "concept": "sku"
       },
       "data": {

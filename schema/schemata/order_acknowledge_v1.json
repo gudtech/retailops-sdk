@@ -14,7 +14,7 @@
                 "string"
             ],
             "description": "RetailOPS api action name",
-            "example": "testco.order_acknowledge"
+            "example": "order_acknowledge"
         },
         "version": {
             "type": [
@@ -32,18 +32,17 @@
         },
         "channel_refnum": {
             "type": [
-                "string"
+                "integer"
             ],
             "description": "channel reference number for order",
-            "example": "496"
+            "example": 496
         },
         "client_id": {
             "description": "RetailOPS client id",
-            "readOnly": true,
             "type": [
                 "integer"
             ],
-            "example": "497"
+            "example": 497
         },
         "channel": {
             "type": [
@@ -73,10 +72,10 @@
                 },
                 "tenant": {
                     "type": [
-                        "string"
+                        "integer"
                     ],
                     "description": "tenant ID",
-                    "example": "15394"
+                    "example": 15394
                 },
                 "StoreID": {
                     "type": "string",
@@ -92,24 +91,24 @@
                 },
                 "order_ack_status_id": {
                     "type": [
-                        "string"
+                        "integer"
                     ],
                     "description": "order acknowledgement status id",
-                    "example": "32"
+                    "example": 32
                 },
                 "order_fulfilled_status_id": {
                     "type": [
-                        "string"
+                        "integer"
                     ],
                     "description": "order fulfilled status id",
-                    "example": "34"
+                    "example": 34
                 },
                 "order_in_filfillment_status_id": {
                     "type": [
-                        "string"
+                        "integer"
                     ],
                     "description": "order in fulfillment status id",
-                    "example": "33"
+                    "example": 33
                 },
                 "email_return": {
                     "type": [
@@ -294,10 +293,10 @@
         },
         "amount": {
             "type": [
-                "string"
+                "number"
             ],
             "description": "payment amount",
-            "example": "1.32"
+            "example": 1.32
         },
         "payment_method": {
             "type": [
@@ -308,10 +307,10 @@
         },
         "tax_amt": {
             "type": [
-                "string"
+                "number"
             ],
             "description": "tax amount",
-            "example": "0.07"
+            "example": 0.07
         },
         "address": {
             "type": [
@@ -457,17 +456,17 @@
         },
         "sku": {
             "type": [
-                "string"
+                "integer"
             ],
             "description": "sku number",
-            "example": "299"
+            "example": 299
         },
         "unit_tax": {
             "type": [
-                "integer"
+                "number"
             ],
             "description": "unit tax",
-            "example": 0
+            "example": 0.00
         },
         "quantity": {
             "type": [
@@ -485,10 +484,10 @@
         },
         "unit_price": {
             "type": [
-                "string"
+                "number"
             ],
             "description": "unit price for sku",
-            "example": "1"
+            "example": 1.00
         },
         "event": {
             "type": [
@@ -511,9 +510,9 @@
                     "properties": {
                         "id": {
                             "type": [
-                                "string"
+                                "integer"
                             ],
-                            "example": "66"
+                            "example": 66
                         },
                         "concept": {
                             "type": [

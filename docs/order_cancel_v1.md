@@ -16,7 +16,7 @@ POST /orders
 
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
-| **action** | *string* | RetailOPS api action name | `"testco.order_cancel"` |
+| **action** | *string* | RetailOPS api action name | `"order_cancel"` |
 | **data:channel:id** | *integer* |  | `21` |
 | **data:channel:params:base_uri** | *string* | uri | `"http://172.16.4.130/magento1921"` |
 | **data:channel:params:email_invoice** | *integer* | boolean | `0` |
@@ -37,7 +37,7 @@ POST /orders
 | **data:order:channel_payment:channel_id** | *integer* | channel ID | `12` |
 | **data:order:channel_payment:charged** | *integer* |  | `35` |
 | **data:order:channel_payment:credited** | *integer* |  | `0` |
-| **data:order:channel_payment:id** | *string* |  | `"6"` |
+| **data:order:channel_payment:id** | *integer* |  | `6` |
 | **data:order:channel_payment:method** | *string* |  | `"channel"` |
 | **data:order:channel_payment:module** | *string* |  | `"Channel"` |
 | **data:order:channel_payment:settled** | *integer* |  | `35` |
@@ -46,14 +46,14 @@ POST /orders
 | **data:order:channel_payment:unsettled_deferred** | *integer* |  | `0` |
 | **data:order:channel_payment:unsettled_external** | *integer* |  | `0` |
 | **data:order:channel_payment:voided** | *integer* |  | `0` |
-| **data:order:channel_refnum** | *string* | channel reference number for order | `"496"` |
+| **data:order:channel_refnum** | *integer* | channel reference number for order | `496` |
 | **data:order:from_counterparty_rate** | *integer* |  | `1` |
-| **data:order:grand_total** | *string* | order grandtotal | `"35"` |
+| **data:order:grand_total** | *number* | order grandtotal | `35` |
 | **data:order:id** | *string* | order ID | `"4897"` |
-| **data:order:payment_series_id** | *string* | payment series ID | `"2572"` |
+| **data:order:payment_series_id** | *integer* | payment series ID | `2572` |
 | **data:order:payment_status:authed** | *integer* |  | `0` |
 | **data:order:payment_status:available** | *integer* |  | `35` |
-| **data:order:payment_status:by_account** | *array* | payment status by account | `[{"success":1,"unsettled_external":0,"unsettled_deferred":0,"channel_id":12,"authed":0,"captures_are_external":1,"unsettled":0,"settled":35,"charged":35,"captured":0,"captures_are_deferred":0,"voided":0,"id":"6","method":"channel","credited":0,"module":"Channel","available":35}]` |
+| **data:order:payment_status:by_account** | *array* | payment status by account | `[{"success":1,"unsettled_external":0,"unsettled_deferred":0,"channel_id":12,"authed":0,"captures_are_external":1,"unsettled":0,"settled":35,"charged":35,"captured":0,"captures_are_deferred":0,"voided":0,"id":6,"method":"channel","credited":0,"module":"Channel","available":35}]` |
 | **data:order:payment_status:captured** | *integer* |  | `0` |
 | **data:order:payment_status:charged** | *integer* |  | `35` |
 | **data:order:payment_status:credited** | *integer* |  | `0` |
@@ -64,7 +64,7 @@ POST /orders
 | **data:order:payment_status:unsettled_external** | *integer* |  | `0` |
 | **data:order:ship_service_name** | *string* | name of shipping service | `"Will Call"` |
 | **data:order:shipments** | *array* |  | `[null]` |
-| **data:order:unshipped_items_ref** | *array* |  | `["496"]` |
+| **data:order:unshipped_items_ref** | *array* |  | `[496]` |
 | **version** | *integer* | RetailOPS api action version | `1` |
 
 
@@ -75,7 +75,7 @@ POST /orders
 $ curl -n -X POST https://yoursite.com/orders \
   -d '{
   "version": 1,
-  "action": "testco.order_cancel",
+  "action": "order_cancel",
   "data": {
     "order": {
       "channel_payment": {
@@ -91,20 +91,20 @@ $ curl -n -X POST https://yoursite.com/orders \
         "captured": 0,
         "captures_are_deferred": 0,
         "voided": 0,
-        "id": "6",
+        "id": 6,
         "method": "channel",
         "credited": 0,
         "module": "Channel",
         "available": 35
       },
-      "grand_total": "35",
+      "grand_total": 35,
       "unshipped_items_ref": [
-        "496"
+        496
       ],
-      "payment_series_id": "2572",
+      "payment_series_id": 2572,
       "from_counterparty_rate": 1,
       "ship_service_name": "Will Call",
-      "channel_refnum": "496",
+      "channel_refnum": 496,
       "shipments": [
         null
       ],
@@ -127,7 +127,7 @@ $ curl -n -X POST https://yoursite.com/orders \
             "captured": 0,
             "captures_are_deferred": 0,
             "voided": 0,
-            "id": "6",
+            "id": 6,
             "method": "channel",
             "credited": 0,
             "module": "Channel",
@@ -177,7 +177,7 @@ HTTP/1.1 200 OK
     {
       "handle": "channel_catpush_fail",
       "secondary": {
-        "id": "66",
+        "id": 66,
         "concept": "sku"
       },
       "data": {

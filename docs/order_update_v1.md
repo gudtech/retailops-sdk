@@ -33,7 +33,7 @@ POST /orders
 | **data:line_items/corr** | *integer* | ???? | `7397` |
 | **data:line_items/direct_ship_amt** | *integer* | number of items direct-shipped(?) | `5` |
 | **data:line_items/estimated_cost** | *number* | estimated cost of shipment | `0.0` |
-| **data:line_items/estimated_extended_cost** | *number* | ?? | `0.0` |
+| **data:line_items/estimated_extended_cost** | *number* | ?? | `0` |
 | **data:line_items/estimated_ship_date** | *integer* | estimated ship date in unix time | `1460151590` |
 | **data:line_items/estimated_unit_cost** | *number* | estimated unit cost | `0.0` |
 | **data:line_items/quantity** | *integer* | quantity | `2` |
@@ -59,7 +59,7 @@ POST /orders
 | **data:order:channel_payment:voided** | *integer* |  | `0` |
 | **data:order:channel_refnum** | *integer* | channel reference number for order | `496` |
 | **data:order:from_counterparty_rate** | *integer* |  | `1` |
-| **data:order:grand_total** | *number* | order grandtotal | `35.0` |
+| **data:order:grand_total** | *number* | order grandtotal | `35` |
 | **data:order:id** | *integer* | order ID | `4897` |
 | **data:order:payment_series_id** | *integer* | payment series ID | `2572` |
 | **data:order:payment_status:authed** | *integer* |  | `0` |
@@ -76,10 +76,10 @@ POST /orders
 | **data:order:ship_service_name** | *string* | name of shipping service | `"Will Call"` |
 | **data:order:shipments** | *array* |  | `[null]` |
 | **data:order:unshipped_items_ref** | *array* |  | `[496]` |
-| **data:order_info:direct_tax_amt** | *number* |  | `0.0` |
-| **data:order_info:discount_amt** | *number* |  | `0.0` |
+| **data:order_info:direct_tax_amt** | *number* |  | `0` |
+| **data:order_info:discount_amt** | *number* |  | `0` |
 | **data:order_info:shipping_amt** | *integer* |  | `5` |
-| **data:order_info:tax_amt** | *number* |  | `0.0` |
+| **data:order_info:tax_amt** | *number* |  | `0` |
 | **data:rmas** | *array* |  | `[null]` |
 | **version** | *integer* | RetailOPS api action version | `1` |
 
@@ -99,7 +99,7 @@ $ curl -n -X POST https://yoursite.com/orders \
     "line_items": [
       {
         "apportioned_ship_amt": 5,
-        "estimated_extended_cost": 0.0,
+        "estimated_extended_cost": 0,
         "sku": 132,
         "quantity": 2,
         "estimated_ship_date": 1460151590,
@@ -113,9 +113,9 @@ $ curl -n -X POST https://yoursite.com/orders \
     ],
     "order_info": {
       "shipping_amt": 5,
-      "discount_amt": 0.0,
-      "tax_amt": 0.0,
-      "direct_tax_amt": 0.0
+      "discount_amt": 0,
+      "tax_amt": 0,
+      "direct_tax_amt": 0
     },
     "order": {
       "channel_payment": {
@@ -137,7 +137,7 @@ $ curl -n -X POST https://yoursite.com/orders \
         "module": "Channel",
         "available": 35
       },
-      "grand_total": 35.0,
+      "grand_total": 35,
       "unshipped_items_ref": [
         496
       ],
