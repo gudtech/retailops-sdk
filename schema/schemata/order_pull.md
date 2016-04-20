@@ -4,7 +4,7 @@ Stability: `prototype`
 
 order_pull method RetailOPS webhook API
 
-### order_pull order_pull
+### order_pull
 
 Order fetch request.
 
@@ -16,7 +16,7 @@ POST /orders
 
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
-| **action** | *string* | RetailOPS api action name | `"testco.orderpull.order_fetch"` |
+| **action** | *string* | RetailOPS api action name | `"testco.order_pull"` |
 | **data:channel:id** | *integer* |  | `21` |
 | **data:channel:params:StoreID** | *string* | Store ID | `"yhst-18909142938879050075142"` |
 | **data:channel:params:base_uri** | *string* | uri | `"http://172.16.4.130/magento1921"` |
@@ -49,7 +49,7 @@ POST /orders
 $ curl -n -X POST https://yoursite.com/orders \
   -d '{
   "version": 1,
-  "action": "testco.orderpull.order_fetch",
+  "action": "testco.order_pull",
   "data": {
     "single": 0,
     "order": {
@@ -160,5 +160,3 @@ HTTP/1.1 200 OK
   ]
 }
 ```
-
-
