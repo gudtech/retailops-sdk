@@ -1,0 +1,638 @@
+{
+    "$schema": "http://json-schema.org/draft-04/hyper-schema",
+    "title": "inventory_push",
+    "description": "inventory_push method RetailOPS webhook API version 1",
+    "stability": "prototype",
+    "additionalProperties": true,
+    "type": [
+        "object"
+    ],
+    "definitions": {
+        "identity": {},
+        "action": {
+            "type": [
+                "string"
+            ],
+            "description": "RetailOPS api action name",
+            "example": "inventory_push"
+        },
+        "version": {
+            "type": [
+                "integer"
+            ],
+            "description": "RetailOPS api action version",
+            "example": 1
+        },
+        "concept": {
+            "type": [
+                "string"
+            ],
+            "description": "",
+            "example": "sku"
+        },
+        "client_id": {
+            "description": "RetailOPS client id",
+            "type": [
+                "integer"
+            ],
+            "example": 497
+        },
+        "channel": {
+            "type": [
+                "object"
+            ],
+            "description": "channel",
+            "definitions": {
+                "client_id": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "client ID",
+                    "example": 1
+                },
+                "id": {
+                    "type": [
+                        "integer"
+                    ],
+                    "example": 21
+                },
+                "appKey": {
+                    "type": [
+                        "string"
+                    ],
+                    "description": "application key",
+                    "example": "acme_co.retailops.0.1.0.Release"
+                },
+                "tenant": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "tenant ID",
+                    "example": 15394
+                },
+                "StoreID": {
+                    "type": "string",
+                    "description": "Store ID",
+                    "example": "yhst-18909142938879050075142"
+                },
+                "next_order_refnum": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "next order reference number",
+                    "example": 496
+                },
+                "order_ack_status_id": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "order acknowledgement status id",
+                    "example": 32
+                },
+                "order_fulfilled_status_id": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "order fulfilled status id",
+                    "example": 34
+                },
+                "order_in_filfillment_status_id": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "order in fulfillment status id",
+                    "example": 33
+                },
+                "email_return": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "boolean",
+                    "example": 0
+                },
+                "inv_suspended_instock": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "boolean",
+                    "example": 0
+                },
+                "unset_other_media": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "boolean",
+                    "example": 0
+                },
+                "import_order_attrs": {
+                    "type": [
+                        "string"
+                    ],
+                    "description": "",
+                    "example": ""
+                },
+                "base_uri": {
+                    "type": [
+                        "string"
+                    ],
+                    "description": "uri",
+                    "example": "http://172.16.4.130/magento1921"
+                },
+                "express_configurable_super_links": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "boolean",
+                    "example": 0
+                },
+                "unset_other_attributes": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "boolean",
+                    "example": 0
+                },
+                "push_cancel": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "boolean",
+                    "example": 0
+                },
+                "inv_suspended_mode": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "",
+                    "example": null
+                },
+                "email_invoice": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "boolean",
+                    "example": 0
+                },
+                "email_tracking": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "boolean",
+                    "example": 0
+                }
+            },
+            "properties": {
+                "id": {
+                    "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/id"
+                },
+                "params": {
+                    "type": [
+                        "object"
+                    ],
+                    "properties": {
+                        "StoreID": {
+                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/StoreID"
+                        },
+                        "next_order_refnum": {
+                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/next_order_refnum"
+                        },
+                        "order_ack_status_id": {
+                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/order_ack_status_id"
+                        },
+                        "order_fulfilled_status_id": {
+                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/order_fulfilled_status_id"
+                        },
+                        "order_in_filfillment_status_id": {
+                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/order_in_filfillment_status_id"
+                        },
+                        "email_return": {
+                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/email_return"
+                        },
+                        "inv_suspended_instock": {
+                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/inv_suspended_instock"
+                        },
+                        "unset_other_media": {
+                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/unset_other_media"
+                        },
+                        "import_order_attrs": {
+                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/import_order_attrs"
+                        },
+                        "base_uri": {
+                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/base_uri"
+                        },
+                        "express_configurable_super_links": {
+                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/express_configurable_super_links"
+                        },
+                        "unset_other_attributes": {
+                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/unset_other_attributes"
+                        },
+                        "push_cancel": {
+                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/push_cancel"
+                        },
+                        "inv_suspended_mode": {
+                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/inv_suspended_mode"
+                        },
+                        "email_invoice": {
+                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/email_invoice"
+                        },
+                        "email_tracking": {
+                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/email_tracking"
+                        }
+                    }
+                }
+            }
+        },
+        "amount": {
+            "type": [
+                "number"
+            ],
+            "description": "payment amount",
+            "example": 1.32
+        },
+        "attributes": {
+            "type": [
+                "object"
+            ],
+            "description": "sku attributes",
+            "properties": {}
+        },
+        "sku": {
+            "type": [
+                "object"
+            ],
+            "description": "product sku",
+            "definitions": {
+                "sku_num": {
+                    "type": [
+                        "string"
+                    ],
+                    "description": "sku number (id)",
+                    "example": "53"
+                },
+                "sellable": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "number of units available to sale",
+                    "example": 5
+                },
+                "unclaimed": {
+                    "type": [
+                        "integer"
+                    ],
+                    "desciption": "unclaimed units",
+                    "example": 0
+                },
+                "zones": {
+                    "type": [
+                        "array"
+                    ],
+                    "description": "",
+                    "items": {
+                        "$ref": "/schemata/inventory_push_v1#/definitions/zone"
+                    }
+                },
+                "facility": {
+                    "$ref": "/schemata/inventory_push_v1#/definitions/facility"
+                },
+                "est_ship": {
+                    "type": [
+                        "string"
+                    ],
+                    "description": "estimated ship date",
+                    "example": "2016-04-22T11:02:47-07:00"
+                },
+                "vendor": {
+                    "type": [
+                        "string"
+                    ],
+                    "description": "vendor name",
+                    "example": "002_Acme Corp"
+                },
+                "qty_available": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "quantity available",
+                    "example": 24
+                },
+                "breakdown_inventory": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "",
+                    "example": 0
+                }
+            },
+            "properties": {
+                "sku_num": {
+                    "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/sku_num"
+                },
+                "sellable": {
+                    "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/sellable"
+                },
+                "unclaimed": {
+                    "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/unclaimed"
+                },
+                "zones": {
+                    "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/zones"
+                },
+                "facility": {
+                    "$ref": "/schemata/inventory_push_v1#/definitions/facility"
+                },
+                "est_ship": {
+                    "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/est_ship"
+                },
+                "vendor": {
+                    "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/vendor"
+                },
+                "qty_available": {
+                    "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/qty_available"
+                },
+                "breakdown_inventory": {
+                    "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/breakdown_inventory"
+                }
+            }
+        },
+        "unit_tax": {
+            "type": [
+                "number"
+            ],
+            "description": "unit tax",
+            "example": 0
+        },
+        "event": {
+            "type": [
+                "object"
+            ],
+            "description": "event returned in action response",
+            "properties": {
+                "handle": {
+                    "type": [
+                        "string"
+                    ],
+                    "description": "event type",
+                    "example": "channel_catpush_fail"
+                },
+                "secondary": {
+                    "type": [
+                        "object"
+                    ],
+                    "description": "",
+                    "properties": {
+                        "id": {
+                            "type": [
+                                "integer"
+                            ],
+                            "example": 66
+                        },
+                        "concept": {
+                            "type": [
+                                "string"
+                            ],
+                            "example": "sku"
+                        }
+                    }
+                },
+                "data": {
+                    "type": [
+                        "object"
+                    ],
+                    "description": "event data structure",
+                    "properties": {
+                        "sub_code": {
+                            "type": [
+                                "string"
+                            ],
+                            "example": ""
+                        },
+                        "status": {
+                            "type": [
+                                "integer"
+                            ],
+                            "description": "http status code",
+                            "exxample": 400
+                        },
+                        "is_failure": {
+                            "type": "integer",
+                            "description": "boolean success value represented as integer (0, 1)",
+                            "example": 1
+                        },
+                        "request_url": {
+                            "type": [
+                                "string"
+                            ],
+                            "format": "uri",
+                            "description": "request url for this service action",
+                            "example": "https://t14961.sandbox.mozu.com/api/commerce/catalog/admin/products/PP20?responseFields="
+                        },
+                        "data_items": {
+                            "type": [
+                                "array"
+                            ],
+                            "description": "(key was originally named items, had to be changed to avoid schema conflict) What types are in the array?",
+                            "items": {}
+                        },
+                        "additonal": {
+                            "type": [
+                                "string"
+                            ],
+                            "description": "additional information re: missing or invalid parameters",
+                            "example": "[{\"name\":\"ParameterName\",\"value\":\"PackagWeight.Unit\"}]"
+                        },
+                        "code": {
+                            "type": [
+                                "string"
+                            ],
+                            "description": "error code",
+                            "example": "MISSING_OR_INVALID_PARAMETER"
+                        },
+                        "message": {
+                            "type": [
+                                "string"
+                            ],
+                            "description": "descriptive error message",
+                            "example": "Error: ident c1.channel-55-api_auth not found"
+                        }
+                    }
+                }
+            }
+        },
+        "facility": {
+            "type": [
+                "string"
+            ],
+            "description": "facility name",
+            "example": "testco"
+        },
+        "zone": {
+            "type": [
+                "object"
+            ],
+            "description": "facilty zone",
+            "properties": {
+                "zone": {
+                    "type": [
+                        "string"
+                    ],
+                    "description": "zone name",
+                    "example": "default"
+                },
+                "pick": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "",
+                    "example": 0
+                },
+                "npick": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "",
+                    "example": 5
+                }
+            }
+        }
+    },
+    "links": [
+        {
+            "description": "Inventory push method.",
+            "href": "/orders",
+            "method": "POST",
+            "rel": "instances",
+            "schema": {
+                "type": [
+                    "object"
+                ],
+                "properties": {
+                    "version": {
+                        "$ref": "/schemata/inventory_push_v1#/definitions/version"
+                    },
+                    "action": {
+                        "$ref": "/schemata/inventory_push_v1#/definitions/action"
+                    },
+                    "data": {
+                        "type": [
+                            "object"
+                        ],
+                        "properties": {
+                            "inventory": {
+                                "type": [
+                                    "object"
+                                ],
+                                "properties": {
+                                    "data": {
+                                        "type": [
+                                            "object"
+                                        ],
+                                        "properties": {
+                                            "sku": {
+                                                "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/sku_num"
+                                            },
+                                            "id": {
+                                                "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/id"
+                                            },
+                                            "concept": {
+                                                "$ref": "/schemata/inventory_push_v1#/definitions/concept"
+                                            },
+                                            "qty_breakdown": {
+                                                "type": [
+                                                    "array"
+                                                ],
+                                                "description": "inventory quantities",
+                                                "items": {
+                                                    "type": [
+                                                        "object"
+                                                    ],
+                                                    "properties": {
+                                                        "est_ship": {
+                                                            "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/est_ship"
+                                                        },
+                                                        "reserving_orders": {
+                                                            "type": [
+                                                                "array"
+                                                            ],
+                                                            "description": "order ids",
+                                                            "items": {
+                                                                "type": [
+                                                                    "string"
+                                                                ]
+                                                            }
+                                                        },
+                                                        "sellable": {
+                                                            "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/sellable"
+                                                        },
+                                                        "unclaimed": {
+                                                            "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/unclaimed"
+                                                        },
+                                                        "vendor": {
+                                                            "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/vendor"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "qty_available": {
+                                                "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/qty_available"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "client_id": {
+                                "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/client_id"
+                            },
+                            "channel": {
+                                "type": [
+                                    "object"
+                                ],
+                                "properties": {
+                                    "params": {
+                                        "type": [
+                                            "object"
+                                        ],
+                                        "properties": {
+                                            "breakdown_inventory": {
+                                                "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/breakdown_inventory"
+                                            },
+                                            "tenant": {
+                                                "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/tenant"
+                                            },
+                                            "appKey": {
+                                                "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/appKey"
+                                            }
+                                        }
+                                    },
+                                    "id": {
+                                        "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/id"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "required": [
+                    "version",
+                    "action",
+                    "data"
+                ]
+            },
+            "targetSchema": {
+                "type": "object",
+                "properties": {
+                    "events": {
+                        "type": [
+                            "array"
+                        ],
+                        "items": {
+                            "$ref": "/schemata/inventory_push_v1#/definitions/event"
+                        }
+                    }
+                }
+            },
+            "title": "inventory_push"
+        }
+    ],
+    "properties": {},
+    "id": "schemata/inventory_push_v1"
+}
