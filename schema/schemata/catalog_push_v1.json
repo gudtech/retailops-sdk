@@ -1,0 +1,377 @@
+{
+    "$schema": "http://json-schema.org/draft-04/hyper-schema",
+    "title": "catalog_push",
+    "description": "catalog_push method RetailOPS webhook API version 1",
+    "stability": "prototype",
+    "additionalProperties": true,
+    "type": [
+        "object"
+    ],
+    "definitions": {
+        "identity": {},
+        "action": {
+            "type": [
+                "string"
+            ],
+            "description": "RetailOPS api action name",
+            "example": "catalog_push"
+        },
+        "version": {
+            "type": [
+                "integer"
+            ],
+            "description": "RetailOPS api action version",
+            "example": 1
+        },
+        "event": {
+            "type": [
+                "object"
+            ],
+            "description": "event returned in action response",
+            "properties": {
+                "handle": {
+                    "type": [
+                        "string"
+                    ],
+                    "description": "event type",
+                    "example": "channel_catpush_fail"
+                },
+                "secondary": {
+                    "type": [
+                        "object"
+                    ],
+                    "description": "",
+                    "properties": {
+                        "id": {
+                            "type": [
+                                "integer"
+                            ],
+                            "example": 66
+                        },
+                        "concept": {
+                            "type": [
+                                "string"
+                            ],
+                            "example": "sku"
+                        }
+                    }
+                },
+                "data": {
+                    "type": [
+                        "object"
+                    ],
+                    "description": "event data structure",
+                    "properties": {
+                        "sub_code": {
+                            "type": [
+                                "string"
+                            ],
+                            "example": ""
+                        },
+                        "status": {
+                            "type": [
+                                "integer"
+                            ],
+                            "description": "http status code",
+                            "exxample": 400
+                        },
+                        "is_failure": {
+                            "type": "integer",
+                            "description": "boolean success value represented as integer (0, 1)",
+                            "example": 1
+                        },
+                        "request_url": {
+                            "type": [
+                                "string"
+                            ],
+                            "format": "uri",
+                            "description": "request url for this service action",
+                            "example": "https://t14961.sandbox.mozu.com/api/commerce/catalog/admin/products/PP20?responseFields="
+                        },
+                        "data_items": {
+                            "type": [
+                                "array"
+                            ],
+                            "description": "(key was originally named items, had to be changed to avoid schema conflict) What types are in the array?",
+                            "items": {}
+                        },
+                        "additonal": {
+                            "type": [
+                                "string"
+                            ],
+                            "description": "additional information re: missing or invalid parameters",
+                            "example": "[{\"name\":\"ParameterName\",\"value\":\"PackagWeight.Unit\"}]"
+                        },
+                        "code": {
+                            "type": [
+                                "string"
+                            ],
+                            "description": "error code",
+                            "example": "MISSING_OR_INVALID_PARAMETER"
+                        },
+                        "message": {
+                            "type": [
+                                "string"
+                            ],
+                            "description": "descriptive error message",
+                            "example": "Error: ident c1.channel-55-api_auth not found"
+                        }
+                    }
+                }
+            }
+        },
+        "channel": {
+            "type": [
+                "object"
+            ],
+            "description": "channel",
+            "definitions": {
+                "client_id": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "client ID",
+                    "example": 1
+                },
+                "id": {
+                    "type": [
+                        "integer"
+                    ],
+                    "example": 21
+                },
+                "appKey": {
+                    "type": [
+                        "string"
+                    ],
+                    "description": "application key",
+                    "example": "acme_co.retailops.0.1.0.Release"
+                },
+                "tenant": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "tenant ID",
+                    "example": 15394
+                },
+                "StoreID": {
+                    "type": "string",
+                    "description": "Store ID",
+                    "example": "yhst-18909142938879050075142"
+                },
+                "next_order_refnum": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "next order reference number",
+                    "example": 496
+                },
+                "order_ack_status_id": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "order acknowledgement status id",
+                    "example": 32
+                },
+                "order_fulfilled_status_id": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "order fulfilled status id",
+                    "example": 34
+                },
+                "order_in_filfillment_status_id": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "order in fulfillment status id",
+                    "example": 33
+                },
+                "email_return": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "boolean",
+                    "example": 0
+                },
+                "inv_suspended_instock": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "boolean",
+                    "example": 0
+                },
+                "unset_other_media": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "boolean",
+                    "example": 0
+                },
+                "import_order_attrs": {
+                    "type": [
+                        "string"
+                    ],
+                    "description": "",
+                    "example": ""
+                },
+                "base_uri": {
+                    "type": [
+                        "string"
+                    ],
+                    "description": "uri",
+                    "example": "http://172.16.4.130/magento1921"
+                },
+                "express_configurable_super_links": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "boolean",
+                    "example": 0
+                },
+                "unset_other_attributes": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "boolean",
+                    "example": 0
+                },
+                "push_cancel": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "boolean",
+                    "example": 0
+                },
+                "inv_suspended_mode": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "",
+                    "example": null
+                },
+                "email_invoice": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "boolean",
+                    "example": 0
+                },
+                "email_tracking": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "boolean",
+                    "example": 0
+                }
+            },
+            "properties": {
+                "id": {
+                    "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/id"
+                },
+                "params": {
+                    "type": [
+                        "object"
+                    ],
+                    "properties": {
+                        "StoreID": {
+                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/StoreID"
+                        },
+                        "next_order_refnum": {
+                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/next_order_refnum"
+                        },
+                        "order_ack_status_id": {
+                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/order_ack_status_id"
+                        },
+                        "order_fulfilled_status_id": {
+                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/order_fulfilled_status_id"
+                        },
+                        "order_in_filfillment_status_id": {
+                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/order_in_filfillment_status_id"
+                        },
+                        "email_return": {
+                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/email_return"
+                        },
+                        "inv_suspended_instock": {
+                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/inv_suspended_instock"
+                        },
+                        "unset_other_media": {
+                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/unset_other_media"
+                        },
+                        "import_order_attrs": {
+                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/import_order_attrs"
+                        },
+                        "base_uri": {
+                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/base_uri"
+                        },
+                        "express_configurable_super_links": {
+                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/express_configurable_super_links"
+                        },
+                        "unset_other_attributes": {
+                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/unset_other_attributes"
+                        },
+                        "push_cancel": {
+                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/push_cancel"
+                        },
+                        "inv_suspended_mode": {
+                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/inv_suspended_mode"
+                        },
+                        "email_invoice": {
+                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/email_invoice"
+                        },
+                        "email_tracking": {
+                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/email_tracking"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "links": [
+        {
+            "description": "Catalog push method.",
+            "href": "/orders",
+            "method": "POST",
+            "rel": "instances",
+            "schema": {
+                "type": [
+                    "object"
+                ],
+                "properties": {
+                    "version": {
+                        "$ref": "/schemata/catalog_push_v1#/definitions/version"
+                    },
+                    "action": {
+                        "$ref": "/schemata/catalog_push_v1#/definitions/action"
+                    },
+                    "data": {
+                        "type": [
+                            "object"
+                        ],
+                        "description": "the contents and structure of the data object are specific to the channel integratin and must be provided to gudTECH by the channel integrator",
+                        "properties": {
+
+                        }
+                    }
+                }
+            },
+            "targetSchema": {
+                "type": [
+                    "object"
+                ],
+                "properties": {
+                    "events": {
+                        "type": [
+                            "array"
+                        ],
+                        "items": {
+                            "$ref": "/schemata/catalog_push_v1#/definitions/event"
+                        }
+                    }
+                }
+            },
+            "title": "catalog_push"
+        }
+    ],
+    "properties": {},
+    "id": "schemata/catalog_push_v1"
+}
