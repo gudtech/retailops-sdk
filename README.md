@@ -8,6 +8,7 @@ Using the RetailOps SDK, you can create, test, and certify custom integrations f
 
 - [Channel Integrations](#channel-integrations)
 - [Shipper Integrations (coming soon)](#shipper-integrations)
+- [Payment Processor Integrations (coming soon)](#payment-processor-integrations)
 
 ## Channel Integrations
 
@@ -15,6 +16,10 @@ A channel is a source of orders.
 RetailOps, serves as the system-of-record for catalog/product data.
 It pushes this catalog data out to "Channels" (Storefronts, marketplaces, etc) which in turn take customer orders for said products.
 RetailOps then pulls this order information, fulfills said orders, and pushes status / edit information back to the channel in question.
+
+RetailOps is the initiator of all these requests.
+In order to integrate, you must create web service endpoints which implement the following contracts for each desired interaction.
+Not all interactions are required to be implemented. Any which are not implemented will be ignored by RetailOps, and instead handled according to the defaults.
 
 ### Channel Interactions:
 

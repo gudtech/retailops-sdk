@@ -31,14 +31,12 @@ $ curl -n -X POST https://yoursite.com/order_acknowledge \
   -d '{
   "version": 1,
   "action": "order_acknowledge",
-  "data": {
-    "order": {
-      "acks": [
-        496
-      ]
-    },
-    "client_id": 497,
-    "channel": {
+  "orders": [
+    {
+      "reference_number": "12345"
+    }
+  ],
+  "channel": {
       "id": 21
     }
   }
