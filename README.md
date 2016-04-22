@@ -2,7 +2,7 @@
 
 ### RetailOps SDK
 
-* DRAFT - THIS DOCUMENTATION IS PENDING FINALIZATION * 
+* DRAFT - THIS DOCUMENTATION IS PENDING FINALIZATION *
 
 Using the RetailOps SDK, you can create, test, and certify custom integrations for use with RetailOps.
 
@@ -32,5 +32,9 @@ RetailOps then pulls this order information, fulfills said orders, and pushes st
 
 
 ## Shipper Integrations
+
+*Coming soon*
+
+## Payment Processor Integrations
 
 *Coming soon*
