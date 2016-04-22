@@ -1,6 +1,6 @@
 ## <a name="resource-order_pull">order_pull</a>
 
-Stability: `prototype`
+Stability: `draft`
 
 order_pull method RetailOPS webhook API, version 1
 
@@ -18,22 +18,6 @@ POST /orders
 | ------- | ------- | ------- | ------- |
 | **action** | *string* | RetailOPS api action name | `"testco.order_pull"` |
 | **data:channel:id** | *integer* |  | `21` |
-| **data:channel:params:StoreID** | *string* | Store ID | `"yhst-18909142938879050075142"` |
-| **data:channel:params:base_uri** | *string* | uri | `"http://172.16.4.130/magento1921"` |
-| **data:channel:params:email_invoice** | *integer* | boolean | `0` |
-| **data:channel:params:email_return** | *integer* | boolean | `0` |
-| **data:channel:params:email_tracking** | *integer* | boolean | `0` |
-| **data:channel:params:express_configurable_super_links** | *integer* | boolean | `0` |
-| **data:channel:params:import_order_attrs** | *string* |  | `""` |
-| **data:channel:params:inv_suspended_instock** | *integer* | boolean | `0` |
-| **data:channel:params:inv_suspended_mode** | *integer* |  | `null` |
-| **data:channel:params:next_order_refnum** | *integer* | next order reference number | `496` |
-| **data:channel:params:order_ack_status_id** | *string* | order acknowledgement status id | `"32"` |
-| **data:channel:params:order_fulfilled_status_id** | *string* | order fulfilled status id | `"34"` |
-| **data:channel:params:order_in_filfillment_status_id** | *string* | order in fulfillment status id | `"33"` |
-| **data:channel:params:push_cancel** | *integer* | boolean | `0` |
-| **data:channel:params:unset_other_attributes** | *integer* | boolean | `0` |
-| **data:channel:params:unset_other_media** | *integer* | boolean | `0` |
 | **data:client_id** | *integer* | RetailOPS client id | `"497"` |
 | **data:max_page_size** | *integer* | maximum number of records to include in paged response | `50` |
 | **data:order:channel_refnum** | *string* | channel reference number for order | `"496"` |
@@ -57,25 +41,7 @@ $ curl -n -X POST https://yoursite.com/orders \
     },
     "client_id": "497",
     "channel": {
-      "id": 21,
-      "params": {
-        "StoreID": "yhst-18909142938879050075142",
-        "next_order_refnum": 496,
-        "order_ack_status_id": "32",
-        "order_fulfilled_status_id": "34",
-        "order_in_filfillment_status_id": "33",
-        "email_return": 0,
-        "inv_suspended_instock": 0,
-        "unset_other_media": 0,
-        "import_order_attrs": "",
-        "base_uri": "http://172.16.4.130/magento1921",
-        "express_configurable_super_links": 0,
-        "unset_other_attributes": 0,
-        "push_cancel": 0,
-        "inv_suspended_mode": null,
-        "email_invoice": 0,
-        "email_tracking": 0
-      }
+      "id": 21
     },
     "page_state": null,
     "max_page_size": 50

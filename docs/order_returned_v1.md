@@ -1,6 +1,6 @@
 ## <a name="resource-order_returned_v1">order_returned</a>
 
-Stability: `prototype`
+Stability: `draft`
 
 order_returned method RetailOPS webhook API version 1
 
@@ -18,22 +18,6 @@ POST /orders
 | ------- | ------- | ------- | ------- |
 | **action** | *string* | RetailOPS api action name | `"order_returned"` |
 | **data:channel:id** | *integer* |  | `21` |
-| **data:channel:params:StoreID** | *string* | Store ID | `"yhst-18909142938879050075142"` |
-| **data:channel:params:base_uri** | *string* | uri | `"http://172.16.4.130/magento1921"` |
-| **data:channel:params:email_invoice** | *integer* | boolean | `0` |
-| **data:channel:params:email_return** | *integer* | boolean | `0` |
-| **data:channel:params:email_tracking** | *integer* | boolean | `0` |
-| **data:channel:params:express_configurable_super_links** | *integer* | boolean | `0` |
-| **data:channel:params:import_order_attrs** | *string* |  | `""` |
-| **data:channel:params:inv_suspended_instock** | *integer* | boolean | `0` |
-| **data:channel:params:inv_suspended_mode** | *integer* |  | `null` |
-| **data:channel:params:next_order_refnum** | *integer* | next order reference number | `496` |
-| **data:channel:params:order_ack_status_id** | *integer* | order acknowledgement status id | `32` |
-| **data:channel:params:order_fulfilled_status_id** | *integer* | order fulfilled status id | `34` |
-| **data:channel:params:order_in_filfillment_status_id** | *integer* | order in fulfillment status id | `33` |
-| **data:channel:params:push_cancel** | *integer* | boolean | `0` |
-| **data:channel:params:unset_other_attributes** | *integer* | boolean | `0` |
-| **data:channel:params:unset_other_media** | *integer* | boolean | `0` |
 | **data:order:channel_payment:authed** | *integer* |  | `0` |
 | **data:order:channel_payment:available** | *integer* |  | `35` |
 | **data:order:channel_payment:captured** | *integer* |  | `0` |
@@ -182,25 +166,7 @@ $ curl -n -X POST https://yoursite.com/orders \
       }
     },
     "channel": {
-      "id": 21,
-      "params": {
-        "StoreID": "yhst-18909142938879050075142",
-        "next_order_refnum": 496,
-        "order_ack_status_id": 32,
-        "order_fulfilled_status_id": 34,
-        "order_in_filfillment_status_id": 33,
-        "email_return": 0,
-        "inv_suspended_instock": 0,
-        "unset_other_media": 0,
-        "import_order_attrs": "",
-        "base_uri": "http://172.16.4.130/magento1921",
-        "express_configurable_super_links": 0,
-        "unset_other_attributes": 0,
-        "push_cancel": 0,
-        "inv_suspended_mode": null,
-        "email_invoice": 0,
-        "email_tracking": 0
-      }
+      "id": 21
     },
     "return": {
       "shipping_amt": 0,
@@ -258,26 +224,17 @@ HTTP/1.1 200 OK
 {
   "events": [
     {
-      "handle": "channel_catpush_fail",
-      "secondary": {
-        "id": 66,
-        "concept": "sku"
-      },
-      "data": {
-        "sub_code": "",
-        "status": 42,
-        "is_failure": 1,
-        "request_url": "https://t14961.sandbox.mozu.com/api/commerce/catalog/admin/products/PP20?responseFields=",
-        "data_items": [
-          null
-        ],
-        "additonal": "[{\"name\":\"ParameterName\",\"value\":\"PackagWeight.Unit\"}]",
-        "code": "MISSING_OR_INVALID_PARAMETER",
-        "message": "Error: ident c1.channel-55-api_auth not found"
-      }
+      "status": "error",
+      "error_code": "ERR1234",
+      "error_message": "Example error message",
+      "diagnostic_data": [],
+      "associations": [
+        {
+          "type": "sku",
+          "identity": "S1234",
+        }
+      ],
     }
   ]
 }
 ```
-
-

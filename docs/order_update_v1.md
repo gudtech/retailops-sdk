@@ -1,6 +1,6 @@
 ## <a name="resource-order_update_v1">order_update</a>
 
-Stability: `prototype`
+Stability: `draft`
 
 order_update method RetailOPS webhook API version 1
 
@@ -18,17 +18,6 @@ POST /orders
 | ------- | ------- | ------- | ------- |
 | **action** | *string* | RetailOPS api action name | `"order_update"` |
 | **data:channel:id** | *integer* |  | `21` |
-| **data:channel:params:base_uri** | *string* | uri | `"http://172.16.4.130/magento1921"` |
-| **data:channel:params:email_invoice** | *integer* | boolean | `0` |
-| **data:channel:params:email_return** | *integer* | boolean | `0` |
-| **data:channel:params:email_tracking** | *integer* | boolean | `0` |
-| **data:channel:params:express_configurable_super_links** | *integer* | boolean | `0` |
-| **data:channel:params:import_order_attrs** | *string* |  | `""` |
-| **data:channel:params:inv_suspended_instock** | *integer* | boolean | `0` |
-| **data:channel:params:inv_suspended_mode** | *integer* |  | `null` |
-| **data:channel:params:push_cancel** | *integer* | boolean | `0` |
-| **data:channel:params:unset_other_attributes** | *integer* | boolean | `0` |
-| **data:channel:params:unset_other_media** | *integer* | boolean | `0` |
 | **data:line_items/apportioned_ship_amt** | *integer* | ??? | `5` |
 | **data:line_items/corr** | *integer* | ???? | `7397` |
 | **data:line_items/direct_ship_amt** | *integer* | number of items direct-shipped(?) | `5` |
@@ -184,20 +173,7 @@ $ curl -n -X POST https://yoursite.com/orders \
       }
     },
     "channel": {
-      "id": 21,
-      "params": {
-        "email_return": 0,
-        "inv_suspended_instock": 0,
-        "unset_other_media": 0,
-        "import_order_attrs": "",
-        "base_uri": "http://172.16.4.130/magento1921",
-        "express_configurable_super_links": 0,
-        "unset_other_attributes": 0,
-        "push_cancel": 0,
-        "inv_suspended_mode": null,
-        "email_invoice": 0,
-        "email_tracking": 0
-      }
+      "id": 21
     }
   }
 }' \
@@ -215,23 +191,16 @@ HTTP/1.1 200 OK
 {
   "events": [
     {
-      "handle": "channel_catpush_fail",
-      "secondary": {
-        "id": 66,
-        "concept": "sku"
-      },
-      "data": {
-        "sub_code": "",
-        "status": 42,
-        "is_failure": 1,
-        "request_url": "https://t14961.sandbox.mozu.com/api/commerce/catalog/admin/products/PP20?responseFields=",
-        "data_items": [
-          null
-        ],
-        "additonal": "[{\"name\":\"ParameterName\",\"value\":\"PackagWeight.Unit\"}]",
-        "code": "MISSING_OR_INVALID_PARAMETER",
-        "message": "Error: ident c1.channel-55-api_auth not found"
-      }
+      "status": "error",
+      "error_code": "ERR1234",
+      "error_message": "Example error message",
+      "diagnostic_data": [],
+      "associations": [
+        {
+          "type": "sku",
+          "identity": "S1234",
+        }
+      ],
     }
   ]
 }

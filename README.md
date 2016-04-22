@@ -2,6 +2,8 @@
 
 ### RetailOps SDK
 
+* DRAFT - THIS DOCUMENTATION IS PENDING FINALIZATION * 
+
 Using the RetailOps SDK, you can create, test, and certify custom integrations for use with RetailOps.
 
 - [Channel Integrations](#channel-integrations)
