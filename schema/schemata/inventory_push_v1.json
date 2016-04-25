@@ -2,7 +2,7 @@
     "$schema": "http://json-schema.org/draft-04/hyper-schema",
     "title": "inventory_push",
     "description": "inventory_push method RetailOPS webhook API version 1",
-    "stability": "prototype",
+    "stability": "draft",
     "additionalProperties": true,
     "type": [
         "object"
@@ -367,92 +367,58 @@
             ],
             "description": "event returned in action response",
             "properties": {
-                "handle": {
+                "status": {
                     "type": [
                         "string"
                     ],
-                    "description": "event type",
-                    "example": "channel_catpush_fail"
+                    "description": "status code",
+                    "example": "error"
                 },
-                "secondary": {
+                "error_code": {
                     "type": [
-                        "object"
+                        "string"
+                    ],
+                    "description": "error code",
+                    "example": "ERR1234"
+                },
+                "error_message": {
+                    "type": [
+                        "string"
+                    ],
+                    "description": "descriptive error message",
+                    "example": "Example error message"
+                },
+                "diagnostic_data": {
+                    "type": [
+                        "array"
                     ],
                     "description": "",
-                    "properties": {
-                        "id": {
-                            "type": [
-                                "integer"
-                            ],
-                            "example": 66
-                        },
-                        "concept": {
-                            "type": [
-                                "string"
-                            ],
-                            "example": "sku"
-                        }
-                    }
+                    "items": {}
                 },
-                "data": {
+                "associations": {
                     "type": [
-                        "object"
+                        "array"
                     ],
-                    "description": "event data structure",
-                    "properties": {
-                        "sub_code": {
-                            "type": [
-                                "string"
-                            ],
-                            "example": ""
-                        },
-                        "status": {
-                            "type": [
-                                "integer"
-                            ],
-                            "description": "http status code",
-                            "exxample": 400
-                        },
-                        "is_failure": {
-                            "type": "integer",
-                            "description": "boolean success value represented as integer (0, 1)",
-                            "example": 1
-                        },
-                        "request_url": {
-                            "type": [
-                                "string"
-                            ],
-                            "format": "uri",
-                            "description": "request url for this service action",
-                            "example": "https://t14961.sandbox.mozu.com/api/commerce/catalog/admin/products/PP20?responseFields="
-                        },
-                        "data_items": {
-                            "type": [
-                                "array"
-                            ],
-                            "description": "(key was originally named items, had to be changed to avoid schema conflict) What types are in the array?",
-                            "items": {}
-                        },
-                        "additonal": {
-                            "type": [
-                                "string"
-                            ],
-                            "description": "additional information re: missing or invalid parameters",
-                            "example": "[{\"name\":\"ParameterName\",\"value\":\"PackagWeight.Unit\"}]"
-                        },
-                        "code": {
-                            "type": [
-                                "string"
-                            ],
-                            "description": "error code",
-                            "example": "MISSING_OR_INVALID_PARAMETER"
-                        },
-                        "message": {
-                            "type": [
-                                "string"
-                            ],
-                            "description": "descriptive error message",
-                            "example": "Error: ident c1.channel-55-api_auth not found"
+                    "description": "",
+                    "items": {
+                        "type": [
+                            "object"
+                        ],
+                        "properties": {
+                            "type": {
+                                "type": [
+                                    "string"
+                                ],
+                                "description": "",
+                                "example": "sku"
+                            },
+                            "identity": {
+                                "type": [
+                                    "string"
+                                ],
+                                "description": "",
+                                "example": "S1234"
+                            }
                         }
                     }
                 }
@@ -498,7 +464,7 @@
     "links": [
         {
             "description": "Inventory push method.",
-            "href": "/orders",
+            "href": "/inventory_push",
             "method": "POST",
             "rel": "instances",
             "schema": {
@@ -587,22 +553,6 @@
                                     "object"
                                 ],
                                 "properties": {
-                                    "params": {
-                                        "type": [
-                                            "object"
-                                        ],
-                                        "properties": {
-                                            "breakdown_inventory": {
-                                                "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/breakdown_inventory"
-                                            },
-                                            "tenant": {
-                                                "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/tenant"
-                                            },
-                                            "appKey": {
-                                                "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/appKey"
-                                            }
-                                        }
-                                    },
                                     "id": {
                                         "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/id"
                                     }
@@ -610,12 +560,7 @@
                             }
                         }
                     }
-                },
-                "required": [
-                    "version",
-                    "action",
-                    "data"
-                ]
+                }
             },
             "targetSchema": {
                 "type": "object",

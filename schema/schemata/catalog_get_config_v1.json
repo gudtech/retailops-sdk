@@ -2,7 +2,7 @@
     "$schema": "http://json-schema.org/draft-04/hyper-schema",
     "title": "catalog_get_config",
     "description": "catalog_get_config method RetailOPS webhook API version 1",
-    "stability": "prototype",
+    "stability": "draft",
     "additionalProperties": true,
     "type": [
         "object"
@@ -73,7 +73,7 @@
                                 "integer"
                             ],
                             "description": "http status code",
-                            "exxample": 400
+                            "example": 400
                         },
                         "is_failure": {
                             "type": "integer",
@@ -124,7 +124,7 @@
     "links": [
         {
             "description": "Catalog get config method.",
-            "href": "/orders",
+            "href": "/catalog_get_config",
             "method": "POST",
             "rel": "instances",
             "schema": {
@@ -151,10 +151,10 @@
             "targetSchema": {
                 "type": "object",
                 "properties": {
-                    "fanout": {
+                    "sku_fanout": {
                         "type": ["string"],
                         "description": "channel fanout configuration",
-                        "example": "relative"
+                        "example": "all_skus_for_product"
                     }
                 }
             },

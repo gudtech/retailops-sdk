@@ -2,7 +2,7 @@
     "$schema": "http://json-schema.org/draft-04/hyper-schema",
     "title": "order_pull",
     "description": "order_pull method RetailOPS webhook API version 1",
-    "stability": "prototype",
+    "stability": "draft",
     "additionalProperties": true,
     "type": [
         "object"
@@ -488,13 +488,13 @@
                 "number"
             ],
             "description": "unit price for sku",
-            "example": 1.00
-        },
+            "example": 1
+        }
     },
     "links": [
         {
             "description": "Order fetch request.",
-            "href": "/channel",
+            "href": "/order_pull",
             "method": "POST",
             "rel": "instances",
             "schema": {
@@ -530,7 +530,14 @@
                                 "$ref": "/schemata/order_pull_v1#/definitions/client_id"
                             },
                             "channel": {
-                                "$ref": "/schemata/order_pull_v1#/definitions/channel"
+                                "type": [
+                                    "object"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "$ref": "/schemata/order_pull_v1#/definitions/channel/definitions/id"
+                                    }
+                                }
                             },
                             "page_state": {
                                 "$ref": "/schemata/order_pull_v1#/definitions/page_state"

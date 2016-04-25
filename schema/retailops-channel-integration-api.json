@@ -801,7 +801,7 @@
                     "integer"
                   ],
                   "description": "http status code",
-                  "exxample": 400
+                  "example": 400
                 },
                 "is_failure": {
                   "type": [

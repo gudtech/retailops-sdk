@@ -2,7 +2,7 @@
     "$schema": "http://json-schema.org/draft-04/hyper-schema",
     "title": "order_returned",
     "description": "order_returned method RetailOPS webhook API version 1",
-    "stability": "prototype",
+    "stability": "draft",
     "additionalProperties": true,
     "type": [
         "object"
@@ -495,92 +495,58 @@
             ],
             "description": "event returned in action response",
             "properties": {
-                "handle": {
+                "status": {
                     "type": [
                         "string"
                     ],
-                    "description": "event type",
-                    "example": "channel_catpush_fail"
+                    "description": "status code",
+                    "example": "error"
                 },
-                "secondary": {
+                "error_code": {
                     "type": [
-                        "object"
+                        "string"
+                    ],
+                    "description": "error code",
+                    "example": "ERR1234"
+                },
+                "error_message": {
+                    "type": [
+                        "string"
+                    ],
+                    "description": "descriptive error message",
+                    "example": "Example error message"
+                },
+                "diagnostic_data": {
+                    "type": [
+                        "array"
                     ],
                     "description": "",
-                    "properties": {
-                        "id": {
-                            "type": [
-                                "integer"
-                            ],
-                            "example": 66
-                        },
-                        "concept": {
-                            "type": [
-                                "string"
-                            ],
-                            "example": "sku"
-                        }
-                    }
+                    "items": {}
                 },
-                "data": {
+                "associations": {
                     "type": [
-                        "object"
+                        "array"
                     ],
-                    "description": "event data structure",
-                    "properties": {
-                        "sub_code": {
-                            "type": [
-                                "string"
-                            ],
-                            "example": ""
-                        },
-                        "status": {
-                            "type": [
-                                "integer"
-                            ],
-                            "description": "http status code",
-                            "exxample": 400
-                        },
-                        "is_failure": {
-                            "type": "integer",
-                            "description": "boolean success value represented as integer (0, 1)",
-                            "example": 1
-                        },
-                        "request_url": {
-                            "type": [
-                                "string"
-                            ],
-                            "format": "uri",
-                            "description": "request url for this service action",
-                            "example": "https://t14961.sandbox.mozu.com/api/commerce/catalog/admin/products/PP20?responseFields="
-                        },
-                        "data_items": {
-                            "type": [
-                                "array"
-                            ],
-                            "description": "(key was originally named items, had to be changed to avoid schema conflict) What types are in the array?",
-                            "items": {}
-                        },
-                        "additonal": {
-                            "type": [
-                                "string"
-                            ],
-                            "description": "additional information re: missing or invalid parameters",
-                            "example": "[{\"name\":\"ParameterName\",\"value\":\"PackagWeight.Unit\"}]"
-                        },
-                        "code": {
-                            "type": [
-                                "string"
-                            ],
-                            "description": "error code",
-                            "example": "MISSING_OR_INVALID_PARAMETER"
-                        },
-                        "message": {
-                            "type": [
-                                "string"
-                            ],
-                            "description": "descriptive error message",
-                            "example": "Error: ident c1.channel-55-api_auth not found"
+                    "description": "",
+                    "items": {
+                        "type": [
+                            "object"
+                        ],
+                        "properties": {
+                            "type": {
+                                "type": [
+                                    "string"
+                                ],
+                                "description": "",
+                                "example": "sku"
+                            },
+                            "identity": {
+                                "type": [
+                                    "string"
+                                ],
+                                "description": "",
+                                "example": "S1234"
+                            }
                         }
                     }
                 }
@@ -901,7 +867,7 @@
                         "number"
                     ],
                     "description": "",
-                    "example": 30.00
+                    "example": 30
                 },
                 "credit_item_refnum": {
                     "type": [
@@ -915,7 +881,7 @@
                         "number"
                     ],
                     "description": "",
-                    "example": 0.00
+                    "example": 0
                 },
                 "channel_order_refnum": {
                     "type": [
@@ -929,14 +895,14 @@
                         "number"
                     ],
                     "description": "item shipped amount",
-                    "example": 0.00
+                    "example": 0
                 },
                 "item_restock_fee_amt": {
                     "type": [
                         "number"
                     ],
                     "description": "item restock fee",
-                    "example": 0.00
+                    "example": 0
                 },
                 "channel_id": {
                     "type": [
@@ -978,7 +944,7 @@
                         "number"
                     ],
                     "description": "",
-                    "example": 30.00
+                    "example": 30
                 },
                 "item_recycling_amt": {
                     "type": [
@@ -992,21 +958,21 @@
                         "number"
                     ],
                     "description": "",
-                    "example": 30.00
+                    "example": 30
                 },
                 "item_credit_amt": {
                     "type": [
                         "number"
                     ],
                     "description": "",
-                    "example": 30.00
+                    "example": 30
                 },
                 "item_giftwrap_tax_amt": {
                     "type": [
                         "number"
                     ],
                     "description": "",
-                    "example": 0.00
+                    "example": 0
                 }
             }
         },
@@ -1021,7 +987,7 @@
     "links": [
         {
             "description": "Order returned method.",
-            "href": "/orders",
+            "href": "/order_returned",
             "method": "POST",
             "rel": "instances",
             "schema": {
@@ -1156,7 +1122,14 @@
                                 }
                             },
                             "channel": {
-                                "$ref": "/schemata/order_returned_v1#/definitions/channel"
+                                "type": [
+                                    "object"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "$ref": "/schemata/order_returned_v1#/definitions/channel/definitions/id"
+                                    }
+                                }
                             },
                             "return": {
                                 "type": [
@@ -1175,28 +1148,28 @@
                                             "number"
                                         ],
                                         "description": "",
-                                        "example": 30.00
+                                        "example": 30
                                     },
                                     "product_amt": {
                                         "type": [
                                             "number"
                                         ],
                                         "description": "",
-                                        "example": 30.00
+                                        "example": 30
                                     },
                                     "refund_amt": {
                                         "type": [
                                             "number"
                                         ],
                                         "description": "amount refunded",
-                                        "example": 30.00
+                                        "example": 30
                                     },
                                     "tax_amt": {
                                         "type": [
                                             "number"
                                         ],
                                         "description": "tax amount on returned items",
-                                        "example": 0.00
+                                        "example": 0
                                     },
                                     "rma_id": {
                                         "type": [
@@ -1217,7 +1190,7 @@
                                             "number"
                                         ],
                                         "description": "amount of applied discount",
-                                        "example": 0.00
+                                        "example": 0
                                     },
                                     "credit_items_ref": {
                                         "type": [
