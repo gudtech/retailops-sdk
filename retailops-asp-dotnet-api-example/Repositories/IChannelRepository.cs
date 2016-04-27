@@ -15,7 +15,7 @@ namespace dotnet_example_api.Repositories
         
         Event[] inventory_push();
         
-        ChannelResponse order_pull();
+        OrderPullResponse order_pull();
         
         Event[] order_acknowledge();
         

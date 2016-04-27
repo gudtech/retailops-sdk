@@ -19,7 +19,7 @@ namespace dotnet_example_api.Controllers
         {
             ConfigResponse response = ChannelRepo.catalog_get_config();
             
-            // the repository methods return a ChannelResponse object if 
+            // the repository methods return a response object if 
             // they are successful, if not they return a null object and 
             // we return an HTTP not found error 
             if (response == null)
@@ -61,7 +61,7 @@ namespace dotnet_example_api.Controllers
         [HttpPost("order_pull")]
         public IActionResult order_pull([FromBody]string request)
         {
-            ChannelResponse response = ChannelRepo.order_pull();
+            OrderPullResponse response = ChannelRepo.order_pull();
 
             if (response == null)
             {

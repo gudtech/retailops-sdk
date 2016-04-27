@@ -51,13 +51,79 @@ namespace dotnet_example_api.Repositories
            return _GetStandardResponse();
         } 
           
-        public ChannelResponse order_pull()
+        public OrderPullResponse order_pull()
         {
-           //TODO return detailed response
-           //
-           //
-           //            
-           return new ChannelResponse();
+           List<Order> orders = new List<Order>();
+           List<ChannelPayment> payment = new List<ChannelPayment>();
+           List<OrderItem> order_items = new List<OrderItem>();
+           
+           OrderItem orderItem = new OrderItem() {
+               channel_refnum   = 496,
+               sku              = 299,
+               unit_tax         = 0,
+               quantity         = 1,
+               sku_title        = "test product",
+               unit_price       = 1.00
+           };
+           
+           order_items.Add(orderItem);
+           
+           Address address = new Address(){
+               first_name       = "John",
+               last_name        = "Smith",
+               company          = "gudTECH",
+               address1         = "600 B Street, Suite 2120",
+               address2         = "",
+               city             = "San Diego",
+               state_match      = "CA",
+               country_match    = "USA",
+               postal_code      = "92101"
+           };
+           
+           ChannelPayment newPayment = new ChannelPayment(){
+             amount             = 1.32,
+             type               = "charge",
+             payment_params     = new {
+                 channel_refnum = 496,
+                 payment_type   = "Visa"
+             }  
+           };
+           
+           payment.Add(newPayment);
+           
+           Customer customer = new Customer(){
+               first_name       = "John",
+               last_name        = "Smith",
+               email_address    = "john.smith@gmail.com"
+           };
+           
+           Order newOrder = new Order(){
+             shipping_amt           = 0.25,
+             calc_mode              = "order",
+             channel_date_created   = 1460142547,
+             payment                = payment.ToArray(),
+             tax_amt                = 0.07,
+             bill_addr              = address,
+             ship_addr              = address,
+             gift_message           = "Happy Birthday",
+             channel_refnum         = 496,
+             customer               = customer,
+             discount_amt           = 0,
+             shipcode               = "Ground (5-7 days)",
+             ip_address             = "192.168.1.187",
+             attributes             = new string[0],
+             items                  = order_items.ToArray()
+           }; 
+           
+           orders.Add(newOrder);
+           
+           OrderPullResponse response = new OrderPullResponse(){
+               next_page_state = 0,
+               next_order_refnum = 496,
+               orders = orders.ToArray()
+           };
+                      
+           return response;
         }
         
         public Event[] order_acknowledge()
