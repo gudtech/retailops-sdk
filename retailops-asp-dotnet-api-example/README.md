@@ -12,7 +12,7 @@ as it is missing the following:
 - JSON validation - JSON received in requests is currently ignored. A production application needs to parse and use incoming JSON
     
 #### Repository Design Pattern
-This example is designed using a variation of the repository pattern. This seperates the business logic from the controller by using a repository 
-for the data-access and business logic, which is accessed via an interface. This makes unit-testing easier, as well as facilitating
-significant changes in the application (such as changing the data source) while minimizing code changes in the application. For example, connection 
-to a database would only require updating the methods in the repository to use a database context, as well as some minor changes in the application config.
+This example is designed using a variation of the repository pattern. This seperates the business logic from the controller by using a repository class
+for the data-access and business logic, which is accessed via an interface class. This makes unit-testing easier, and facilitates
+changes in the application (such as changing the data source) while constraining most code changes to the repository layer. For example, connecting 
+to a database would only require code changes in the repository, as well as some minor changes in the application config.
