@@ -10,17 +10,26 @@ namespace dotnet_example_api.Repositories
 {
     public interface IChannelRepository
     {
-        // TODO: define the following api repository methods
-        ChannelResponse catalog_get_config(int id);
-        //  catalog_push 
-        //  inventory_push 
-        //  order_pull
-        //  order_acknowledge
-        //  order_update
-        //  order_cancel
-        //  order_shipment_submit
-        //  order_complete
-        //  order_settle_payment
-        //  order_returned
+        ChannelResponse catalog_get_config();
+        
+        ChannelResponse catalog_push();
+        
+        ChannelResponse inventory_push();
+        
+        ChannelResponse order_pull();
+        
+        ChannelResponse order_acknowledge();
+        
+        ChannelResponse order_update();
+        
+        ChannelResponse order_cancel();
+        
+        ChannelResponse order_shipment_submit();
+        
+        ChannelResponse order_complete();
+        
+        ChannelResponse order_settle_payment();
+        
+        ChannelResponse order_returned();
     }
 }

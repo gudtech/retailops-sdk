@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using dotnet_example_api.Repositories;
 using dotnet_example_api.Models;
+using Newtonsoft.Json;
 
 namespace dotnet_example_api.Controllers
 {
@@ -14,14 +15,24 @@ namespace dotnet_example_api.Controllers
         [FromServices]
         public IChannelRepository ChannelRepo { get; set; } //TODO: add Channel Model
         
-
-        [HttpGet("get_channel_config")]
+        // The api actions defined below do not parse the incoming JSON included
+        // in the request body. In a production application you would parse this JSON
+        // and pass the data to your repository where the business logic resides.
+        
+        [HttpPost("get_channel_config")]
         public IActionResult get_channel_config([FromBody]string request)
         {
-            ChannelResponse response = ChannelRepo.catalog_get_config(1);
+            ChannelResponse response = ChannelRepo.catalog_get_config();
+            
+            // the repository methods return a ChannelResponse object if 
+            // they are successful, if not they return a null object and 
+            // we return an HTTP not found error 
             if (response == null)
             {
-                return HttpNotFound();//TODO may need to define custome type to return exepected event structure
+                //in a production application you would define a custom 
+                //erorr handler that would return a retailOPS formatted error 
+                //with defined event structure
+                return HttpNotFound();
             }
             return new ObjectResult(response);
         }
@@ -29,81 +40,131 @@ namespace dotnet_example_api.Controllers
         [HttpPost("inventory_push")]
         public IActionResult inventory_push([FromBody]string request)
         {
-            string todo = "{ \"TODO\": \"Implement inventory_push controller method\" }";
+            ChannelResponse response = ChannelRepo.inventory_push();
 
-            return new ObjectResult(todo);
+            if (response == null)
+            {
+                return HttpNotFound();
+            }
+            
+            return new ObjectResult(response);
         }
         
-        [HttpGet("catalog_push")]
+        [HttpPost("catalog_push")]
         public IActionResult catalog_push([FromBody]string request)
         {
-            string todo = "{ \"TODO\": \"Implement catalog_push controller method\" }";
+            ChannelResponse response = ChannelRepo.catalog_push();
 
-            return new ObjectResult(todo);
+            if (response == null)
+            {
+                return HttpNotFound();
+            }
+            
+            return new ObjectResult(response);
         }
 
         [HttpPost("order_pull")]
         public IActionResult order_pull([FromBody]string request)
         {
-            string todo = "{ \"TODO\": \"Implement order_pull controller method\" }";
+            ChannelResponse response = ChannelRepo.order_pull();
 
-            return new ObjectResult(todo);
+            if (response == null)
+            {
+                return HttpNotFound();
+            }
+            
+            return new ObjectResult(response);
         }
         
         [HttpPost("order_acknowledge")]
         public IActionResult order_acknowledge([FromBody]string request)
         {
-            string todo = "{ \"TODO\": \"Implement order_acknowledge controller method\" }";
+            ChannelResponse response = ChannelRepo.order_acknowledge();
 
-            return new ObjectResult(todo);
+            if (response == null)
+            {
+                return HttpNotFound();
+            }
+            
+            return new ObjectResult(response);
         }
         
         [HttpPost("order_update")]
         public IActionResult order_update([FromBody]string request)
         {
-            string todo = "{ \"TODO\": \"Implement order_update controller method\" }";
+            ChannelResponse response = ChannelRepo.order_update();
 
-            return new ObjectResult(todo);
+            if (response == null)
+            {
+                return HttpNotFound();
+            }
+            
+            return new ObjectResult(response);
         }
         
         [HttpPost("order_cancel")]
         public IActionResult order_cancel([FromBody]string request)
         {
-            string todo = "{ \"TODO\": \"Implement order_cancel controller method\" }";
+            ChannelResponse response = ChannelRepo.order_cancel();
 
-            return new ObjectResult(todo);
+            if (response == null)
+            {
+                return HttpNotFound();
+            }
+            
+            return new ObjectResult(response);
         }
         
         [HttpPost("order_shipment_submit")]
         public IActionResult order_shipment_submit([FromBody]string request)
         {
-            string todo = "{ \"TODO\": \"Implement order_shipment_submit controller method\" }";
+            ChannelResponse response = ChannelRepo.order_shipment_submit();
 
-            return new ObjectResult(todo);
+            if (response == null)
+            {
+                return HttpNotFound();
+            }
+            
+            return new ObjectResult(response);
         }
         
         [HttpPost("order_complete")]
         public IActionResult order_complete([FromBody]string request)
         {
-            string todo = "{ \"TODO\": \"Implement order_complete controller method\" }";
+            ChannelResponse response = ChannelRepo.order_complete();
 
-            return new ObjectResult(todo);
+            if (response == null)
+            {
+                return HttpNotFound();
+            }
+            
+            return new ObjectResult(response);
         }
         
         [HttpPost("order_settle_payment")]
         public IActionResult order_settle_payment([FromBody]string request)
         {
-            string todo = "{ \"TODO\": \"Implement order_settle_payment controller method\" }";
+            ChannelResponse response = ChannelRepo.order_settle_payment();
 
-            return new ObjectResult(todo);
+            if (response == null)
+            {
+                return HttpNotFound();
+            }
+            
+            return new ObjectResult(response);
         }
         
         [HttpPost("order_returned")]
         public IActionResult order_returned([FromBody]string request)
         {
-            string todo = "{ \"TODO\": \"Implement order_update controller method\" }";
+            ChannelResponse response = ChannelRepo.order_returned();
 
-            return new ObjectResult(todo);
+            if (response == null)
+            {
+                return HttpNotFound();
+            }
+            
+            return new ObjectResult(response);
         }
     }
 }
