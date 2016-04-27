@@ -7,9 +7,9 @@
 This application is provided as an example to illustrate implementation of a channel integration web-hook
 developed with ASP .NET Web API. This is not a full production application and should not be used without modification
 as it is missing the following:
-    * Authentication - this example does not implement any sort of authentication
-    * Data Layer - the example does not connect to any data source (database, channel, etc...) 
-    * JSON validation - JSON received in requests is currently ignored. A production application needs to parse and use incoming JSON
+- Authentication - this example does not implement any sort of authentication
+- Data Layer - the example does not connect to any data source (database, channel, etc...) 
+- JSON validation - JSON received in requests is currently ignored. A production application needs to parse and use incoming JSON
     
 #### Repository Design Pattern
 This example is designed using a variation of the repository pattern. This seperates the business logic from the controller by using a repository 
