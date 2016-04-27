@@ -26,7 +26,7 @@ namespace dotnet_example_api.Controllers
             return new ObjectResult(response);
         }
         
-        [HttpGet("catalog_push")]
+        [HttpPost("inventory_push")]
         public IActionResult inventory_push([FromBody]string request)
         {
             string todo = "{ \"TODO\": \"Implement inventory_push controller method\" }";
