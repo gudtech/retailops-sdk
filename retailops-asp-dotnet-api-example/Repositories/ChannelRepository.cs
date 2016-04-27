@@ -13,9 +13,9 @@ namespace dotnet_example_api.Repositories
         }
         
         // This method returns a generic "canned" response, 
-        // which consitss of a single example event, for the 
+        // which consitss of a single example event array, for the 
         // purposes of demonstration and testing
-        private ChannelResponse _GetStandardResponse()
+        private Event[] _GetStandardResponse()
         {
             List<Event> responseEvents = new List<Event>();
             
@@ -29,26 +29,23 @@ namespace dotnet_example_api.Repositories
             
             responseEvents.Add(responseEvent);
             
-            ChannelResponse response = new ChannelResponse();  
-            response.events = responseEvents.ToArray();
-            
-            return response; 
+            return responseEvents.ToArray();; 
         }
 
-        public ChannelResponse catalog_get_config()
+        public ConfigResponse catalog_get_config()
         {
-            ChannelResponse response = new ChannelResponse();
+            ConfigResponse response = new ConfigResponse();
             response.sku_fanout = "all_skus_for_product";
             return response;
         }
         
-        public ChannelResponse catalog_push()
+        public Event[] catalog_push()
         {   
             //return a canned response
             return _GetStandardResponse();  
         } 
         
-        public ChannelResponse inventory_push()
+        public Event[] inventory_push()
         {
            //return a canned response            
            return _GetStandardResponse();
@@ -63,43 +60,43 @@ namespace dotnet_example_api.Repositories
            return new ChannelResponse();
         }
         
-        public ChannelResponse order_acknowledge()
+        public Event[] order_acknowledge()
         {
            //return a canned response            
            return _GetStandardResponse();
         }
         
-        public ChannelResponse order_update()
+        public Event[] order_update()
         {
            //return a canned response            
            return _GetStandardResponse();
         } 
         
-        public ChannelResponse order_cancel()
+        public Event[] order_cancel()
         {
            //return a canned response            
            return _GetStandardResponse();
         }
         
-        public ChannelResponse order_shipment_submit()
+        public Event[] order_shipment_submit()
         {
            //return a canned response            
            return _GetStandardResponse();
         }   
         
-        public ChannelResponse order_complete()
+        public Event[] order_complete()
         {
            //return a canned response            
            return _GetStandardResponse();
         } 
         
-        public ChannelResponse order_settle_payment()
+        public Event[] order_settle_payment()
         {
            //return a canned response            
            return _GetStandardResponse();
         }
         
-        public ChannelResponse order_returned()
+        public Event[] order_returned()
         {
            //return a canned response            
            return _GetStandardResponse();
