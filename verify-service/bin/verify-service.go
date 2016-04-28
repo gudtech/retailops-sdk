@@ -11,7 +11,7 @@ import (
   p "path"
   fp "path/filepath"
 
-  "github.com/gudtech/retailops-sdk/webhook-faker/faker"
+  "github.com/gudtech/retailops-sdk/verify-service/verify"
 )
 
 func main() {
@@ -57,7 +57,7 @@ func request(schemaPath, examplePath string) (err error) {
     return
   }
 
-  err = faker.Request(f,exampleF)
+  err = verify.Request(f,exampleF)
   if err != nil {
     return
   }

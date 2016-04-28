@@ -1,4 +1,4 @@
-package faker
+package verify
 
 import (
   // "fmt"
