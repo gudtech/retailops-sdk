@@ -18,7 +18,13 @@ func main() {
   var err error
 
   schemaPathPtr := flag.String("schema-path", "", "path to JSON or directory with JSON")
+  baseURLPtr := flag.String("base-url", "http://localhost:5000/api/channel", "base url for sending requests")
   flag.Parse()
+
+  if len(*baseURLPtr) == 0 {
+    fmt.Println("base-url cannot be empty")
+    os.Exit(1)
+  }
 
   fmt.Println(*schemaPathPtr)
 
@@ -29,8 +35,9 @@ func main() {
   }
 
   for _,examplePath := range examples {
-    err = request(*schemaPathPtr, examplePath)
+    err = request(*baseURLPtr, *schemaPathPtr, examplePath)
     if err != nil {
+      panic(err.Error())
       os.Exit(1)
     }
   }
@@ -46,7 +53,7 @@ func examples(path string) (examples []string, err error) {
   return fp.Glob(pathGlob)
 }
 
-func request(schemaPath, examplePath string) (err error) {
+func request(baseUrl, schemaPath, examplePath string) (err error) {
   f,err := os.Open(schemaPath)
   if err != nil {
     return
@@ -57,7 +64,7 @@ func request(schemaPath, examplePath string) (err error) {
     return
   }
 
-  err = verify.Request(f,exampleF)
+  err = verify.Request(baseUrl, f,exampleF)
   if err != nil {
     return
   }

@@ -9,6 +9,9 @@ import (
 
   "encoding/json"
 
+  "net/http"
+  "net/url"
+
   schema "github.com/xeipuuv/gojsonschema"
 )
 
@@ -57,45 +60,112 @@ type V1FileLink struct {
   Title          string `json:"title"`
 }
 
-func Request(hyperSchema io.Reader, example io.Reader) (err error) {
+func Request(baseUrlStr string, hyperSchema io.Reader, example io.Reader) (err error) {
+  requestUrl,err := url.Parse(baseUrlStr)
+  if err != nil {
+    return
+  }
+
+  basePath := requestUrl.Path
+
   var v1file V1File
   err = json.NewDecoder(hyperSchema).Decode(&v1file)
 
-  examplesBytes,err := ioutil.ReadAll(example)
+  exampleBytes,err := ioutil.ReadAll(example)
   if err != nil {
     return
   }
 
   fmt.Println(len(v1file.Links), "REQUEST(S) TO BE GENERATED", )
   for _,link := range v1file.Links {
-    reqSchemaStr := string(*link.RequestSchema)
-    schemaWithDefinitions,err := insertDefinitions(v1file.Definitions, reqSchemaStr)
-    if err != nil {
-      return err
-    }
-
-
-    exampleStr := string(examplesBytes)
-
-    reqSchemaLoader := schema.NewStringLoader(schemaWithDefinitions)
-    exampleDataLoader := schema.NewStringLoader(exampleStr)
-
-    fmt.Println(link.Method, link.Href)
-    fmt.Println("schema (with definitions omitted):")
-    fmt.Println(reqSchemaStr)
-    fmt.Println("example:")
-    fmt.Println(exampleStr)
-
-    result,err := schema.Validate(reqSchemaLoader, exampleDataLoader)
-    if err != nil {
-      fmt.Println("error validating:", err.Error())
-      return err
-    } else if !result.Valid() {
-      err = fmt.Errorf("example was not valid: ")
-    }
-
-    fmt.Println("example is valid:", result.Valid())
+    requestAgainstLink(v1file, link, basePath, requestUrl, exampleBytes)
   }
+  return
+}
+
+func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, requestUrl *url.URL, exampleBytes []byte) (err error) {
+  client := &http.Client{}
+
+  /*
+    schema lib data setup
+  */
+  indentedReqSchemaStr,err := indentJson(*link.RequestSchema)
+  if err != nil {
+    return err
+  }
+
+  reqSchemaWDefs,err := insertDefinitions(v1file.Definitions, indentedReqSchemaStr)
+  if err != nil {
+    return err
+  }
+  reqSchemaLoader := schema.NewStringLoader(reqSchemaWDefs)
+
+  respSchemaStr := string(*link.ResponseSchema)
+  respSchemaWDefs,err := insertDefinitions(v1file.Definitions, respSchemaStr)
+  if err != nil {
+    return err
+  }
+  respSchemaLoader := schema.NewStringLoader(respSchemaWDefs)
+
+  exampleStr := string(exampleBytes)
+  exampleDataLoader := schema.NewStringLoader(exampleStr)
+
+  /*
+    Echo request to be performed
+  */
+  fmt.Println(link.Method, link.Href)
+  fmt.Println("schema (with definitions omitted):")
+  fmt.Println(indentedReqSchemaStr)
+  fmt.Println("example:")
+  fmt.Println(exampleStr)
+
+  result,err := schema.Validate(reqSchemaLoader, exampleDataLoader)
+  if err != nil {
+    fmt.Println("error validating:", err.Error())
+    return err
+  } else if !result.Valid() {
+    // TODO: iterate over result errors
+    return fmt.Errorf("example was not valid: ")
+  }
+
+  // fmt.Println("example is valid:", result.Valid())
+
+  /* 
+    HTTP request issuance
+  */
+  requestUrl.Path = fmt.Sprintf("%s%s", basePath, link.Href)
+  response,err := client.Do(&http.Request {
+    Method: link.Method,
+    URL: requestUrl,
+  })
+  if err != nil {
+    return err
+  }
+
+
+  /*
+    HTTP response validation
+  */
+  responseBytes,err := ioutil.ReadAll(response.Body)
+  if response.StatusCode != 200 {
+    fmt.Println("request failed:", string(responseBytes))
+  }
+
+  fmt.Println("response status code:", response.StatusCode)
+  indentedResp,err := indentJson(responseBytes)
+  if err != nil {
+    return err
+  }
+  fmt.Println(indentedResp)
+
+  respDataLoader := schema.NewStringLoader(string(responseBytes))
+  result,err = schema.Validate(respSchemaLoader, respDataLoader)
+  fmt.Println("response valid:", result.Valid())
+  fmt.Println("reason(s):")
+  for _,validationError := range result.Errors() {
+    fmt.Println(" ",validationError)
+  }
+
   return
 }
 
@@ -113,5 +183,21 @@ func insertDefinitions(rawDefinitions *json.RawMessage, schemaStr string) (fixed
   }
 
   fixedupSchema = string(fixedupSchemaBytes)
+  return
+}
+
+func indentJson(input []byte) (output string, err error) {
+  var parsedJson interface{}
+  err = json.Unmarshal(input, &parsedJson)
+  if err != nil {
+    return
+  }
+
+  outputBytes,err := json.MarshalIndent(parsedJson, "", "  ")
+  if err != nil {
+    return
+  }
+
+  output = string(outputBytes)
   return
 }
