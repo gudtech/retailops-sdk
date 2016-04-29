@@ -76,9 +76,11 @@ func Request(baseUrlStr string, hyperSchema io.Reader, example io.Reader) (err e
     return
   }
 
-  fmt.Println(len(v1file.Links), "REQUEST(S) TO BE GENERATED", )
   for _,link := range v1file.Links {
-    requestAgainstLink(v1file, link, basePath, requestUrl, exampleBytes)
+    err = requestAgainstLink(v1file, link, basePath, requestUrl, exampleBytes)
+    if err != nil {
+      return err
+    }
   }
   return
 }
@@ -113,10 +115,10 @@ func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, request
   /*
     Echo request to be performed
   */
-  fmt.Println(link.Method, link.Href)
-  fmt.Println("schema (with definitions omitted):")
-  fmt.Println(indentedReqSchemaStr)
-  fmt.Println("example:")
+  fmt.Println(link.Method, fmt.Sprintf("%s%s", basePath, link.Href))
+  // fmt.Println("schema (with definitions omitted):")
+  // fmt.Println(indentedReqSchemaStr)
+  // fmt.Println("request data:")
   fmt.Println(exampleStr)
 
   result,err := schema.Validate(reqSchemaLoader, exampleDataLoader)
@@ -148,22 +150,28 @@ func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, request
   */
   responseBytes,err := ioutil.ReadAll(response.Body)
   if response.StatusCode != 200 {
-    fmt.Println("request failed:", string(responseBytes))
+    err = fmt.Errorf("HTTP status code: %d", response.StatusCode)
+    return err
   }
 
-  fmt.Println("response status code:", response.StatusCode)
+  // fmt.Println("response status code:", response.StatusCode)
   indentedResp,err := indentJson(responseBytes)
   if err != nil {
     return err
   }
+  fmt.Println("HTTP status code",response.StatusCode)
+  fmt.Println("data:")
   fmt.Println(indentedResp)
 
   respDataLoader := schema.NewStringLoader(string(responseBytes))
   result,err = schema.Validate(respSchemaLoader, respDataLoader)
   fmt.Println("response valid:", result.Valid())
-  fmt.Println("reason(s):")
-  for _,validationError := range result.Errors() {
-    fmt.Println(" ",validationError)
+  if !result.Valid() {
+    fmt.Println("reason(s):")
+    for _,validationError := range result.Errors() {
+      fmt.Println(" ",validationError)
+    }
+    return fmt.Errorf("invalid response")
   }
 
   return
