@@ -38,6 +38,9 @@ func main() {
     if err != nil {
       fmt.Println("failed:", err.Error())
       os.Exit(1)
+    } else if len(verPairs) == 0 {
+      fmt.Println("no verification files found. try `--help` for more information")
+      os.Exit(1)
     }
 
     fmt.Println(len(verPairs),"REQUESTS TO BE GENERATED")
@@ -54,11 +57,14 @@ func main() {
       }
     }
     fmt.Println("-----------")
-    
+
   } else {
     examples,err := examples(*schemaPathPtr)
     if err != nil {
       fmt.Println("failed:", err.Error())
+      os.Exit(1)
+    } else if len(examples) == 0 {
+      fmt.Println("no verification files found. try `--help` for more information",*schemaPathPtr)
       os.Exit(1)
     }
 
