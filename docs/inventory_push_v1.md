@@ -1,6 +1,6 @@
 ## <a name="resource-inventory_push_v1">inventory_push</a>
 
-Stability: `prototype`
+Stability: `draft`
 
 inventory_push method RetailOPS webhook API version 1
 
@@ -9,18 +9,15 @@ inventory_push method RetailOPS webhook API version 1
 Inventory push method.
 
 ```
-POST /orders
+POST /inventory_push
 ```
 
-#### Required Parameters
+#### Optional Parameters
 
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
 | **action** | *string* | RetailOPS api action name | `"inventory_push"` |
 | **data:channel:id** | *integer* |  | `21` |
-| **data:channel:params:appKey** | *string* | application key | `"acme_co.retailops.0.1.0.Release"` |
-| **data:channel:params:breakdown_inventory** | *integer* |  | `0` |
-| **data:channel:params:tenant** | *integer* | tenant ID | `15394` |
 | **data:client_id** | *integer* | client ID | `1` |
 | **data:inventory:data:concept** | *string* |  | `"sku"` |
 | **data:inventory:data:id** | *integer* |  | `21` |
@@ -34,11 +31,10 @@ POST /orders
 | **version** | *integer* | RetailOPS api action version | `1` |
 
 
-
 #### Curl Example
 
 ```bash
-$ curl -n -X POST https://yoursite.com/orders \
+$ curl -n -X POST https://yoursite.com/inventory_push \
   -d '{
   "version": 1,
   "action": "inventory_push",
@@ -64,11 +60,6 @@ $ curl -n -X POST https://yoursite.com/orders \
     },
     "client_id": 1,
     "channel": {
-      "params": {
-        "breakdown_inventory": 0,
-        "tenant": 15394,
-        "appKey": "acme_co.retailops.0.1.0.Release"
-      },
       "id": 21
     }
   }
@@ -87,23 +78,18 @@ HTTP/1.1 200 OK
 {
   "events": [
     {
-      "handle": "channel_catpush_fail",
-      "secondary": {
-        "id": 66,
-        "concept": "sku"
-      },
-      "data": {
-        "sub_code": "",
-        "status": 42,
-        "is_failure": 1,
-        "request_url": "https://t14961.sandbox.mozu.com/api/commerce/catalog/admin/products/PP20?responseFields=",
-        "data_items": [
-          null
-        ],
-        "additonal": "[{\"name\":\"ParameterName\",\"value\":\"PackagWeight.Unit\"}]",
-        "code": "MISSING_OR_INVALID_PARAMETER",
-        "message": "Error: ident c1.channel-55-api_auth not found"
-      }
+      "status": "error",
+      "error_code": "ERR1234",
+      "error_message": "Example error message",
+      "diagnostic_data": [
+        null
+      ],
+      "associations": [
+        {
+          "type": "sku",
+          "identity": "S1234"
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,103 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Uber API",
+        "description": "Move your app forward with the Uber API",
+        "version": "1.0.0"
+    },
+    "host": "api.uber.com",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/catalog_get_config": {
+            "post": {
+                "summary": "catalog_get_config",
+                "description": "catalog_get_config method RetailOPS webhook API version 1",
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "in": "body",
+                        "name": "body",
+                        "description": "request body.",
+                        "schema": {
+                            "$ref": "#/definitions/RequestBody"
+                        }
+                    }
+                ],
+                "tags": [
+                    "User"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "catalog config info",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "sku_fanout": {
+                                    "type":
+                                        "string",
+                                    "description": "channel fanout configuration",
+                                    "example": "all_skus_for_product"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "sku_fanout": {
+                                    "type":
+                                        "string",
+                                    "description": "channel fanout configuration",
+                                    "example": "all_skus_for_product"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "RequestBody": {
+            "type": [
+                "object"
+            ],
+            "properties": {
+                "version": {
+                    "$ref": "#/definitions/version"
+                },
+                "action": {
+                    "$ref": "#/definitions/action"
+                },
+                "data": {
+                    "type": [
+                        "object"
+                    ],
+                    "properties": {}
+                }
+            }
+        },
+        "action": {
+            "type": [
+                "string"
+            ],
+            "description": "RetailOPS api action name",
+            "example": "catalog_get_config"
+        },
+        "version": {
+            "type": [
+                "integer"
+            ],
+            "description": "RetailOPS api action version",
+            "example": 1
+        }
+    }
+}

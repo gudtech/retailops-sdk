@@ -1,15 +1,15 @@
 ## <a name="resource-order_update_v1">order_update</a>
 
-Stability: `prototype`
+Stability: `draft`
 
 order_update method RetailOPS webhook API version 1
 
-### order_update
+### order_update order_update
 
 Order update method.
 
 ```
-POST /orders
+POST /order_update
 ```
 
 #### Required Parameters
@@ -18,28 +18,17 @@ POST /orders
 | ------- | ------- | ------- | ------- |
 | **action** | *string* | RetailOPS api action name | `"order_update"` |
 | **data:channel:id** | *integer* |  | `21` |
-| **data:channel:params:base_uri** | *string* | uri | `"http://172.16.4.130/magento1921"` |
-| **data:channel:params:email_invoice** | *integer* | boolean | `0` |
-| **data:channel:params:email_return** | *integer* | boolean | `0` |
-| **data:channel:params:email_tracking** | *integer* | boolean | `0` |
-| **data:channel:params:express_configurable_super_links** | *integer* | boolean | `0` |
-| **data:channel:params:import_order_attrs** | *string* |  | `""` |
-| **data:channel:params:inv_suspended_instock** | *integer* | boolean | `0` |
-| **data:channel:params:inv_suspended_mode** | *integer* |  | `null` |
-| **data:channel:params:push_cancel** | *integer* | boolean | `0` |
-| **data:channel:params:unset_other_attributes** | *integer* | boolean | `0` |
-| **data:channel:params:unset_other_media** | *integer* | boolean | `0` |
 | **data:line_items/apportioned_ship_amt** | *integer* | ??? | `5` |
 | **data:line_items/corr** | *integer* | ???? | `7397` |
 | **data:line_items/direct_ship_amt** | *integer* | number of items direct-shipped(?) | `5` |
-| **data:line_items/estimated_cost** | *number* | estimated cost of shipment | `0.0` |
+| **data:line_items/estimated_cost** | *number* | estimated cost of shipment | `0` |
 | **data:line_items/estimated_extended_cost** | *number* | ?? | `0` |
 | **data:line_items/estimated_ship_date** | *integer* | estimated ship date in unix time | `1460151590` |
-| **data:line_items/estimated_unit_cost** | *number* | estimated unit cost | `0.0` |
+| **data:line_items/estimated_unit_cost** | *number* | estimated unit cost | `0` |
 | **data:line_items/quantity** | *integer* | quantity | `2` |
 | **data:line_items/removed** | *integer* |  | `0` |
 | **data:line_items/sku** | *integer* | sku number | `132` |
-| **data:line_items/unit_price** | *number* | unit price | `30.0` |
+| **data:line_items/unit_price** | *number* | unit price | `30` |
 | **data:order:channel_payment:authed** | *integer* |  | `0` |
 | **data:order:channel_payment:available** | *integer* |  | `35` |
 | **data:order:channel_payment:captured** | *integer* |  | `0` |
@@ -88,7 +77,7 @@ POST /orders
 #### Curl Example
 
 ```bash
-$ curl -n -X POST https://yoursite.com/orders \
+$ curl -n -X POST https://yoursite.com/order_update \
   -d '{
   "version": 1,
   "action": "order_update",
@@ -106,9 +95,9 @@ $ curl -n -X POST https://yoursite.com/orders \
         "direct_ship_amt": 5,
         "corr": 7397,
         "removed": 0,
-        "estimated_cost": 0.0,
-        "estimated_unit_cost": 0.0,
-        "unit_price": 30.0
+        "estimated_cost": 0,
+        "estimated_unit_cost": 0,
+        "unit_price": 30
       }
     ],
     "order_info": {
@@ -184,20 +173,7 @@ $ curl -n -X POST https://yoursite.com/orders \
       }
     },
     "channel": {
-      "id": 21,
-      "params": {
-        "email_return": 0,
-        "inv_suspended_instock": 0,
-        "unset_other_media": 0,
-        "import_order_attrs": "",
-        "base_uri": "http://172.16.4.130/magento1921",
-        "express_configurable_super_links": 0,
-        "unset_other_attributes": 0,
-        "push_cancel": 0,
-        "inv_suspended_mode": null,
-        "email_invoice": 0,
-        "email_tracking": 0
-      }
+      "id": 21
     }
   }
 }' \
@@ -215,24 +191,21 @@ HTTP/1.1 200 OK
 {
   "events": [
     {
-      "handle": "channel_catpush_fail",
-      "secondary": {
-        "id": 66,
-        "concept": "sku"
-      },
-      "data": {
-        "sub_code": "",
-        "status": 42,
-        "is_failure": 1,
-        "request_url": "https://t14961.sandbox.mozu.com/api/commerce/catalog/admin/products/PP20?responseFields=",
-        "data_items": [
-          null
-        ],
-        "additonal": "[{\"name\":\"ParameterName\",\"value\":\"PackagWeight.Unit\"}]",
-        "code": "MISSING_OR_INVALID_PARAMETER",
-        "message": "Error: ident c1.channel-55-api_auth not found"
-      }
+      "status": "error",
+      "error_code": "ERR1234",
+      "error_message": "Example error message",
+      "diagnostic_data": [
+        null
+      ],
+      "associations": [
+        {
+          "type": "sku",
+          "identity": "S1234"
+        }
+      ]
     }
   ]
 }
 ```
+
+

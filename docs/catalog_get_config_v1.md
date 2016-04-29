@@ -1,6 +1,6 @@
 ## <a name="resource-catalog_get_config_v1">catalog_get_config</a>
 
-Stability: `prototype`
+Stability: `draft`
 
 catalog_get_config method RetailOPS webhook API version 1
 
@@ -9,7 +9,7 @@ catalog_get_config method RetailOPS webhook API version 1
 Catalog get config method.
 
 ```
-POST /orders
+POST /catalog_get_config
 ```
 
 #### Optional Parameters
@@ -23,7 +23,7 @@ POST /orders
 #### Curl Example
 
 ```bash
-$ curl -n -X POST https://yoursite.com/orders \
+$ curl -n -X POST https://yoursite.com/catalog_get_config \
   -d '{
   "version": 1,
   "action": "catalog_get_config",
@@ -42,7 +42,7 @@ HTTP/1.1 200 OK
 
 ```json
 {
-  "fanout": "relative"
+  "sku_fanout": "all_skus_for_product"
 }
 ```
 

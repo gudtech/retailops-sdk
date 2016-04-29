@@ -1,6 +1,6 @@
 ## <a name="resource-catalog_push_v1">catalog_push</a>
 
-Stability: `prototype`
+Stability: `draft`
 
 catalog_push method RetailOPS webhook API version 1
 
@@ -9,7 +9,7 @@ catalog_push method RetailOPS webhook API version 1
 Catalog push method.
 
 ```
-POST /orders
+POST /catalog_push
 ```
 
 #### Optional Parameters
@@ -23,7 +23,7 @@ POST /orders
 #### Curl Example
 
 ```bash
-$ curl -n -X POST https://yoursite.com/orders \
+$ curl -n -X POST https://yoursite.com/catalog_push \
   -d '{
   "version": 1,
   "action": "catalog_push",
@@ -44,23 +44,18 @@ HTTP/1.1 200 OK
 {
   "events": [
     {
-      "handle": "channel_catpush_fail",
-      "secondary": {
-        "id": 66,
-        "concept": "sku"
-      },
-      "data": {
-        "sub_code": "",
-        "status": 42,
-        "is_failure": 1,
-        "request_url": "https://t14961.sandbox.mozu.com/api/commerce/catalog/admin/products/PP20?responseFields=",
-        "data_items": [
-          null
-        ],
-        "additonal": "[{\"name\":\"ParameterName\",\"value\":\"PackagWeight.Unit\"}]",
-        "code": "MISSING_OR_INVALID_PARAMETER",
-        "message": "Error: ident c1.channel-55-api_auth not found"
-      }
+      "status": "error",
+      "error_code": "ERR1234",
+      "error_message": "Example error message",
+      "diagnostic_data": [
+        null
+      ],
+      "associations": [
+        {
+          "type": "sku",
+          "identity": "S1234"
+        }
+      ]
     }
   ]
 }
