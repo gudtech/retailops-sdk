@@ -30,9 +30,9 @@
             "description": "event returned in action response",
             "properties": {
                 "handle": {
-                    "type": [
+                    "type":
                         "string"
-                    ],
+                    ,
                     "description": "event type",
                     "example": "channel_catpush_fail"
                 },
@@ -43,9 +43,9 @@
                     "description": "",
                     "properties": {
                         "id": {
-                            "type": [
+                            "type":
                                 "integer"
-                            ],
+                            ,
                             "example": 66
                         },
                         "concept": {
@@ -133,18 +133,16 @@
                 ],
                 "properties": {
                     "version": {
-                        "$ref": "/schemata/catalog_get_config_v1#/definitions/version"
+                        "$ref": "#/definitions/version"
                     },
                     "action": {
-                        "$ref": "/schemata/catalog_get_config_v1#/definitions/action"
+                        "$ref": "#/definitions/action"
                     },
                     "data": {
                         "type": [
                             "object"
                         ],
-                        "properties": {
-
-                        }
+                        "properties": {}
                     }
                 }
             },
@@ -152,7 +150,9 @@
                 "type": "object",
                 "properties": {
                     "sku_fanout": {
-                        "type": ["string"],
+                        "type": [
+                            "string"
+                        ],
                         "description": "channel fanout configuration",
                         "example": "all_skus_for_product"
                     }

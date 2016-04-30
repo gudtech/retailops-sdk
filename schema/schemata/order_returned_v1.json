@@ -171,7 +171,7 @@
                         "integer"
                     ],
                     "description": "",
-                    "example": null
+                    "example": "null"
                 },
                 "email_invoice": {
                     "type": [
@@ -190,7 +190,7 @@
             },
             "properties": {
                 "id": {
-                    "$ref": "/schemata/order_returned_v1#/definitions/channel/definitions/id"
+                    "$ref": "#/definitions/channel/definitions/id"
                 },
                 "params": {
                     "type": [
@@ -198,52 +198,52 @@
                     ],
                     "properties": {
                         "StoreID": {
-                            "$ref": "/schemata/order_returned_v1#/definitions/channel/definitions/StoreID"
+                            "$ref": "#/definitions/channel/definitions/StoreID"
                         },
                         "next_order_refnum": {
-                            "$ref": "/schemata/order_returned_v1#/definitions/channel/definitions/next_order_refnum"
+                            "$ref": "#/definitions/channel/definitions/next_order_refnum"
                         },
                         "order_ack_status_id": {
-                            "$ref": "/schemata/order_returned_v1#/definitions/channel/definitions/order_ack_status_id"
+                            "$ref": "#/definitions/channel/definitions/order_ack_status_id"
                         },
                         "order_fulfilled_status_id": {
-                            "$ref": "/schemata/order_returned_v1#/definitions/channel/definitions/order_fulfilled_status_id"
+                            "$ref": "#/definitions/channel/definitions/order_fulfilled_status_id"
                         },
                         "order_in_filfillment_status_id": {
-                            "$ref": "/schemata/order_returned_v1#/definitions/channel/definitions/order_in_filfillment_status_id"
+                            "$ref": "#/definitions/channel/definitions/order_in_filfillment_status_id"
                         },
                         "email_return": {
-                            "$ref": "/schemata/order_returned_v1#/definitions/channel/definitions/email_return"
+                            "$ref": "#/definitions/channel/definitions/email_return"
                         },
                         "inv_suspended_instock": {
-                            "$ref": "/schemata/order_returned_v1#/definitions/channel/definitions/inv_suspended_instock"
+                            "$ref": "#/definitions/channel/definitions/inv_suspended_instock"
                         },
                         "unset_other_media": {
-                            "$ref": "/schemata/order_returned_v1#/definitions/channel/definitions/unset_other_media"
+                            "$ref": "#/definitions/channel/definitions/unset_other_media"
                         },
                         "import_order_attrs": {
-                            "$ref": "/schemata/order_returned_v1#/definitions/channel/definitions/import_order_attrs"
+                            "$ref": "#/definitions/channel/definitions/import_order_attrs"
                         },
                         "base_uri": {
-                            "$ref": "/schemata/order_returned_v1#/definitions/channel/definitions/base_uri"
+                            "$ref": "#/definitions/channel/definitions/base_uri"
                         },
                         "express_configurable_super_links": {
-                            "$ref": "/schemata/order_returned_v1#/definitions/channel/definitions/express_configurable_super_links"
+                            "$ref": "#/definitions/channel/definitions/express_configurable_super_links"
                         },
                         "unset_other_attributes": {
-                            "$ref": "/schemata/order_returned_v1#/definitions/channel/definitions/unset_other_attributes"
+                            "$ref": "#/definitions/channel/definitions/unset_other_attributes"
                         },
                         "push_cancel": {
-                            "$ref": "/schemata/order_returned_v1#/definitions/channel/definitions/push_cancel"
+                            "$ref": "#/definitions/channel/definitions/push_cancel"
                         },
                         "inv_suspended_mode": {
-                            "$ref": "/schemata/order_returned_v1#/definitions/channel/definitions/inv_suspended_mode"
+                            "$ref": "#/definitions/channel/definitions/inv_suspended_mode"
                         },
                         "email_invoice": {
-                            "$ref": "/schemata/order_returned_v1#/definitions/channel/definitions/email_invoice"
+                            "$ref": "#/definitions/channel/definitions/email_invoice"
                         },
                         "email_tracking": {
-                            "$ref": "/schemata/order_returned_v1#/definitions/channel/definitions/email_tracking"
+                            "$ref": "#/definitions/channel/definitions/email_tracking"
                         }
                     }
                 }
@@ -254,7 +254,7 @@
                 "integer"
             ],
             "description": "",
-            "example": null
+            "example": "null"
         },
         "max_page_size": {
             "type": [
@@ -680,55 +680,55 @@
             },
             "properties": {
                 "success": {
-                    "$ref": "/schemata/order_returned_v1#/definitions/channel_payment/definitions/success"
+                    "$ref": "#/definitions/channel_payment/definitions/success"
                 },
                 "unsettled_external": {
-                    "$ref": "/schemata/order_returned_v1#/definitions/channel_payment/definitions/unsettled_external"
+                    "$ref": "#/definitions/channel_payment/definitions/unsettled_external"
                 },
                 "unsettled_deferred": {
-                    "$ref": "/schemata/order_returned_v1#/definitions/channel_payment/definitions/unsettled_deferred"
+                    "$ref": "#/definitions/channel_payment/definitions/unsettled_deferred"
                 },
                 "channel_id": {
-                    "$ref": "/schemata/order_returned_v1#/definitions/channel_payment/definitions/channel_id"
+                    "$ref": "#/definitions/channel_payment/definitions/channel_id"
                 },
                 "authed": {
-                    "$ref": "/schemata/order_returned_v1#/definitions/channel_payment/definitions/authed"
+                    "$ref": "#/definitions/channel_payment/definitions/authed"
                 },
                 "captures_are_external": {
-                    "$ref": "/schemata/order_returned_v1#/definitions/channel_payment/definitions/captures_are_external"
+                    "$ref": "#/definitions/channel_payment/definitions/captures_are_external"
                 },
                 "unsettled": {
-                    "$ref": "/schemata/order_returned_v1#/definitions/channel_payment/definitions/unsettled"
+                    "$ref": "#/definitions/channel_payment/definitions/unsettled"
                 },
                 "settled": {
-                    "$ref": "/schemata/order_returned_v1#/definitions/channel_payment/definitions/settled"
+                    "$ref": "#/definitions/channel_payment/definitions/settled"
                 },
                 "charged": {
-                    "$ref": "/schemata/order_returned_v1#/definitions/channel_payment/definitions/charged"
+                    "$ref": "#/definitions/channel_payment/definitions/charged"
                 },
                 "captured": {
-                    "$ref": "/schemata/order_returned_v1#/definitions/channel_payment/definitions/captured"
+                    "$ref": "#/definitions/channel_payment/definitions/captured"
                 },
                 "captures_are_deferred": {
-                    "$ref": "/schemata/order_returned_v1#/definitions/channel_payment/definitions/captures_are_deferred"
+                    "$ref": "#/definitions/channel_payment/definitions/captures_are_deferred"
                 },
                 "voided": {
-                    "$ref": "/schemata/order_returned_v1#/definitions/channel_payment/definitions/voided"
+                    "$ref": "#/definitions/channel_payment/definitions/voided"
                 },
                 "id": {
-                    "$ref": "/schemata/order_returned_v1#/definitions/channel_payment/definitions/id"
+                    "$ref": "#/definitions/channel_payment/definitions/id"
                 },
                 "method": {
-                    "$ref": "/schemata/order_returned_v1#/definitions/channel_payment/definitions/method"
+                    "$ref": "#/definitions/channel_payment/definitions/method"
                 },
                 "credited": {
-                    "$ref": "/schemata/order_returned_v1#/definitions/channel_payment/definitions/credited"
+                    "$ref": "#/definitions/channel_payment/definitions/credited"
                 },
                 "module": {
-                    "$ref": "/schemata/order_returned_v1#/definitions/channel_payment/definitions/module"
+                    "$ref": "#/definitions/channel_payment/definitions/module"
                 },
                 "available": {
-                    "$ref": "/schemata/order_returned_v1#/definitions/channel_payment/definitions/available"
+                    "$ref": "#/definitions/channel_payment/definitions/available"
                 }
             }
         },
@@ -810,7 +810,7 @@
                         "string"
                     ],
                     "description": "ship code",
-                    "example": null
+                    "example": "null"
                 },
                 "date_shipped": {
                     "type": [
@@ -996,10 +996,10 @@
                 ],
                 "properties": {
                     "version": {
-                        "$ref": "/schemata/order_returned_v1#/definitions/version"
+                        "$ref": "#/definitions/version"
                     },
                     "action": {
-                        "$ref": "/schemata/order_returned_v1#/definitions/action"
+                        "$ref": "#/definitions/action"
                     },
                     "data": {
                         "type": [
@@ -1012,30 +1012,30 @@
                                 ],
                                 "properties": {
                                     "channel_payment": {
-                                        "$ref": "/schemata/order_returned_v1#/definitions/channel_payment"
+                                        "$ref": "#/definitions/channel_payment"
                                     },
                                     "grand_total": {
-                                        "$ref": "/schemata/order_returned_v1#/definitions/grand_total"
+                                        "$ref": "#/definitions/grand_total"
                                     },
                                     "unshipped_items_ref": {
                                         "type": [
                                             "array"
                                         ],
                                         "items": {
-                                            "$ref": "/schemata/order_returned_v1#/definitions/channel_refnum"
+                                            "$ref": "#/definitions/channel_refnum"
                                         }
                                     },
                                     "payment_series_id": {
-                                        "$ref": "/schemata/order_returned_v1#/definitions/payment_series_id"
+                                        "$ref": "#/definitions/payment_series_id"
                                     },
                                     "from_counterparty_rate": {
-                                        "$ref": "/schemata/order_returned_v1#/definitions/from_counterparty_rate"
+                                        "$ref": "#/definitions/from_counterparty_rate"
                                     },
                                     "ship_service_name": {
-                                        "$ref": "/schemata/order_returned_v1#/definitions/ship_service_name"
+                                        "$ref": "#/definitions/ship_service_name"
                                     },
                                     "channel_refnum": {
-                                        "$ref": "/schemata/order_returned_v1#/definitions/channel_refnum"
+                                        "$ref": "#/definitions/channel_refnum"
                                     },
                                     "shipments": {
                                         "type": [
@@ -1059,7 +1059,7 @@
                                                     ],
                                                     "description": "array of packages included in this shipment",
                                                     "items": {
-                                                        "$ref": "/schemata/order_returned_v1#/definitions/package"
+                                                        "$ref": "#/definitions/package"
                                                     }
                                                 }
                                             }
@@ -1079,13 +1079,13 @@
                                         "description": "payment status",
                                         "properties": {
                                             "success": {
-                                                "$ref": "/schemata/order_returned_v1#/definitions/channel_payment/definitions/success"
+                                                "$ref": "#/definitions/channel_payment/definitions/success"
                                             },
                                             "unsettled_external": {
-                                                "$ref": "/schemata/order_returned_v1#/definitions/channel_payment/definitions/unsettled_external"
+                                                "$ref": "#/definitions/channel_payment/definitions/unsettled_external"
                                             },
                                             "unsettled_deferred": {
-                                                "$ref": "/schemata/order_returned_v1#/definitions/channel_payment/definitions/unsettled_deferred"
+                                                "$ref": "#/definitions/channel_payment/definitions/unsettled_deferred"
                                             },
                                             "by_account": {
                                                 "type": [
@@ -1093,29 +1093,29 @@
                                                 ],
                                                 "description": "payment status by account",
                                                 "items": {
-                                                    "$ref": "/schemata/order_returned_v1#/definitions/channel_payment"
+                                                    "$ref": "#/definitions/channel_payment"
                                                 }
                                             },
                                             "unsettled": {
-                                                "$ref": "/schemata/order_returned_v1#/definitions/channel_payment/definitions/unsettled"
+                                                "$ref": "#/definitions/channel_payment/definitions/unsettled"
                                             },
                                             "settled": {
-                                                "$ref": "/schemata/order_returned_v1#/definitions/channel_payment/definitions/settled"
+                                                "$ref": "#/definitions/channel_payment/definitions/settled"
                                             },
                                             "charged": {
-                                                "$ref": "/schemata/order_returned_v1#/definitions/channel_payment/definitions/charged"
+                                                "$ref": "#/definitions/channel_payment/definitions/charged"
                                             },
                                             "captured": {
-                                                "$ref": "/schemata/order_returned_v1#/definitions/channel_payment/definitions/captured"
+                                                "$ref": "#/definitions/channel_payment/definitions/captured"
                                             },
                                             "authed": {
-                                                "$ref": "/schemata/order_returned_v1#/definitions/channel_payment/definitions/authed"
+                                                "$ref": "#/definitions/channel_payment/definitions/authed"
                                             },
                                             "credited": {
-                                                "$ref": "/schemata/order_returned_v1#/definitions/channel_payment/definitions/credited"
+                                                "$ref": "#/definitions/channel_payment/definitions/credited"
                                             },
                                             "available": {
-                                                "$ref": "/schemata/order_returned_v1#/definitions/channel_payment/definitions/available"
+                                                "$ref": "#/definitions/channel_payment/definitions/available"
                                             }
                                         }
                                     }
@@ -1127,7 +1127,7 @@
                                 ],
                                 "properties": {
                                     "id": {
-                                        "$ref": "/schemata/order_returned_v1#/definitions/channel/definitions/id"
+                                        "$ref": "#/definitions/channel/definitions/id"
                                     }
                                 }
                             },
@@ -1197,7 +1197,7 @@
                                             "array"
                                         ],
                                         "items": {
-                                            "$ref": "/schemata/order_returned_v1#/definitions/credit_items_ref"
+                                            "$ref": "#/definitions/credit_items_ref"
                                         }
                                     },
                                     "id": {
@@ -1217,7 +1217,7 @@
                                             ],
                                             "properties": {
                                                 "channel_refnum": {
-                                                    "$ref": "/schemata/order_returned_v1#/definitions/channel_refnum"
+                                                    "$ref": "#/definitions/channel_refnum"
                                                 },
                                                 "order_item_id": {
                                                     "type": [
@@ -1227,10 +1227,10 @@
                                                     "example": 7395
                                                 },
                                                 "sku": {
-                                                    "$ref": "/schemata/order_returned_v1#/definitions/sku_num"
+                                                    "$ref": "#/definitions/sku_num"
                                                 },
                                                 "quantity": {
-                                                    "$ref": "/schemata/order_returned_v1#/definitions/quantity"
+                                                    "$ref": "#/definitions/quantity"
                                                 }
                                             }
                                         }
@@ -1249,7 +1249,7 @@
                             "array"
                         ],
                         "items": {
-                            "$ref": "/schemata/order_returned_v1#/definitions/event"
+                            "$ref": "#/definitions/event"
                         }
                     }
                 }

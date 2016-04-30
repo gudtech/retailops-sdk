@@ -85,211 +85,6 @@
                     }
                 }
             }
-        },
-        "channel": {
-            "type": [
-                "object"
-            ],
-            "description": "channel",
-            "definitions": {
-                "client_id": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "client ID",
-                    "example": 1
-                },
-                "id": {
-                    "type": [
-                        "integer"
-                    ],
-                    "example": 21
-                },
-                "appKey": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "application key",
-                    "example": "acme_co.retailops.0.1.0.Release"
-                },
-                "tenant": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "tenant ID",
-                    "example": 15394
-                },
-                "StoreID": {
-                    "type": "string",
-                    "description": "Store ID",
-                    "example": "yhst-18909142938879050075142"
-                },
-                "next_order_refnum": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "next order reference number",
-                    "example": 496
-                },
-                "order_ack_status_id": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "order acknowledgement status id",
-                    "example": 32
-                },
-                "order_fulfilled_status_id": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "order fulfilled status id",
-                    "example": 34
-                },
-                "order_in_filfillment_status_id": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "order in fulfillment status id",
-                    "example": 33
-                },
-                "email_return": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean",
-                    "example": 0
-                },
-                "inv_suspended_instock": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean",
-                    "example": 0
-                },
-                "unset_other_media": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean",
-                    "example": 0
-                },
-                "import_order_attrs": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "",
-                    "example": ""
-                },
-                "base_uri": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "uri",
-                    "example": "http://172.16.4.130/magento1921"
-                },
-                "express_configurable_super_links": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean",
-                    "example": 0
-                },
-                "unset_other_attributes": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean",
-                    "example": 0
-                },
-                "push_cancel": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean",
-                    "example": 0
-                },
-                "inv_suspended_mode": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "",
-                    "example": null
-                },
-                "email_invoice": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean",
-                    "example": 0
-                },
-                "email_tracking": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean",
-                    "example": 0
-                }
-            },
-            "properties": {
-                "id": {
-                    "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/id"
-                },
-                "params": {
-                    "type": [
-                        "object"
-                    ],
-                    "properties": {
-                        "StoreID": {
-                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/StoreID"
-                        },
-                        "next_order_refnum": {
-                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/next_order_refnum"
-                        },
-                        "order_ack_status_id": {
-                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/order_ack_status_id"
-                        },
-                        "order_fulfilled_status_id": {
-                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/order_fulfilled_status_id"
-                        },
-                        "order_in_filfillment_status_id": {
-                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/order_in_filfillment_status_id"
-                        },
-                        "email_return": {
-                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/email_return"
-                        },
-                        "inv_suspended_instock": {
-                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/inv_suspended_instock"
-                        },
-                        "unset_other_media": {
-                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/unset_other_media"
-                        },
-                        "import_order_attrs": {
-                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/import_order_attrs"
-                        },
-                        "base_uri": {
-                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/base_uri"
-                        },
-                        "express_configurable_super_links": {
-                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/express_configurable_super_links"
-                        },
-                        "unset_other_attributes": {
-                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/unset_other_attributes"
-                        },
-                        "push_cancel": {
-                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/push_cancel"
-                        },
-                        "inv_suspended_mode": {
-                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/inv_suspended_mode"
-                        },
-                        "email_invoice": {
-                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/email_invoice"
-                        },
-                        "email_tracking": {
-                            "$ref": "/schemata/catalog_push_v1#/definitions/channel/definitions/email_tracking"
-                        }
-                    }
-                }
-            }
         }
     },
     "links": [
@@ -304,10 +99,10 @@
                 ],
                 "properties": {
                     "version": {
-                        "$ref": "/schemata/catalog_push_v1#/definitions/version"
+                        "$ref": "#/definitions/version"
                     },
                     "action": {
-                        "$ref": "/schemata/catalog_push_v1#/definitions/action"
+                        "$ref": "#/definitions/action"
                     },
                     "data": {
                         "type": [
@@ -328,7 +123,7 @@
                             "array"
                         ],
                         "items": {
-                            "$ref": "/schemata/catalog_push_v1#/definitions/event"
+                            "$ref": "#/definitions/event"
                         }
                     }
                 }
