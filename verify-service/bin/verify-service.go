@@ -24,7 +24,7 @@ func main() {
 
   schemaPathPtr := flag.String("schema-path", "", "path to JSON or directory with JSON")
   baseURLPtr := flag.String("base-url", "http://localhost:5000/api/channel", "base url for sending requests")
-  stopOnError := flag.Bool("stop-on-error", false, "stop immediately on error")
+  stopOnError := flag.Bool("stop-on-error", true, "stop immediately on error")
   flag.Parse()
 
   if len(*baseURLPtr) == 0 {
@@ -44,6 +44,7 @@ func main() {
     }
 
     fmt.Println(len(verPairs),"REQUESTS TO BE GENERATED")
+    var thereWasAnError bool = false
     for _,verPair := range verPairs {
       fmt.Println("-----------")
       err = request(*baseURLPtr, verPair.schemaPath, verPair.examplePath)
@@ -51,12 +52,19 @@ func main() {
         fmt.Println("FAILURE:", err.Error())
         if *stopOnError {
           os.Exit(1)
+        } else {
+          thereWasAnError = true
         }
       } else {
         fmt.Println("SUCCESS")
       }
     }
     fmt.Println("-----------")
+
+    if thereWasAnError {
+      fmt.Println("AT LEAST ONE OF THE TEST CASES FAILED")
+      os.Exit(1)
+    }
 
   } else {
     examples,err := examples(*schemaPathPtr)
