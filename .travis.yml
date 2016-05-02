@@ -7,4 +7,4 @@ go_import_path: github.com/gudtech/retailops-sdk
 before_install:
   - docker run -d --name=example_server -p 5000:5000 -it -v $PWD/retailops-asp-dotnet-api-example:/app microsoft/aspnet:1.0.0-rc1-update1-coreclr /app/travis.sh
   - while ! echo exit | curl http://localhost:5000; do sleep 10; done
-script: go run $GOPATH/src/github.com/gudtech/retailops-sdk/verify-service/bin/verify-service.go -h
+script: go run $GOPATH/src/github.com/gudtech/retailops-sdk/verify-service/bin/verify-service.go -schema-path $GOPATH/src/github.com/gudtech/retailops-sdk/schema/schemata
