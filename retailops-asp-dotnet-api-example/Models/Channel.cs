@@ -14,8 +14,21 @@ namespace dotnet_example_api.Models
         public string error_code {get; set;}
         public string error_message {get; set;}
         public Array diagnostic_data {get; set;}
-        public String[] associations {get; set;}            
+        public object[] associations {get; set;}            
     }
+    
+    public class EventResponse
+    {
+        public Event[] events {get; set;}
+    }
+    
+    
+    public class Association
+    {
+        public string type {get; set;}
+        public string identity {get; set;}
+    }
+    
     public class Customer
     {
         public string first_name {get; set;}

@@ -35,7 +35,7 @@ namespace dotnet_example_api.Controllers
         [HttpPost("inventory_push")]
         public IActionResult inventory_push([FromBody]string request)
         {
-            Event[] response = ChannelRepo.inventory_push();
+            EventResponse response = ChannelRepo.inventory_push();
 
             if (response == null)
             {
@@ -48,7 +48,7 @@ namespace dotnet_example_api.Controllers
         [HttpPost("catalog_push")]
         public IActionResult catalog_push([FromBody]string request)
         {
-            Event[] response = ChannelRepo.catalog_push();
+            EventResponse response = ChannelRepo.catalog_push();
 
             if (response == null)
             {
@@ -74,7 +74,7 @@ namespace dotnet_example_api.Controllers
         [HttpPost("order_acknowledge")]
         public IActionResult order_acknowledge([FromBody]string request)
         {
-            Event[] response = ChannelRepo.order_acknowledge();
+            EventResponse response = ChannelRepo.order_acknowledge();
 
             if (response == null)
             {
@@ -87,7 +87,7 @@ namespace dotnet_example_api.Controllers
         [HttpPost("order_update")]
         public IActionResult order_update([FromBody]string request)
         {
-            Event[] response = ChannelRepo.order_update();
+            EventResponse response = ChannelRepo.order_update();
 
             if (response == null)
             {
@@ -100,7 +100,7 @@ namespace dotnet_example_api.Controllers
         [HttpPost("order_cancel")]
         public IActionResult order_cancel([FromBody]string request)
         {
-            Event[] response = ChannelRepo.order_cancel();
+            EventResponse response = ChannelRepo.order_cancel();
 
             if (response == null)
             {
@@ -113,7 +113,7 @@ namespace dotnet_example_api.Controllers
         [HttpPost("order_shipment_submit")]
         public IActionResult order_shipment_submit([FromBody]string request)
         {
-            Event[] response = ChannelRepo.order_shipment_submit();
+            EventResponse response = ChannelRepo.order_shipment_submit();
 
             if (response == null)
             {
@@ -126,7 +126,7 @@ namespace dotnet_example_api.Controllers
         [HttpPost("order_complete")]
         public IActionResult order_complete([FromBody]string request)
         {
-            Event[] response = ChannelRepo.order_complete();
+            EventResponse response = ChannelRepo.order_complete();
 
             if (response == null)
             {
@@ -139,7 +139,7 @@ namespace dotnet_example_api.Controllers
         [HttpPost("order_settle_payment")]
         public IActionResult order_settle_payment([FromBody]string request)
         {
-            Event[] response = ChannelRepo.order_settle_payment();
+            EventResponse response = ChannelRepo.order_settle_payment();
 
             if (response == null)
             {
@@ -152,7 +152,7 @@ namespace dotnet_example_api.Controllers
         [HttpPost("order_returned")]
         public IActionResult order_returned([FromBody]string request)
         {
-            Event[] response = ChannelRepo.order_returned();
+            EventResponse response = ChannelRepo.order_returned();
 
             if (response == null)
             {

@@ -25,6 +25,7 @@ func main() {
   schemaPathPtr := flag.String("schema-path", "", "path to JSON or directory with JSON")
   baseURLPtr := flag.String("base-url", "http://localhost:5000/api/channel", "base url for sending requests")
   stopOnError := flag.Bool("stop-on-error", true, "stop immediately on error")
+
   flag.Parse()
 
   if len(*baseURLPtr) == 0 {

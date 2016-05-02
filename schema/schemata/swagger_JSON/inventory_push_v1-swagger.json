@@ -1,0 +1,258 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "RetailOps Channel Webhook Integration Method",
+        "description": "Integrate a sales channel with RetailOps",
+        "version": "1.0.0"
+    },
+    "host": "your.servername-here.com",
+    "schemes": [
+        "https",
+        "http"
+    ],
+    "basePath": "/",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/inventory_push": {
+            "post": {
+                "summary": "inventory_push",
+                "description": "Inventory push method.",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "request body.",
+                        "schema": {
+                            "$ref": "#/definitions/RequestBodyinventory_push"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseBodyinventory_push"
+                        }
+                    }
+                },
+                "tags": []
+            }
+        }
+    },
+    "definitions": {
+        "RequestBodyinventory_push": {
+            "type": [
+                "object"
+            ],
+            "properties": {
+                "version": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "RetailOPS api action version",
+                    "example": 1
+                },
+                "action": {
+                    "type": [
+                        "string"
+                    ],
+                    "description": "RetailOPS api action name",
+                    "example": "inventory_push"
+                },
+                "data": {
+                    "type": [
+                        "object"
+                    ],
+                    "properties": {
+                        "inventory": {
+                            "type": [
+                                "object"
+                            ],
+                            "properties": {
+                                "data": {
+                                    "type": [
+                                        "object"
+                                    ],
+                                    "properties": {
+                                        "sku": {
+                                            "type": [
+                                                "string"
+                                            ],
+                                            "description": "sku number (id)",
+                                            "example": "53"
+                                        },
+                                        "id": {
+                                            "type": [
+                                                "integer"
+                                            ],
+                                            "example": 21
+                                        },
+                                        "concept": {
+                                            "type": [
+                                                "string"
+                                            ],
+                                            "description": "",
+                                            "example": "sku"
+                                        },
+                                        "qty_breakdown": {
+                                            "type": [
+                                                "array"
+                                            ],
+                                            "items": {
+                                                "type": [
+                                                    "object"
+                                                ],
+                                                "properties": {
+                                                    "est_ship": {
+                                                        "type": [
+                                                            "string"
+                                                        ],
+                                                        "description": "estimated ship date",
+                                                        "example": "2016-04-22T11:02:47-07:00"
+                                                    },
+                                                    "reserving_orders": {
+                                                        "type": [
+                                                            "array"
+                                                        ],
+                                                        "description": "order ids",
+                                                        "items": {
+                                                            "type": [
+                                                                "string"
+                                                            ]
+                                                        }
+                                                    },
+                                                    "sellable": {
+                                                        "type": [
+                                                            "integer"
+                                                        ],
+                                                        "description": "number of units available to sale",
+                                                        "example": 5
+                                                    },
+                                                    "unclaimed": {
+                                                        "type": [
+                                                            "integer"
+                                                        ],
+                                                        "example": 0
+                                                    },
+                                                    "vendor": {
+                                                        "type": [
+                                                            "string"
+                                                        ],
+                                                        "description": "vendor name",
+                                                        "example": "002_Acme Corp"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "qty_available": {
+                                            "type": [
+                                                "integer"
+                                            ],
+                                            "description": "quantity available",
+                                            "example": 24
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "client_id": {
+                            "type": [
+                                "integer"
+                            ],
+                            "description": "client ID",
+                            "example": 1
+                        },
+                        "channel": {
+                            "type": [
+                                "object"
+                            ],
+                            "properties": {
+                                "id": {
+                                    "type": [
+                                        "integer"
+                                    ],
+                                    "example": 21
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "ResponseBodyinventory_push": {
+            "type": "object",
+            "properties": {
+                "events": {
+                    "type": [
+                        "array"
+                    ],
+                    "items": {
+                        "type": [
+                            "object"
+                        ],
+                        "description": "event returned in action response",
+                        "properties": {
+                            "status": {
+                                "type": [
+                                    "string"
+                                ],
+                                "description": "status code",
+                                "example": "error"
+                            },
+                            "error_code": {
+                                "type": [
+                                    "string"
+                                ],
+                                "description": "error code",
+                                "example": "ERR1234"
+                            },
+                            "error_message": {
+                                "type": [
+                                    "string"
+                                ],
+                                "description": "descriptive error message",
+                                "example": "Example error message"
+                            },
+                            "diagnostic_data": {
+                                "type": [
+                                    "array"
+                                ],
+                                "description": "",
+                                "items": {}
+                            },
+                            "associations": {
+                                "type": [
+                                    "array"
+                                ],
+                                "description": "",
+                                "items": {
+                                    "type": [
+                                        "object"
+                                    ],
+                                    "properties": {
+                                        "type": {
+                                            "type": [
+                                                "string"
+                                            ],
+                                            "description": "",
+                                            "example": "sku"
+                                        },
+                                        "identity": {
+                                            "type": [
+                                                "string"
+                                            ],
+                                            "description": "",
+                                            "example": "S1234"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

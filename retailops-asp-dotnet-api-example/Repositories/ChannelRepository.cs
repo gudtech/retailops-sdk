@@ -15,21 +15,30 @@ namespace dotnet_example_api.Repositories
         // This method returns a generic "canned" response, 
         // which consitss of a single example event array, for the 
         // purposes of demonstration and testing
-        private Event[] _GetStandardResponse()
+        private EventResponse _GetStandardResponse()
         {
             List<Event> responseEvents = new List<Event>();
+            
+            Association assoc = new Association(){
+                type = "sku",
+                identity = "S1234"
+            };
             
             Event responseEvent = new Event(){
                 status          = "error",
                 error_code      = "ERR1234",
                 error_message   = "Example error message",
                 diagnostic_data = new Array[0],
-                associations    = new string[2]{" \"type\": \"sku\" ", "\"identity\":\"S1234\""}
+                associations    = new []{assoc}
             };
             
             responseEvents.Add(responseEvent);
             
-            return responseEvents.ToArray();; 
+            EventResponse events = new EventResponse(){
+                events = responseEvents.ToArray()
+            };
+            
+            return events; 
         }
 
         public ConfigResponse catalog_get_config()
@@ -39,13 +48,13 @@ namespace dotnet_example_api.Repositories
             return response;
         }
         
-        public Event[] catalog_push()
+        public EventResponse catalog_push()
         {   
             //return a canned response
             return _GetStandardResponse();  
         } 
         
-        public Event[] inventory_push()
+        public EventResponse inventory_push()
         {
            //return a canned response            
            return _GetStandardResponse();
@@ -126,43 +135,43 @@ namespace dotnet_example_api.Repositories
            return response;
         }
         
-        public Event[] order_acknowledge()
+        public EventResponse order_acknowledge()
         {
            //return a canned response            
            return _GetStandardResponse();
         }
         
-        public Event[] order_update()
+        public EventResponse order_update()
         {
            //return a canned response            
            return _GetStandardResponse();
         } 
         
-        public Event[] order_cancel()
+        public EventResponse order_cancel()
         {
            //return a canned response            
            return _GetStandardResponse();
         }
         
-        public Event[] order_shipment_submit()
+        public EventResponse order_shipment_submit()
         {
            //return a canned response            
            return _GetStandardResponse();
         }   
         
-        public Event[] order_complete()
+        public EventResponse order_complete()
         {
            //return a canned response            
            return _GetStandardResponse();
         } 
         
-        public Event[] order_settle_payment()
+        public EventResponse order_settle_payment()
         {
            //return a canned response            
            return _GetStandardResponse();
         }
         
-        public Event[] order_returned()
+        public EventResponse order_returned()
         {
            //return a canned response            
            return _GetStandardResponse();

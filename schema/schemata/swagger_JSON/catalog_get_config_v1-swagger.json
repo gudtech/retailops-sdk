@@ -1,0 +1,85 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "RetailOps Channel Webhook Integration Method",
+        "description": "Integrate a sales channel with RetailOps",
+        "version": "1.0.0"
+    },
+    "host": "your.servername-here.com",
+    "schemes": [
+        "https",
+        "http"
+    ],
+    "basePath": "/",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/catalog_get_config": {
+            "post": {
+                "summary": "catalog_get_config",
+                "description": "Catalog get config method.",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "request body.",
+                        "schema": {
+                            "$ref": "#/definitions/RequestBodycatalog_get_config"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseBodycatalog_get_config"
+                        }
+                    }
+                },
+                "tags": []
+            }
+        }
+    },
+    "definitions": {
+        "RequestBodycatalog_get_config": {
+            "type": [
+                "object"
+            ],
+            "properties": {
+                "version": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "RetailOPS api action version",
+                    "example": 1
+                },
+                "action": {
+                    "type": [
+                        "string"
+                    ],
+                    "description": "RetailOPS api action name",
+                    "example": "catalog_get_config"
+                },
+                "data": {
+                    "type": [
+                        "object"
+                    ],
+                    "properties": {}
+                }
+            }
+        },
+        "ResponseBodycatalog_get_config": {
+            "type": "object",
+            "properties": {
+                "sku_fanout": {
+                    "type": [
+                        "string"
+                    ],
+                    "description": "channel fanout configuration",
+                    "example": "all_skus_for_product"
+                }
+            }
+        }
+    }
+}

@@ -11,24 +11,24 @@ namespace dotnet_example_api.Repositories
     {
         ConfigResponse catalog_get_config();
         
-        Event[] catalog_push();
+        EventResponse catalog_push();
         
-        Event[] inventory_push();
+        EventResponse inventory_push();
         
         OrderPullResponse order_pull();
         
-        Event[] order_acknowledge();
+        EventResponse order_acknowledge();
         
-        Event[] order_update();
+        EventResponse order_update();
         
-        Event[] order_cancel();
+        EventResponse order_cancel();
         
-        Event[] order_shipment_submit();
+        EventResponse order_shipment_submit();
         
-        Event[] order_complete();
+        EventResponse order_complete();
         
-        Event[] order_settle_payment();
+        EventResponse order_settle_payment();
         
-        Event[] order_returned();
+        EventResponse order_returned();
     }
 }

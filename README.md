@@ -9,6 +9,9 @@ Using the RetailOps SDK, you can create, test, and certify custom integrations f
 
 [![Build Status](https://travis-ci.org/gudTECH/retailops-sdk.svg?branch=web-hook-design)](https://travis-ci.org/gudTECH/retailops-sdk)
 
+## Interactive Documentation
+[RetailOps SDK](http://senseijack.github.io/retailops-sdk) 
+
 ## Channel Integrations
 
 A channel is a source of orders.

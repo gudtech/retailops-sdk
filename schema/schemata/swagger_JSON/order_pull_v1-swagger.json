@@ -1,0 +1,516 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "RetailOps Channel Webhook Integration Method",
+        "description": "Integrate a sales channel with RetailOps",
+        "version": "1.0.0"
+    },
+    "host": "your.servername-here.com",
+    "schemes": [
+        "https",
+        "http"
+    ],
+    "basePath": "/",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/order_pull": {
+            "post": {
+                "summary": "order_pull_v1",
+                "description": "Order fetch request.",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "request body.",
+                        "schema": {
+                            "$ref": "#/definitions/RequestBodyorder_pull"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseBodyorder_pull"
+                        }
+                    }
+                },
+                "tags": []
+            }
+        }
+    },
+    "definitions": {
+
+        "RequestBodyorder_pull": {
+            "type": [
+                "object"
+            ],
+            "properties": {
+                "version": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "RetailOPS api action version",
+                    "example": 1
+                },
+                "action": {
+                    "type": [
+                        "string"
+                    ],
+                    "description": "RetailOPS api action name",
+                    "example": "order_pull"
+                },
+                "data": {
+                    "type": [
+                        "object"
+                    ],
+                    "properties": {
+                        "single": {
+                            "type": [
+                                "integer"
+                            ],
+                            "description": "requesting single order?",
+                            "example": 0
+                        },
+                        "order": {
+                            "type": [
+                                "object"
+                            ],
+                            "properties": {
+                                "channel_refnum": {
+                                    "type": [
+                                        "integer"
+                                    ],
+                                    "description": "channel reference number for order",
+                                    "example": 496
+                                }
+                            }
+                        },
+                        "client_id": {
+                            "description": "RetailOPS client id",
+                            "readOnly": true,
+                            "type": [
+                                "integer"
+                            ],
+                            "example": 497
+                        },
+                        "channel": {
+                            "type": [
+                                "object"
+                            ],
+                            "properties": {
+                                "id": {
+                                    "type": [
+                                        "integer"
+                                    ],
+                                    "example": 21
+                                }
+                            }
+                        },
+                        "page_state": {
+                            "type": [
+                                "integer"
+                            ],
+                            "description": "",
+                            "example": "null"
+                        },
+                        "max_page_size": {
+                            "type": [
+                                "integer"
+                            ],
+                            "description": "maximum number of records to include in paged response",
+                            "example": 50
+                        }
+                    }
+                }
+            },
+            "required": [
+                "version",
+                "action",
+                "data"
+            ]
+        },
+        "ResponseBodyorder_pull": {
+            "type": "object",
+            "properties": {
+                "next_page_state": {
+                    "type": [
+                        "integer"
+                    ],
+                    "example": 0
+                },
+                "next_order_refnum": {
+                    "type": [
+                        "integer"
+                    ],
+                    "description": "next order reference number",
+                    "example": 496
+                },
+                "orders": {
+                    "type": [
+                        "array"
+                    ],
+                    "items": {
+                        "type": [
+                            "object"
+                        ],
+                        "properties": {
+                            "shipping_amt": {
+                                "type": [
+                                    "number"
+                                ],
+                                "description": "",
+                                "example": 0.25
+                            },
+                            "calc_mode": {
+                                "type": [
+                                    "string"
+                                ],
+                                "description": "calculation mode",
+                                "example": "order"
+                            },
+                            "channel_date_created": {
+                                "type": [
+                                    "integer"
+                                ],
+                                "description": "date created expressed unix time",
+                                "example": 1460142547
+                            },
+                            "payment": {
+                                "type": [
+                                    "array"
+                                ],
+                                "items": {
+                                    "type": [
+                                        "object"
+                                    ],
+                                    "properties": {
+                                        "params": {
+                                            "type": [
+                                                "object"
+                                            ],
+                                            "properties": {
+                                                "channel_refnum": {
+                                                    "type": [
+                                                        "integer"
+                                                    ],
+                                                    "description": "channel reference number for order",
+                                                    "example": 496
+                                                },
+                                                "payment_type": {
+                                                    "type": [
+                                                        "string"
+                                                    ],
+                                                    "description": "payment type",
+                                                    "example": "Visa"
+                                                }
+                                            }
+                                        },
+                                        "amount": {
+                                            "type": [
+                                                "number"
+                                            ],
+                                            "description": "payment amount",
+                                            "example": 1.32
+                                        },
+                                        "type": {
+                                            "type": [
+                                                "string"
+                                            ],
+                                            "description": "payment method",
+                                            "example": "charge"
+                                        }
+                                    }
+                                }
+                            },
+                            "tax_amt": {
+                                "type": [
+                                    "number"
+                                ],
+                                "description": "tax amount",
+                                "example": 0.07
+                            },
+                            "bill_addr": {
+                                "type": [
+                                    "object"
+                                ],
+                                "description": "address",
+                                "properties": {
+                                    "state_match": {
+                                        "type": [
+                                            "string"
+                                        ],
+                                        "description": "state",
+                                        "example": "CA"
+                                    },
+                                    "country_match": {
+                                        "type": [
+                                            "string"
+                                        ],
+                                        "description": "Country",
+                                        "example": "US United States"
+                                    },
+                                    "last_name": {
+                                        "type": [
+                                            "string"
+                                        ],
+                                        "description": "Last Name",
+                                        "example": "Smith"
+                                    },
+                                    "address2": {
+                                        "type": [
+                                            "string"
+                                        ],
+                                        "description": "Address second line",
+                                        "example": "suite 100"
+                                    },
+                                    "city": {
+                                        "type": [
+                                            "string"
+                                        ],
+                                        "description": "City",
+                                        "example": "San Diego"
+                                    },
+                                    "postal_code": {
+                                        "type": [
+                                            "string"
+                                        ],
+                                        "description": "Postal Code",
+                                        "example": "92101"
+                                    },
+                                    "address1": {
+                                        "type": [
+                                            "string"
+                                        ],
+                                        "description": "Address line one",
+                                        "example": "123 Main St"
+                                    },
+                                    "company": {
+                                        "type": [
+                                            "string"
+                                        ],
+                                        "description": "Company name",
+                                        "example": "gudTECH"
+                                    },
+                                    "first_name": {
+                                        "type": [
+                                            "string"
+                                        ],
+                                        "description": "First Name",
+                                        "example": "John"
+                                    }
+                                }
+                            },
+                            "gift_message": {
+                                "type": [
+                                    "string"
+                                ],
+                                "description": "gift message",
+                                "example": "Happy Birthday"
+                            },
+                            "ship_addr": {
+                                "type": [
+                                    "object"
+                                ],
+                                "description": "address",
+                                "properties": {
+                                    "state_match": {
+                                        "type": [
+                                            "string"
+                                        ],
+                                        "description": "state",
+                                        "example": "CA"
+                                    },
+                                    "country_match": {
+                                        "type": [
+                                            "string"
+                                        ],
+                                        "description": "Country",
+                                        "example": "US United States"
+                                    },
+                                    "last_name": {
+                                        "type": [
+                                            "string"
+                                        ],
+                                        "description": "Last Name",
+                                        "example": "Smith"
+                                    },
+                                    "address2": {
+                                        "type": [
+                                            "string"
+                                        ],
+                                        "description": "Address second line",
+                                        "example": "suite 100"
+                                    },
+                                    "city": {
+                                        "type": [
+                                            "string"
+                                        ],
+                                        "description": "City",
+                                        "example": "San Diego"
+                                    },
+                                    "postal_code": {
+                                        "type": [
+                                            "string"
+                                        ],
+                                        "description": "Postal Code",
+                                        "example": "92101"
+                                    },
+                                    "address1": {
+                                        "type": [
+                                            "string"
+                                        ],
+                                        "description": "Address line one",
+                                        "example": "123 Main St"
+                                    },
+                                    "company": {
+                                        "type": [
+                                            "string"
+                                        ],
+                                        "description": "Company name",
+                                        "example": "gudTECH"
+                                    },
+                                    "first_name": {
+                                        "type": [
+                                            "string"
+                                        ],
+                                        "description": "First Name",
+                                        "example": "John"
+                                    }
+                                }
+                            },
+                            "channel_refnum": {
+                                "type": [
+                                    "integer"
+                                ],
+                                "description": "channel reference number for order",
+                                "example": 496
+                            },
+                            "customer": {
+                                "type": [
+                                    "object"
+                                ],
+                                "description": "customer",
+                                "properties": {
+                                    "email_address": {
+                                        "type": [
+                                            "string"
+                                        ],
+                                        "description": "Customer email address",
+                                        "example": "john@gudtech.com"
+                                    },
+                                    "phone_number": {
+                                        "type": [
+                                            "string"
+                                        ],
+                                        "description": "customer phone",
+                                        "example": "(619)555-5555"
+                                    },
+                                    "first_name": {
+                                        "type": [
+                                            "string"
+                                        ],
+                                        "description": "Firest name",
+                                        "example": "John"
+                                    },
+                                    "last_name": {
+                                        "type": [
+                                            "string"
+                                        ],
+                                        "description": "last name",
+                                        "example": "Smith"
+                                    }
+                                }
+                            },
+                            "discount_amt": {
+                                "type": [
+                                    "integer"
+                                ],
+                                "description": "amount discounted",
+                                "example": 0
+                            },
+                            "shipcode": {
+                                "type": [
+                                    "string"
+                                ],
+                                "description": "shipping code",
+                                "example": "Ground (5-7 days)"
+                            },
+                            "ip_address": {
+                                "type": [
+                                    "string"
+                                ],
+                                "description": "ip address used to place order",
+                                "example": "68.7.2.222"
+                            },
+                            "attributes": {
+                                "type": [
+                                    "object"
+                                ],
+                                "description": "sku attributes",
+                                "properties": {}
+                            },
+                            "items": {
+                                "type": [
+                                    "array"
+                                ],
+                                "items": {
+                                    "type": [
+                                        "object"
+                                    ],
+                                    "properties": {
+                                        "channel_refnum": {
+                                            "type": [
+                                                "integer"
+                                            ],
+                                            "description": "channel reference number for order",
+                                            "example": 496
+                                        },
+                                        "sku": {
+                                            "type": [
+                                                "integer"
+                                            ],
+                                            "description": "sku number",
+                                            "example": 299
+                                        },
+                                        "unit_tax": {
+                                            "type": [
+                                                "integer"
+                                            ],
+                                            "description": "unit tax",
+                                            "example": 0
+                                        },
+                                        "quantity": {
+                                            "type": [
+                                                "integer"
+                                            ],
+                                            "description": "quantity of sku in order",
+                                            "example": 1
+                                        },
+                                        "sku_title": {
+                                            "type": [
+                                                "string"
+                                            ],
+                                            "description": "sku title",
+                                            "example": "test"
+                                        },
+                                        "unit_price": {
+                                            "type": [
+                                                "number"
+                                            ],
+                                            "description": "unit price for sku",
+                                            "example": 1
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}
