@@ -127,7 +127,12 @@ func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, request
     return err
   } else if !result.Valid() {
     // TODO: iterate over result errors
-    return fmt.Errorf("example was not valid: ")
+    fmt.Printf("validation failures:\n")
+    for _,resultErr := range result.Errors() {
+      fmt.Printf("- %s\n", resultErr)
+    }
+    fmt.Println()
+    return fmt.Errorf("outgoing example invalid")
   }
 
   // fmt.Println("example is valid:", result.Valid())
