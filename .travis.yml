@@ -5,5 +5,5 @@ go:
   - 1.6
 go_import_path: github.com/gudtech/retailops-sdk
 before_install:
-  - docker run -d --name=example_server -p 5000:5000 --rm -it -v $PWD/retailops-asp-dotnet-api-example:/app microsoft/aspnet:1.0.0-rc1-update1-coreclr /app/travis.sh
+  - docker run -d --name=example_server -p 5000:5000 -it -v $PWD/retailops-asp-dotnet-api-example:/app microsoft/aspnet:1.0.0-rc1-update1-coreclr /app/travis.sh
   - sh retailops-asp-dotnet-api-example/travis_wait.sh
