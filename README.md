@@ -7,6 +7,9 @@ Using the RetailOps SDK, you can create, test, and certify custom integrations f
 - [Channel Integrations](#channel-integrations)
 - [Shipper Integrations (coming soon)](#shipper-integrations)
 
+## Interactive Documentation
+[RetailOps SDK](http://senseijack.github.io/retailops-sdk) 
+
 ## Channel Integrations
 
 A channel is a source of orders.
