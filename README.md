@@ -7,7 +7,7 @@ Using the RetailOps SDK, you can create, test, and certify custom integrations f
 - [Channel Integrations](#channel-integrations)
 - [Shipper Integrations (coming soon)](#shipper-integrations)
 
-[![Build Status](https://travis-ci.org/xrl/retailops-sdk.svg?branch=web-hook-design)](https://travis-ci.org/xrl/retailops-sdk)
+[![Build Status](https://travis-ci.org/gudTECH/retailops-sdk.svg?branch=web-hook-design)](https://travis-ci.org/gudTECH/retailops-sdk)
 
 ## Channel Integrations
 
