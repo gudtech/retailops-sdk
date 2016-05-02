@@ -215,31 +215,6 @@
                 "tags": []
             }
         },
-        "/order_returned": {
-            "post": {
-                "summary": "order_returned",
-                "description": "Order returned method.",
-                "parameters": [
-                    {
-                        "name": "body",
-                        "in": "body",
-                        "description": "request body.",
-                        "schema": {
-                            "$ref": "#/definitions/RequestBodyorder_returned"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/ResponseBodyorder_returned"
-                        }
-                    }
-                },
-                "tags": []
-            }
-        },
         "/order_settle_payment": {
             "post": {
                 "summary": "order_settle_payment",
@@ -601,7 +576,7 @@
                                 "shipments": {
                                     "type": "array",
                                     "items": {
-                                        "type": "object",
+                                        "type": "object"
                                     }
                                 },
                                 "id": {
@@ -835,7 +810,7 @@
             }
         },
         "RequestBodycatalog_push": {
-           "type": "object",
+            "type": "object",
             "properties": {
                 "version": {
                     "type": "integer",
@@ -957,7 +932,7 @@
                                                         "type": "array",
                                                         "description": "order ids",
                                                         "items": {
-                                                            "type": "string",
+                                                            "type": "string"
                                                         }
                                                     },
                                                     "sellable": {
@@ -1058,7 +1033,7 @@
             }
         },
         "RequestBodyorder_complete": {
-           "type": "object",
+            "type": "object",
             "properties": {
                 "version": {
                     "type": "integer",
@@ -1234,7 +1209,7 @@
                                                         "ship_items": {
                                                             "type": "array",
                                                             "items": {
-                                                                "type": "object",
+                                                                "type": "object"
                                                             }
                                                         },
                                                         "tracking_number": {
@@ -2017,7 +1992,7 @@
             }
         },
         "RequestBodyorder_returned": {
-           "type": "object",
+            "type": "object",
             "properties": {
                 "version": {
                     "type": [
@@ -2218,9 +2193,7 @@
                                     "example": 496
                                 },
                                 "shipments": {
-                                    "type": [
-                                        "array"
-                                    ],
+                                    "type": "array",
                                     "items": {
                                         "type": [
                                             "object"
@@ -3509,7 +3482,7 @@
             }
         },
         "RequestBodyorder_shipment_submit": {
-           "type": "object",
+            "type": "object",
             "properties": {
                 "version": {
                     "type": [
