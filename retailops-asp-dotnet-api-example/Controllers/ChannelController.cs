@@ -14,7 +14,7 @@ namespace dotnet_example_api.Controllers
         // in the request body. In a production application you would parse this JSON
         // and pass the data to your repository where the business logic resides.
         
-        [HttpPost("ctalog_get_config")]
+        [HttpPost("catalog_get_config")]
         public IActionResult get_channel_config([FromBody]string request)
         {
             ConfigResponse response = ChannelRepo.catalog_get_config();
