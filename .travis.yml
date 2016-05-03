@@ -11,7 +11,7 @@ before_script:
 - while ! echo exit | curl http://localhost:5000; do sleep 10; done
 script: go run $GOPATH/src/github.com/gudtech/retailops-sdk/verify-service/bin/verify-service.go
   -schema-path $GOPATH/src/github.com/gudtech/retailops-sdk/schema/schemata
-after_success: pushd verify-service && sh release.sh && popd
+after_success: pushd verify-service && bash release.sh && popd
 deploy:
   provider: releases
   api_key:
