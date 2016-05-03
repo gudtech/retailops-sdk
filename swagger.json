@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "RetailOps Channel Webhook Integration Method",
+        "title": "RetailOps Channel Webhook Integration API",
         "description": "Integrate a sales channel with RetailOps",
         "version": "1.0.0"
     },
