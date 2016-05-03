@@ -4,7 +4,7 @@ set -ex
 docker build -t verify-service .
 
 if [[ -d artifacts ]]; then
-  rm -f artifacts/*
+  rm -rf artifacts/*
 else
   mkdir artifacts
 fi
