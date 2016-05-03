@@ -30,17 +30,17 @@ RetailOps then pulls this order information, fulfills said orders, and pushes st
 
 ### Channel Interactions:
 
-- [catalog_get_config](docs/catalog_get_config_v1.md) - Configuration information about Catalog Push
-- [catalog_push](docs/catalog_push_v1.md) - New product information and product updates
-- [inventory_push](docs/inventory_push_v1.md) - Inventory updates
-- [order_pull](docs/order_pull_v1.md) - Fetch new orders from the channel which are ready
-- [order_acknowledge](docs/order_acknowledge_v1.md) - Mark specific fetched orders has having been picked up
-- [order_update](docs/order_update_v1.md) - Update channel order information to reflect order items which have been updated, added, or removed in RetailOps
-- [order_cancel](docs/order_cancel_v1.md) - Mark an order as canceled in the channel
-- [order_shipment_submit](docs/order_shipment_submit_v1.md) - Convey shipping status and tracking information to the channel
-- [order_complete](docs/order_complete_v1.md) - Mark an order as fully completed in the channel
-- [order_settle_payment](docs/order_settle_payment_v1.md) - Cause the channel to collect/capture payment, or otherwise verify payment has been collected
-- [order_returned](docs/order_returned_v1.md) - Notify the channel that a return has been processed against the order
+- [catalog_get_config](http://gudtech.github.io/retailops-sdk/#!/default/post_catalog_get_config) - Configuration information about Catalog Push
+- [catalog_push](http://gudtech.github.io/retailops-sdk/#!/default/post_catalog_push) - New product information and product updates
+- [inventory_push](http://gudtech.github.io/retailops-sdk/#!/default/post_inventory_push) - Inventory updates
+- [order_pull](http://gudtech.github.io/retailops-sdk/#!/default/post_order_pull) - Fetch new orders from the channel which are ready
+- [order_acknowledge](http://gudtech.github.io/retailops-sdk/#!/default/post_order_acknowledge) - Mark specific fetched orders has having been picked up
+- [order_update](http://gudtech.github.io/retailops-sdk/#!/default/post_order_update) - Update channel order information to reflect order items which have been updated, added, or removed in RetailOps
+- [order_cancel](http://gudtech.github.io/retailops-sdk/#!/default/post_order_cancel) - Mark an order as canceled in the channel
+- [order_shipment_submit](http://gudtech.github.io/retailops-sdk/#!/default/post_order_shipment_submit) - Convey shipping status and tracking information to the channel
+- [order_complete](http://gudtech.github.io/retailops-sdk/#!/default/post_order_complete) - Mark an order as fully completed in the channel
+- [order_settle_payment](http://gudtech.github.io/retailops-sdk/#!/default/post_order_settle_payment) - Cause the channel to collect/capture payment, or otherwise verify payment has been collected
+- [order_returned](http://gudtech.github.io/retailops-sdk/#!/default/post_order_returned) - Notify the channel that a return has been processed against the order
 
 
 ## Shipper Integrations
