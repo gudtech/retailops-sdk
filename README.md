@@ -16,7 +16,7 @@ The SDK includes
  * Example ASP.NET web server with all callbacks implemented
  * Verify Service command line tool for exercising callbacks
 
-[The SDK README](https://github.com/gudTECH/retailops-sdk/blob/master/verify-service/README.md)
+[More instructions in the SDK README](https://github.com/gudTECH/retailops-sdk/blob/master/verify-service/README.md)
 
 ## Interactive Documentation
 [RetailOps SDK](http://senseijack.github.io/retailops-sdk) 
