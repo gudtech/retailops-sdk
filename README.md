@@ -19,7 +19,7 @@ The SDK includes
 [More instructions in the SDK README](https://github.com/gudTECH/retailops-sdk/blob/master/verify-service/README.md)
 
 ## Interactive Documentation
-[RetailOps SDK](http://senseijack.github.io/retailops-sdk) 
+[RetailOps SDK](http://gudtech.github.io/retailops-sdk) 
 
 ## Channel Integrations
 
