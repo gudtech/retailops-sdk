@@ -23,6 +23,7 @@ Once in the directory run the following commands:
 After the ASP .NET application is running, open a second command prompt, and navigate to the `verify-service_windows` folder
 and run:
 - `verify-service-windows-amd64-2016-05-03-1ace8 -schema-path ".\schema\schemata"`
+
 If the command is succesful, you'll see something like this:
 ```Bash
 3 REQUESTS TO BE GENERATED
