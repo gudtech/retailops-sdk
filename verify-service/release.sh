@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -ex
 
 DATE_STR=$(date +%Y-%m-%d)
