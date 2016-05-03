@@ -21,5 +21,6 @@ deploy:
     - verify-service/artifacts/verify-service_linux_amd64.zip
     - verify-service/artifacts/verify-service_windows_amd64.zip
   on:
+    tags: true
     repo: gudTECH/retailops-sdk
     branch: web-hook-design
