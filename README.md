@@ -24,7 +24,7 @@ RetailOps then pulls this order information, fulfills said orders, and pushes st
 - [catalog_get_config](http://gudtech.github.io/retailops-sdk/#!/default/post_catalog_get_config) - Configuration information about Catalog Push
 - [catalog_push](http://gudtech.github.io/retailops-sdk/#!/default/post_catalog_push) - New product information and product updates
 - [inventory_push](http://gudtech.github.io/retailops-sdk/#!/default/post_inventory_push) - Inventory updates
-- [order_pull](http://gudtech.github.io/retailops-sdk/#!/default/order_pull) - Fetch new orders from the channel which are ready
+- [order_pull](http://gudtech.github.io/retailops-sdk/#!/default/post_order_pull) - Fetch new orders from the channel which are ready
 - [order_acknowledge](http://gudtech.github.io/retailops-sdk/#!/default/post_order_acknowledge) - Mark specific fetched orders has having been picked up
 - [order_update](http://gudtech.github.io/retailops-sdk/#!/default/post_order_update) - Update channel order information to reflect order items which have been updated, added, or removed in RetailOps
 - [order_cancel](http://gudtech.github.io/retailops-sdk/#!/default/post_order_cancel) - Mark an order as canceled in the channel
