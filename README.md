@@ -30,7 +30,7 @@ RetailOps then pulls this order information, fulfills said orders, and pushes st
 - [order_cancel](http://gudtech.github.io/retailops-sdk/#!/default/post_order_cancel) - Mark an order as canceled in the channel
 - [order_shipment_submit](http://gudtech.github.io/retailops-sdk/#!/default/post_shipment_submit) - Convey shipping status and tracking information to the channel
 - [order_complete](http://gudtech.github.io/retailops-sdk/#!/default/post_order_complete) - Mark an order as fully completed in the channel
-- [order_settle_payment](http://gudtech.github.io/retailops-sdk/#!/default/post_settle_payment) - Cause the channel to collect/capture payment, or otherwise verify payment has been collected
+- [order_settle_payment](http://gudtech.github.io/retailops-sdk/#!/default/post_order_settle_payment) - Cause the channel to collect/capture payment, or otherwise verify payment has been collected
 - [order_returned](http://gudtech.github.io/retailops-sdk/#!/default/post_order_returned) - Notify the channel that a return has been processed against the order
 
 
