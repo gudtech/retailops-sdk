@@ -17,7 +17,7 @@
     "paths": {
         "/catalog_get_config": {
             "post": {
-                "summary": "catalog_get_config",
+                "summary": "catalog_get_config_v1",
                 "description": "Catalog get config method.",
                 "parameters": [
                     {
@@ -42,7 +42,7 @@
         },
         "/order_acknowledge": {
             "post": {
-                "summary": "order_acknowledge",
+                "summary": "order_acknowledge_v1",
                 "description": "Order acknowledge method.",
                 "parameters": [
                     {
@@ -62,12 +62,12 @@
                         }
                     }
                 },
-                "tags": []
+                "tags": [ ]
             }
         },
         "/order_cancel": {
             "post": {
-                "summary": "order_cancel",
+                "summary": "order_cancel_v1",
                 "description": "Order cancel method.",
                 "parameters": [
                     {
@@ -87,12 +87,12 @@
                         }
                     }
                 },
-                "tags": []
+                "tags": [ ]
             }
         },
         "/catalog_push": {
             "post": {
-                "summary": "catalog_push",
+                "summary": "catalog_push_v1",
                 "description": "Catalog push method.",
                 "parameters": [
                     {
@@ -112,12 +112,12 @@
                         }
                     }
                 },
-                "tags": []
+                "tags": [ ]
             }
         },
         "/inventory_push": {
             "post": {
-                "summary": "inventory_push",
+                "summary": "inventory_push_v1",
                 "description": "Inventory push method.",
                 "parameters": [
                     {
@@ -137,12 +137,12 @@
                         }
                     }
                 },
-                "tags": []
+                "tags": [ ]
             }
         },
         "/order_complete": {
             "post": {
-                "summary": "order_complete",
+                "summary": "order_complete_v1",
                 "description": "Order Complete method.",
                 "parameters": [
                     {
@@ -162,7 +162,7 @@
                         }
                     }
                 },
-                "tags": []
+                "tags": [ ]
             }
         },
         "/order_pull": {
@@ -192,7 +192,7 @@
         },
         "/order_returned": {
             "post": {
-                "summary": "order_returned",
+                "summary": "order_returned_v1",
                 "description": "Order returned method.",
                 "parameters": [
                     {
@@ -212,12 +212,12 @@
                         }
                     }
                 },
-                "tags": []
+                "tags": [ ]
             }
         },
         "/order_settle_payment": {
             "post": {
-                "summary": "order_settle_payment",
+                "summary": "order_settle_payment_v1",
                 "description": "Order settle payment method.",
                 "parameters": [
                     {
@@ -237,12 +237,12 @@
                         }
                     }
                 },
-                "tags": []
+                "tags": [ ]
             }
         },
         "/order_shipment_submit": {
             "post": {
-                "summary": "order_shipment_submit",
+                "summary": "order_shipment_submit_v1",
                 "description": "Order shipment submit method.",
                 "parameters": [
                     {
@@ -262,12 +262,12 @@
                         }
                     }
                 },
-                "tags": []
+                "tags": [ ]
             }
         },
         "/order_update": {
             "post": {
-                "summary": "order_update",
+                "summary": "order_update_v1",
                 "description": "Order update method.",
                 "parameters": [
                     {
@@ -287,7 +287,7 @@
                         }
                     }
                 },
-                "tags": []
+                "tags": [ ]
             }
         }
     },
