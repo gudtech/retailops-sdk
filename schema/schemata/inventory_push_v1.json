@@ -2,7 +2,7 @@
     "$schema": "http://json-schema.org/draft-04/hyper-schema",
     "title": "inventory_push",
     "description": "inventory_push method RetailOPS webhook API version 1",
-    "stability": "prototype",
+    "stability": "draft",
     "additionalProperties": true,
     "type": [
         "object"
@@ -42,7 +42,7 @@
                 "object"
             ],
             "description": "channel",
-            "definitions": {
+            "properties": {
                 "client_id": {
                     "type": [
                         "integer"
@@ -164,7 +164,7 @@
                         "integer"
                     ],
                     "description": "",
-                    "example": null
+                    "example": "null"
                 },
                 "email_invoice": {
                     "type": [
@@ -180,88 +180,14 @@
                     "description": "boolean",
                     "example": 0
                 }
-            },
-            "properties": {
-                "id": {
-                    "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/id"
-                },
-                "params": {
-                    "type": [
-                        "object"
-                    ],
-                    "properties": {
-                        "StoreID": {
-                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/StoreID"
-                        },
-                        "next_order_refnum": {
-                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/next_order_refnum"
-                        },
-                        "order_ack_status_id": {
-                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/order_ack_status_id"
-                        },
-                        "order_fulfilled_status_id": {
-                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/order_fulfilled_status_id"
-                        },
-                        "order_in_filfillment_status_id": {
-                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/order_in_filfillment_status_id"
-                        },
-                        "email_return": {
-                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/email_return"
-                        },
-                        "inv_suspended_instock": {
-                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/inv_suspended_instock"
-                        },
-                        "unset_other_media": {
-                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/unset_other_media"
-                        },
-                        "import_order_attrs": {
-                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/import_order_attrs"
-                        },
-                        "base_uri": {
-                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/base_uri"
-                        },
-                        "express_configurable_super_links": {
-                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/express_configurable_super_links"
-                        },
-                        "unset_other_attributes": {
-                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/unset_other_attributes"
-                        },
-                        "push_cancel": {
-                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/push_cancel"
-                        },
-                        "inv_suspended_mode": {
-                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/inv_suspended_mode"
-                        },
-                        "email_invoice": {
-                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/email_invoice"
-                        },
-                        "email_tracking": {
-                            "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/email_tracking"
-                        }
-                    }
-                }
             }
-        },
-        "amount": {
-            "type": [
-                "number"
-            ],
-            "description": "payment amount",
-            "example": 1.32
-        },
-        "attributes": {
-            "type": [
-                "object"
-            ],
-            "description": "sku attributes",
-            "properties": {}
         },
         "sku": {
             "type": [
                 "object"
             ],
             "description": "product sku",
-            "definitions": {
+            "properties": {
                 "sku_num": {
                     "type": [
                         "string"
@@ -289,11 +215,41 @@
                     ],
                     "description": "",
                     "items": {
-                        "$ref": "/schemata/inventory_push_v1#/definitions/zone"
+                        "type": [
+                            "object"
+                        ],
+                        "description": "facilty zone",
+                        "properties": {
+                            "zone": {
+                                "type": [
+                                    "string"
+                                ],
+                                "description": "zone name",
+                                "example": "default"
+                            },
+                            "pick": {
+                                "type": [
+                                    "integer"
+                                ],
+                                "description": "",
+                                "example": 0
+                            },
+                            "npick": {
+                                "type": [
+                                    "integer"
+                                ],
+                                "description": "",
+                                "example": 5
+                            }
+                        }
                     }
                 },
                 "facility": {
-                    "$ref": "/schemata/inventory_push_v1#/definitions/facility"
+                    "type": [
+                        "string"
+                    ],
+                    "description": "facility name",
+                    "example": "testco"
                 },
                 "est_ship": {
                     "type": [
@@ -323,43 +279,7 @@
                     "description": "",
                     "example": 0
                 }
-            },
-            "properties": {
-                "sku_num": {
-                    "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/sku_num"
-                },
-                "sellable": {
-                    "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/sellable"
-                },
-                "unclaimed": {
-                    "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/unclaimed"
-                },
-                "zones": {
-                    "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/zones"
-                },
-                "facility": {
-                    "$ref": "/schemata/inventory_push_v1#/definitions/facility"
-                },
-                "est_ship": {
-                    "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/est_ship"
-                },
-                "vendor": {
-                    "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/vendor"
-                },
-                "qty_available": {
-                    "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/qty_available"
-                },
-                "breakdown_inventory": {
-                    "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/breakdown_inventory"
-                }
             }
-        },
-        "unit_tax": {
-            "type": [
-                "number"
-            ],
-            "description": "unit tax",
-            "example": 0
         },
         "event": {
             "type": [
@@ -367,130 +287,60 @@
             ],
             "description": "event returned in action response",
             "properties": {
-                "handle": {
+                "status": {
                     "type": [
                         "string"
                     ],
-                    "description": "event type",
-                    "example": "channel_catpush_fail"
+                    "description": "status code",
+                    "example": "error"
                 },
-                "secondary": {
-                    "type": [
-                        "object"
-                    ],
-                    "description": "",
-                    "properties": {
-                        "id": {
-                            "type": [
-                                "integer"
-                            ],
-                            "example": 66
-                        },
-                        "concept": {
-                            "type": [
-                                "string"
-                            ],
-                            "example": "sku"
-                        }
-                    }
-                },
-                "data": {
-                    "type": [
-                        "object"
-                    ],
-                    "description": "event data structure",
-                    "properties": {
-                        "sub_code": {
-                            "type": [
-                                "string"
-                            ],
-                            "example": ""
-                        },
-                        "status": {
-                            "type": [
-                                "integer"
-                            ],
-                            "description": "http status code",
-                            "exxample": 400
-                        },
-                        "is_failure": {
-                            "type": "integer",
-                            "description": "boolean success value represented as integer (0, 1)",
-                            "example": 1
-                        },
-                        "request_url": {
-                            "type": [
-                                "string"
-                            ],
-                            "format": "uri",
-                            "description": "request url for this service action",
-                            "example": "https://t14961.sandbox.mozu.com/api/commerce/catalog/admin/products/PP20?responseFields="
-                        },
-                        "data_items": {
-                            "type": [
-                                "array"
-                            ],
-                            "description": "(key was originally named items, had to be changed to avoid schema conflict) What types are in the array?",
-                            "items": {}
-                        },
-                        "additonal": {
-                            "type": [
-                                "string"
-                            ],
-                            "description": "additional information re: missing or invalid parameters",
-                            "example": "[{\"name\":\"ParameterName\",\"value\":\"PackagWeight.Unit\"}]"
-                        },
-                        "code": {
-                            "type": [
-                                "string"
-                            ],
-                            "description": "error code",
-                            "example": "MISSING_OR_INVALID_PARAMETER"
-                        },
-                        "message": {
-                            "type": [
-                                "string"
-                            ],
-                            "description": "descriptive error message",
-                            "example": "Error: ident c1.channel-55-api_auth not found"
-                        }
-                    }
-                }
-            }
-        },
-        "facility": {
-            "type": [
-                "string"
-            ],
-            "description": "facility name",
-            "example": "testco"
-        },
-        "zone": {
-            "type": [
-                "object"
-            ],
-            "description": "facilty zone",
-            "properties": {
-                "zone": {
+                "error_code": {
                     "type": [
                         "string"
                     ],
-                    "description": "zone name",
-                    "example": "default"
+                    "description": "error code",
+                    "example": "ERR1234"
                 },
-                "pick": {
+                "error_message": {
                     "type": [
-                        "integer"
+                        "string"
+                    ],
+                    "description": "descriptive error message",
+                    "example": "Example error message"
+                },
+                "diagnostic_data": {
+                    "type": [
+                        "array"
                     ],
                     "description": "",
-                    "example": 0
+                    "items": {}
                 },
-                "npick": {
+                "associations": {
                     "type": [
-                        "integer"
+                        "array"
                     ],
                     "description": "",
-                    "example": 5
+                    "items": {
+                        "type": [
+                            "object"
+                        ],
+                        "properties": {
+                            "type": {
+                                "type": [
+                                    "string"
+                                ],
+                                "description": "",
+                                "example": "sku"
+                            },
+                            "identity": {
+                                "type": [
+                                    "string"
+                                ],
+                                "description": "",
+                                "example": "S1234"
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -498,7 +348,7 @@
     "links": [
         {
             "description": "Inventory push method.",
-            "href": "/orders",
+            "href": "/inventory_push",
             "method": "POST",
             "rel": "instances",
             "schema": {
@@ -507,10 +357,10 @@
                 ],
                 "properties": {
                     "version": {
-                        "$ref": "/schemata/inventory_push_v1#/definitions/version"
+                        "$ref": "#/definitions/version"
                     },
                     "action": {
-                        "$ref": "/schemata/inventory_push_v1#/definitions/action"
+                        "$ref": "#/definitions/action"
                     },
                     "data": {
                         "type": [
@@ -528,13 +378,13 @@
                                         ],
                                         "properties": {
                                             "sku": {
-                                                "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/sku_num"
+                                                "$ref": "#/definitions/sku/properties/sku_num"
                                             },
                                             "id": {
-                                                "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/id"
+                                                "$ref": "#/definitions/channel/properties/id"
                                             },
                                             "concept": {
-                                                "$ref": "/schemata/inventory_push_v1#/definitions/concept"
+                                                "$ref": "#/definitions/concept"
                                             },
                                             "qty_breakdown": {
                                                 "type": [
@@ -547,7 +397,7 @@
                                                     ],
                                                     "properties": {
                                                         "est_ship": {
-                                                            "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/est_ship"
+                                                            "$ref": "#/definitions/sku/properties/est_ship"
                                                         },
                                                         "reserving_orders": {
                                                             "type": [
@@ -561,61 +411,40 @@
                                                             }
                                                         },
                                                         "sellable": {
-                                                            "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/sellable"
+                                                            "$ref": "#/definitions/sku/properties/sellable"
                                                         },
                                                         "unclaimed": {
-                                                            "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/unclaimed"
+                                                            "$ref": "#/definitions/sku/properties/unclaimed"
                                                         },
                                                         "vendor": {
-                                                            "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/vendor"
+                                                            "$ref": "#/definitions/sku/properties/vendor"
                                                         }
                                                     }
                                                 }
                                             },
                                             "qty_available": {
-                                                "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/qty_available"
+                                                "$ref": "#/definitions/sku/properties/qty_available"
                                             }
                                         }
                                     }
                                 }
                             },
                             "client_id": {
-                                "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/client_id"
+                                "$ref": "#/definitions/channel/properties/client_id"
                             },
                             "channel": {
                                 "type": [
                                     "object"
                                 ],
                                 "properties": {
-                                    "params": {
-                                        "type": [
-                                            "object"
-                                        ],
-                                        "properties": {
-                                            "breakdown_inventory": {
-                                                "$ref": "/schemata/inventory_push_v1#/definitions/sku/definitions/breakdown_inventory"
-                                            },
-                                            "tenant": {
-                                                "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/tenant"
-                                            },
-                                            "appKey": {
-                                                "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/appKey"
-                                            }
-                                        }
-                                    },
                                     "id": {
-                                        "$ref": "/schemata/inventory_push_v1#/definitions/channel/definitions/id"
+                                        "$ref": "#/definitions/channel/properties/id"
                                     }
                                 }
                             }
                         }
                     }
-                },
-                "required": [
-                    "version",
-                    "action",
-                    "data"
-                ]
+                }
             },
             "targetSchema": {
                 "type": "object",
@@ -625,7 +454,7 @@
                             "array"
                         ],
                         "items": {
-                            "$ref": "/schemata/inventory_push_v1#/definitions/event"
+                            "$ref": "#/definitions/event"
                         }
                     }
                 }

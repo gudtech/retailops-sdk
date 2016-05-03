@@ -2,7 +2,7 @@
     "$schema": "http://json-schema.org/draft-04/hyper-schema",
     "title": "catalog_get_config",
     "description": "catalog_get_config method RetailOPS webhook API version 1",
-    "stability": "prototype",
+    "stability": "draft",
     "additionalProperties": true,
     "type": [
         "object"
@@ -30,9 +30,9 @@
             "description": "event returned in action response",
             "properties": {
                 "handle": {
-                    "type": [
+                    "type":
                         "string"
-                    ],
+                    ,
                     "description": "event type",
                     "example": "channel_catpush_fail"
                 },
@@ -43,9 +43,9 @@
                     "description": "",
                     "properties": {
                         "id": {
-                            "type": [
+                            "type":
                                 "integer"
-                            ],
+                            ,
                             "example": 66
                         },
                         "concept": {
@@ -73,7 +73,7 @@
                                 "integer"
                             ],
                             "description": "http status code",
-                            "exxample": 400
+                            "example": 400
                         },
                         "is_failure": {
                             "type": "integer",
@@ -124,7 +124,7 @@
     "links": [
         {
             "description": "Catalog get config method.",
-            "href": "/orders",
+            "href": "/catalog_get_config",
             "method": "POST",
             "rel": "instances",
             "schema": {
@@ -133,28 +133,28 @@
                 ],
                 "properties": {
                     "version": {
-                        "$ref": "/schemata/catalog_get_config_v1#/definitions/version"
+                        "$ref": "#/definitions/version"
                     },
                     "action": {
-                        "$ref": "/schemata/catalog_get_config_v1#/definitions/action"
+                        "$ref": "#/definitions/action"
                     },
                     "data": {
                         "type": [
                             "object"
                         ],
-                        "properties": {
-
-                        }
+                        "properties": {}
                     }
                 }
             },
             "targetSchema": {
                 "type": "object",
                 "properties": {
-                    "fanout": {
-                        "type": ["string"],
+                    "sku_fanout": {
+                        "type": [
+                            "string"
+                        ],
                         "description": "channel fanout configuration",
-                        "example": "relative"
+                        "example": "all_skus_for_product"
                     }
                 }
             },
