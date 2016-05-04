@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "action": "catalog_get_config_v1",
+  "catalog_items": [
+    {
+        "item_type": "sku",
+        "item_info": {
+            "sku_number": "S1234",
+            "product_id": "15252",
+            "skugroup_number": "S272626"
+        },
+        "template_output": {}
+    }
+  ],
+"client_id" : 497,
+"channel": {
+      "id": 21
+  }
+}
