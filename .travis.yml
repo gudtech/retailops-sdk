@@ -21,4 +21,3 @@ deploy:
   on:
     tags: true
     repo: gudTECH/retailops-sdk
-    branch: web-hook-design
