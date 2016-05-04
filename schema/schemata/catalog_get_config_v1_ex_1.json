@@ -1,5 +1,8 @@
 {
   "version": 1,
-  "action": "catpush_config",
-  "data": {}
+  "action": "catalog_get_config_v1",
+  "client_id" : 497,
+  "channel": {
+      "id": 21
+  }
 }

@@ -1,5 +1,14 @@
 {
   "version": 1,
-  "action": "order_acknowledge",
-  "data": {}
+  "action": "order_acknowledge_v1",
+  "orders": [
+      {
+          "channel_order_refnum": "496",
+          "retailops_order_id": 2444
+      }
+  ],
+  "client_id": 497,
+  "channel": {
+      "id": 21
+  }
 }

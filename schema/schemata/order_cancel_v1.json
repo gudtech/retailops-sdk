@@ -33,9 +33,9 @@
                                 "description": "RetailOps Order ID"
                             },
                             "channel_order_refnum": {
-                                "type": "integer",
+                                "type": "string",
                                 "description": "channel reference number for order",
-                                "example": 496
+                                "example": "496"
                             }
                         }
                     },

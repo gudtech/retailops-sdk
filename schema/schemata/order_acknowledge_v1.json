@@ -34,7 +34,7 @@
                                 "channel_order_refnum": {
                                     "type": "string",
                                     "description": "channel reference number corresponding to an order from the channel",
-                                    "example": 496
+                                    "example": "496"
                                 },
                                 "retailops_order_id": {
                                     "type": "integer",
