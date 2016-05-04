@@ -1,549 +1,72 @@
 {
     "$schema": "http://json-schema.org/draft-04/hyper-schema",
-    "title": "order_pull",
-    "description": "order_pull method RetailOPS webhook API version 1",
+    "title": "/order_pull_v1",
+    "description": "order_pull_v1",
     "stability": "draft",
     "additionalProperties": true,
-    "type": [
-        "object"
-    ],
-    "definitions": {
-        "identity": {},
-        "action": {
-            "type": [
-                "string"
-            ],
-            "description": "RetailOPS api action name",
-            "example": "order_pull"
-        },
-        "version": {
-            "type": [
-                "integer"
-            ],
-            "description": "RetailOPS api action version",
-            "example": 1
-        },
-        "single": {
-            "type": [
-                "integer"
-            ],
-            "description": "requesting single order?",
-            "example": 0
-        },
-        "channel_refnum": {
-            "type": [
-                "integer"
-            ],
-            "description": "channel reference number for order",
-            "example": 496
-        },
-        "client_id": {
-            "description": "RetailOPS client id",
-            "readOnly": true,
-            "type": [
-                "integer"
-            ],
-            "example": 497
-        },
-        "channel": {
-            "type": [
-                "object"
-            ],
-            "description": "channel",
-            "definitions": {
-                "client_id": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "client ID",
-                    "example": 1
-                },
-                "id": {
-                    "type": [
-                        "integer"
-                    ],
-                    "example": 21
-                },
-                "appKey": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "application key",
-                    "example": "acme_co.retailops.0.1.0.Release"
-                },
-                "tenant": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "tenant ID",
-                    "example": 15394
-                },
-                "StoreID": {
-                    "type": "string",
-                    "description": "Store ID",
-                    "example": "yhst-18909142938879050075142"
-                },
-                "next_order_refnum": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "next order reference number",
-                    "example": 496
-                },
-                "order_ack_status_id": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "order acknowledgement status id",
-                    "example": 32
-                },
-                "order_fulfilled_status_id": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "order fulfilled status id",
-                    "example": 34
-                },
-                "order_in_filfillment_status_id": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "order in fulfillment status id",
-                    "example": 33
-                },
-                "email_return": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean",
-                    "example": 0
-                },
-                "inv_suspended_instock": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean",
-                    "example": 0
-                },
-                "unset_other_media": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean",
-                    "example": 0
-                },
-                "import_order_attrs": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "",
-                    "example": ""
-                },
-                "base_uri": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "uri",
-                    "example": "http://172.16.4.130/magento1921"
-                },
-                "express_configurable_super_links": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean",
-                    "example": 0
-                },
-                "unset_other_attributes": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean",
-                    "example": 0
-                },
-                "push_cancel": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean",
-                    "example": 0
-                },
-                "inv_suspended_mode": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "",
-                    "example": "null"
-                },
-                "email_invoice": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean",
-                    "example": 0
-                },
-                "email_tracking": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean",
-                    "example": 0
-                }
-            },
-            "properties": {
-                "id": {
-                    "$ref": "#/definitions/channel/definitions/id"
-                },
-                "params": {
-                    "type": [
-                        "object"
-                    ],
-                    "properties": {
-                        "StoreID": {
-                            "$ref": "#/definitions/channel/definitions/StoreID"
-                        },
-                        "next_order_refnum": {
-                            "$ref": "#/definitions/channel/definitions/next_order_refnum"
-                        },
-                        "order_ack_status_id": {
-                            "$ref": "#/definitions/channel/definitions/order_ack_status_id"
-                        },
-                        "order_fulfilled_status_id": {
-                            "$ref": "#/definitions/channel/definitions/order_fulfilled_status_id"
-                        },
-                        "order_in_filfillment_status_id": {
-                            "$ref": "#/definitions/channel/definitions/order_in_filfillment_status_id"
-                        },
-                        "email_return": {
-                            "$ref": "#/definitions/channel/definitions/email_return"
-                        },
-                        "inv_suspended_instock": {
-                            "$ref": "#/definitions/channel/definitions/inv_suspended_instock"
-                        },
-                        "unset_other_media": {
-                            "$ref": "#/definitions/channel/definitions/unset_other_media"
-                        },
-                        "import_order_attrs": {
-                            "$ref": "#/definitions/channel/definitions/import_order_attrs"
-                        },
-                        "base_uri": {
-                            "$ref": "#/definitions/channel/definitions/base_uri"
-                        },
-                        "express_configurable_super_links": {
-                            "$ref": "#/definitions/channel/definitions/express_configurable_super_links"
-                        },
-                        "unset_other_attributes": {
-                            "$ref": "#/definitions/channel/definitions/unset_other_attributes"
-                        },
-                        "push_cancel": {
-                            "$ref": "#/definitions/channel/definitions/push_cancel"
-                        },
-                        "inv_suspended_mode": {
-                            "$ref": "#/definitions/channel/definitions/inv_suspended_mode"
-                        },
-                        "email_invoice": {
-                            "$ref": "#/definitions/channel/definitions/email_invoice"
-                        },
-                        "email_tracking": {
-                            "$ref": "#/definitions/channel/definitions/email_tracking"
-                        }
-                    }
-                }
-            }
-        },
-        "page_state": {
-            "type": [
-                "integer"
-            ],
-            "description": "",
-            "example": "null"
-        },
-        "max_page_size": {
-            "type": [
-                "integer"
-            ],
-            "description": "maximum number of records to include in paged response",
-            "example": 50
-        },
-        "shipping_amt": {
-            "type": [
-                "number"
-            ],
-            "description": "",
-            "example": 0.25
-        },
-        "calc_mode": {
-            "type": [
-                "string"
-            ],
-            "description": "calculation mode",
-            "example": "order"
-        },
-        "channel_date_created": {
-            "type": [
-                "integer"
-            ],
-            "description": "date created expressed unix time",
-            "example": 1460142547
-        },
-        "payment_type": {
-            "type": [
-                "string"
-            ],
-            "description": "payment type",
-            "example": "Visa"
-        },
-        "amount": {
-            "type": [
-                "number"
-            ],
-            "description": "payment amount",
-            "example": 1.32
-        },
-        "payment_method": {
-            "type": [
-                "string"
-            ],
-            "description": "payment method",
-            "example": "charge"
-        },
-        "tax_amt": {
-            "type": [
-                "number"
-            ],
-            "description": "tax amount",
-            "example": 0.07
-        },
-        "address": {
-            "type": [
-                "object"
-            ],
-            "description": "address",
-            "properties": {
-                "state_match": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "state",
-                    "example": "CA"
-                },
-                "country_match": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "Country",
-                    "example": "US United States"
-                },
-                "last_name": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "Last Name",
-                    "example": "Smith"
-                },
-                "address2": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "Address second line",
-                    "example": "suite 100"
-                },
-                "city": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "City",
-                    "example": "San Diego"
-                },
-                "postal_code": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "Postal Code",
-                    "example": "92101"
-                },
-                "address1": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "Address line one",
-                    "example": "123 Main St"
-                },
-                "company": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "Company name",
-                    "example": "gudTECH"
-                },
-                "first_name": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "First Name",
-                    "example": "John"
-                }
-            }
-        },
-        "gift_message": {
-            "type": [
-                "string"
-            ],
-            "description": "gift message",
-            "example": "Happy Birthday"
-        },
-        "customer": {
-            "type": [
-                "object"
-            ],
-            "description": "customer",
-            "properties": {
-                "email_address": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "Customer email address",
-                    "example": "john@gudtech.com"
-                },
-                "phone_number": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "customer phone",
-                    "example": "(619)555-5555"
-                },
-                "first_name": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "Firest name",
-                    "example": "John"
-                },
-                "last_name": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "last name",
-                    "example": "Smith"
-                }
-            }
-        },
-        "discount_amt": {
-            "type": [
-                "integer"
-            ],
-            "description": "amount discounted",
-            "example": 0
-        },
-        "shipcode": {
-            "type": [
-                "string"
-            ],
-            "description": "shipping code",
-            "example": "Ground (5-7 days)"
-        },
-        "ip_address": {
-            "type": [
-                "string"
-            ],
-            "description": "ip address used to place order",
-            "example": "68.7.2.222"
-        },
-        "attributes": {
-            "type": [
-                "object"
-            ],
-            "description": "sku attributes",
-            "properties": {}
-        },
-        "sku": {
-            "type": [
-                "integer"
-            ],
-            "description": "sku number",
-            "example": 299
-        },
-        "unit_tax": {
-            "type": [
-                "integer"
-            ],
-            "description": "unit tax",
-            "example": 0
-        },
-        "quantity": {
-            "type": [
-                "integer"
-            ],
-            "description": "quantity of sku in order",
-            "example": 1
-        },
-        "sku_title": {
-            "type": [
-                "string"
-            ],
-            "description": "sku title",
-            "example": "test"
-        },
-        "unit_price": {
-            "type": [
-                "number"
-            ],
-            "description": "unit price for sku",
-            "example": 1
-        }
-    },
+    "type": "object",
+    "definitions": {},
     "links": [
         {
-            "description": "Order fetch request.",
-            "href": "/order_pull",
-            "method": "POST",
+            "description": "order_pull_v1",
+            "href": "/order_pull_v1",
+            "method": "post",
             "rel": "instances",
             "schema": {
-                "type": [
-                    "object"
-                ],
+                "type": "object",
                 "properties": {
                     "version": {
-                        "$ref": "#/definitions/version"
+                        "type": "integer",
+                        "description": "Action Version",
+                        "example": 1
                     },
                     "action": {
-                        "$ref": "#/definitions/action"
+                        "type": "string",
+                        "description": "Action Name name",
+                        "example": "order_pull"
                     },
                     "data": {
-                        "type": [
-                            "object"
-                        ],
+                        "type": "object",
                         "properties": {
                             "single": {
-                                "$ref": "#/definitions/single"
+                                "type": "integer",
+                                "description": "requesting single order?",
+                                "example": 0
                             },
                             "order": {
-                                "type": [
-                                    "object"
-                                ],
+                                "type": "object",
                                 "properties": {
                                     "channel_refnum": {
-                                        "$ref": "#/definitions/channel_refnum"
+                                        "type": "integer",
+                                        "description": "channel reference number for order",
+                                        "example": 496
                                     }
                                 }
                             },
                             "client_id": {
-                                "$ref": "#/definitions/client_id"
+                                "description": "RetailOPS client id",
+                                "readOnly": true,
+                                "type": "integer",
+                                "example": 497
                             },
                             "channel": {
-                                "type": [
-                                    "object"
-                                ],
+                                "type": "object",
                                 "properties": {
                                     "id": {
-                                        "$ref": "#/definitions/channel/definitions/id"
+                                        "type": "integer",
+                                        "example": 21
                                     }
                                 }
                             },
                             "page_state": {
-                                "$ref": "#/definitions/page_state"
+                                "type": "integer",
+                                "description": "",
+                                "example": "null"
                             },
                             "max_page_size": {
-                                "$ref": "#/definitions/max_page_size"
+                                "type": "integer",
+                                "description": "maximum number of records to include in paged response",
+                                "example": 50
                             }
                         }
                     }
@@ -558,123 +81,264 @@
                 "type": "object",
                 "properties": {
                     "next_page_state": {
-                        "type": [
-                            "integer"
-                        ],
+                        "type": "integer",
                         "example": 0
                     },
                     "next_order_refnum": {
-                        "type": [
-                            "integer"
-                        ],
+                        "type": "integer",
                         "description": "next order reference number",
                         "example": 496
                     },
                     "orders": {
-                        "type": [
-                            "array"
-                        ],
+                        "type": "array",
                         "items": {
-                            "type": [
-                                "object"
-                            ],
+                            "type": "object",
                             "properties": {
                                 "shipping_amt": {
-                                    "$ref": "#/definitions/shipping_amt"
+                                    "type": "number",
+                                    "description": "",
+                                    "example": 0.25
                                 },
                                 "calc_mode": {
-                                    "$ref": "#/definitions/calc_mode"
+                                    "type": "string",
+                                    "description": "calculation mode",
+                                    "example": "order"
                                 },
                                 "channel_date_created": {
-                                    "$ref": "#/definitions/channel_date_created"
+                                    "type": "integer",
+                                    "description": "date created expressed unix time",
+                                    "example": 1460142547
                                 },
                                 "payment": {
-                                    "type": [
-                                        "array"
-                                    ],
+                                    "type": "array",
                                     "items": {
-                                        "type": [
-                                            "object"
-                                        ],
+                                        "type": "object",
                                         "properties": {
                                             "params": {
-                                                "type": [
-                                                    "object"
-                                                ],
+                                                "type": "object",
                                                 "properties": {
                                                     "channel_refnum": {
-                                                        "$ref": "#/definitions/channel_refnum"
+                                                        "type": "integer",
+                                                        "description": "channel reference number for order",
+                                                        "example": 496
                                                     },
                                                     "payment_type": {
-                                                        "$ref": "#/definitions/payment_type"
+                                                        "type": "string",
+                                                        "description": "payment type",
+                                                        "example": "Visa"
                                                     }
                                                 }
                                             },
                                             "amount": {
-                                                "$ref": "#/definitions/amount"
+                                                "type": "number",
+                                                "description": "payment amount",
+                                                "example": 1.32
                                             },
                                             "type": {
-                                                "$ref": "#/definitions/payment_method"
+                                                "type": "string",
+                                                "description": "payment method",
+                                                "example": "charge"
                                             }
                                         }
                                     }
                                 },
                                 "tax_amt": {
-                                    "$ref": "#/definitions/tax_amt"
+                                    "type": "number",
+                                    "description": "tax amount",
+                                    "example": 0.07
                                 },
                                 "bill_addr": {
-                                    "$ref": "#/definitions/address"
+                                    "type": "object",
+                                    "description": "address",
+                                    "properties": {
+                                        "state_match": {
+                                            "type": "string",
+                                            "description": "state",
+                                            "example": "CA"
+                                        },
+                                        "country_match": {
+                                            "type": "string",
+                                            "description": "Country",
+                                            "example": "US United States"
+                                        },
+                                        "last_name": {
+                                            "type": "string",
+                                            "description": "Last Name",
+                                            "example": "Smith"
+                                        },
+                                        "address2": {
+                                            "type": "string",
+                                            "description": "Address second line",
+                                            "example": "suite 100"
+                                        },
+                                        "city": {
+                                            "type": "string",
+                                            "description": "City",
+                                            "example": "San Diego"
+                                        },
+                                        "postal_code": {
+                                            "type": "string",
+                                            "description": "Postal Code",
+                                            "example": "92101"
+                                        },
+                                        "address1": {
+                                            "type": "string",
+                                            "description": "Address line one",
+                                            "example": "123 Main St"
+                                        },
+                                        "company": {
+                                            "type": "string",
+                                            "description": "Company name",
+                                            "example": "gudTECH"
+                                        },
+                                        "first_name": {
+                                            "type": "string",
+                                            "description": "First Name",
+                                            "example": "John"
+                                        }
+                                    }
                                 },
                                 "gift_message": {
-                                    "$ref": "#/definitions/gift_message"
+                                    "type": "string",
+                                    "description": "gift message",
+                                    "example": "Happy Birthday"
                                 },
                                 "ship_addr": {
-                                    "$ref": "#/definitions/address"
+                                    "type": "object",
+                                    "description": "address",
+                                    "properties": {
+                                        "state_match": {
+                                            "type": "string",
+                                            "description": "state",
+                                            "example": "CA"
+                                        },
+                                        "country_match": {
+                                            "type": "string",
+                                            "description": "Country",
+                                            "example": "US United States"
+                                        },
+                                        "last_name": {
+                                            "type": "string",
+                                            "description": "Last Name",
+                                            "example": "Smith"
+                                        },
+                                        "address2": {
+                                            "type": "string",
+                                            "description": "Address second line",
+                                            "example": "suite 100"
+                                        },
+                                        "city": {
+                                            "type": "string",
+                                            "description": "City",
+                                            "example": "San Diego"
+                                        },
+                                        "postal_code": {
+                                            "type": "string",
+                                            "description": "Postal Code",
+                                            "example": "92101"
+                                        },
+                                        "address1": {
+                                            "type": "string",
+                                            "description": "Address line one",
+                                            "example": "123 Main St"
+                                        },
+                                        "company": {
+                                            "type": "string",
+                                            "description": "Company name",
+                                            "example": "gudTECH"
+                                        },
+                                        "first_name": {
+                                            "type": "string",
+                                            "description": "First Name",
+                                            "example": "John"
+                                        }
+                                    }
                                 },
                                 "channel_refnum": {
-                                    "$ref": "#/definitions/channel_refnum"
+                                    "type": "integer",
+                                    "description": "channel reference number for order",
+                                    "example": 496
                                 },
                                 "customer": {
-                                    "$ref": "#/definitions/customer"
+                                    "type": "object",
+                                    "description": "customer",
+                                    "properties": {
+                                        "email_address": {
+                                            "type": "string",
+                                            "description": "Customer email address",
+                                            "example": "john@gudtech.com"
+                                        },
+                                        "phone_number": {
+                                            "type": "string",
+                                            "description": "customer phone",
+                                            "example": "(619)555-5555"
+                                        },
+                                        "first_name": {
+                                            "type": "string",
+                                            "description": "Firest name",
+                                            "example": "John"
+                                        },
+                                        "last_name": {
+                                            "type": "string",
+                                            "description": "last name",
+                                            "example": "Smith"
+                                        }
+                                    }
                                 },
                                 "discount_amt": {
-                                    "$ref": "#/definitions/discount_amt"
+                                    "type": "integer",
+                                    "description": "amount discounted",
+                                    "example": 0
                                 },
                                 "shipcode": {
-                                    "$ref": "#/definitions/shipcode"
+                                    "type": "string",
+                                    "description": "shipping code",
+                                    "example": "Ground (5-7 days)"
                                 },
                                 "ip_address": {
-                                    "$ref": "#/definitions/ip_address"
+                                    "type": "string",
+                                    "description": "ip address used to place order",
+                                    "example": "68.7.2.222"
                                 },
                                 "attributes": {
-                                    "$ref": "#/definitions/attributes"
+                                    "type": "object",
+                                    "description": "sku attributes",
+                                    "properties": {}
                                 },
                                 "items": {
-                                    "type": [
-                                        "array"
-                                    ],
+                                    "type": "array",
                                     "items": {
-                                        "type": [
-                                            "object"
-                                        ],
+                                        "type": "object",
                                         "properties": {
                                             "channel_refnum": {
-                                                "$ref": "#/definitions/channel_refnum"
+                                                "type": "integer",
+                                                "description": "channel reference number for order",
+                                                "example": 496
                                             },
                                             "sku": {
-                                                "$ref": "#/definitions/sku"
+                                                "type": "integer",
+                                                "description": "sku number",
+                                                "example": 299
                                             },
                                             "unit_tax": {
-                                                "$ref": "#/definitions/unit_tax"
+                                                "type": "integer",
+                                                "description": "unit tax",
+                                                "example": 0
                                             },
                                             "quantity": {
-                                                "$ref": "#/definitions/quantity"
+                                                "type": "integer",
+                                                "description": "quantity of sku in order",
+                                                "example": 1
                                             },
                                             "sku_title": {
-                                                "$ref": "#/definitions/sku_title"
+                                                "type": "string",
+                                                "description": "sku title",
+                                                "example": "test"
                                             },
                                             "unit_price": {
-                                                "$ref": "#/definitions/unit_price"
+                                                "type": "number",
+                                                "description": "unit price for sku",
+                                                "example": 1
                                             }
                                         }
                                     }
@@ -684,9 +348,9 @@
                     }
                 }
             },
-            "title": "order_pull_v1"
+            "title": "/order_pull_v1"
         }
     ],
     "properties": {},
-    "id": "schemata/order_pull"
+    "id": "/order_pull_v1"
 }

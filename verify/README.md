@@ -1,7 +1,9 @@
-RetailOps SDK
+[![RetailOps SDK](http://cdn2.hubspot.net/hubfs/530512/Image/logo.png)](http://retailops.com)
+
+### RetailOps SDK
 ----
 
-Self-verify your RetailOps integration with this SDK. 
+Self-verify your RetailOps integration with this SDK.
 
  1. Download the `Verify Service` release for your operating system here: [RetailOps SDK Releases Page](https://github.com/gudTECH/retailops-sdk/releases)
  2. Unzip downloaded file

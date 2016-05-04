@@ -1,136 +1,155 @@
 {
     "$schema": "http://json-schema.org/draft-04/hyper-schema",
-    "title": "catalog_push",
-    "description": "catalog_push method RetailOPS webhook API version 1",
+    "title": "/catalog_push_v1",
+    "description": "catalog_push_v1",
     "stability": "draft",
     "additionalProperties": true,
-    "type": [
-        "object"
-    ],
-    "definitions": {
-        "identity": {},
-        "action": {
-            "type": [
-                "string"
-            ],
-            "description": "RetailOPS api action name",
-            "example": "catalog_push"
-        },
-        "version": {
-            "type": [
-                "integer"
-            ],
-            "description": "RetailOPS api action version",
-            "example": 1
-        },
-        "event": {
-            "type": [
-                "object"
-            ],
-            "description": "event returned in action response",
-            "properties": {
-                "status": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "status code",
-                    "example": "error"
-                },
-                "error_code": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "error code",
-                    "example": "ERR1234"
-                },
-                "error_message": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "descriptive error message",
-                    "example": "Example error message"
-                },
-                "diagnostic_data": {
-                    "type": [
-                        "array"
-                    ],
-                    "description": "",
-                    "items": {}
-                },
-                "associations": {
-                    "type": [
-                        "array"
-                    ],
-                    "description": "",
-                    "items": {
-                        "type": [
-                            "object"
-                        ],
+    "type": "object",
+    "definitions": {},
+    "links": [
+        {
+            "description": "catalog_push_v1",
+            "href": "/catalog_push_v1",
+            "method": "post",
+            "rel": "instances",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "version": {
+                        "type": "integer",
+                        "description": "Action Version",
+                        "example": 1
+                    },
+                    "action": {
+                        "type": "string",
+                        "description": "Action Name name",
+                        "example": "catalog_push"
+                    },
+                    "catalog_items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "item_type": {
+                                    "type": "string",
+                                    "description": "The type of RetailOps data item being expressed",
+                                    "enum": [
+                                        "sku",
+                                        "product_family",
+                                        "sku_group",
+                                        "collection"
+                                    ]
+                                },
+                                "item_info": {
+                                    "type": "object",
+                                    "description": "Details about the RetailOps data item being expressed",
+                                    "properties": {
+                                        "sku_number": {
+                                            "type": "string"
+                                        },
+                                        "product_id": {
+                                            "type": "string"
+                                        },
+                                        "skugroup_number": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "template_output": {
+                                    "description": "Data structure as provided by the RetailOps feed system template which has been evaluated against the retailops catalog item in question",
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "client_id": {
+                        "type": "integer",
+                        "description": "client ID",
+                        "example": 1
+                    },
+                    "channel": {
+                        "type": "object",
                         "properties": {
-                            "type": {
-                                "type": [
-                                    "string"
-                                ],
-                                "description": "",
-                                "example": "sku"
-                            },
-                            "identity": {
-                                "type": [
-                                    "string"
-                                ],
-                                "description": "",
-                                "example": "S1234"
+                            "id": {
+                                "type": "integer",
+                                "description": "channel ID",
+                                "example": 12
                             }
                         }
                     }
                 }
-            }
-        }
-    },
-    "links": [
-        {
-            "description": "Catalog push method.",
-            "href": "/catalog_push",
-            "method": "POST",
-            "rel": "instances",
-            "schema": {
-                "type": [
-                    "object"
-                ],
-                "properties": {
-                    "version": {
-                        "$ref": "#/definitions/version"
-                    },
-                    "action": {
-                        "$ref": "#/definitions/action"
-                    },
-                    "data": {
-                        "type": [
-                            "object"
-                        ],
-                        "description": "the contents and structure of the data object are specific to the channel integratin and must be provided to gudTECH by the channel integrator",
-                        "properties": {}
-                    }
-                }
             },
             "targetSchema": {
-                "type": [
-                    "object"
-                ],
+                "type": "object",
                 "properties": {
                     "events": {
-                        "type": [
-                            "array"
-                        ],
+                        "type": "array",
                         "items": {
-                            "$ref": "#/definitions/event"
+                            "type": "object",
+                            "description": "event returned in action response",
+                            "properties": {
+                                "event_type": {
+                                    "type": "string",
+                                    "description": "event type",
+                                    "enum": [
+                                        "error",
+                                        "warning",
+                                        "info"
+                                    ],
+                                    "example": "error"
+                                },
+                                "code": {
+                                    "type": "string",
+                                    "description": "error/warning code",
+                                    "example": "ERR1234"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "descriptive error/warning message",
+                                    "example": "Example error message"
+                                },
+                                "diagnostic_data": {
+                                    "type": "string",
+                                    "description": "",
+                                    "items": {}
+                                },
+                                "associations": {
+                                    "type": "array",
+                                    "description": "",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "identifier_type": {
+                                                "type": "string",
+                                                "description": "Type of identifier being provided",
+                                                "enum": [
+                                                    "order_id",
+                                                    "order_refnum",
+                                                    "orderitem_id",
+                                                    "orderitem_refnum",
+                                                    "shipment_id",
+                                                    "shipmentitem_id",
+                                                    "product_id",
+                                                    "sku_number"
+                                                ],
+                                                "example": "sku_number"
+                                            },
+                                            "identifier": {
+                                                "type": "string",
+                                                "description": "identify value corresponding to the type",
+                                                "example": "S1234"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             },
-            "title": "catalog_push"
+            "title": "/catalog_push_v1"
         }
     ],
     "properties": {},
-    "id": "schemata/catalog_push_v1"
+    "id": "/catalog_push_v1"
 }
