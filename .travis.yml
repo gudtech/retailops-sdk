@@ -9,18 +9,15 @@ before_script:
 - docker run -d --name=example_server -p 5000:5000 -it -v $PWD/retailops-asp-dotnet-api-example:/app
   microsoft/aspnet:1.0.0-rc1-update1-coreclr /app/travis.sh
 - while ! echo exit | curl http://localhost:5000; do sleep 10; done
-script: go run $GOPATH/src/github.com/gudtech/retailops-sdk/verify-service/bin/verify-service.go
+script: go run $GOPATH/src/github.com/gudtech/retailops-sdk/verify/bin/verify.go
   -schema-path $GOPATH/src/github.com/gudtech/retailops-sdk/schema/schemata
-after_success: pushd verify-service && bash release.sh && popd
+after_success: pushd verify && bash generate_packages.sh && popd
 deploy:
   provider: releases
   api_key:
     secure: sH3jolMauCpxB+clnomDfO170p+OnlzMe8slA9nfKOvp7t5TgBys0QnYAraYwVRQ3RBLc6IWdnepWhmuqBiZ7YMkULXajCqdVTwLjF+C0plmieES3Mvyx9eCRuoU4FsJTmRSwuk1deE/aOpwLITBaN/TdIBk2Dz4bBBET2q3Oevr8GMCCXjE1naxcY3XeOVhzJMH5KiicfUX6RmPrjOTyt8FDlYZHWzAKzSLOVuQT4GVjS49Q9bg/fR8hMsl1uvH5z2p6LOzL/d/qt5Bdp0K4flXOK9wsnB2X4Qz/6xM4CEuUPQW/E0MkyIa4YzswAnNWgZ4oYaYL3lSXndOlS0OzXNJLuG9qil17WfpAZ0tTYHQn8zVEdh3MdKuzQ49UMRLpS2pYfqRAivwxSVT2WhCMbfDKN0c9EMg/w/mJEbaZsBGJSqtXJNhgA5Du88R3yECYYfbHZXa8Fvohu0Djbv68r5nz9laWz++6l78jdEYBR+9oZRq/sDALLL2Qr5ubIbWOTucL+jZOZbJ1qV9iDQb9yRmLosGFoD3mTcRlnIh6zyJt5l7D5/9eaOVjyPEwdn7PJPvNvDnv05bO2KInhJyCSD7pRIlEkxOcUIDCD/0wqe7wJxmIZoypiERLm+y/VyQ7K9RA5ufiCE+vyDjGtsgkjilb8RRy23eN4YpEW2pWp0=
   file:
-    - verify-service/artifacts/verify-service_darwin_amd64.zip
-    - verify-service/artifacts/verify-service_linux_amd64.zip
-    - verify-service/artifacts/verify-service_windows_amd64.zip
+    - verify/artifacts/verify-*.zip
   on:
     tags: true
     repo: gudTECH/retailops-sdk
-    branch: web-hook-design

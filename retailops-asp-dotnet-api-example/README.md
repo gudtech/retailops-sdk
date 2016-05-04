@@ -20,9 +20,9 @@ Once in the directory run the following commands:
 - `dnu build` to rebuild the executable for your environment
 - `dnx web` to start the application on http://localhost:5000. (leave this command prompt open)  
 
-After the ASP .NET application is running, open a second command prompt, and navigate to the `verify-service_windows` folder
+After the ASP .NET application is running, open a second command prompt, and navigate to the `verify` release folder
 and run:
-- `verify-service-windows-amd64-2016-05-03-1ace8 -schema-path ".\schema\schemata"`
+- `verify.exe -schema-path ".\schema\schemata"`
 
 If the command is succesful, you'll see something like this:
 ```Bash

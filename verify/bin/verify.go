@@ -11,7 +11,7 @@ import (
   p "path"
   fp "path/filepath"
 
-  "github.com/gudtech/retailops-sdk/verify-service/verify"
+  "github.com/gudtech/retailops-sdk/verify/verify"
 )
 
 type schemaExample struct {
