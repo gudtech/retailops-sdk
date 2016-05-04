@@ -1,148 +1,44 @@
 {
     "$schema": "http://json-schema.org/draft-04/hyper-schema",
-    "title": "catalog_get_config",
-    "description": "catalog_get_config method RetailOPS webhook API version 1",
+    "title": "/catalog_get_config_v1",
+    "description": "catalog_get_config_v1",
     "stability": "draft",
     "additionalProperties": true,
-    "type": [
-        "object"
-    ],
-    "definitions": {
-        "identity": {},
-        "action": {
-            "type": [
-                "string"
-            ],
-            "description": "RetailOPS api action name",
-            "example": "catalog_get_config"
-        },
-        "version": {
-            "type": [
-                "integer"
-            ],
-            "description": "RetailOPS api action version",
-            "example": 1
-        },
-        "event": {
-            "type": [
-                "object"
-            ],
-            "description": "event returned in action response",
-            "properties": {
-                "handle": {
-                    "type":
-                        "string"
-                    ,
-                    "description": "event type",
-                    "example": "channel_catpush_fail"
-                },
-                "secondary": {
-                    "type": [
-                        "object"
-                    ],
-                    "description": "",
-                    "properties": {
-                        "id": {
-                            "type":
-                                "integer"
-                            ,
-                            "example": 66
-                        },
-                        "concept": {
-                            "type": [
-                                "string"
-                            ],
-                            "example": "sku"
-                        }
-                    }
-                },
-                "data": {
-                    "type": [
-                        "object"
-                    ],
-                    "description": "event data structure",
-                    "properties": {
-                        "sub_code": {
-                            "type": [
-                                "string"
-                            ],
-                            "example": ""
-                        },
-                        "status": {
-                            "type": [
-                                "integer"
-                            ],
-                            "description": "http status code",
-                            "example": 400
-                        },
-                        "is_failure": {
-                            "type": "integer",
-                            "description": "boolean success value represented as integer (0, 1)",
-                            "example": 1
-                        },
-                        "request_url": {
-                            "type": [
-                                "string"
-                            ],
-                            "format": "uri",
-                            "description": "request url for this service action",
-                            "example": "https://t14961.sandbox.mozu.com/api/commerce/catalog/admin/products/PP20?responseFields="
-                        },
-                        "data_items": {
-                            "type": [
-                                "array"
-                            ],
-                            "description": "(key was originally named items, had to be changed to avoid schema conflict) What types are in the array?",
-                            "items": {}
-                        },
-                        "additonal": {
-                            "type": [
-                                "string"
-                            ],
-                            "description": "additional information re: missing or invalid parameters",
-                            "example": "[{\"name\":\"ParameterName\",\"value\":\"PackagWeight.Unit\"}]"
-                        },
-                        "code": {
-                            "type": [
-                                "string"
-                            ],
-                            "description": "error code",
-                            "example": "MISSING_OR_INVALID_PARAMETER"
-                        },
-                        "message": {
-                            "type": [
-                                "string"
-                            ],
-                            "description": "descriptive error message",
-                            "example": "Error: ident c1.channel-55-api_auth not found"
-                        }
-                    }
-                }
-            }
-        }
-    },
+    "type": "object",
+    "definitions": {},
     "links": [
         {
-            "description": "Catalog get config method.",
-            "href": "/catalog_get_config",
-            "method": "POST",
+            "description": "catalog_get_config_v1",
+            "href": "/catalog_get_config_v1",
+            "method": "post",
             "rel": "instances",
             "schema": {
-                "type": [
-                    "object"
-                ],
+                "type": "object",
                 "properties": {
                     "version": {
-                        "$ref": "#/definitions/version"
+                        "type": "integer",
+                        "description": "Action Version",
+                        "example": 1
                     },
                     "action": {
-                        "$ref": "#/definitions/action"
+                        "type": "string",
+                        "description": "Action Name name",
+                        "example": "catalog_get_config"
                     },
-                    "data": {
-                        "type": [
-                            "object"
-                        ],
-                        "properties": {}
+                    "client_id": {
+                        "description": "RetailOPS client id",
+                        "type": "integer",
+                        "example": 497
+                    },
+                    "channel": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "integer",
+                                "description": "channel id",
+                                "example": 21
+                            }
+                        }
                     }
                 }
             },
@@ -150,17 +46,19 @@
                 "type": "object",
                 "properties": {
                     "sku_fanout": {
-                        "type": [
-                            "string"
+                        "type": "string",
+                        "enum": [
+                            "related_skus",
+                            "no_fanout"
                         ],
                         "description": "channel fanout configuration",
-                        "example": "all_skus_for_product"
+                        "example": "no_fanout"
                     }
                 }
             },
-            "title": "catalog_get_config"
+            "title": "/catalog_get_config_v1"
         }
     ],
     "properties": {},
-    "id": "schemata/catalog_get_config_v1"
+    "id": "/catalog_get_config_v1"
 }

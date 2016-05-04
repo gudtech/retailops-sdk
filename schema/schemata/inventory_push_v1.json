@@ -1,446 +1,85 @@
 {
     "$schema": "http://json-schema.org/draft-04/hyper-schema",
-    "title": "inventory_push",
-    "description": "inventory_push method RetailOPS webhook API version 1",
+    "title": "/inventory_push_v1",
+    "description": "inventory_push_v1",
     "stability": "draft",
     "additionalProperties": true,
-    "type": [
-        "object"
-    ],
-    "definitions": {
-        "identity": {},
-        "action": {
-            "type": [
-                "string"
-            ],
-            "description": "RetailOPS api action name",
-            "example": "inventory_push"
-        },
-        "version": {
-            "type": [
-                "integer"
-            ],
-            "description": "RetailOPS api action version",
-            "example": 1
-        },
-        "concept": {
-            "type": [
-                "string"
-            ],
-            "description": "",
-            "example": "sku"
-        },
-        "client_id": {
-            "description": "RetailOPS client id",
-            "type": [
-                "integer"
-            ],
-            "example": 497
-        },
-        "channel": {
-            "type": [
-                "object"
-            ],
-            "description": "channel",
-            "properties": {
-                "client_id": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "client ID",
-                    "example": 1
-                },
-                "id": {
-                    "type": [
-                        "integer"
-                    ],
-                    "example": 21
-                },
-                "appKey": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "application key",
-                    "example": "acme_co.retailops.0.1.0.Release"
-                },
-                "tenant": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "tenant ID",
-                    "example": 15394
-                },
-                "StoreID": {
-                    "type": "string",
-                    "description": "Store ID",
-                    "example": "yhst-18909142938879050075142"
-                },
-                "next_order_refnum": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "next order reference number",
-                    "example": 496
-                },
-                "order_ack_status_id": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "order acknowledgement status id",
-                    "example": 32
-                },
-                "order_fulfilled_status_id": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "order fulfilled status id",
-                    "example": 34
-                },
-                "order_in_filfillment_status_id": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "order in fulfillment status id",
-                    "example": 33
-                },
-                "email_return": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean",
-                    "example": 0
-                },
-                "inv_suspended_instock": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean",
-                    "example": 0
-                },
-                "unset_other_media": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean",
-                    "example": 0
-                },
-                "import_order_attrs": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "",
-                    "example": ""
-                },
-                "base_uri": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "uri",
-                    "example": "http://172.16.4.130/magento1921"
-                },
-                "express_configurable_super_links": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean",
-                    "example": 0
-                },
-                "unset_other_attributes": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean",
-                    "example": 0
-                },
-                "push_cancel": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean",
-                    "example": 0
-                },
-                "inv_suspended_mode": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "",
-                    "example": "null"
-                },
-                "email_invoice": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean",
-                    "example": 0
-                },
-                "email_tracking": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "boolean",
-                    "example": 0
-                }
-            }
-        },
-        "sku": {
-            "type": [
-                "object"
-            ],
-            "description": "product sku",
-            "properties": {
-                "sku_num": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "sku number (id)",
-                    "example": "53"
-                },
-                "sellable": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "number of units available to sale",
-                    "example": 5
-                },
-                "unclaimed": {
-                    "type": [
-                        "integer"
-                    ],
-                    "desciption": "unclaimed units",
-                    "example": 0
-                },
-                "zones": {
-                    "type": [
-                        "array"
-                    ],
-                    "description": "",
-                    "items": {
-                        "type": [
-                            "object"
-                        ],
-                        "description": "facilty zone",
-                        "properties": {
-                            "zone": {
-                                "type": [
-                                    "string"
-                                ],
-                                "description": "zone name",
-                                "example": "default"
-                            },
-                            "pick": {
-                                "type": [
-                                    "integer"
-                                ],
-                                "description": "",
-                                "example": 0
-                            },
-                            "npick": {
-                                "type": [
-                                    "integer"
-                                ],
-                                "description": "",
-                                "example": 5
-                            }
-                        }
-                    }
-                },
-                "facility": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "facility name",
-                    "example": "testco"
-                },
-                "est_ship": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "estimated ship date",
-                    "example": "2016-04-22T11:02:47-07:00"
-                },
-                "vendor": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "vendor name",
-                    "example": "002_Acme Corp"
-                },
-                "qty_available": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "quantity available",
-                    "example": 24
-                },
-                "breakdown_inventory": {
-                    "type": [
-                        "integer"
-                    ],
-                    "description": "",
-                    "example": 0
-                }
-            }
-        },
-        "event": {
-            "type": [
-                "object"
-            ],
-            "description": "event returned in action response",
-            "properties": {
-                "status": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "status code",
-                    "example": "error"
-                },
-                "error_code": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "error code",
-                    "example": "ERR1234"
-                },
-                "error_message": {
-                    "type": [
-                        "string"
-                    ],
-                    "description": "descriptive error message",
-                    "example": "Example error message"
-                },
-                "diagnostic_data": {
-                    "type": [
-                        "array"
-                    ],
-                    "description": "",
-                    "items": {}
-                },
-                "associations": {
-                    "type": [
-                        "array"
-                    ],
-                    "description": "",
-                    "items": {
-                        "type": [
-                            "object"
-                        ],
-                        "properties": {
-                            "type": {
-                                "type": [
-                                    "string"
-                                ],
-                                "description": "",
-                                "example": "sku"
-                            },
-                            "identity": {
-                                "type": [
-                                    "string"
-                                ],
-                                "description": "",
-                                "example": "S1234"
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    },
+    "type": "object",
+    "definitions": {},
     "links": [
         {
-            "description": "Inventory push method.",
-            "href": "/inventory_push",
-            "method": "POST",
+            "description": "inventory_push_v1",
+            "href": "/inventory_push_v1",
+            "method": "post",
             "rel": "instances",
             "schema": {
-                "type": [
-                    "object"
-                ],
+                "type": "object",
                 "properties": {
                     "version": {
-                        "$ref": "#/definitions/version"
+                        "type": "integer",
+                        "description": "Action Version",
+                        "example": 1
                     },
                     "action": {
-                        "$ref": "#/definitions/action"
+                        "type": "string",
+                        "description": "Action Name name",
+                        "example": "inventory_push"
                     },
-                    "data": {
-                        "type": [
-                            "object"
-                        ],
-                        "properties": {
-                            "inventory": {
-                                "type": [
-                                    "object"
-                                ],
-                                "properties": {
-                                    "data": {
-                                        "type": [
-                                            "object"
-                                        ],
+                    "inventory_updates": {
+                        "type": "array",
+                        "description": "List of inventory item updates",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "sku": {
+                                    "type": "string",
+                                    "description": "sku number",
+                                    "example": "S12345"
+                                },
+                                "quantity_available": {
+                                    "type": "integer",
+                                    "description": "quantity available",
+                                    "example": 24
+                                },
+                                "quantity_detail": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
                                         "properties": {
-                                            "sku": {
-                                                "$ref": "#/definitions/sku/properties/sku_num"
+                                            "estimated_availability_date": {
+                                                "type": "string",
+                                                "description": "estimated availability date"
                                             },
-                                            "id": {
-                                                "$ref": "#/definitions/channel/properties/id"
+                                            "total_sellable_quantity": {
+                                                "type": "integer",
+                                                "description": "number of units available to sale",
+                                                "example": 5
                                             },
-                                            "concept": {
-                                                "$ref": "#/definitions/concept"
+                                            "unclaimed_quantity": {
+                                                "type": "integer",
+                                                "example": 0
                                             },
-                                            "qty_breakdown": {
-                                                "type": [
-                                                    "array"
-                                                ],
-                                                "description": "inventory quantities",
-                                                "items": {
-                                                    "type": [
-                                                        "object"
-                                                    ],
-                                                    "properties": {
-                                                        "est_ship": {
-                                                            "$ref": "#/definitions/sku/properties/est_ship"
-                                                        },
-                                                        "reserving_orders": {
-                                                            "type": [
-                                                                "array"
-                                                            ],
-                                                            "description": "order ids",
-                                                            "items": {
-                                                                "type": [
-                                                                    "string"
-                                                                ]
-                                                            }
-                                                        },
-                                                        "sellable": {
-                                                            "$ref": "#/definitions/sku/properties/sellable"
-                                                        },
-                                                        "unclaimed": {
-                                                            "$ref": "#/definitions/sku/properties/unclaimed"
-                                                        },
-                                                        "vendor": {
-                                                            "$ref": "#/definitions/sku/properties/vendor"
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "qty_available": {
-                                                "$ref": "#/definitions/sku/properties/qty_available"
+                                            "vendor": {
+                                                "type": "string",
+                                                "description": "vendor name"
                                             }
                                         }
                                     }
                                 }
-                            },
-                            "client_id": {
-                                "$ref": "#/definitions/channel/properties/client_id"
-                            },
-                            "channel": {
-                                "type": [
-                                    "object"
-                                ],
-                                "properties": {
-                                    "id": {
-                                        "$ref": "#/definitions/channel/properties/id"
-                                    }
-                                }
+                            }
+                        }
+                    },
+                    "client_id": {
+                        "type": "integer",
+                        "description": "client ID",
+                        "example": 1
+                    },
+                    "channel": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "integer",
+                                "example": 21
                             }
                         }
                     }
@@ -450,18 +89,73 @@
                 "type": "object",
                 "properties": {
                     "events": {
-                        "type": [
-                            "array"
-                        ],
+                        "type": "array",
                         "items": {
-                            "$ref": "#/definitions/event"
+                            "type": "object",
+                            "description": "event returned in action response",
+                            "properties": {
+                                "event_type": {
+                                    "type": "string",
+                                    "description": "event type",
+                                    "enum": [
+                                        "error",
+                                        "warning",
+                                        "info"
+                                    ],
+                                    "example": "error"
+                                },
+                                "code": {
+                                    "type": "string",
+                                    "description": "error/warning code",
+                                    "example": "ERR1234"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "descriptive error/warning message",
+                                    "example": "Example error message"
+                                },
+                                "diagnostic_data": {
+                                    "type": "string",
+                                    "description": "",
+                                    "items": {}
+                                },
+                                "associations": {
+                                    "type": "array",
+                                    "description": "",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "identifier_type": {
+                                                "type": "string",
+                                                "description": "Type of identifier being provided",
+                                                "enum": [
+                                                    "order_id",
+                                                    "order_refnum",
+                                                    "orderitem_id",
+                                                    "orderitem_refnum",
+                                                    "shipment_id",
+                                                    "shipmentitem_id",
+                                                    "product_id",
+                                                    "sku_number"
+                                                ],
+                                                "example": "sku_number"
+                                            },
+                                            "identifier": {
+                                                "type": "string",
+                                                "description": "identify value corresponding to the type",
+                                                "example": "S1234"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             },
-            "title": "inventory_push"
+            "title": "/inventory_push_v1"
         }
     ],
     "properties": {},
-    "id": "schemata/inventory_push_v1"
+    "id": "/inventory_push_v1"
 }
