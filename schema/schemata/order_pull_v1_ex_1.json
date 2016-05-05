@@ -1,16 +1,14 @@
 {
     "version": 1,
     "action": "order_pull_v1",
-    "data": {
-        "single": 0,
-        "order": {
-            "channel_refnum": "496"
-        },
-        "client_id": 497,
-        "channel": {
-            "id": 21
-        },
-        "page_state": 0,
-        "max_page_size": 50
+    "page_token": " ",
+    "specific_orders": [
+        {
+            "channel_refnum": "495"
+        }
+    ],
+    "client_id": 1,
+    "channel": {
+        "id": 21
     }
 }

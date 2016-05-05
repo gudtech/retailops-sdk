@@ -97,8 +97,7 @@ namespace dotnet_example_api.Models
     
     public class OrderPullResponse
     {
-        public int next_page_state {get; set;}
-        public string next_order_refnum {get; set;}
+        public string next_page_token {get; set;}
         public Order[] orders {get; set;}
     }
 

@@ -118,7 +118,12 @@ namespace dotnet_example_api.Controllers
                 return HttpNotFound();
             }
             
-            return new ObjectResult(response);
+            var result = new {
+              status = "success",
+              events = response  
+            };
+            
+            return new ObjectResult(result);
         }
         
         [HttpPost("order_shipment_submit_v1")]
@@ -144,7 +149,12 @@ namespace dotnet_example_api.Controllers
                 return HttpNotFound();
             }
             
-            return new ObjectResult(response);
+            var result = new {
+              status = "success",
+              events = response  
+            };
+            
+            return new ObjectResult(result);
         }
         
         [HttpPost("order_settle_payment_v1")]

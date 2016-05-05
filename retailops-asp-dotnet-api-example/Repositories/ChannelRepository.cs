@@ -128,8 +128,7 @@ namespace dotnet_example_api.Repositories
            orders.Add(newOrder);
            
            OrderPullResponse response = new OrderPullResponse(){
-               next_page_state = 0,
-               next_order_refnum = "496",
+               next_page_token = "",
                orders = orders.ToArray()
            };
                       
