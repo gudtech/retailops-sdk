@@ -939,7 +939,7 @@
                                                         "example": 6
                                                     },
                                                     "method": {
-                                                        "type": "integer",
+                                                        "type": "string",
                                                         "description": "",
                                                         "example": "channel"
                                                     },
