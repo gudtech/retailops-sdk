@@ -1,6 +1,11 @@
 #!/bin/bash
 set -ex
 
+if [[ $TRAVIS_TAG == "" ]]; then
+  echo "$TRAVIS_TAG not set. skipping artifact build."
+  exit 0
+fi
+
 DATE_STR=$(date +%Y-%m-%d)
 GITC=$(git rev-parse HEAD)
 TRUNC_GITC=${GITC:35:40}
