@@ -47,14 +47,14 @@ func main() {
       os.Exit(1)
     }
 
-    fmt.Println(len(verPairs),"REQUESTS TO BE GENERATED")
+    fmt.Println(len(verPairs),"TESTS TO BE GENERATED")
     var thereWasAnError bool = false
     for index,verPair := range verPairs {
       fmt.Println(HR)
-      fmt.Printf("REQUEST %d (%s)\n", index+1, p.Base(verPair.examplePath))
+      fmt.Printf("TEST %d (%s)\n", index+1, p.Base(verPair.examplePath))
       err = request(*baseURLPtr, verPair.schemaPath, verPair.examplePath, *verbosePtr)
       if err != nil {
-        fmt.Printf("\n-- REQUEST %d FAILED: %s\n", index+1, err.Error())
+        fmt.Printf("\n-- TEST %d FAILED: %s\n", index+1, err.Error())
         if *verbosePtr {
           fmt.Println("")
         }
@@ -67,7 +67,7 @@ func main() {
         if *verbosePtr {
           fmt.Println("")
         }
-        fmt.Printf("REQUEST %d WAS A SUCCESS\n", index+1)
+        fmt.Printf("TEST %d WAS A SUCCESS\n", index+1)
         if *verbosePtr {
           fmt.Println("")
         }
@@ -96,7 +96,7 @@ func main() {
 
     for _,examplePath := range examples {
       // fmt.Println(examplePath)
-      fmt.Println("1 REQUEST TO BE GENERATED")
+      fmt.Println("1 TEST TO BE GENERATED")
       err = request(*baseURLPtr, *schemaPathPtr, examplePath, *verbosePtr)
       if err != nil {
         fmt.Println(err.Error())
