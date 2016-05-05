@@ -850,7 +850,8 @@
                         "properties": {
                             "channel_refnum": {
                                 "type": "string",
-                                "description": "Channel reference number for one of the desired orders"
+                                "description": "Channel reference number for one of the desired orders",
+                                "example": "141"
                             }
                         }
                     }
