@@ -47,9 +47,6 @@ for PLATFORM in {darwin,linux,windows}; do
   zip -r $ZIPNAME $FOLDERNAME
 done
 
-rm -r $(ls | grep -v zip)
+rm -rf $(ls | grep -v zip)
 
 popd
-
-
-# rm -r !\(artifacts/*.zip\) # comment out of if you want pre-packaged files
