@@ -120,7 +120,7 @@ namespace dotnet_example_api.Controllers
             
             var result = new {
               status = "success",
-              events = response  
+              events = response.events  
             };
             
             return new ObjectResult(result);
@@ -151,7 +151,7 @@ namespace dotnet_example_api.Controllers
             
             var result = new {
               status = "success",
-              events = response  
+              events = response.events  
             };
             
             return new ObjectResult(result);
