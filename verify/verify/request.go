@@ -5,7 +5,7 @@ import (
   "io"
   "io/ioutil"
 
-  // "strings"
+  "strings"
 
   "encoding/json"
 
@@ -142,7 +142,7 @@ func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, request
   */
   requestUrl.Path = fmt.Sprintf("%s%s", basePath, link.Href)
   response,err := client.Do(&http.Request {
-    Method: link.Method,
+    Method: strings.ToUpper(link.Method),
     URL: requestUrl,
   })
   if err != nil {
