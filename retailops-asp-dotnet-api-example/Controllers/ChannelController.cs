@@ -82,7 +82,7 @@ namespace dotnet_example_api.Controllers
             return new ObjectResult(response);
         }
         
-        [HttpPost("order_acknowledge")]
+        [HttpPost("order_acknowledge_v1")]
         public IActionResult order_acknowledge([FromBody]string request)
         {
             EventResponse response = ChannelRepo.order_acknowledge();
