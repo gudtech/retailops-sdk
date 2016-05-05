@@ -111,19 +111,14 @@ namespace dotnet_example_api.Controllers
         [HttpPost("order_cancel_v1")]
         public IActionResult order_cancel([FromBody]string request)
         {
-            EventResponse response = ChannelRepo.order_cancel();
+            EventResponseWithStatus response = ChannelRepo.order_cancel();
 
             if (response == null)
             {
                 return HttpNotFound();
             }
             
-            var result = new {
-              status = "success",
-              events = response.events  
-            };
-            
-            return new ObjectResult(result);
+            return new ObjectResult(response);
         }
         
         [HttpPost("order_shipment_submit_v1")]
@@ -142,19 +137,14 @@ namespace dotnet_example_api.Controllers
         [HttpPost("order_complete_v1")]
         public IActionResult order_complete([FromBody]string request)
         {
-            EventResponse response = ChannelRepo.order_complete();
+            EventResponseWithStatus response = ChannelRepo.order_complete();
 
             if (response == null)
             {
                 return HttpNotFound();
             }
             
-            var result = new {
-              status = "success",
-              events = response.events  
-            };
-            
-            return new ObjectResult(result);
+            return new ObjectResult(response);
         }
         
         [HttpPost("order_settle_payment_v1")]

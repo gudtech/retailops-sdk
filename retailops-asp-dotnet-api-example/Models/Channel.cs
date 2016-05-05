@@ -22,6 +22,11 @@ namespace dotnet_example_api.Models
         public Event[] events {get; set;}
     }
     
+    public class EventResponseWithStatus
+    {
+        public string status {get; set;}
+        public Event[] events {get; set;}
+    }
     
     public class Association
     {
