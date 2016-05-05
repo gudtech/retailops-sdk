@@ -60,7 +60,7 @@ type V1FileLink struct {
   Title          string `json:"title"`
 }
 
-func Request(baseUrlStr string, hyperSchema io.Reader, example io.Reader) (err error) {
+func Request(baseUrlStr string, hyperSchema io.Reader, example io.Reader, verbose bool) (err error) {
   requestUrl,err := url.Parse(baseUrlStr)
   if err != nil {
     return
@@ -77,7 +77,7 @@ func Request(baseUrlStr string, hyperSchema io.Reader, example io.Reader) (err e
   }
 
   for _,link := range v1file.Links {
-    err = requestAgainstLink(v1file, link, basePath, requestUrl, exampleBytes)
+    err = requestAgainstLink(v1file, link, basePath, requestUrl, exampleBytes, verbose)
     if err != nil {
       return err
     }
@@ -85,7 +85,7 @@ func Request(baseUrlStr string, hyperSchema io.Reader, example io.Reader) (err e
   return
 }
 
-func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, requestUrl *url.URL, exampleBytes []byte) (err error) {
+func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, requestUrl *url.URL, exampleBytes []byte, verbose bool) (err error) {
   client := &http.Client{}
 
   /*
@@ -115,11 +115,14 @@ func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, request
   /*
     Echo request to be performed
   */
-  fmt.Println("HTTP request:", strings.ToUpper(link.Method), fmt.Sprintf("%s%s", basePath, link.Href))
-  // fmt.Println("schema (with definitions omitted):")
-  // fmt.Println(indentedReqSchemaStr)
-  fmt.Println("HTTP request body:")
-  fmt.Println(exampleStr)
+  if verbose {
+    fmt.Println("HTTP request:", strings.ToUpper(link.Method), fmt.Sprintf("%s%s", basePath, link.Href))
+
+    // fmt.Println("schema (with definitions omitted):")
+    // fmt.Println(indentedReqSchemaStr)
+    fmt.Println("HTTP request body:")
+    fmt.Println(exampleStr)
+  }
 
   result,err := schema.Validate(reqSchemaLoader, exampleDataLoader)
   if err != nil {
@@ -127,12 +130,11 @@ func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, request
     return err
   } else if !result.Valid() {
     // TODO: iterate over result errors
-    fmt.Printf("validation failures:\n")
+    fmt.Printf("Failure validating outgoing test:\n")
     for _,resultErr := range result.Errors() {
       fmt.Printf("- %s\n", resultErr)
     }
-    fmt.Println()
-    return fmt.Errorf("outgoing example invalid")
+    return fmt.Errorf("outgoing test data was invalid")
   }
 
   // fmt.Println("example is valid:", result.Valid())
@@ -164,13 +166,17 @@ func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, request
   if err != nil {
     return err
   }
-  fmt.Println("HTTP response status code:",response.StatusCode)
-  fmt.Println("HTTP response body:")
-  fmt.Println(indentedResp)
+  if verbose {
+    fmt.Println("HTTP response status code:",response.StatusCode)
+    fmt.Println("HTTP response body:")
+    fmt.Println(indentedResp)
+  }
 
   respDataLoader := schema.NewStringLoader(string(responseBytes))
   result,err = schema.Validate(respSchemaLoader, respDataLoader)
-  fmt.Println("response valid:", result.Valid())
+  if verbose {
+    fmt.Println("response valid:", result.Valid())
+  }
   if !result.Valid() {
     fmt.Println("reason(s):")
     for _,validationError := range result.Errors() {
