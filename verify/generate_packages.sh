@@ -1,15 +1,19 @@
 #!/bin/bash
 set -ex
 
-if [[ $TRAVIS_TAG == "" ]]; then
+if [[ $TRAVIS_TAG == "" && $TRAVIS ]]; then
   echo "TRAVIS_TAG not set. skipping artifact build."
   exit 0
 fi
 
-DATE_STR=$(date +%Y-%m-%d)
-GITC=$(git rev-parse HEAD)
-TRUNC_GITC=${GITC:35:40}
-RELEASE_NAME=$DATE_STR-$TRUNC_GITC
+if [[ $TRAVIS_TAG == "" ]]; then
+  DATE_STR=$(date +%Y-%m-%d)
+  GITC=$(git rev-parse HEAD)
+  TRUNC_GITC=${GITC:35:40}
+  RELEASE_NAME=$DATE_STR-$TRUNC_GITC
+else
+  RELEASE_NAME=$TRAVIS_TAG
+fi
 GO_VERSION=1.6
 
 # docker build -t verify .

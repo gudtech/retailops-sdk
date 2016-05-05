@@ -35,7 +35,6 @@ func main() {
     os.Exit(1)
   }
 
-  fmt.Println(*schemaPathPtr)
   if isDir(*schemaPathPtr) {
     verPairs,err := allExamples(*schemaPathPtr)
     if err != nil {
