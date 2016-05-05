@@ -55,7 +55,7 @@ namespace dotnet_example_api.Models
     {
         public double amount {get; set;}
         public string type {get; set;}
-        public int channel_refnum {get; set;}
+        public string channel_refnum {get; set;}
         public string payment_type {get; set;}
         public object payment_params {get; set;}
     }
@@ -63,7 +63,7 @@ namespace dotnet_example_api.Models
     
     public class OrderItem
     {
-        public int channel_refnum {get; set;}
+        public string channel_refnum {get; set;}
         public int sku {get; set;}
         public double unit_tax {get; set;}
         public int quantity {get; set;}
@@ -81,7 +81,7 @@ namespace dotnet_example_api.Models
         public Address bill_addr {get; set;}
         public string gift_message {get; set;}
         public Address ship_addr {get; set;}
-        public int channel_refnum {get; set;}
+        public string channel_refnum {get; set;}
         public Customer customer {get; set;}
         public double discount_amt {get; set;}
         public string shipcode {get; set;}
@@ -98,7 +98,7 @@ namespace dotnet_example_api.Models
     public class OrderPullResponse
     {
         public int next_page_state {get; set;}
-        public int next_order_refnum {get; set;}
+        public string next_order_refnum {get; set;}
         public Order[] orders {get; set;}
     }
 

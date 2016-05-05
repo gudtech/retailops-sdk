@@ -67,7 +67,7 @@ namespace dotnet_example_api.Repositories
            List<OrderItem> order_items = new List<OrderItem>();
            
            OrderItem orderItem = new OrderItem() {
-               channel_refnum   = 496,
+               channel_refnum   = "496",
                sku              = 299,
                unit_tax         = 0,
                quantity         = 1,
@@ -103,7 +103,8 @@ namespace dotnet_example_api.Repositories
            Customer customer = new Customer(){
                first_name       = "John",
                last_name        = "Smith",
-               email_address    = "john.smith@gmail.com"
+               email_address    = "john.smith@gmail.com",
+               phone_number     = "123 456-7890"
            };
            
            Order newOrder = new Order(){
@@ -115,12 +116,12 @@ namespace dotnet_example_api.Repositories
              bill_addr              = address,
              ship_addr              = address,
              gift_message           = "Happy Birthday",
-             channel_refnum         = 496,
+             channel_refnum         = "496",
              customer               = customer,
              discount_amt           = 0,
              shipcode               = "Ground (5-7 days)",
              ip_address             = "192.168.1.187",
-             attributes             = new string[0],
+             attributes             = new object(),
              items                  = order_items.ToArray()
            }; 
            
@@ -128,7 +129,7 @@ namespace dotnet_example_api.Repositories
            
            OrderPullResponse response = new OrderPullResponse(){
                next_page_state = 0,
-               next_order_refnum = 496,
+               next_order_refnum = "496",
                orders = orders.ToArray()
            };
                       
