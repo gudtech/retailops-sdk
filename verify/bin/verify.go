@@ -46,8 +46,8 @@ func main() {
 
     fmt.Println(len(verPairs),"REQUESTS TO BE GENERATED")
     var thereWasAnError bool = false
-    for _,verPair := range verPairs {
-      fmt.Println("-----------")
+    for index,verPair := range verPairs {
+      fmt.Println("--REQUEST %d-----------", index+1)
       err = request(*baseURLPtr, verPair.schemaPath, verPair.examplePath)
       if err != nil {
         fmt.Println("FAILURE:", err.Error())
