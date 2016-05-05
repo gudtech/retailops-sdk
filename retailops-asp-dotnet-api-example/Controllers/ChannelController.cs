@@ -1,6 +1,7 @@
 using Microsoft.AspNet.Mvc;
 using dotnet_example_api.Repositories;
 using dotnet_example_api.Models;
+using Microsoft.Extensions.Logging;
 
 namespace dotnet_example_api.Controllers
 {
@@ -10,6 +11,14 @@ namespace dotnet_example_api.Controllers
         [FromServices]
         public IChannelRepository ChannelRepo { get; set; } //TODO: add Channel Model
         
+        private readonly ILogger<ChannelController> _logger;
+        
+        public ChannelController(ILogger<ChannelController> logger)
+        {
+            //could inject repository here as well
+            _logger = logger;
+        }
+        
         // The api actions defined below do not parse the incoming JSON included
         // in the request body. In a production application you would parse this JSON
         // and pass the data to your repository where the business logic resides.
@@ -18,6 +27,8 @@ namespace dotnet_example_api.Controllers
         public IActionResult get_channel_config([FromBody]string request)
         {
             ConfigResponse response = ChannelRepo.catalog_get_config();
+            
+            _logger.LogInformation("request body", request);
             
             // the repository methods return a response object if 
             // they are successful, if not they return a null object and 
