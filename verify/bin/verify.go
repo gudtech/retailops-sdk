@@ -57,7 +57,7 @@ func main() {
           thereWasAnError = true
         }
       } else {
-        fmt.Printf("\n-- REQUEST %d WAS A SUCCESS\n\n", index)
+        fmt.Printf("\n-- REQUEST %d WAS A SUCCESS\n\n", index+1)
       }
     }
     fmt.Println("")
