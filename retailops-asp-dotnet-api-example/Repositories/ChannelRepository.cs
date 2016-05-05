@@ -20,14 +20,14 @@ namespace dotnet_example_api.Repositories
             List<Event> responseEvents = new List<Event>();
             
             Association assoc = new Association(){
-                type = "sku",
-                identity = "S1234"
+                identifier_type = "order_id",
+                identifier      = "S1234"
             };
             
             Event responseEvent = new Event(){
-                status          = "error",
-                error_code      = "ERR1234",
-                error_message   = "Example error message",
+                event_type      = "warning",
+                code            = "1234",
+                message         = "Example warning message",
                 diagnostic_data = new Array[0],
                 associations    = new []{assoc}
             };

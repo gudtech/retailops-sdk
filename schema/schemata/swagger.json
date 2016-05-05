@@ -3266,8 +3266,7 @@
                     },
                     "diagnostic_data": {
                         "type": "string",
-                        "description": "",
-                        "items": {}
+                        "description": ""
                     },
                     "associations": {
                         "type": "array",

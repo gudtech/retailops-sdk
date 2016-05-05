@@ -10,11 +10,11 @@ namespace dotnet_example_api.Models
 { 
     public class Event
     {
-        public string status {get; set;}
-        public string error_code {get; set;}
-        public string error_message {get; set;}
+        public string event_type {get; set;}
+        public string code {get; set;}
+        public string message {get; set;}
         public Array diagnostic_data {get; set;}
-        public object[] associations {get; set;}            
+        public Association[] associations {get; set;}            
     }
     
     public class EventResponse
@@ -25,8 +25,8 @@ namespace dotnet_example_api.Models
     
     public class Association
     {
-        public string type {get; set;}
-        public string identity {get; set;}
+        public string identifier_type {get; set;}
+        public string identifier {get; set;}
     }
     
     public class Customer
