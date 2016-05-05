@@ -54,7 +54,7 @@ func main() {
       fmt.Printf("TEST %d (%s)\n", index+1, p.Base(verPair.examplePath))
       err = request(*baseURLPtr, verPair.schemaPath, verPair.examplePath, *verbosePtr)
       if err != nil {
-        fmt.Printf("\n-- TEST %d FAILED: %s\n", index+1, err.Error())
+        fmt.Printf("\nTEST %d FAILED: %s\n", index+1, err.Error())
         if *verbosePtr {
           fmt.Println("")
         }
@@ -67,7 +67,7 @@ func main() {
         if *verbosePtr {
           fmt.Println("")
         }
-        fmt.Printf("TEST %d WAS A SUCCESS\n", index+1)
+        fmt.Printf("\rTEST %d (%s) WAS A SUCCESS\n", index+1, p.Base(verPair.examplePath))
         if *verbosePtr {
           fmt.Println("")
         }
