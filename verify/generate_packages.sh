@@ -5,14 +5,28 @@ DATE_STR=$(date +%Y-%m-%d)
 GITC=$(git rev-parse HEAD)
 TRUNC_GITC=${GITC:35:40}
 RELEASE_NAME=$DATE_STR-$TRUNC_GITC
+GO_VERSION=1.6
 
-docker build -t verify .
+# docker build -t verify .
 if [[ -d artifacts ]]; then
   rm -rf $PWD/artifacts/*
 else
   mkdir $PWD/artifacts
 fi
-docker run --rm -it -v $PWD/artifacts:/artifacts verify
+
+build_platform_binary()
+{
+  docker run \
+    -v $PWD:/go/src/github.com/gudtech/retailops-sdk/verify \
+    -v $PWD/artifacts:/artifacts \
+    -e GOOS=$1 \
+    -e GOARCH=$2 \
+    golang:$GO_VERSION \
+    go build -o /artifacts/verify-$1 /go/src/github.com/gudtech/retailops-sdk/verify/bin/verify.go
+}
+build_platform_binary windows amd64
+build_platform_binary linux amd64
+build_platform_binary darwin amd64
 
 pushd artifacts
 for PLATFORM in {darwin,linux,windows}; do
@@ -32,4 +46,10 @@ for PLATFORM in {darwin,linux,windows}; do
   cp ../README.md $FOLDERNAME/README.md
   zip -r $ZIPNAME $FOLDERNAME
 done
+
+rm -r $(ls | grep -v zip)
+
 popd
+
+
+# rm -r !\(artifacts/*.zip\) # comment out of if you want pre-packaged files

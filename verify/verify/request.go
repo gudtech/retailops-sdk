@@ -115,10 +115,10 @@ func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, request
   /*
     Echo request to be performed
   */
-  fmt.Println(link.Method, fmt.Sprintf("%s%s", basePath, link.Href))
+  fmt.Println("HTTP request:", strings.ToUpper(link.Method), fmt.Sprintf("%s%s", basePath, link.Href))
   // fmt.Println("schema (with definitions omitted):")
   // fmt.Println(indentedReqSchemaStr)
-  // fmt.Println("request data:")
+  fmt.Println("HTTP request body:")
   fmt.Println(exampleStr)
 
   result,err := schema.Validate(reqSchemaLoader, exampleDataLoader)
@@ -164,8 +164,8 @@ func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, request
   if err != nil {
     return err
   }
-  fmt.Println("HTTP status code",response.StatusCode)
-  fmt.Println("data:")
+  fmt.Println("HTTP response status code:",response.StatusCode)
+  fmt.Println("HTTP response body:")
   fmt.Println(indentedResp)
 
   respDataLoader := schema.NewStringLoader(string(responseBytes))

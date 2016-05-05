@@ -19,6 +19,8 @@ type schemaExample struct {
   examplePath string
 }
 
+var HR string = "----------------"
+
 func main() {
   // var err error
 
@@ -46,21 +48,24 @@ func main() {
 
     fmt.Println(len(verPairs),"REQUESTS TO BE GENERATED")
     var thereWasAnError bool = false
-    for _,verPair := range verPairs {
-      fmt.Println("-----------")
+    for index,verPair := range verPairs {
+      fmt.Println(HR)
+      fmt.Printf("REQUEST %d (%s)\n", index+1, p.Base(verPair.examplePath))
       err = request(*baseURLPtr, verPair.schemaPath, verPair.examplePath)
       if err != nil {
-        fmt.Println("FAILURE:", err.Error())
+        fmt.Printf("\n-- REQUEST %d FAILED: %s\n\n", index+1, err.Error())
         if *stopOnError {
           os.Exit(1)
         } else {
           thereWasAnError = true
         }
       } else {
-        fmt.Println("SUCCESS")
+        fmt.Printf("\nREQUEST %d WAS A SUCCESS\n\n", index+1)
       }
     }
-    fmt.Println("-----------")
+    fmt.Println("")
+    fmt.Println(HR)
+    fmt.Println("")
 
     if thereWasAnError {
       fmt.Println("AT LEAST ONE OF THE TEST CASES FAILED")
