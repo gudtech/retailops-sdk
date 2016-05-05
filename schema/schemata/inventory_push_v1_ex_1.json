@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "action": "inventory_push",
+    "inventory_updates": [
+        {
+            "sku": "S12345",
+            "quantity_available": 24,
+            "quantity_detail": [
+                {
+                    "estimated_availability_date": "May 25 2016",
+                    "total_sellable_quantity": 5,
+                    "unclaimed_quantity": 0,
+                    "vendor": "Acme Co"
+                }
+            ]
+        }
+    ],
+    "client_id": 1,
+    "channel": {
+        "id": 21
+    }
+}
