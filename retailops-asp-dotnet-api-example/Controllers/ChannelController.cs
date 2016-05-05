@@ -23,12 +23,12 @@ namespace dotnet_example_api.Controllers
         // in the request body. In a production application you would parse this JSON
         // and pass the data to your repository where the business logic resides.
         
-        [HttpPost("catalog_get_config")]
-        public IActionResult get_channel_config([FromBody]string request)
+        [HttpPost("catalog_get_config_v1")]
+        public IActionResult catalog_get_config_v1([FromBody]string request)
         {
             ConfigResponse response = ChannelRepo.catalog_get_config();
             
-            _logger.LogInformation("request body", request);
+            //_logger.LogInformation("request body", request);
             
             // the repository methods return a response object if 
             // they are successful, if not they return a null object and 
@@ -43,7 +43,7 @@ namespace dotnet_example_api.Controllers
             return new ObjectResult(response);
         }
         
-        [HttpPost("inventory_push")]
+        [HttpPost("inventory_push_v1")]
         public IActionResult inventory_push([FromBody]string request)
         {
             EventResponse response = ChannelRepo.inventory_push();
@@ -56,7 +56,7 @@ namespace dotnet_example_api.Controllers
             return new ObjectResult(response);
         }
         
-        [HttpPost("catalog_push")]
+        [HttpPost("catalog_push_v1")]
         public IActionResult catalog_push([FromBody]string request)
         {
             EventResponse response = ChannelRepo.catalog_push();
@@ -69,7 +69,7 @@ namespace dotnet_example_api.Controllers
             return new ObjectResult(response);
         }
 
-        [HttpPost("order_pull")]
+        [HttpPost("order_pull_v1")]
         public IActionResult order_pull([FromBody]string request)
         {
             OrderPullResponse response = ChannelRepo.order_pull();
@@ -95,7 +95,7 @@ namespace dotnet_example_api.Controllers
             return new ObjectResult(response);
         }
         
-        [HttpPost("order_update")]
+        [HttpPost("order_update_v1")]
         public IActionResult order_update([FromBody]string request)
         {
             EventResponse response = ChannelRepo.order_update();
@@ -108,7 +108,7 @@ namespace dotnet_example_api.Controllers
             return new ObjectResult(response);
         }
         
-        [HttpPost("order_cancel")]
+        [HttpPost("order_cancel_v1")]
         public IActionResult order_cancel([FromBody]string request)
         {
             EventResponse response = ChannelRepo.order_cancel();
@@ -121,7 +121,7 @@ namespace dotnet_example_api.Controllers
             return new ObjectResult(response);
         }
         
-        [HttpPost("order_shipment_submit")]
+        [HttpPost("order_shipment_submit_v1")]
         public IActionResult order_shipment_submit([FromBody]string request)
         {
             EventResponse response = ChannelRepo.order_shipment_submit();
@@ -134,7 +134,7 @@ namespace dotnet_example_api.Controllers
             return new ObjectResult(response);
         }
         
-        [HttpPost("order_complete")]
+        [HttpPost("order_complete_v1")]
         public IActionResult order_complete([FromBody]string request)
         {
             EventResponse response = ChannelRepo.order_complete();
@@ -147,7 +147,7 @@ namespace dotnet_example_api.Controllers
             return new ObjectResult(response);
         }
         
-        [HttpPost("order_settle_payment")]
+        [HttpPost("order_settle_payment_v1")]
         public IActionResult order_settle_payment([FromBody]string request)
         {
             EventResponse response = ChannelRepo.order_settle_payment();
@@ -160,7 +160,7 @@ namespace dotnet_example_api.Controllers
             return new ObjectResult(response);
         }
         
-        [HttpPost("order_returned")]
+        [HttpPost("order_returned_v1")]
         public IActionResult order_returned([FromBody]string request)
         {
             EventResponse response = ChannelRepo.order_returned();

@@ -16,7 +16,7 @@
     ],
     "paths": {
         "/catalog_get_config_v1": {
-            "post": {
+            "POST": {
                 "summary": "catalog_get_config_v1",
                 "description": "Catalog get config method.",
                 "parameters": [
@@ -41,7 +41,7 @@
             }
         },
         "/order_acknowledge_v1": {
-            "post": {
+            "POST": {
                 "summary": "order_acknowledge_v1",
                 "description": "Order acknowledge method.",
                 "parameters": [
@@ -66,7 +66,7 @@
             }
         },
         "/order_cancel_v1": {
-            "post": {
+            "POST": {
                 "summary": "order_cancel_v1",
                 "description": "Order cancel method.",
                 "parameters": [
@@ -91,7 +91,7 @@
             }
         },
         "/catalog_push_v1": {
-            "post": {
+            "POST": {
                 "summary": "catalog_push_v1",
                 "description": "Catalog push method.",
                 "parameters": [
@@ -116,7 +116,7 @@
             }
         },
         "/inventory_push_v1": {
-            "post": {
+            "POST": {
                 "summary": "inventory_push_v1",
                 "description": "Inventory push method.",
                 "parameters": [
@@ -141,7 +141,7 @@
             }
         },
         "/order_complete_v1": {
-            "post": {
+            "POST": {
                 "summary": "order_complete_v1",
                 "description": "Order Complete method.",
                 "parameters": [
@@ -166,7 +166,7 @@
             }
         },
         "/order_pull_v1": {
-            "post": {
+            "POST": {
                 "summary": "order_pull_v1",
                 "description": "Order fetch request.",
                 "parameters": [
@@ -191,7 +191,7 @@
             }
         },
         "/order_returned_v1": {
-            "post": {
+            "POST": {
                 "summary": "order_returned_v1",
                 "description": "Order returned method.",
                 "parameters": [
@@ -216,7 +216,7 @@
             }
         },
         "/order_settle_payment_v1": {
-            "post": {
+            "POST": {
                 "summary": "order_settle_payment_v1",
                 "description": "Order settle payment method.",
                 "parameters": [
@@ -241,7 +241,7 @@
             }
         },
         "/order_shipment_submit_v1": {
-            "post": {
+            "POST": {
                 "summary": "order_shipment_submit_v1",
                 "description": "Order shipment submit method.",
                 "parameters": [
@@ -266,7 +266,7 @@
             }
         },
         "/order_update_v1": {
-            "post": {
+            "POST": {
                 "summary": "order_update_v1",
                 "description": "Order update method.",
                 "parameters": [
