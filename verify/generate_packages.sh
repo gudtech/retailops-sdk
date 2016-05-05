@@ -2,7 +2,7 @@
 set -ex
 
 if [[ $TRAVIS_TAG == "" ]]; then
-  echo "$TRAVIS_TAG not set. skipping artifact build."
+  echo "TRAVIS_TAG not set. skipping artifact build."
   exit 0
 fi
 
