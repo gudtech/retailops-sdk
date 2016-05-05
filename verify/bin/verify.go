@@ -50,16 +50,17 @@ func main() {
       fmt.Printf("--REQUEST %d-----------\n", index+1)
       err = request(*baseURLPtr, verPair.schemaPath, verPair.examplePath)
       if err != nil {
-        fmt.Println("FAILURE:", err.Error())
+        fmt.Printf("-- REQUEST %d FAILED: %s\n", index, err.Error())
         if *stopOnError {
           os.Exit(1)
         } else {
           thereWasAnError = true
         }
       } else {
-        fmt.Println("SUCCESS")
+        fmt.Printf("-- REQUEST %d WAS A SUCCESS\n", index)
       }
     }
+    fmt.Println("")
     fmt.Println("-----------")
 
     if thereWasAnError {
