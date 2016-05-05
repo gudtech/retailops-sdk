@@ -13,7 +13,7 @@ namespace dotnet_example_api.Models
         public string event_type {get; set;}
         public string code {get; set;}
         public string message {get; set;}
-        public Array diagnostic_data {get; set;}
+        public string diagnostic_data {get; set;}
         public Association[] associations {get; set;}            
     }
     

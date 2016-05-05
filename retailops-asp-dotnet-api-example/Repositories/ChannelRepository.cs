@@ -28,7 +28,7 @@ namespace dotnet_example_api.Repositories
                 event_type      = "warning",
                 code            = "1234",
                 message         = "Example warning message",
-                diagnostic_data = new Array[0],
+                diagnostic_data = "",
                 associations    = new []{assoc}
             };
             

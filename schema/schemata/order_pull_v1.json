@@ -37,9 +37,9 @@
                                 "type": "object",
                                 "properties": {
                                     "channel_refnum": {
-                                        "type": "integer",
+                                        "type": "string",
                                         "description": "channel reference number for order",
-                                        "example": 496
+                                        "example": "496"
                                     }
                                 }
                             },
@@ -85,9 +85,9 @@
                         "example": 0
                     },
                     "next_order_refnum": {
-                        "type": "integer",
+                        "type": "string",
                         "description": "next order reference number",
-                        "example": 496
+                        "example": "496"
                     },
                     "orders": {
                         "type": "array",
@@ -118,9 +118,9 @@
                                                 "type": "object",
                                                 "properties": {
                                                     "channel_refnum": {
-                                                        "type": "integer",
+                                                        "type": "string",
                                                         "description": "channel reference number for order",
-                                                        "example": 496
+                                                        "example": "496"
                                                     },
                                                     "payment_type": {
                                                         "type": "string",
@@ -255,9 +255,9 @@
                                     }
                                 },
                                 "channel_refnum": {
-                                    "type": "integer",
+                                    "type": "string",
                                     "description": "channel reference number for order",
-                                    "example": 496
+                                    "example": "496"
                                 },
                                 "customer": {
                                     "type": "object",
@@ -311,9 +311,9 @@
                                         "type": "object",
                                         "properties": {
                                             "channel_refnum": {
-                                                "type": "integer",
+                                                "type": "string",
                                                 "description": "channel reference number for order",
-                                                "example": 496
+                                                "example": "496"
                                             },
                                             "sku": {
                                                 "type": "integer",

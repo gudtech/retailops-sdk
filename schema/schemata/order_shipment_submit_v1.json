@@ -229,9 +229,9 @@
                                         "example": "Will Call"
                                     },
                                     "channel_refnum": {
-                                        "type": "integer",
+                                        "type": "string",
                                         "description": "channel reference number for order",
-                                        "example": 496
+                                        "example": "496"
                                     },
                                     "shipments": {
                                         "type": "array",
@@ -513,8 +513,7 @@
                                 },
                                 "diagnostic_data": {
                                     "type": "string",
-                                    "description": "",
-                                    "items": {}
+                                    "description": ""
                                 },
                                 "associations": {
                                     "type": "array",

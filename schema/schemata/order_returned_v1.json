@@ -151,9 +151,9 @@
                                         "example": "Will Call"
                                     },
                                     "channel_refnum": {
-                                        "type": "integer",
+                                        "type": "string",
                                         "description": "channel reference number for order",
-                                        "example": 496
+                                        "example": "496"
                                     },
                                     "shipments": {
                                         "type": "array",
@@ -472,9 +472,9 @@
                                                     "example": 0
                                                 },
                                                 "channel_order_refnum": {
-                                                    "type": "integer",
+                                                    "type": "string",
                                                     "description": "channel order ref num",
-                                                    "example": 100000084
+                                                    "example": "100000084"
                                                 },
                                                 "item_shipping_amt": {
                                                     "type": "number",
@@ -497,9 +497,9 @@
                                                     "example": 0
                                                 },
                                                 "channel_item_refnum": {
-                                                    "type": "integer",
+                                                    "type": "string",
                                                     "description": "channel item ref num",
-                                                    "example": 88
+                                                    "example": "88"
                                                 },
                                                 "quantity": {
                                                     "type": "integer",
@@ -550,9 +550,9 @@
                                             "type": "object",
                                             "properties": {
                                                 "channel_refnum": {
-                                                    "type": "integer",
+                                                    "type": "string",
                                                     "description": "channel reference number for order",
-                                                    "example": 496
+                                                    "example": "496"
                                                 },
                                                 "order_item_id": {
                                                     "type": "integer",
@@ -609,8 +609,7 @@
                                 },
                                 "diagnostic_data": {
                                     "type": "string",
-                                    "description": "",
-                                    "items": {}
+                                    "description": ""
                                 },
                                 "associations": {
                                     "type": "array",

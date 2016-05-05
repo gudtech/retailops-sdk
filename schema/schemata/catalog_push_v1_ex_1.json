@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "action": "catalog_get_config_v1",
+  "action": "catalog_push_v1",
   "catalog_items": [
     {
         "item_type": "sku",
