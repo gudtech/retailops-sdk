@@ -27,6 +27,8 @@ func main() {
   schemaPathPtr := flag.String("schema-path", "", "path to JSON or directory with JSON")
   baseURLPtr := flag.String("base-url", "http://localhost:5000/api/channel", "base url for sending requests")
   stopOnError := flag.Bool("stop-on-error", true, "stop immediately on error")
+  filterPtr := flag.String("filter", "", "filter test cases by name. ex: 'order' or 'order_cance'")
+  verbosePtr := flag.Bool("verbose", false, "show all outgoing and incoming request data")
 
   flag.Parse()
 
@@ -36,7 +38,7 @@ func main() {
   }
 
   if isDir(*schemaPathPtr) {
-    verPairs,err := allExamples(*schemaPathPtr)
+    verPairs,err := allExamples(*schemaPathPtr,*filterPtr)
     if err != nil {
       fmt.Println("failed:", err.Error())
       os.Exit(1)
@@ -50,19 +52,30 @@ func main() {
     for index,verPair := range verPairs {
       fmt.Println(HR)
       fmt.Printf("REQUEST %d (%s)\n", index+1, p.Base(verPair.examplePath))
-      err = request(*baseURLPtr, verPair.schemaPath, verPair.examplePath)
+      err = request(*baseURLPtr, verPair.schemaPath, verPair.examplePath, *verbosePtr)
       if err != nil {
-        fmt.Printf("\n-- REQUEST %d FAILED: %s\n\n", index+1, err.Error())
+        fmt.Printf("\n-- REQUEST %d FAILED: %s\n", index+1, err.Error())
+        if *verbosePtr {
+          fmt.Println("")
+        }
         if *stopOnError {
           os.Exit(1)
         } else {
           thereWasAnError = true
         }
       } else {
-        fmt.Printf("\nREQUEST %d WAS A SUCCESS\n\n", index+1)
+        if *verbosePtr {
+          fmt.Println("")
+        }
+        fmt.Printf("REQUEST %d WAS A SUCCESS\n", index+1)
+        if *verbosePtr {
+          fmt.Println("")
+        }
       }
     }
-    fmt.Println("")
+    if *verbosePtr {
+      fmt.Println("")
+    }
     fmt.Println(HR)
     fmt.Println("")
 
@@ -84,7 +97,7 @@ func main() {
     for _,examplePath := range examples {
       // fmt.Println(examplePath)
       fmt.Println("1 REQUEST TO BE GENERATED")
-      err = request(*baseURLPtr, *schemaPathPtr, examplePath)
+      err = request(*baseURLPtr, *schemaPathPtr, examplePath, *verbosePtr)
       if err != nil {
         fmt.Println(err.Error())
         os.Exit(1)
@@ -93,9 +106,14 @@ func main() {
   }
 }
 
-func allExamples(dirname string) (verifications []schemaExample, err error) {
+func allExamples(dirname, filter string) (verifications []schemaExample, err error) {
   verifications = make([]schemaExample,0)
-  allSchemasGlob := p.Join(dirname, "*v1.json")
+  var allSchemasGlob string
+  if filter == "" {
+    allSchemasGlob = p.Join(dirname, "*v1.json")
+  } else {
+    allSchemasGlob = p.Join(dirname, fmt.Sprintf("*%s*v1.json", filter))
+  }
   allSchemaPaths,err := fp.Glob(allSchemasGlob)
   if err != nil {
     return
@@ -138,7 +156,7 @@ func isDir(path string) (bool) {
   return err == nil && info.IsDir()
 }
 
-func request(baseUrl, schemaPath, examplePath string) (err error) {
+func request(baseUrl, schemaPath, examplePath string, verbose bool) (err error) {
   f,err := os.Open(schemaPath)
   if err != nil {
     return
@@ -149,7 +167,7 @@ func request(baseUrl, schemaPath, examplePath string) (err error) {
     return
   }
 
-  err = verify.Request(baseUrl, f,exampleF)
+  err = verify.Request(baseUrl, f,exampleF, verbose)
   if err != nil {
     return
   }
