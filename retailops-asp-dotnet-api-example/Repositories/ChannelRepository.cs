@@ -44,7 +44,7 @@ namespace dotnet_example_api.Repositories
         public ConfigResponse catalog_get_config()
         {
             ConfigResponse response = new ConfigResponse();
-            response.sku_fanout = "all_skus_for_product";
+            response.sku_fanout = "related_skus";
             return response;
         }
         
