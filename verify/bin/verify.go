@@ -26,7 +26,7 @@ func main() {
 
   schemaPathPtr := flag.String("schema-path", "", "path to JSON or directory with JSON")
   baseURLPtr := flag.String("base-url", "http://localhost:5000/api/channel", "base url for sending requests")
-  stopOnError := flag.Bool("stop-on-error", true, "stop immediately on error")
+  stopOnError := flag.Bool("stop-on-error", false, "stop immediately on error")
   filterPtr := flag.String("filter", "", "filter test cases by name. ex: 'order' or 'order_cance'")
   verbosePtr := flag.Bool("verbose", false, "show all outgoing and incoming request data")
 
@@ -51,10 +51,10 @@ func main() {
     var thereWasAnError bool = false
     for index,verPair := range verPairs {
       fmt.Println(HR)
-      fmt.Printf("TEST %d (%s)\n", index+1, p.Base(verPair.examplePath))
+      fmt.Printf("TEST %d (%s)", index+1, p.Base(verPair.examplePath))
       err = request(*baseURLPtr, verPair.schemaPath, verPair.examplePath, *verbosePtr)
       if err != nil {
-        fmt.Printf("\nTEST %d FAILED: %s\n", index+1, err.Error())
+        fmt.Printf("\rTEST %d FAILED: %s\n", index+1, err.Error())
         if *verbosePtr {
           fmt.Println("")
         }
