@@ -21,11 +21,11 @@ namespace dotnet_example_api.Repositories
         
         EventResponse order_update();
         
-        EventResponse order_cancel();
+        EventResponseWithStatus order_cancel();
         
         EventResponse order_shipment_submit();
         
-        EventResponse order_complete();
+        EventResponseWithStatus order_complete();
         
         EventResponse order_settle_payment();
         

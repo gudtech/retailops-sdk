@@ -111,7 +111,7 @@ namespace dotnet_example_api.Controllers
         [HttpPost("order_cancel_v1")]
         public IActionResult order_cancel([FromBody]string request)
         {
-            EventResponse response = ChannelRepo.order_cancel();
+            EventResponseWithStatus response = ChannelRepo.order_cancel();
 
             if (response == null)
             {
@@ -137,7 +137,7 @@ namespace dotnet_example_api.Controllers
         [HttpPost("order_complete_v1")]
         public IActionResult order_complete([FromBody]string request)
         {
-            EventResponse response = ChannelRepo.order_complete();
+            EventResponseWithStatus response = ChannelRepo.order_complete();
 
             if (response == null)
             {

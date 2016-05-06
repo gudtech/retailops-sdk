@@ -43,25 +43,46 @@
                                 },
                                 "quantity_detail": {
                                     "type": "array",
+                                    "description": "Detailed breakdown of inventory quantities contributing to the top-line numbers",
                                     "items": {
                                         "type": "object",
                                         "properties": {
+                                            "quantity_type": {
+                                                "type": "string",
+                                                "description": "Type of quantity for this item",
+                                                "enum": [
+                                                    "internal",
+                                                    "external",
+                                                    "inflight"
+                                                ]
+                                            },
                                             "estimated_availability_date": {
                                                 "type": "string",
-                                                "description": "estimated availability date"
+                                                "description": "estimated availability date for one unit"
                                             },
-                                            "total_sellable_quantity": {
+                                            "available_quantity": {
                                                 "type": "integer",
-                                                "description": "number of units available to sale",
-                                                "example": 5
+                                                "description": "Quantity which is presently available for sale"
                                             },
-                                            "unclaimed_quantity": {
+                                            "total_quantity": {
                                                 "type": "integer",
-                                                "example": 0
+                                                "description": "Total quantity, irrespective of sellability or availability"
                                             },
-                                            "vendor": {
+                                            "vendor_name": {
                                                 "type": "string",
-                                                "description": "vendor name"
+                                                "description": "Vendor Name"
+                                            },
+                                            "po": {
+                                                "type": "string",
+                                                "description": "PO number corresponding to inflight quantity considered to be available"
+                                            },
+                                            "po_destination": {
+                                                "type": "string",
+                                                "description": "PO destinatination"
+                                            },
+                                            "facility_name": {
+                                                "type": "string",
+                                                "description": "RetailOps Facility Name"
                                             }
                                         }
                                     }

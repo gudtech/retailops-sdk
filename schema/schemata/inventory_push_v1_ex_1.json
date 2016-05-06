@@ -7,10 +7,13 @@
             "quantity_available": 24,
             "quantity_detail": [
                 {
+                    "quantity_type": "internal",
                     "estimated_availability_date": "May 25 2016",
-                    "total_sellable_quantity": 5,
-                    "unclaimed_quantity": 0,
-                    "vendor": "Acme Co"
+                    "available_quantity": 5,
+                    "total_quantity": 5,
+                    "vendor_name": "Acme Co",
+                    "po": "P132131",
+                    "facility_name": "main"
                 }
             ]
         }

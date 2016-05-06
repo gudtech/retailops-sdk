@@ -33,13 +33,38 @@ namespace dotnet_example_api.Repositories
             };
             
             responseEvents.Add(responseEvent);
-            
-            EventResponse events = new EventResponse(){
+
+            return new EventResponse(){
                 events = responseEvents.ToArray()
             };
-            
-            return events; 
         }
+
+        private EventResponseWithStatus _GetStandardResponseWithStatus()
+        {
+            List<Event> responseEvents = new List<Event>();
+            
+            Association assoc = new Association(){
+                identifier_type = "order_id",
+                identifier      = "S1234"
+            };
+            
+            Event responseEvent = new Event(){
+                event_type      = "warning",
+                code            = "1234",
+                message         = "Example warning message",
+                diagnostic_data = "",
+                associations    = new []{assoc}
+            };
+            
+            responseEvents.Add(responseEvent);
+
+           return new EventResponseWithStatus(){
+                status = "success",
+                events = responseEvents.ToArray()
+            };        
+        }    
+            
+            
 
         public ConfigResponse catalog_get_config()
         {
@@ -128,8 +153,7 @@ namespace dotnet_example_api.Repositories
            orders.Add(newOrder);
            
            OrderPullResponse response = new OrderPullResponse(){
-               next_page_state = 0,
-               next_order_refnum = "496",
+               next_page_token = "",
                orders = orders.ToArray()
            };
                       
@@ -148,10 +172,10 @@ namespace dotnet_example_api.Repositories
            return _GetStandardResponse();
         } 
         
-        public EventResponse order_cancel()
+        public EventResponseWithStatus order_cancel()
         {
            //return a canned response            
-           return _GetStandardResponse();
+           return _GetStandardResponseWithStatus();
         }
         
         public EventResponse order_shipment_submit()
@@ -160,10 +184,10 @@ namespace dotnet_example_api.Repositories
            return _GetStandardResponse();
         }   
         
-        public EventResponse order_complete()
+        public EventResponseWithStatus order_complete()
         {
            //return a canned response            
-           return _GetStandardResponse();
+           return _GetStandardResponseWithStatus();
         } 
         
         public EventResponse order_settle_payment()
