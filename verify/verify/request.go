@@ -6,6 +6,7 @@ import (
   "io/ioutil"
 
   "strings"
+  "bytes"
 
   "encoding/json"
 
@@ -116,7 +117,8 @@ func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, request
     Echo request to be performed
   */
   if verbose {
-    fmt.Println("HTTP request:", strings.ToUpper(link.Method), fmt.Sprintf("%s%s", basePath, link.Href))
+    fmt.Println()
+    fmt.Println(strings.ToUpper(link.Method), fmt.Sprintf("%s%s", basePath, link.Href))
 
     // fmt.Println("schema (with definitions omitted):")
     // fmt.Println(indentedReqSchemaStr)
@@ -130,12 +132,20 @@ func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, request
     return err
   } else if !result.Valid() {
     // TODO: iterate over result errors
-    fmt.Printf("\n\nFailure validating outgoing test:\n")
-    for _,resultErr := range result.Errors() {
-      fmt.Printf("- %s\n", resultErr)
+    var buf bytes.Buffer
+    _,err := buf.WriteString("\n\nFailure validating outgoing test:\n")
+    if err != nil {
+      return err
     }
-    fmt.Println()
-    return fmt.Errorf("outgoing test data was invalid")
+
+    for _,resultErr := range result.Errors() {
+      _,err := buf.WriteString(fmt.Sprintf("- %s\n", resultErr))
+      if err != nil {
+        return err
+      }
+    }
+
+    return fmt.Errorf(buf.String())
   }
 
   // fmt.Println("example is valid:", result.Valid())
@@ -179,11 +189,19 @@ func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, request
     fmt.Println("response valid:", result.Valid())
   }
   if !result.Valid() {
-    fmt.Println("reason(s):")
-    for _,validationError := range result.Errors() {
-      fmt.Println(" ",validationError)
+    var buf bytes.Buffer
+    _,err := buf.WriteString("reason(s):\n")
+    if err != nil {
+      return err
     }
-    return fmt.Errorf("invalid response")
+
+    for _,validationError := range result.Errors() {
+      _,err := buf.WriteString(fmt.Sprintf(" %s",validationError))
+      if err != nil {
+        return err
+      }
+    }
+    return fmt.Errorf(buf.String())
   }
 
   return

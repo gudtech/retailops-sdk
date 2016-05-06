@@ -54,10 +54,7 @@ func main() {
       fmt.Printf("TEST %d (%s)", index+1, p.Base(verPair.examplePath))
       err = request(*baseURLPtr, verPair.schemaPath, verPair.examplePath, *verbosePtr)
       if err != nil {
-        fmt.Printf("\rTEST %d FAILED: %s\n", index+1, err.Error())
-        if *verbosePtr {
-          fmt.Println("")
-        }
+        fmt.Printf("\rTEST %d (%s) FAILED: %s\n", index+1, p.Base(verPair.examplePath), err.Error())
         if *stopOnError {
           os.Exit(1)
         } else {
@@ -79,7 +76,7 @@ func main() {
     fmt.Println(HR)
     fmt.Println("")
 
-    if thereWasAnError {
+    if thereWasAnError && *stopOnError {
       fmt.Println("AT LEAST ONE OF THE TEST CASES FAILED")
       os.Exit(1)
     }
