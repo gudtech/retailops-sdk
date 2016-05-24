@@ -30,10 +30,6 @@ Self-verify your RetailOps integration with this SDK.
 Linux Prerequisites
 ---
 
-Follow the official .NET Core Install Instructions:
-
-  https://github.com/dotnet/coreclr/blob/master/Documentation/install/get-dotnetcore-dnx-linux.md
-
 Install the .NET runtime for Linux:
 
 ```
