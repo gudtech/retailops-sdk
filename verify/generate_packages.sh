@@ -52,7 +52,7 @@ for PLATFORM in {darwin,linux,windows}; do
   done
   cp -r ../../schema $FOLDERNAME/schema
   cp -r ../../retailops-asp-dotnet-api-example $FOLDERNAME/retailops-asp-dotnet-api-example
-  cp ../README.md $FOLDERNAME/README.md
+  cp ../README.${PLATFORM}.md $FOLDERNAME/README.md
   zip -r $ZIPNAME $FOLDERNAME
 done
 
