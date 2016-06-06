@@ -37,18 +37,16 @@
         url = decodeURIComponent(url[1]);
         console.log("search uri: ", uri);
       }
-      var hashValue = window.location.hash;
-      if(hashValue.length > 0){
-          switch (hashValue) {
-              case hashValue.indexOf("tax") > 0:
+      else {
+          switch (window.location.hash) {
+              case window.location.hash.indexOf("tax") > 0:
                   url = "http://gudtech.github.io/retailops-sdk/tax-calc-swagger.json";
                   break;
               default:
                   url = "http://gudtech.github.io/retailops-sdk/swagger.json";
           }
-      }
-      else {
-          url = "http://gudtech.github.io/retailops-sdk/swagger.json";
+          //
+        //   url = "http://gudtech.github.io/retailops-sdk/swagger.json";
       }
       console.log("url: ", url);
       hljs.configure({
