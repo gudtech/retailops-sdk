@@ -51,7 +51,7 @@ RetailOps then pulls this order information, fulfills said orders, and pushes st
 - [order_returned](http://gudtech.github.io/retailops-sdk/#!/default/post_order_returned) - Notify the channel that a return has been processed against the order
 
 ### Tax Calculation Integrations
-<!-- - [catalog_get_config](http://gudtech.github.io/retailops-sdk/#!/default/post_catalog_get_config) - Configuration information about Catalog Push -->
+- [catalog_get_config](http://gudtech.github.io/retailops-sdk/#!/Tax/post_calculate_order_v1) - Tax Calculation for order
 
 ## Shipper Integrations
 
