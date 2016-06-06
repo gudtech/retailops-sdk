@@ -26,8 +26,8 @@ All parts of the SDK package are available for Windows, Linux, and OSX. Each rel
 [Read darwin (Mac OSX) verifier instructions here](https://github.com/gudTECH/retailops-sdk/blob/master/verify/README.darwin.md)
 
 ## Interactive Documentation
-[RetailOps SDK](http://gudtech.github.io/retailops-sdk)
-[RetailOps Tax Calculation SDK](http://gudtech.github.io/retailops-sdk/tax-calc-swagger.json)
+- [RetailOps SDK](http://gudtech.github.io/retailops-sdk)
+- [RetailOps Tax Calculation SDK](http://gudtech.github.io/retailops-sdk/#tax)
 
 ## Channel Integrations
 
