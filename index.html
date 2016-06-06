@@ -36,9 +36,16 @@
       if (url && url.length > 1) {
         url = decodeURIComponent(url[1]);
       } else {
-    
-        url = window.location;
+
+        url = window.location.href;
         console.log("URL = ", url);
+        if(url.length > 0 && url.indexOf("channel") > 0){
+            // channel schema
+            url = "http://gudtech.github.io/retailops-sdk/swagger.json"
+        }
+        if(url.length > 0 && url.indexOf("tax") > 0){
+            url = "http://gudtech.github.io/retailops-sdk/tax-calc-swagger.json"
+        }
       }
 
       hljs.configure({
