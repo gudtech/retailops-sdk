@@ -40,13 +40,15 @@
           var hash = window.location.hash.substring(1);
           if (hash.length > 0){
               console.log("Hash: ", hash);
+              if(hash.index(!) > 0){
+                  hash = "#" + hash;
+                  console.log("new hash: ", hash);
+              }
               url = "http://gudtech.github.io/retailops-sdk/" + hash;
           }
           else{
               url = "http://gudtech.github.io/retailops-sdk/swagger.json"
           }
-        // url = "http://gudtech.github.io/retailops-sdk/";
-        // url = "http://petstore.swagger.io/v2/swagger.json/";
       }
 
       hljs.configure({
