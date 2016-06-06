@@ -39,7 +39,7 @@
       } else {
           var hashValue = window.location.hash;
           switch (hashValue) {
-              case hashValue.length > 0 && hashValue.indexOf(tax > 0):
+              case hashValue.length > 0 && hashValue.indexOf("tax") > 0:
                   url = "http://gudtech.github.io/retailops-sdk/tax-calc-swagger.json";
                   console.log("url: ", url);
                   break;
@@ -47,7 +47,7 @@
                   console.log("default url: ", url);
                   url = "http://gudtech.github.io/retailops-sdk/swagger.json";
           }
-          
+
       }
 
       hljs.configure({
