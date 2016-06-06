@@ -35,7 +35,16 @@
       var url = window.location.search.match(/url=([^&]+)/);
       if (url && url.length > 1) {
         url = decodeURIComponent(url[1]);
+        console.log("URL: ", url);
       } else {
+          var hash = window.location.hash.substring(1);
+          if (hash.length > 0){
+              console.log("Hash: ", hash);
+              url = "http://gudtech.github.io/" + hash;
+          }
+          else{
+              url = "http://gudtech.github.io/retailops-sdk/swagger.json"
+          }
         // url = "http://gudtech.github.io/retailops-sdk/";
         // url = "http://petstore.swagger.io/v2/swagger.json/";
       }
