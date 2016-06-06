@@ -36,18 +36,19 @@
       if (url && url.length > 1) {
         url = decodeURIComponent(url[1]);
       } else {
-        // we're using '#' to distinguish between API's (channel, tax, shipping)
-        var hash = window.location.hash.substring(1);
-        if(hash.indexOf("!") == 0){
-            // check for "!" character which is passed when drilling down to a specific action
-            // re-add "#" so that UI works as intended
-            hash = "#" + hash;
-        }
-        url = "http://gudtech.github.io/retailops-sdk/" + hash;
-      }
-      if(url.length == 0){
-        // use default url
-        url = "http://gudtech.github.io/retailops-sdk/swagger.json"
+    //     // we're using '#' to distinguish between API's (channel, tax, shipping)
+    //     var hash = window.location.hash.substring(1);
+    //     if(hash.indexOf("!") == 0){
+    //         // check for "!" character which is passed when drilling down to a specific action
+    //         // re-add "#" so that UI works as intended
+    //         hash = "#" + hash;
+    //     }
+    //     url = "http://gudtech.github.io/retailops-sdk/" + hash;
+    //   }
+    //   if(url.length == 0){
+    //     // use default url
+    //     url = "http://gudtech.github.io/retailops-sdk/swagger.json"
+        url = window.location;
       }
 
       hljs.configure({
