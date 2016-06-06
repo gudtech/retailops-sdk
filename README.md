@@ -6,6 +6,7 @@ Using the RetailOps SDK, you can create, test, and certify custom integrations f
 
 - [Channel Integrations](#channel-integrations)
 - [Shipper Integrations (coming soon)](#shipper-integrations)
+- [Tax Calculation Integration (coming soon)](#shipper-integrations)
 
 [![Build Status](https://travis-ci.org/gudTECH/retailops-sdk.svg?branch=web-hook-design)](https://travis-ci.org/gudTECH/retailops-sdk)
 
@@ -25,7 +26,7 @@ All parts of the SDK package are available for Windows, Linux, and OSX. Each rel
 [Read darwin (Mac OSX) verifier instructions here](https://github.com/gudTECH/retailops-sdk/blob/master/verify/README.darwin.md)
 
 ## Interactive Documentation
-[RetailOps SDK](http://gudtech.github.io/retailops-sdk) 
+[RetailOps SDK](http://gudtech.github.io/retailops-sdk)
 
 ## Channel Integrations
 
