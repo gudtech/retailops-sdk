@@ -27,6 +27,7 @@ All parts of the SDK package are available for Windows, Linux, and OSX. Each rel
 
 ## Interactive Documentation
 [RetailOps SDK](http://gudtech.github.io/retailops-sdk)
+[RetailOps Tax Calculation SDK](http://gudtech.github.io/retailops-sdk/tax-calc-swagger.json)
 
 ## Channel Integrations
 
@@ -49,6 +50,8 @@ RetailOps then pulls this order information, fulfills said orders, and pushes st
 - [order_settle_payment](http://gudtech.github.io/retailops-sdk/#!/default/post_order_settle_payment) - Cause the channel to collect/capture payment, or otherwise verify payment has been collected
 - [order_returned](http://gudtech.github.io/retailops-sdk/#!/default/post_order_returned) - Notify the channel that a return has been processed against the order
 
+### Tax Calculation Integrations
+<!-- - [catalog_get_config](http://gudtech.github.io/retailops-sdk/#!/default/post_catalog_get_config) - Configuration information about Catalog Push -->
 
 ## Shipper Integrations
 
