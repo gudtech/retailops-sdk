@@ -40,6 +40,7 @@
           var hashValue = window.location.hash;
           console.log("hashValue: ", hashValue);
           console.log("index: ", hashValue.indexOf("tax"));
+          console.log("length: ", hashValue.length);
           switch (hashValue) {
               case (hashValue.length > 0 && hashValue.indexOf("tax") > 0):
                   url = "http://gudtech.github.io/retailops-sdk/tax-calc-swagger.json";
