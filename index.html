@@ -37,17 +37,16 @@
         url = decodeURIComponent(url[1]);
         console.log("uri: ", uri);
       } else {
-
-        // url = window.location.href;
-        // console.log("URL = ", url);
-        // if(url.length > 0 && url.indexOf("retailops-sdk/swagger.json") > 0){
-        //     // channel schema
+        url = window.location.href;
+        console.log("URL = ", url);
+        if(url.length > 0 && url.indexOf("retailops-sdk/swagger.json") > 0){
+        // channel schema
             url = "http://gudtech.github.io/retailops-sdk/swagger.json"
         }
     //     if(url.length > 0 && url.indexOf("tax-calc-swagger") > 0){
     //         url = "http://gudtech.github.io/retailops-sdk/tax-calc-swagger.json"
     //     }
-    //   }
+      }
 
       hljs.configure({
         highlightSizeThreshold: 5000
