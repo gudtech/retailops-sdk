@@ -13,16 +13,22 @@ import (
   "net/http"
   "net/url"
 
+  "time"
+
   schema "github.com/xeipuuv/gojsonschema"
 )
 
+var client = &http.Client{
+  Timeout: time.Second * 15,
+}
+
+/*
 type V1FileAction struct {
   Description string   `json:"description"`
   Example     string   `json:"example"`
   Type        []string `json:"type"`
 }
 
-/*
 type V1FileDefinitions struct {
   Action V1FileAction `json:"action"`
   ResponseSchema *json.RawMessage `json:"event"`
@@ -87,8 +93,6 @@ func Request(baseUrlStr string, hyperSchema io.Reader, example io.Reader, verbos
 }
 
 func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, requestUrl *url.URL, exampleBytes []byte, verbose bool) (err error) {
-  client := &http.Client{}
-
   /*
     schema lib data setup
   */

@@ -164,7 +164,7 @@ func request(baseUrl, schemaPath, examplePath string, verbose bool) (err error) 
     return
   }
 
-  err = verify.Request(baseUrl, f,exampleF, verbose)
+  err = verify.Request(baseUrl, f, exampleF, verbose)
   if err != nil {
     return
   }
