@@ -47,6 +47,9 @@ func Execute(cliExec CLIExecution) (err error) {
   }
 
   fmt.Println(len(examples),"TESTS TO BE GENERATED")
+  for index,example := range examples {
+    doVerify(cliExec, index, example)
+  }
 
   return
 }
