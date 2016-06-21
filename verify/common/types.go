@@ -1,9 +1,29 @@
-package verify_service
+package common
+
+import (
+  "fmt"
+)
 
 type VerifyRequest struct {
   Version int `json:"version"`
   TargetUrl string `json:"target_url"`
   SupportedActions []string `json:"supported_actions"`
+}
+
+func NewVerifyRequest() (VerifyRequest) {
+  return VerifyRequest{}
+}
+
+func (vr VerifyRequest) IsValid() (err error) {
+  if vr.Version == 0 {
+    err = fmt.Errorf("must set version")
+  } else if vr.TargetUrl == "" {
+    err = fmt.Errorf("must set target url")
+  } else if len(vr.SupportedActions) == 0 {
+    err = fmt.Errorf("must set supported action list")
+  }
+
+  return
 }
 
 type VerifyResponse struct {

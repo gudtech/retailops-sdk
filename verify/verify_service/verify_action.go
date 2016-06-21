@@ -10,33 +10,23 @@ import (
 
   "github.com/gudtech/scamp-go/scamp"
   "github.com/gudtech/retailops-sdk/verify/verify"
+  "github.com/gudtech/retailops-sdk/verify/common"
+
 )
 
 // var httpClient = &http.Client{
 //   Timeout: time.Second * 15,
 // }
 
-func (vr VerifyRequest) IsValid() (reason err) {
-  if !vr.Version > 0 {
-    err = fmt.Errorf("must set version")
-  } else if vr.TargetUrl == "" {
-    err = fmt.Errorf("must set target url")
-  } else if len(vr.SupportedActions) == 0 {
-    err = fmt.Errorf("must set supported action list")
-  }
-
-  return
-}
-
 func VerifyAction(msg *scamp.Message, client *scamp.Client) {
   var err error
-  verResp := NewVerifyResponse()
+  verResp := common.NewVerifyResponse()
   // scamp.Error.Printf("received new verify request size: %d", len(msg.Bytes()))
 
   respMsg := scamp.NewResponseMessage()
   respMsg.SetRequestId(msg.RequestId)
 
-  var req VerifyRequest
+  var req = common.NewVerifyRequest()
   err = json.NewDecoder(bytes.NewReader(msg.Bytes())).Decode(&req)
   if err != nil {
     verResp.Status = "error"
@@ -46,9 +36,9 @@ func VerifyAction(msg *scamp.Message, client *scamp.Client) {
     return
   }
 
-  if !req.IsValid() {
+  if err = req.IsValid(); err != nil {
     verResp.Status = "error"
-    verResp.Message = "request is not valid"
+    verResp.Message = fmt.Sprintf("request is not valid: `%s`", err.Error())
     respMsg.WriteJson(verResp)
     _,_ = client.Send(respMsg)
     return
@@ -57,7 +47,7 @@ func VerifyAction(msg *scamp.Message, client *scamp.Client) {
   doVerificationRequest(req, &verResp)
 
   if verResp.Status == "success" {
-    doRegistration()
+    // doRegistration()
   }
 
   respMsg.WriteJson(verResp)
@@ -68,7 +58,7 @@ func VerifyAction(msg *scamp.Message, client *scamp.Client) {
 }
 
 
-func doVerificationRequest(verReq VerifyRequest, verResp *VerifyResponse) {
+func doVerificationRequest(verReq common.VerifyRequest, verResp *common.VerifyResponse) {
   // url,err := url.Parse(verReq.TargetUrl)
   // if err != nil {
   //   verResp.Status = "error"
@@ -84,9 +74,9 @@ func doVerificationRequest(verReq VerifyRequest, verResp *VerifyResponse) {
   var failCount int = 0
 
   for _,action := range verReq.SupportedActions {
-    schemaFile,err := os.Open(fmt.Sprintf("/Users/xavierlange/code/gudtech/workspace/src/github.com/gudtech/retailops-sdk/schema/schemata/%s_v%d.json", action, verReq.Version))
+    schemaFile,err := os.Open(fmt.Sprintf("/go/src/github.com/gudtech/retailops-sdk/schema/schemata/%s_v%d.json", action, verReq.Version))
     if err != nil {
-      verResp.ActionResults = append(verResp.ActionResults, ActionResult {
+      verResp.ActionResults = append(verResp.ActionResults, common.ActionResult {
         Status: "error",
         Message: err.Error(),
         Action: action,
@@ -98,9 +88,9 @@ func doVerificationRequest(verReq VerifyRequest, verResp *VerifyResponse) {
       continue
     }
 
-    exampleFile,err := os.Open(fmt.Sprintf("/Users/xavierlange/code/gudtech/workspace/src/github.com/gudtech/retailops-sdk/schema/schemata/%s_v%d_ex_1.json", action, verReq.Version))
+    exampleFile,err := os.Open(fmt.Sprintf("/go/src/github.com/gudtech/retailops-sdk/schema/schemata/%s_v%d_ex_1.json", action, verReq.Version))
     if err != nil {
-      verResp.ActionResults = append(verResp.ActionResults, ActionResult {
+      verResp.ActionResults = append(verResp.ActionResults, common.ActionResult {
         Status: "error",
         Message: err.Error(),
         Action: action,
@@ -114,7 +104,7 @@ func doVerificationRequest(verReq VerifyRequest, verResp *VerifyResponse) {
 
     err = verify.Request(verReq.TargetUrl, schemaFile, exampleFile, true)
     if err != nil {
-      verResp.ActionResults = append(verResp.ActionResults, ActionResult {
+      verResp.ActionResults = append(verResp.ActionResults, common.ActionResult {
         Status: "error",
         Message: err.Error(),
         Action: action,
@@ -153,7 +143,7 @@ func doVerificationRequest(verReq VerifyRequest, verResp *VerifyResponse) {
     //   continue
     // }
 
-    verResp.ActionResults = append(verResp.ActionResults, ActionResult {
+    verResp.ActionResults = append(verResp.ActionResults, common.ActionResult {
       Status: "success",
       Message: "",
       Action: action,

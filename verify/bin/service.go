@@ -6,7 +6,7 @@ import (
   "flag"
   "github.com/gudtech/scamp-go/scamp"
 
-  "github.com/gudtech/retailops-sdk/verify-service/verify_service"
+  "github.com/gudtech/retailops-sdk/verify/verify_service"
 )
 
 var gtsoaConfigPath = flag.String("config", "/etc/GTSOA/soa.conf", "path to the GTSOA soa.conf")

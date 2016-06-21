@@ -4,6 +4,8 @@ import (
   "os"
 
   "fmt"
+  "bytes"
+  "encoding/json"
 
   p "path"
   fp "path/filepath"
@@ -13,7 +15,7 @@ import (
   "time"
   "io/ioutil"
 
-  "github.com/gudtech/retailops-sdk/verify-service/verify_service"
+  "github.com/gudtech/retailops-sdk/verify/common"
 )
 
 type SchemaExample struct {
@@ -52,10 +54,10 @@ var certifyClient = &http.Client{
 
 var baseDispatcherUrl string = "https://api.retailops.com/integrations/channel/certify.json"
 func doCertify(cliExec CLIExecution) (err error) {
-  var verReq = verify_service.VerifyRequest {
+  var verReq = common.VerifyRequest {
     Version: 1,
     TargetUrl: cliExec.BaseURL,
-    SupportedActions: []string{ "asdf" }
+    SupportedActions: []string{ "catalog_get_config" },
   }
 
   var buf bytes.Buffer
@@ -65,7 +67,7 @@ func doCertify(cliExec CLIExecution) (err error) {
   }
 
   url := fmt.Sprintf("%s?apikey=%s",baseDispatcherUrl,cliExec.ApiKey)
-  resp,err := certifyClient.Post(url, "", &buf)
+  resp,err := certifyClient.Post(url, "application/json", &buf)
   if err != nil {
     return
   }

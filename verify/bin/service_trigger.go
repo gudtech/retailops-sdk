@@ -4,7 +4,7 @@ import (
   "encoding/json"
 
   "github.com/gudtech/scamp-go/scamp"
-  "github.com/gudtech/retailops-sdk/verify-service/verify_service"
+  "github.com/gudtech/retailops-sdk/verify/common"
   "bytes"
 
   "os"
@@ -19,7 +19,7 @@ func main() {
   msg.SetRequestId(1 /*reqId*/)
   scamp.Info.Printf("reqId: %d", 1/* reqId */)
 
-  var req = verify_service.VerifyRequest {
+  var req = common.VerifyRequest {
     Version: 1,
     TargetUrl: "http://localhost:5000/api/channel",
     SupportedActions: []string{ "catalog_get_config" },
@@ -32,7 +32,7 @@ func main() {
   }
   respMsg := <-respChan
 
-  var resp verify_service.VerifyResponse
+  var resp common.VerifyResponse
   err = json.NewDecoder(bytes.NewReader(respMsg.Bytes())).Decode(&resp)
   if err != nil {
     scamp.Error.Printf("could not decode response: %s", err.Error())
