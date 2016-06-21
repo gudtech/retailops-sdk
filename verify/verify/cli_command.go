@@ -13,7 +13,6 @@ import (
 
   "net/http"
   "time"
-  "io/ioutil"
 
   "github.com/gudtech/retailops-sdk/verify/common"
 )
@@ -72,12 +71,18 @@ func doCertify(cliExec CLIExecution) (err error) {
     return
   }
 
-  respBytes,err := ioutil.ReadAll(resp.Body)
+
+  var apiResp common.VerifyResponse
+  err = json.NewDecoder(resp.Body).Decode(&apiResp)
   if err != nil {
     return
   }
 
-  panic(string(respBytes))
+  if apiResp.Status != "success" {
+    err = fmt.Errorf("certification was not successful: %s", apiResp.Message)
+  }
+
+  return
 
 }
 

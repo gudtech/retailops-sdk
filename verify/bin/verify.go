@@ -61,7 +61,11 @@ func main() {
     fmt.Println("failed:", err.Error())
     os.Exit(1)
   } else {
-    fmt.Println("verify was successful")
+    if cliExec.Action == "test" {
+      fmt.Println("local verify was successful")
+    } else if cliExec.Action == "certify" {
+      fmt.Println("remote certification was a success")
+    }
   }
 }
 
