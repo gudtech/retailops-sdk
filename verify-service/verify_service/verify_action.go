@@ -16,8 +16,16 @@ import (
 //   Timeout: time.Second * 15,
 // }
 
-func (vr VerifyRequest) IsValid() (bool) {
-  return vr.Version > 0 && vr.TargetUrl != "" && len(vr.SupportedActions) != 0
+func (vr VerifyRequest) IsValid() (reason err) {
+  if !vr.Version > 0 {
+    err = fmt.Errorf("must set version")
+  } else if vr.TargetUrl == "" {
+    err = fmt.Errorf("must set target url")
+  } else if len(vr.SupportedActions) == 0 {
+    err = fmt.Errorf("must set supported action list")
+  }
+
+  return
 }
 
 func VerifyAction(msg *scamp.Message, client *scamp.Client) {
@@ -47,6 +55,10 @@ func VerifyAction(msg *scamp.Message, client *scamp.Client) {
   }
 
   doVerificationRequest(req, &verResp)
+
+  if verResp.Status == "success" {
+    doRegistration()
+  }
 
   respMsg.WriteJson(verResp)
   _,err = client.Send(respMsg)

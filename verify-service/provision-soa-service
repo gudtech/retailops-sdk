@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e
+service="$1"
+mkdir -p /private/etc
+[ -f /etc/GT_private/services/$service.key ] && exit 0
+mkdir -p /etc/GT_private/services/$service.key
+rmdir /etc/GT_private/services/$service.key
+openssl req -new -nodes -subj "/CN=$hostname $(echo $service | sed 's|/|:|g')" -x509 -days 3650 \
+    -newkey rsa:4096 -out /etc/GT_private/services/$service.crt -keyout /etc/GT_private/services/$service.key

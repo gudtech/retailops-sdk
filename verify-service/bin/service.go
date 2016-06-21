@@ -3,24 +3,27 @@ package main
 import (
   "os"
   "fmt"
-  // "flag"
+  "flag"
   "github.com/gudtech/scamp-go/scamp"
 
   "github.com/gudtech/retailops-sdk/verify-service/verify_service"
 )
 
-
+var gtsoaConfigPath = flag.String("config", "/etc/GTSOA/soa.conf", "path to the GTSOA soa.conf")
 
 func main() {
   var err error
+  flag.Parse()
 
-  err = scamp.Initialize("/etc/GTSOA/soa.conf")
+  fmt.Println("loading config from",*gtsoaConfigPath)
+
+  err = scamp.Initialize(*gtsoaConfigPath)
   if err != nil {
     fmt.Println("failed to load scamp config:",err.Error())
     os.Exit(1)
   }
 
-  verifierSvc,err := scamp.NewService("0.0.0.0:63531","service_verifier")
+  verifierSvc,err := scamp.NewService("main","0.0.0.0:","sdk_service")
   if err != nil {
     scamp.Error.Printf("could not create service: `%s`", err.Error())
     os.Exit(1)
@@ -32,7 +35,16 @@ func main() {
   *   "supported_actions": ["asdf", "fdsa"]
   * }
   */
-  verifierSvc.Register("verify", verify_service.VerifyAction)
+
+  verifierSvc.Register("Integrations.Channel.certify", verify_service.VerifyAction)
+
+  announcer,err := scamp.NewDiscoveryAnnouncer()
+  if err != nil {
+    scamp.Error.Printf("failed to create announcer: `%s`", err)
+    return
+  }
+  announcer.Track(verifierSvc)
+  go announcer.AnnounceLoop()
 
   verifierSvc.Run()
 }

@@ -9,6 +9,11 @@ import (
   fp "path/filepath"
   "strings"
 
+  "net/http"
+  "time"
+  "io/ioutil"
+
+  "github.com/gudtech/retailops-sdk/verify-service/verify_service"
 )
 
 type SchemaExample struct {
@@ -32,6 +37,49 @@ type CLIExecution struct {
 var HR string = "----------------"
 
 func Execute(cliExec CLIExecution) (err error) {
+  if cliExec.Action == "test" {
+    return doLocalTest(cliExec)
+  } else if cliExec.Action == "certify" {
+    return doCertify(cliExec)
+  }
+
+  return
+}
+
+var certifyClient = &http.Client{
+  Timeout: time.Minute * 5,
+}
+
+var baseDispatcherUrl string = "https://api.retailops.com/integrations/channel/certify.json"
+func doCertify(cliExec CLIExecution) (err error) {
+  var verReq = verify_service.VerifyRequest {
+    Version: 1,
+    TargetUrl: cliExec.BaseURL,
+    SupportedActions: []string{ "asdf" }
+  }
+
+  var buf bytes.Buffer
+  err = json.NewEncoder(&buf).Encode(verReq)
+  if err != nil {
+    return
+  }
+
+  url := fmt.Sprintf("%s?apikey=%s",baseDispatcherUrl,cliExec.ApiKey)
+  resp,err := certifyClient.Post(url, "", &buf)
+  if err != nil {
+    return
+  }
+
+  respBytes,err := ioutil.ReadAll(resp.Body)
+  if err != nil {
+    return
+  }
+
+  panic(string(respBytes))
+
+}
+
+func doLocalTest(cliExec CLIExecution) (err error) {
   var examples []SchemaExample
   if cliExec.SchemaPathIsDir {
     examples,err = allExamples(cliExec.SchemaPath, cliExec.SchemaFilter)

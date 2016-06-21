@@ -35,18 +35,13 @@ func main() {
   flag.Parse()
 
   args := flag.Args()
-  if len(args) != 1 {
-    cliExec.Action = "test"
-  } else if len(args) > 0 && args[0] == "certify" {
+  if len(args) > 0 && (args[0] == "certify") {
     cliExec.Action = "certify"
-  } else {
+  } else if len(args) > 0 {
     fmt.Println("unknown action", args[0])
     os.Exit(1)
-  }
-
-  if len(*schemaPathPtr) == 0 {
-    fmt.Println("must set -schema-path")
-    os.Exit(1)
+  } else {
+    cliExec.Action = "test"
   }
 
   if len(*baseURLPtr) == 0 {
