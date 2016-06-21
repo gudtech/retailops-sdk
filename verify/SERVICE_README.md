@@ -12,4 +12,3 @@ Playing by the rules for deploying service
   2. assemble the soa.conf from all fragments (no way to reuse backplane ansible functionality
  4. deploy the service contianer
  5. fingerprint and disseminate fingerprint
-  1. 

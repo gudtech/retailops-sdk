@@ -27,6 +27,14 @@ Self-verify your RetailOps integration with this SDK.
     [[ TRUNCATED OUTPUT ]]
     ```
 
+ 7. When ready for certification with RetailOps
+
+    ```
+    $ ./verify -api-key $API_KEY -base-url http://www.example.com/api/channel certify
+    remote certification was a success
+    ```
+
+
 Linux Prerequisites
 ---
 
