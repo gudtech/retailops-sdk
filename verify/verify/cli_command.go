@@ -33,6 +33,8 @@ type CLIExecution struct {
   SchemaPathIsDir bool
   StopOnError bool
   Verbose bool
+
+  CertifyActions []string
 }
 
 var HR string = "----------------"
@@ -56,7 +58,7 @@ func doCertify(cliExec CLIExecution) (err error) {
   var verReq = common.VerifyRequest {
     Version: 1,
     TargetUrl: cliExec.BaseURL,
-    SupportedActions: []string{ "catalog_get_config" },
+    SupportedActions: cliExec.CertifyActions,
   }
 
   var buf bytes.Buffer

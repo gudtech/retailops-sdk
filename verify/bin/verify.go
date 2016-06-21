@@ -3,7 +3,7 @@ package main
 import (
   "flag"
   "fmt"
-  // "strings"
+  "strings"
 
   // "net/http"
   // "encoding/json"
@@ -31,6 +31,7 @@ func main() {
   filterPtr := flag.String("filter", "", "filter test cases by name. ex: 'order' or 'order_cance'")
   verbosePtr := flag.Bool("verbose", false, "show all outgoing and incoming request data")
   apiKeyPtr := flag.String("api-key", "", "your retailops API key")
+  certifyActionsPtr := flag.String("certify-actions", "catalog_get_config,catalog_push,inventory_push,order_acknowledge,order_cancel,order_complete,order_pull,order_returned,order_settle_payment,order_shipment_submit,order_update", "subset of actions to test for certification")
 
   flag.Parse()
 
@@ -55,6 +56,10 @@ func main() {
   cliExec.SchemaFilter = *filterPtr
   cliExec.Verbose = *verbosePtr
   cliExec.ApiKey = *apiKeyPtr
+
+  if len(*certifyActionsPtr) != 0 {
+    cliExec.CertifyActions = strings.SplitN(*certifyActionsPtr,",",-1)
+  }
 
   err = verify.Execute(cliExec)
   if err != nil {
