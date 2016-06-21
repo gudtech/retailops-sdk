@@ -1,0 +1,323 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "RetailOps Shipment Processor Integration API",
+        "description": "Integrate Shipment Processor module with RetailOps",
+        "version": "1.0.0"
+    },
+    "host": "your.servername-here.com",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/get_labels_v1": {
+            "post": {
+                "summary": "get_labels_v1",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "request body.",
+                        "schema": {
+                            "$ref": "#/definitions/GetLabelsRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/GetLabelsResponse"
+                        }
+                    }
+                },
+                "tags": [
+                    "Shipping Labels"
+                ]
+            }
+        },
+        "/get_rate_and_time_v1": {
+            "post": {
+                "summary": "get_rate_and_time_v1",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "request body.",
+                        "schema": {
+                            "$ref": "#/definitions/GetRateAndTimeRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/GetRateAndTimeResponse"
+                        }
+                    }
+                },
+                "tags": [
+                    "Rate and Time"
+                ]
+            }
+        },
+        "/get_rate_v1": {
+            "post": {
+                "summary": "get_rate_v1",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "request body.",
+                        "schema": {
+                            "$ref": "#/definitions/GetRateRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/GetRateResponse"
+                        }
+                    }
+                },
+                "tags": [
+                    "Rate and Time"
+                ]
+            }
+        },
+        "/get_time_v1": {
+            "post": {
+                "summary": "get_time_v1",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "request body.",
+                        "schema": {
+                            "$ref": "#/definitions/GetTimeRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/GetTimeResponse"
+                        }
+                    }
+                },
+                "tags": [
+                    "Rate and Time"
+                ]
+            }
+        },
+        "/void_label_v1": {
+            "post": {
+                "summary": "void_label_v1",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "request body.",
+                        "schema": {
+                            "$ref": "#/definitions/VoidLabelRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/VoidLabelResponse"
+                        }
+                    }
+                },
+                "tags": [
+                    "Shipping Labels"
+                ]
+            }
+        }
+    },
+    "definitions": {
+        "Address": {
+            "type": "object",
+            "properties": {
+                "state": {
+                    "type": "string",
+                    "description": "state",
+                    "example": "CA"
+                },
+                "country": {
+                    "type": "string",
+                    "description": "Country",
+                    "example": "US United States"
+                },
+                "last_name": {
+                    "type": "string",
+                    "description": "Last Name",
+                    "example": "Smith"
+                },
+                "address2": {
+                    "type": "string",
+                    "description": "Address second line",
+                    "example": "suite 100"
+                },
+                "city": {
+                    "type": "string",
+                    "description": "City",
+                    "example": "San Diego"
+                },
+                "postal_code": {
+                    "type": "string",
+                    "description": "Postal Code",
+                    "example": "92101"
+                },
+                "address1": {
+                    "type": "string",
+                    "description": "Address line one",
+                    "example": "123 Main St"
+                },
+                "company": {
+                    "type": "string",
+                    "description": "Company name",
+                    "example": "gudTECH"
+                },
+                "first_name": {
+                    "type": "string",
+                    "description": "First Name",
+                    "example": "John"
+                }
+            }
+        },
+        "BaseRequest": {
+            "type": "object",
+            "required": [
+                "action",
+                "version",
+                "client_id"
+            ],
+            "properties": {
+                "integration_auth_token": {
+                    "type": "string",
+                    "description": "Randomly generated authorization token, for authenticating genuine RetailOps- originated requests.",
+                    "example": "2KuxqV9rsAtAM78i47CITMvtnflUapNmgGJAvWiHqgUrk1xkeDNWlM3EsrmJEtmV"
+                },
+                "action": {
+                    "type": "string",
+                    "description": "Action Name name",
+                    "example": "catalog_get_config"
+                },
+                "version": {
+                    "type": "integer",
+                    "description": "Action Version",
+                    "example": 1
+                },
+                "client_id": {
+                    "description": "RetailOPS client id",
+                    "type": "integer",
+                    "example": 497
+                }
+            }
+        },
+        "CalculateOrderRequest": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BaseRequest"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "order": {
+                            "$ref": "#/definitions/Shipment"
+                        }
+                    },
+                    "required": [
+                        "order"
+                    ]
+                }
+            ]
+        },
+        "CalculateOrderResponse": {
+            "type": "object",
+            "properties": {
+                "events": {
+                    "$ref": "#/definitions/ResponseEventArray"
+                }
+            }
+        },
+        "ResponseEventArray": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "description": "event returned in action response",
+                "properties": {
+                    "event_type": {
+                        "type": "string",
+                        "description": "event type",
+                        "enum": [
+                            "error",
+                            "warning",
+                            "info"
+                        ],
+                        "example": "error"
+                    },
+                    "code": {
+                        "type": "string",
+                        "description": "error/warning code",
+                        "example": "ERR1234"
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "descriptive error/warning message",
+                        "example": "Example error message"
+                    },
+                    "diagnostic_data": {
+                        "type": "string",
+                        "description": ""
+                    },
+                    "associations": {
+                        "type": "array",
+                        "description": "",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "identifier_type": {
+                                    "type": "string",
+                                    "description": "Type of identifier being provided",
+                                    "enum": [
+                                        "order_id",
+                                        "order_refnum",
+                                        "orderitem_id",
+                                        "orderitem_refnum",
+                                        "shipment_id",
+                                        "shipmentitem_id",
+                                        "product_id",
+                                        "sku_number"
+                                    ],
+                                    "example": "sku_number"
+                                },
+                                "identifier": {
+                                    "type": "string",
+                                    "description": "identify value corresponding to the type",
+                                    "example": "S1234"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
