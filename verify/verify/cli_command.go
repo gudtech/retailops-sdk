@@ -14,6 +14,8 @@ import (
   "net/http"
   "time"
 
+  "io/ioutil"
+
   "github.com/gudtech/retailops-sdk/verify/common"
 )
 
@@ -29,12 +31,14 @@ type CLIExecution struct {
   SchemaFilter string
 
   ApiKey string
+  IntegrationAuthKey string
 
   SchemaPathIsDir bool
   StopOnError bool
   Verbose bool
 
   CertifyActions []string
+  ROCertifyURL string
 }
 
 var HR string = "----------------"
@@ -53,12 +57,12 @@ var certifyClient = &http.Client{
   Timeout: time.Minute * 5,
 }
 
-var baseDispatcherUrl string = "https://api.retailops.com/integrations/channel/certify.json"
 func doCertify(cliExec CLIExecution) (err error) {
   var verReq = common.VerifyRequest {
     Version: 1,
     TargetUrl: cliExec.BaseURL,
     SupportedActions: cliExec.CertifyActions,
+    IntegrationAuthKey: cliExec.IntegrationAuthKey,
   }
 
   var buf bytes.Buffer
@@ -67,12 +71,24 @@ func doCertify(cliExec CLIExecution) (err error) {
     return
   }
 
-  url := fmt.Sprintf("%s?apikey=%s",baseDispatcherUrl,cliExec.ApiKey)
+  url := fmt.Sprintf("%s?apikey=%s",cliExec.ROCertifyURL,cliExec.ApiKey)
   resp,err := certifyClient.Post(url, "application/json", &buf)
+  defer resp.Body.Close()
   if err != nil {
     return
   }
 
+
+  respBuf,err := ioutil.ReadAll(resp.Body)
+  if err != nil {
+    return
+  }
+
+  panic(string(respBuf))
+  // if resp.StatusCode != 200 {
+
+    // panic(fmt.Sprintf("status code: %d", resp.StatusCode))
+  // }
 
   var apiResp common.VerifyResponse
   err = json.NewDecoder(resp.Body).Decode(&apiResp)
@@ -82,6 +98,7 @@ func doCertify(cliExec CLIExecution) (err error) {
 
   if apiResp.Status != "success" {
     err = fmt.Errorf("certification was not successful: %s", apiResp.Message)
+    return
   }
 
   return

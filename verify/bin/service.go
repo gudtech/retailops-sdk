@@ -10,6 +10,7 @@ import (
 )
 
 var gtsoaConfigPath = flag.String("config", "/etc/GTSOA/soa.conf", "path to the GTSOA soa.conf")
+var registrationTicket = flag.String("registration-ticket", "/backplane/etc/endorsements/gtuser-sdk_service.ticket", "path to gtuser sdk_service ticket")
 
 func main() {
   var err error
@@ -36,6 +37,7 @@ func main() {
   * }
   */
 
+  verify_service.TicketPath = *registrationTicket
   verifierSvc.Register("Integrations.Channel.certify", verify_service.VerifyAction)
 
   announcer,err := scamp.NewDiscoveryAnnouncer()

@@ -32,6 +32,8 @@ func main() {
   verbosePtr := flag.Bool("verbose", false, "show all outgoing and incoming request data")
   apiKeyPtr := flag.String("api-key", "", "your retailops API key")
   certifyActionsPtr := flag.String("certify-actions", "catalog_get_config,catalog_push,inventory_push,order_acknowledge,order_cancel,order_complete,order_pull,order_returned,order_settle_payment,order_shipment_submit,order_update", "subset of actions to test for certification")
+  integrationAuthKeyPtr := flag.String("integration-auth-key", "", "integration auth key (random string for now)")
+  roCertifyURLPtr := flag.String("retailops-certify-url", "https://api.retailops.com/integrations/channel/certify.json", "")
 
   flag.Parse()
 
@@ -56,6 +58,15 @@ func main() {
   cliExec.SchemaFilter = *filterPtr
   cliExec.Verbose = *verbosePtr
   cliExec.ApiKey = *apiKeyPtr
+  cliExec.ROCertifyURL = *roCertifyURLPtr
+  cliExec.IntegrationAuthKey = *integrationAuthKeyPtr
+
+  if cliExec.Action == "certify" {
+    if len(cliExec.IntegrationAuthKey) < 20 {
+      fmt.Println("integration auth key must be at least 20 characters")
+      os.Exit(1)
+    }
+  }
 
   if len(*certifyActionsPtr) != 0 {
     cliExec.CertifyActions = strings.SplitN(*certifyActionsPtr,",",-1)

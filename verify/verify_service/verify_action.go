@@ -7,6 +7,8 @@ import (
   "encoding/json"
 
   "os"
+  "io/ioutil"
+  "time"
 
   "github.com/gudtech/scamp-go/scamp"
   "github.com/gudtech/retailops-sdk/verify/verify"
@@ -14,9 +16,7 @@ import (
 
 )
 
-// var httpClient = &http.Client{
-//   Timeout: time.Second * 15,
-// }
+var TicketPath string = ""
 
 func VerifyAction(msg *scamp.Message, client *scamp.Client) {
   var err error
@@ -47,7 +47,18 @@ func VerifyAction(msg *scamp.Message, client *scamp.Client) {
   doVerificationRequest(req, &verResp)
 
   if verResp.Status == "success" {
-    // doRegistration()
+    err = doRegistration(req, &verResp)
+    if err != nil {
+      scamp.Error.Printf("error calling registration: %s", err.Error())
+      respMsg.WriteJson(map[string]string{
+        "error": err.Error(),
+      })
+      _,err = client.Send(respMsg)
+      if err != nil {
+        scamp.Error.Printf("err: %s", err.Error())
+      }
+      return
+    }
   }
 
   respMsg.WriteJson(verResp)
@@ -57,20 +68,55 @@ func VerifyAction(msg *scamp.Message, client *scamp.Client) {
   }
 }
 
+func doRegistration(req *common.VerifyRequest, resp *common.VerifyResponse) (err error) {
+  regReq := common.NewRegistrationRequest("a cool name", req.IntegrationAuthKey)
+  for _,actionResult := range resp.ActionResults {
+    regReq.AddInteraction(actionResult.Action, actionResult.TargetUrl)
+  }
 
-func doVerificationRequest(verReq common.VerifyRequest, verResp *common.VerifyResponse) {
-  // url,err := url.Parse(verReq.TargetUrl)
-  // if err != nil {
-  //   verResp.Status = "error"
-  //   verResp.Message = fmt.Sprintf("could not parse target_url: %s", err.Error())
-  //   return
-  // }
+  stationFile,err := os.Open(TicketPath)
+  if err != nil {
+    return
+  }
+  stationBytes,err := ioutil.ReadAll(stationFile)
+  if err != nil {
+    return
+  }
 
-  // originalPath := url.Path
-  // if originalPath[len(originalPath)-1] != '/' {
-  //   originalPath = fmt.Sprintf("%s/", originalPath)
-  // }
+  station := string(stationBytes)
+  scamp.Info.Printf(station)
 
+  // panicjson(station)
+  msg := scamp.NewRequestMessage()
+  // msg.SetStationTicket(station)
+  // msg.SetStationTicket(station)
+  msg.SetRequestId(1)
+  msg.WriteJson(regReq)
+  msg.SetTicket(station)
+
+  respchan,err := scamp.MakeJsonRequest("main", "Integration.Channel.register", 1, msg)
+  if err != nil {
+    return
+  }
+
+  // TODO: make a timeout
+  scamp.Info.Printf("making registration request")
+  select {
+  case respMsg := <-respchan:
+    strresp := string(respMsg.Bytes())
+    scamp.Info.Printf("%s %s %s", respMsg.GetError(), respMsg.GetErrorCode(),   strresp)
+    if respMsg.GetError() != "" {
+      err = fmt.Errorf(respMsg.GetError())
+      return
+    }
+  case <-time.After(time.Duration(10 * time.Second)):
+    scamp.Error.Printf("timeout...")
+  }
+
+  return
+}
+
+func doVerificationRequest(verReq *common.VerifyRequest, verResp *common.VerifyResponse) {
   var failCount int = 0
 
   for _,action := range verReq.SupportedActions {
@@ -102,7 +148,7 @@ func doVerificationRequest(verReq common.VerifyRequest, verResp *common.VerifyRe
       continue
     }
 
-    err = verify.Request(verReq.TargetUrl, schemaFile, exampleFile, true)
+    err = verify.Request(verReq.TargetUrl, schemaFile, exampleFile, false)
     if err != nil {
       verResp.ActionResults = append(verResp.ActionResults, common.ActionResult {
         Status: "error",
@@ -115,33 +161,6 @@ func doVerificationRequest(verReq common.VerifyRequest, verResp *common.VerifyRe
       failCount += 1
       continue
     }
-
-    // resp,err := httpClient.Get(url.String())
-    // if err != nil {
-    //   verResp.ActionResults = append(verResp.ActionResults, ActionResult {
-    //     Status: "error",
-    //     Message: err.Error(),
-    //     Action: action,
-    //     Version: verReq.Version,
-    //     TargetUrl: url.String(),
-    //   })
-
-    //   failCount += 1
-    //   continue
-    // }
-
-    // _,err = ioutil.ReadAll(resp.Body)
-    // if err != nil {
-    //   verResp.ActionResults = append(verResp.ActionResults, ActionResult {
-    //     Status: "error",
-    //     Message: err.Error(),
-    //     Action: action,
-    //     Version: verReq.Version,
-    //     TargetUrl: url.String(),
-    //   })
-    //   failCount += 1
-    //   continue
-    // }
 
     verResp.ActionResults = append(verResp.ActionResults, common.ActionResult {
       Status: "success",

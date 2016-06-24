@@ -5,13 +5,15 @@ import (
 )
 
 type VerifyRequest struct {
+  ApiKey string `json:"apikey,omitempty"`
+  IntegrationAuthKey string `json:"integration_auth_key,omitempty"`
   Version int `json:"version"`
   TargetUrl string `json:"target_url"`
   SupportedActions []string `json:"supported_actions"`
 }
 
-func NewVerifyRequest() (VerifyRequest) {
-  return VerifyRequest{}
+func NewVerifyRequest() (*VerifyRequest) {
+  return &VerifyRequest{}
 }
 
 func (vr VerifyRequest) IsValid() (err error) {
@@ -44,4 +46,30 @@ type ActionResult struct {
   Action string `json:"action"`
   Version int `json:"version"`
   TargetUrl string `json:"target_url"`
+}
+
+type RegistrationRequest struct {
+  Name string `json:"name"`
+  Handle string `json:"handle"`
+  Interactions []RegistrationInteraction `json:"interactions"`
+}
+
+func NewRegistrationRequest(name, handle string) (req *RegistrationRequest) {
+  return &RegistrationRequest {
+    Name: name,
+    Handle: handle,
+    Interactions: make([]RegistrationInteraction,0),
+  }
+}
+
+func (req *RegistrationRequest)AddInteraction(action, endpointUrl string) {
+  req.Interactions = append(req.Interactions, RegistrationInteraction {
+    Action: action,
+    EndpointUrl: endpointUrl,
+  })
+}
+
+type RegistrationInteraction struct {
+  Action string `json:"action"`
+  EndpointUrl string `json:"endpoint_url"`
 }
