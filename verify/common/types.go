@@ -10,6 +10,7 @@ type VerifyRequest struct {
   Version int `json:"version"`
   TargetUrl string `json:"target_url"`
   SupportedActions []string `json:"supported_actions"`
+  IntegrationName string `json:"integration_name"`
 }
 
 func NewVerifyRequest() (*VerifyRequest) {
@@ -23,6 +24,8 @@ func (vr VerifyRequest) IsValid() (err error) {
     err = fmt.Errorf("must set target url")
   } else if len(vr.SupportedActions) == 0 {
     err = fmt.Errorf("must set supported action list")
+  } else if len(vr.IntegrationName) == 0 {
+    err = fmt.Errorf("must provide integration name")
   }
 
   return

@@ -32,6 +32,7 @@ type CLIExecution struct {
 
   ApiKey string
   IntegrationAuthKey string
+  IntegrationName string
 
   SchemaPathIsDir bool
   StopOnError bool
@@ -63,6 +64,7 @@ func doCertify(cliExec CLIExecution) (err error) {
     TargetUrl: cliExec.BaseURL,
     SupportedActions: cliExec.CertifyActions,
     IntegrationAuthKey: cliExec.IntegrationAuthKey,
+    IntegrationName: cliExec.IntegrationName,
   }
 
   var buf bytes.Buffer

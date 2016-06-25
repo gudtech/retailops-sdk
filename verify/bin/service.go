@@ -38,7 +38,7 @@ func main() {
   */
 
   verify_service.TicketPath = *registrationTicket
-  verifierSvc.Register("Integrations.Channel.certify", verify_service.VerifyAction)
+  verifierSvc.Register("Integration.Channel.certify", verify_service.VerifyAction)
 
   announcer,err := scamp.NewDiscoveryAnnouncer()
   if err != nil {

@@ -15,7 +15,7 @@ Playing by the rules for deploying service
  6. install the actions in the authz table as public:
 
 ```
-docker exec -it main bash -c 'echo "PUBLIC actions+ integrations.channel.certify" | perl ~/gt-core/bin/priv/load'
+docker exec -it main bash -c 'echo "PUBLIC actions+ integration.channel.certify" | perl ~/gt-core/bin/priv/load'
 ```
 
  7. generate the permission for registration
@@ -27,7 +27,7 @@ docker exec -it main bash -c 'echo "integration.register actions+ integration.ch
  8. generate the long-lived token for the container to use when calling registration
 
 ```
-docker exec -it auth bash -c 'mkdir -p /etc/GT/endorsements && perl /opt/gt/gt-auth-service/script/maketicket --timeout 10y --user "RO Automated Agent" --priv integration.register > /etc/GT/endorsements/gtuser-sdk_service.ticket'
+docker exec -it auth bash -c 'mkdir -p /etc/GT/endorsements && perl /opt/gt/gt-auth-service/script/maketicket --timeout 10y --priv integration.register --user "RO Automated Agent" > /tmp/gtuser-sdk_service.ticket'
 ```
 
  9. Need to add a foreign key to contstans for the `implementer_user_id` field:

@@ -28,12 +28,14 @@ func main() {
   schemaPathPtr := flag.String("schema-path", "", "path to JSON or directory with JSON")
   baseURLPtr := flag.String("base-url", "http://localhost:5000/api/channel", "base url for sending requests")
   stopOnError := flag.Bool("stop-on-error", false, "stop immediately on error")
-  filterPtr := flag.String("filter", "", "filter test cases by name. ex: 'order' or 'order_cance'")
+  filterPtr := flag.String("filter", "", "filter test cases by name. ex: 'order' or 'order_cancel'")
   verbosePtr := flag.Bool("verbose", false, "show all outgoing and incoming request data")
   apiKeyPtr := flag.String("api-key", "", "your retailops API key")
   certifyActionsPtr := flag.String("certify-actions", "catalog_get_config,catalog_push,inventory_push,order_acknowledge,order_cancel,order_complete,order_pull,order_returned,order_settle_payment,order_shipment_submit,order_update", "subset of actions to test for certification")
   integrationAuthKeyPtr := flag.String("integration-auth-key", "", "integration auth key (random string for now)")
-  roCertifyURLPtr := flag.String("retailops-certify-url", "https://api.retailops.com/integrations/channel/certify.json", "")
+  integrationNamePtr := flag.String("integration-name", "", "human readable name for identifying the integration")
+  roCertifyURLPtr := flag.String("retailops-certify-url", "https://api.retailops.com/integration/channel/certify.json", "")
+
 
   flag.Parse()
 
@@ -60,6 +62,7 @@ func main() {
   cliExec.ApiKey = *apiKeyPtr
   cliExec.ROCertifyURL = *roCertifyURLPtr
   cliExec.IntegrationAuthKey = *integrationAuthKeyPtr
+  cliExec.IntegrationName = *integrationNamePtr
 
   if cliExec.Action == "certify" {
     if len(cliExec.IntegrationAuthKey) < 20 {
