@@ -1,8 +1,8 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "RetailOps Shipment Processor Integration API",
-        "description": "Integrate Shipment Processor module with RetailOps",
+        "title": "RetailOps Shipment ModProcessor API",
+        "description": "RetailOps modularized shipment processor API",
         "version": "1.0.0"
     },
     "host": "your.servername-here.com",
@@ -17,12 +17,12 @@
         "/get_labels_v1": {
             "post": {
                 "summary": "get_labels_v1",
-                "description": "",
+                "description": "get labels request",
                 "parameters": [
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "request body.",
+                        "description": "Get Label request. Request shipping label(s) for ROP shipment(s)",
                         "schema": {
                             "$ref": "#/definitions/GetLabelsRequest"
                         }
@@ -41,33 +41,6 @@
                 ]
             }
         },
-        "/get_rate_and_time_v1": {
-            "post": {
-                "summary": "get_rate_and_time_v1",
-                "description": "",
-                "parameters": [
-                    {
-                        "name": "body",
-                        "in": "body",
-                        "description": "request body.",
-                        "schema": {
-                            "$ref": "#/definitions/GetRateAndTimeRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/GetRateAndTimeResponse"
-                        }
-                    }
-                },
-                "tags": [
-                    "Rate and Time"
-                ]
-            }
-        },
         "/get_rate_v1": {
             "post": {
                 "summary": "get_rate_v1",
@@ -76,7 +49,7 @@
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "request body.",
+                        "description": "Get Rate request. Request shipping rate(s) for shipment",
                         "schema": {
                             "$ref": "#/definitions/GetRateRequest"
                         }
@@ -95,6 +68,33 @@
                 ]
             }
         },
+        "/get_rate_and_time_v1": {
+            "post": {
+                "summary": "get_rate_and_time_v1",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Get Rete and Time request. Request both shipping rate(s), and estimated delivery days for package(s)",
+                        "schema": {
+                            "$ref": "#/definitions/GetRateAndTimeRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/GetRateAndTimeResponse"
+                        }
+                    }
+                },
+                "tags": [
+                    "Rate and Time"
+                ]
+            }
+        },
         "/get_time_v1": {
             "post": {
                 "summary": "get_time_v1",
@@ -103,7 +103,7 @@
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "request body.",
+                        "description": "Get Time request. Returns estimated number of delivery days",
                         "schema": {
                             "$ref": "#/definitions/GetTimeRequest"
                         }
@@ -130,7 +130,7 @@
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "request body.",
+                        "description": "Void Label request. Void an existing label",
                         "schema": {
                             "$ref": "#/definitions/VoidLabelRequest"
                         }
@@ -138,7 +138,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "",
+                        "description": "Void Label Response",
                         "schema": {
                             "$ref": "#/definitions/VoidLabelResponse"
                         }
@@ -154,24 +154,34 @@
         "Address": {
             "type": "object",
             "properties": {
-                "state": {
+                "first_name": {
                     "type": "string",
-                    "description": "state",
-                    "example": "CA"
-                },
-                "country": {
-                    "type": "string",
-                    "description": "Country",
-                    "example": "US United States"
+                    "description": "First Name",
+                    "example": "John"
                 },
                 "last_name": {
                     "type": "string",
                     "description": "Last Name",
                     "example": "Smith"
                 },
+                "company": {
+                    "type": "string",
+                    "description": "Company name",
+                    "example": "gudTECH"
+                },
+                "address1": {
+                    "type": "string",
+                    "description": "Address line one",
+                    "example": "123 Main St"
+                },
                 "address2": {
                     "type": "string",
                     "description": "Address second line",
+                    "example": "123 Main St"
+                },
+                "address3": {
+                    "type": "string",
+                    "description": "Address third line",
                     "example": "suite 100"
                 },
                 "city": {
@@ -179,25 +189,30 @@
                     "description": "City",
                     "example": "San Diego"
                 },
+                "state": {
+                    "type": "string",
+                    "description": "State",
+                    "example": "CA"
+                },
                 "postal_code": {
                     "type": "string",
                     "description": "Postal Code",
                     "example": "92101"
                 },
-                "address1": {
+                "country_name": {
                     "type": "string",
-                    "description": "Address line one",
-                    "example": "123 Main St"
+                    "description": "Country Name",
+                    "example": "US United States"
                 },
-                "company": {
+                "country_code": {
                     "type": "string",
-                    "description": "Company name",
-                    "example": "gudTECH"
+                    "description": "Country Code",
+                    "example": "US"
                 },
-                "first_name": {
+                "phone": {
                     "type": "string",
-                    "description": "First Name",
-                    "example": "John"
+                    "description": "phone number",
+                    "example": "+1 (619) 555-5555"
                 }
             }
         },
@@ -231,7 +246,7 @@
                 }
             }
         },
-        "CalculateOrderRequest": {
+        "GetLabelsRequest": {
             "allOf": [
                 {
                     "$ref": "#/definitions/BaseRequest"
@@ -239,21 +254,206 @@
                 {
                     "type": "object",
                     "properties": {
-                        "order": {
+                        "account_params": {
+                            "type": "object",
+                            "properties": {
+                            }
+                        },
+                        "carrier_params": {
+                            "type": "object",
+                            "properties": {
+
+                            }
+                        },
+                        "session": {
+                            "type": "object",
+                            "properties": {
+                            }
+                        },
+                        "shipment":{
                             "$ref": "#/definitions/Shipment"
+                        },
+                        "testing": {
+                            "type": "string"
+                        },
+                        "api_key": {
+                            "type": "string"
+                        },
+                        "password": {
+                            "type": "string"
+                        },
+                        "toaddr": {
+                            "$ref": "#/definitions/Address"
+                        },
+                        "pieces": {
+                            "$ref": "#/definitions/Pieces"
                         }
                     },
                     "required": [
-                        "order"
+                        "account_params",
+                        "carrier_params",
+                        "session",
+                        "shipment",
+                        "pieces"
                     ]
                 }
             ]
         },
-        "CalculateOrderResponse": {
+        "GetLabelsResponse": {
             "type": "object",
             "properties": {
                 "events": {
                     "$ref": "#/definitions/ResponseEventArray"
+                }
+            }
+        },
+        "GetRateAndTimeRequest": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BaseRequest"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "shipment": {
+
+                        }
+                    },
+                    "required": ["shipment"]
+                }
+            ]
+        },
+        "GetRateAndTimeResponse": {
+            "type": "object",
+            "properties": {
+                "events": {
+                    "$ref": "#/definitions/ResponseEventArray"
+                }
+            }
+        },
+        "GetRateRequest": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BaseRequest"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "shipment":{
+
+                        }
+                    },
+                    "required": ["shipment"]
+                }
+            ]
+        },
+        "GetRateResponse": {
+            "type": "object",
+            "properties": {
+                "events": {
+                    "$ref": "#/definitions/ResponseEventArray"
+                }
+            }
+        },
+        "GetTimeRequest":{
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BaseRequest"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "shipment": {
+
+                        }
+                    },
+                    "required": ["shipment"]
+                }
+            ]
+        },
+        "GetTimeResponse": {
+            "type": "object",
+            "properties": {
+                "events": {
+                    "$ref": "#/definitions/ResponseEventArray"
+                }
+            }
+        },
+        "VoidLabelRequest":{
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BaseRequest"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "shipment": {
+
+                        }
+                    },
+                    "required": ["shipment"]
+                }
+            ]
+        },
+        "VoidLabelResponse": {
+            "type": "object",
+            "properties": {
+                "events": {
+                    "$ref": "#/definitions/ResponseEventArray"
+                }
+            }
+        },
+        "Package": {
+            "type": "object",
+            "properties": {
+                "retailops_shipment_id": {
+                    "type": "integer",
+                    "description": "RetailOps Shipment ID"
+                },
+                "retailops_package_id": {
+                    "type": "integer",
+                    "description": "RetailOps Package ID",
+                    "example": 436
+                },
+                "piece_number": {
+                    "type": "integer",
+                    "description": "Piece (package) number in shipment",
+                    "example": 1
+                },
+                "piece_count": {
+                    "type": "integer",
+                    "description": "total number of peices in shipment",
+                    "example": 2
+                },
+                "carrier_name": {
+                    "type": "string",
+                    "description": "Ship Carrier Name",
+                    "example": "UPS"
+                },
+                "carrier_class_name": {
+                    "type": "string",
+                    "description": "Ship Carrier's Class Name",
+                    "example": "Ground"
+                },
+                "content_description": {
+                    "type": "string",
+                    "description": "description of package contents",
+                    "example": "Consumer goods"
+                },
+                "shipment_id": {
+                    "type": "integer",
+                    "description": "RetailOps Shipment ID",
+                    "example": 435
+                },
+                "weight_kg": {
+                    "type": "number",
+                    "description": "Weight in Kilograms",
+                    "example": 0.453592
+                },
+                "weight_lbs": {
+                    "type": "number",
+                    "description": "Weight in lbs",
+                    "example": 1.0
                 }
             }
         },
@@ -316,6 +516,545 @@
                             }
                         }
                     }
+                }
+            }
+        },
+        "OrderShipmentItems":{
+            "type": "object",
+            "properties": {
+                "country_of_origin": {
+                    "type": "string",
+                    "description": "Country of origin, country code",
+                    "example": "US"
+                },
+                "quantity":{
+                    "type": "integer",
+                    "description": "Item quantity",
+                    "example": 2
+                },
+                "declared_unit_price": {
+                    "type": "number",
+                    "description": "declared unit price",
+                    "example": 1.50
+                },
+                "declared_value": {
+                    "type": "number",
+                    "description": "declared value",
+                    "example": 1.50
+                },
+                "customs_description": {
+                    "type": "string",
+                    "description": "Customs description",
+                    "example": ""
+                },
+                "weight_kg": {
+                    "type": "number",
+                    "description": "Weight in Kilograms",
+                    "example": 0.453592
+                },
+                "sku": {
+                    "$ref": "#/definitions/Sku"
+                },
+                "channel_refnum": {
+                    "type": "string",
+                    "description": "Channel reference number for order",
+                    "example": "141"
+                }
+            }
+        },
+        "Piece": {
+            "type": "object",
+            "properties": {
+                "order_items": {
+                    "type": "arrray",
+                    "description": "Order Shipment Items included in this piece (package)",
+                    "maxItems": 100,
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "country_of_origin": {
+                                "type": "string",
+                                "description": "Country of origin, country code",
+                                "example": "US"
+                            },
+                            "quantity":{
+                                "type": "integer",
+                                "description": "Item quantity",
+                                "example": 2
+                            },
+                            "declared_unit_price": {
+                                "type": "number",
+                                "description": "declared unit price",
+                                "example": 1.50
+                            },
+                            "declared_value": {
+                                "type": "number",
+                                "description": "declared value",
+                                "example": 1.50
+                            },
+                            "customs_description": {
+                                "type": "string",
+                                "description": "Customs description",
+                                "example": ""
+                            },
+                            "weight_kg": {
+                                "type": "number",
+                                "description": "Weight in Kilograms",
+                                "example": 0.453592
+                            },
+                            "sku": {
+                                "$ref": "#/definitions/Sku"
+                            },
+                            "channel_refnum": {
+                                "type": "string",
+                                "description": "Channel reference number for order",
+                                "example": "141"
+                            }
+                        }
+                    }
+                },
+                "ship_to": {
+                    "$ref": "#/definitions/Address"
+                },
+                "fromaddr": {
+                    "$ref": "#/definitions/Address"
+                },
+                "order_id": {
+                    "type": "integer",
+                    "description": "RetailOps order ID",
+                    "example": 1052
+                },
+                "weight_kg": {
+                    "type": "number",
+                    "description": "Weight in Kilograms",
+                    "example": 0.453592
+                },
+                "height_cm": {
+                    "type": "number",
+                    "description": "height of package in centimeters",
+                    "example": 20.32
+                },
+                "width_cm": {
+                    "type": "number",
+                    "description": "width of package in centimeters",
+                    "example": 20.32
+                },
+                "length_cm": {
+                    "type": "number",
+                    "description": "length of package in centimeters",
+                    "example": 20.32
+                },
+                "description": {
+                    "type": "string",
+                    "description": "",
+                    "example": ""
+                },
+                "class": {
+                    "$ref": "#/definitions/ShipClass"
+                },
+                "tracking_number": {
+                    "type": "string",
+                    "description": "Package tracking number",
+                    "example": "Z152588191910AD"
+                },
+                "product_total_dollars": {
+                    "type": "number",
+                    "description": "",
+                    "example": 50
+                }
+            }
+        },
+        "Pieces": {
+            "type": "array",
+            "description": "Pieces (packages) included in this shipment",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "order_items": {
+                        "type": "arrray",
+                        "description": "Order Shipment Items included in this piece (package)",
+                        "maxItems": 100,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "country_of_origin": {
+                                    "type": "string",
+                                    "description": "Country of origin, country code",
+                                    "example": "US"
+                                },
+                                "quantity":{
+                                    "type": "integer",
+                                    "description": "Item quantity",
+                                    "example": 2
+                                },
+                                "declared_unit_price": {
+                                    "type": "number",
+                                    "description": "declared unit price",
+                                    "example": 1.50
+                                },
+                                "declared_value": {
+                                    "type": "number",
+                                    "description": "declared value",
+                                    "example": 1.50
+                                },
+                                "customs_description": {
+                                    "type": "string",
+                                    "description": "Customs description",
+                                    "example": ""
+                                },
+                                "weight_kg": {
+                                    "type": "number",
+                                    "description": "Weight in Kilograms",
+                                    "example": 0.453592
+                                },
+                                "sku": {
+                                    "$ref": "#/definitions/Sku"
+                                },
+                                "channel_refnum": {
+                                    "type": "string",
+                                    "description": "Channel reference number for order",
+                                    "example": "141"
+                                }
+                            }
+                        }
+                    },
+                    "ship_to": {
+                        "$ref": "#/definitions/Address"
+                    },
+                    "fromaddr": {
+                        "$ref": "#/definitions/Address"
+                    },
+                    "order_id": {
+                        "type": "integer",
+                        "description": "RetailOps order ID",
+                        "example": 1052
+                    },
+                    "weight_kg": {
+                        "type": "number",
+                        "description": "Weight in Kilograms",
+                        "example": 0.453592
+                    },
+                    "height_cm": {
+                        "type": "number",
+                        "description": "height of package in centimeters",
+                        "example": 20.32
+                    },
+                    "width_cm": {
+                        "type": "number",
+                        "description": "width of package in centimeters",
+                        "example": 20.32
+                    },
+                    "length_cm": {
+                        "type": "number",
+                        "description": "length of package in centimeters",
+                        "example": 20.32
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "",
+                        "example": ""
+                    },
+                    "class": {
+                        "$ref": "#/definitions/ShipClass"
+                    },
+                    "tracking_number": {
+                        "type": "string",
+                        "description": "Package tracking number",
+                        "example": "Z152588191910AD"
+                    },
+                    "product_total_dollars": {
+                        "type": "number",
+                        "description": "",
+                        "example": 50
+                    }
+                }
+            }
+        },
+        "PackagingMap": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "packaging map ID",
+                    "example": ""
+                },
+                "name": {
+                    "type": "string",
+                    "description": "packaging map name",
+                    "example": ""
+                },
+                "code": {
+                    "type": "string",
+                    "description": "packaging map code",
+                    "example": "105"
+                }
+            }
+        },
+        "Shipment": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "RetailOps Shipment ID",
+                    "example": 436
+                },
+                "account_id": {
+                    "type": "integer",
+                    "description": "carrier account id",
+                    "example": 15
+                },
+                "carrier_code": {
+                    "type": "string",
+                    "description": "Carrier Code",
+                    "example": "FDXE"
+                },
+                "carrier_name": {
+                    "type": "string",
+                    "description": "Carrier name",
+                    "example": "Fedex"
+                },
+                "channel_refnum": {
+                    "type": "string",
+                    "description": "Channel reference number for order",
+                    "example": "141"
+                },
+                "client_id": {
+                    "type": "integer",
+                    "description": "RetailOps client id",
+                    "example": 1
+                },
+                "consolidated_item_desc": {
+                    "type": "string",
+                    "description": "consolidated item description ",
+                    "example": "mens shoes"
+                },
+                "customs_desc": {
+                    "type": "string",
+                    "description": "customs description",
+                    "example": "consumer goods"
+                },
+                "customs_item_consolidation_message": {
+                    "type": "string",
+                    "description": "customs item consolidation message",
+                    "example": ""
+                },
+                "customs_override_message": {
+                    "type": "string",
+                    "description": "customs override message",
+                    "example": ""
+                },
+                "customs_single_item_message": {
+                    "type": "string",
+                    "description": "customs single item message",
+                    "example": ""
+                },
+                "customs_value_multiplier": {
+                    "type": "string",
+                    "description": "customs value multiplier",
+                    "example": ""
+                },
+                "custsvc_phone": {
+                    "type": "string",
+                    "description": "customer service phone",
+                    "example": "(619) 555-5555"
+                },
+                "custsvc_email": {
+                    "type": "string",
+                    "description": "customer service email address",
+                    "example": "custsvc@ecommerce.com"
+                },
+                "declared_value": {
+                    "type": "number",
+                    "description": "Value for customs declaration",
+                    "example": 35.00
+                },
+                "duty_type": {
+                    "type": "string",
+                    "description": "duty type",
+                    "example": ""
+                },
+                "fromaddr": {
+                    "$ref": "#/definitions/Address"
+                },
+                "generate_bogus_tracking_numbers": {
+                    "type": "boolean",
+                    "description": "Generate private tracking numbers for untrackable shipments",
+                    "example":""
+                },
+                "intl_export_license": {
+                    "type": "string",
+                    "description": "Intl Export License",
+                    "example": ""
+                },
+                "intl_export_license_expdate": {
+                    "type": "string",
+                    "description": "Intl Export License Expiry Date",
+                    "example": ""
+                },
+                "is_intl": {
+                    "type": "boolean",
+                    "description": "Is this an international shipment?",
+                    "example": false
+                },
+                "labeltype": {
+                    "type": "string",
+                    "description": "label type being requested",
+                    "example": "png"
+                },
+                "order_id": {
+                    "type": "integer",
+                    "description": "RetailOps order ID",
+                    "example": 1052
+                },
+                "order_grand_total": {
+                    "type": "number",
+                    "description": "Order grand total amount",
+                    "example": 59.99
+                },
+                "packaging_map": {
+                    "$ref": "#/definitions/PackagingMap"
+                },
+                "pcm_params": {
+                    "type": "object",
+                    "properties": {
+                    }
+                },
+                "pcm_code": {
+                    "type": "string",
+                    "description": "PCM code"
+                },
+                "quantity": {
+                    "type": "integer",
+                    "description": "shipment quantity",
+                    "example": ""
+                },
+                "rcpt_duty_account_nbr": {
+                     "type": "string",
+                     "description": "Recipient duty account number",
+                     "example": ""
+                },
+                "ship_customs_signer": {
+                    "type": "string",
+                    "description": "Customs signer",
+                    "example": "John Doe"
+                },
+                "ship_to_address": {
+                    "$ref": "#/definitions/Address"
+                },
+                "shipper_dba_name": {
+                    "type": "string",
+                    "description": "Shipper DBA name",
+                    "example": "Acme Products"
+                },
+                "signature_type": {
+                    "type": "string",
+                    "description": "Signature type",
+                    "example": ""
+                },
+                "split_trailing": {
+                    "type": "boolean",
+                    "description": "Split trailing labels?",
+                    "example": false
+                },
+                "status": {
+                    "type": "string",
+                    "description": "current status of shipment",
+                    "example": "pending"
+                }
+            }
+        },
+        "ShipClass": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "RetailOps carrier class id",
+                    "example": 21
+                },
+                "carrier_id": {
+                    "type": "integer",
+                    "description": "RetailOps carrier id",
+                    "example": 13
+                },
+                "speed_id": {
+                    "type": "integer",
+                    "description": "RetailOps carrier speed id",
+                    "example": 10
+                },
+                "active": {
+                     "type": "string",
+                     "description": "",
+                     "example": ""
+                },
+                "name": {
+                    "type": "string",
+                    "description": "",
+                    "example": ""
+                },
+                "code": {
+                    "type": "string",
+                    "description": "",
+                    "example": ""
+                },
+                "params": {
+                    "type": "string",
+                    "description": "",
+                    "example": ""
+                },
+                "url_template": {
+                    "type": "string",
+                    "description": "",
+                    "example": ""
+                }
+            }
+        },
+        "Sku": {
+            "type": "object",
+            "properties": {
+                "sku_num": {
+                    "type": "string",
+                    "description": "RetailOps sku number",
+                    "example": ""
+                },
+                "weight":{
+                    "type": "number",
+                    "description": "Sku weight",
+                    "example": 0.95
+                },
+                "country_of_origin":{
+                    "type": "string",
+                    "description": "Country of origin, code2",
+                    "example": "US"
+                },
+                "harmonized_code":{
+                    "type": "string",
+                    "description": "",
+                    "example": ""
+                },
+                "customs_description":{
+                    "type": "string",
+                    "description": "Customs description",
+                    "example": ""
+                },
+                "brand_name": {
+                    "type": "string",
+                    "description": "Brand name of item",
+                    "example": "Adidas"
+                },
+                "family_name": {
+                    "type": "string",
+                    "description": "",
+                    "example": ""
+                },
+                "endicia_product_family_code": {
+                    "type": "string",
+                    "description": "",
+                    "example": ""
+                },
+                "schedule_b_code": {
+                    "type": "string",
+                    "description": "",
+                    "example": ""
                 }
             }
         }
