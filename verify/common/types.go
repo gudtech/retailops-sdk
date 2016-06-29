@@ -2,6 +2,7 @@ package common
 
 import (
   "fmt"
+  "strings"
 )
 
 type VerifyRequest struct {
@@ -57,7 +58,11 @@ type RegistrationRequest struct {
   Interactions []RegistrationInteraction `json:"interactions"`
 }
 
-func NewRegistrationRequest(name, handle string) (req *RegistrationRequest) {
+func NewRegistrationRequest(name, authKey string) (req *RegistrationRequest) {
+  noSpaces := strings.Replace(name, " ", "_", -1)
+  handleBase := strings.ToUpper(noSpaces)
+  handle := fmt.Sprintf("%s_%s",handleBase,authKey)
+
   return &RegistrationRequest {
     Name: name,
     Handle: handle,

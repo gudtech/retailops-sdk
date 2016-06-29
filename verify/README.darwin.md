@@ -34,6 +34,33 @@ Self-verify your RetailOps integration with this SDK.
     remote certification was a success
     ```
 
+Managing Your Integration Auth Key
+---
+
+The integration auth key is used to confirm data is coming from RetailOps. This key must be kept secret and must be checked on every request from RetailOps. This key is a long, random string you will generate using the verify tool.
+
+The verify tool helps manage this key. By default it is stored in your `$HOME/.retailops/` folder. When collaborating with other developers you may need to share this key.
+
+To generate a new key, required for every service:
+
+```
+$ ./verify generate-auth-key
+$ ./verify show-auth-key
+==== INTEGRATION AUTH KEY BELOW ====
+dDkma7W9zA/Nd7r3AUcEI/9MA9KWg+Uc
+==== INTEGRATION AUTH KEY DONE ====
+```
+
+To install a different auth key, setting it to whatever value you choose:
+
+```
+$ ./verify install-auth-key FOOBARBAZ
+$ ./verify.go show-auth-key
+==== INTEGRATION AUTH KEY BELOW ====
+FOOBARBAZ
+==== INTEGRATION AUTH KEY DONE ====
+```
+
 OSX Prerequisites
 ---
 
