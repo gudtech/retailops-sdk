@@ -1,12 +1,13 @@
 {
-  "version": 1,
-  "action": "order_cancel_v1",
-  "order": {
-      "retailops_order_id": 2444,
-      "channel_order_refnum": "241"
-  },
-  "client_id": 1,
-  "channel": {
-      "id": 12
-  }
+    "integration_auth_token": "RETAILOPS_SDK",
+    "action": "catalog_get_config",
+    "version": 1,
+    "client_id": 497,
+    "channel_info": {
+        "id": 21
+    },
+    "order": {
+        "retailops_order_id": 0,
+        "channel_order_refnum": "496"
+    }
 }

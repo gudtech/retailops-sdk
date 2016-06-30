@@ -1,19 +1,20 @@
 {
+  "integration_auth_token": "RETAILOPS_SDK",
+  "action": "catalog_get_config",
   "version": 1,
-  "action": "catalog_push_v1",
+  "client_id": 497,
+  "channel_info": {
+    "id": 21
+  },
   "catalog_items": [
     {
-        "item_type": "sku",
-        "item_info": {
-            "sku_number": "S1234",
-            "product_id": "15252",
-            "skugroup_number": "S272626"
-        },
-        "template_output": {}
+      "item_type": "sku",
+      "item_info": {
+        "sku_number": "string",
+        "product_id": "string",
+        "skugroup_number": "string"
+      },
+      "template_output": {}
     }
-  ],
-"client_id" : 497,
-"channel": {
-      "id": 21
-  }
+  ]
 }
