@@ -23,6 +23,8 @@ func VerifyAction(msg *scamp.Message, client *scamp.Client) {
   verResp := common.NewVerifyResponse()
   // scamp.Error.Printf("received new verify request size: %d", len(msg.Bytes()))
 
+  // scamp.Error.Printf("msg ticket: %s", msg.GetTicket())
+
   respMsg := scamp.NewResponseMessage()
   respMsg.SetRequestId(msg.RequestId)
 
@@ -44,10 +46,10 @@ func VerifyAction(msg *scamp.Message, client *scamp.Client) {
     return
   }
 
-  doVerificationRequest(req, &verResp)
+  doVerificationRequest(req, &verResp, false)
 
-  if verResp.Status == "success" {
-    err = doRegistration(req, &verResp)
+  if verResp.Status == "success" {    
+    err = doRegistration(msg.GetTicket(), req, &verResp)
     if err != nil {
       scamp.Error.Printf("error calling registration: %s", err.Error())
       respMsg.WriteJson(map[string]string{
@@ -68,8 +70,8 @@ func VerifyAction(msg *scamp.Message, client *scamp.Client) {
   }
 }
 
-func doRegistration(req *common.VerifyRequest, resp *common.VerifyResponse) (err error) {
-  regReq := common.NewRegistrationRequest("a cool name", req.IntegrationAuthKey)
+func doRegistration(identifyingToken string, req *common.VerifyRequest, resp *common.VerifyResponse) (err error) {
+  regReq := common.NewRegistrationRequest(req.IntegrationName, req.IntegrationAuthKey)
   for _,actionResult := range resp.ActionResults {
     regReq.AddInteraction(actionResult.Action, actionResult.TargetUrl)
   }
@@ -84,12 +86,10 @@ func doRegistration(req *common.VerifyRequest, resp *common.VerifyResponse) (err
   }
 
   station := string(stationBytes)
-  scamp.Info.Printf(station)
 
-  // panicjson(station)
   msg := scamp.NewRequestMessage()
-  // msg.SetStationTicket(station)
-  // msg.SetStationTicket(station)
+  msg.SetTicket(station)
+  msg.SetIdentifyingToken(identifyingToken)
   msg.SetRequestId(1)
   msg.WriteJson(regReq)
   msg.SetTicket(station)
@@ -99,8 +99,6 @@ func doRegistration(req *common.VerifyRequest, resp *common.VerifyResponse) (err
     return
   }
 
-  // TODO: make a timeout
-  scamp.Info.Printf("making registration request")
   select {
   case respMsg := <-respchan:
     strresp := string(respMsg.Bytes())
@@ -116,7 +114,7 @@ func doRegistration(req *common.VerifyRequest, resp *common.VerifyResponse) (err
   return
 }
 
-func doVerificationRequest(verReq *common.VerifyRequest, verResp *common.VerifyResponse) {
+func doVerificationRequest(verReq *common.VerifyRequest, verResp *common.VerifyResponse, mungeAuthToken bool) {
   var failCount int = 0
 
   for _,action := range verReq.SupportedActions {
@@ -148,11 +146,38 @@ func doVerificationRequest(verReq *common.VerifyRequest, verResp *common.VerifyR
       continue
     }
 
-    err = verify.Request(verReq.TargetUrl, schemaFile, exampleFile, false)
+    var integrationAuthKey = verReq.IntegrationAuthKey
+    if mungeAuthToken {
+      integrationAuthKey = fmt.Sprintf("!!%s!!",verReq.IntegrationAuthKey)
+    }
+
+    /*
+      Make the normal request, proper settings, and everything
+    */
+    err = verify.Request(verReq.TargetUrl, integrationAuthKey, schemaFile, exampleFile, true)
     if err != nil {
       verResp.ActionResults = append(verResp.ActionResults, common.ActionResult {
         Status: "error",
         Message: err.Error(),
+        Action: action,
+        Version: verReq.Version,
+        TargetUrl: fmt.Sprintf("%s/%s", verReq.TargetUrl, action),
+      })
+
+      failCount += 1
+      continue
+    }
+
+    // Check that they reject requests with bad integration_auth_tokens
+    _,err = schemaFile.Seek(0,0)
+    if err != nil { return }
+    _,err = exampleFile.Seek(0,0)
+    if err != nil { return }
+    err = verify.Request(verReq.TargetUrl, fmt.Sprintf("!!!%s", integrationAuthKey), schemaFile, exampleFile, true)
+    if err == nil {
+      verResp.ActionResults = append(verResp.ActionResults, common.ActionResult {
+        Status: "error",
+        Message: "failed to check integration_auth_token. expected HTTP 401",
         Action: action,
         Version: verReq.Version,
         TargetUrl: fmt.Sprintf("%s/%s", verReq.TargetUrl, action),
@@ -175,7 +200,7 @@ func doVerificationRequest(verReq *common.VerifyRequest, verResp *common.VerifyR
     verResp.Status = "success"
   } else {
     verResp.Status = "error"
-    verResp.Message = fmt.Sprintf("%d verification requests failed", failCount)
+    verResp.Message = verResp.NiceError() // fmt.Sprintf("%d verification requests failed", failCount)
   }
 
   return
