@@ -11,7 +11,7 @@ import (
 
 )
 
-func doLocalTest(cliExec CLIExecution) (err error) {
+func doLocalVerify(cliExec CLIExecution) (err error) {
   var examples []SchemaExample
   if cliExec.SchemaPathIsDir {
     examples,err = allExamples(cliExec.SchemaPath, cliExec.SchemaFilter)
@@ -79,6 +79,20 @@ func loadFilesAndMakeRequest(baseUrl, schemaPath, examplePath string, verbose bo
 
   err = Request(baseUrl, "DEADBEEF", f, exampleF, verbose)
   if err != nil {
+    return
+  }
+
+  _,err = exampleF.Seek(0,0)
+  if err != nil {
+    return
+  }
+  _,err = f.Seek(0,0)
+  if err != nil {
+    return
+  }
+  err = Request(baseUrl, "FEEBDAED", f, exampleF, verbose)
+  if err == nil {
+    err = fmt.Errorf("failed to check integration_auth_token. expected HTTP 401")
     return
   }
 

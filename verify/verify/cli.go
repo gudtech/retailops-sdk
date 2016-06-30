@@ -31,7 +31,7 @@ var HR string = "----------------"
 
 func Execute(cliExec CLIExecution) (err error) {
   if cliExec.Action == "test" {
-    return doLocalTest(cliExec)
+    return doLocalVerify(cliExec)
   } else if cliExec.Action == "certify" {
     return doCertify(cliExec)
   } else if cliExec.Action == "generate_token" {
