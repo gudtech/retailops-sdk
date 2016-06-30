@@ -34,6 +34,33 @@ Self-verify your RetailOps integration with this SDK.
     remote certification was a success
     ```
 
+Managing Your Integration Auth Key
+---
+
+The integration auth key is used to confirm data is coming from RetailOps. This key must be kept secret and must be checked on every request from RetailOps. A bad integration auth key value must result in a HTTP 401. The integration auth key is a long, random string you will generate using the verify tool.
+
+The verify tool helps manage this key. By default it is stored in your `$HOME/.retailops/` folder. When collaborating with other developers you may need to share and install this key.
+
+To generate a new key, required for every service:
+
+```
+$ ./verify.exe generate-auth-key
+$ ./verify.exe show-auth-key
+==== INTEGRATION AUTH KEY BELOW ====
+dDkma7W9zA/Nd7r3AUcEI/9MA9KWg+Uc
+==== INTEGRATION AUTH KEY DONE ====
+```
+
+To install a different auth key, setting it to whatever value you choose:
+
+```
+$ ./verify.exe install-auth-key FOOBARBAZ
+$ ./verify.exe show-auth-key
+==== INTEGRATION AUTH KEY BELOW ====
+FOOBARBAZ
+==== INTEGRATION AUTH KEY DONE ====
+```
+
 Windows Prerequisites
 ---
 
