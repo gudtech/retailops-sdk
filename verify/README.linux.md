@@ -61,6 +61,8 @@ FOOBARBAZ
 ==== INTEGRATION AUTH KEY DONE ====
 ```
 
+Note: the integration auth key generated here is only for certification of a production service. The local verification will use the the integration_auth_key "RETAILOPS_SDK" and you should reject all other values.
+
 Linux Prerequisites
 ---
 
