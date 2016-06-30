@@ -1,8 +1,9 @@
 {
+  "integration_auth_token": "RETAILOPS_SDK",
+  "action": "catalog_get_config",
   "version": 1,
-  "action": "catalog_get_config_v1",
-  "client_id" : 497,
-  "channel": {
-      "id": 21
+  "client_id": 497,
+  "channel_info": {
+    "id": 21
   }
 }

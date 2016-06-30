@@ -1,14 +1,15 @@
 {
+  "integration_auth_token": "RETAILOPS_SDK",
+  "action": "catalog_get_config",
   "version": 1,
-  "action": "order_acknowledge_v1",
-  "orders": [
-      {
-          "channel_order_refnum": "496",
-          "retailops_order_id": 2444
-      }
-  ],
   "client_id": 497,
-  "channel": {
-      "id": 21
-  }
+  "channel_info": {
+    "id": 21
+  },
+  "orders": [
+    {
+      "channel_order_refnum": "496",
+      "retailops_order_id": 0
+    }
+  ]
 }

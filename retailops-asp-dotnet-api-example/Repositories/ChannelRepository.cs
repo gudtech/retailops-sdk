@@ -64,7 +64,11 @@ namespace dotnet_example_api.Repositories
             };        
         }    
             
-            
+         //canned test for auth token
+        public bool checkToken(string token){
+            //hard coded api test token, do not use in a production system
+            return token.Equals("DEADBEEF");
+        } 
 
         public ConfigResponse catalog_get_config()
         {

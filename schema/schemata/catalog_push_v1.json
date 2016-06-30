@@ -13,71 +13,91 @@
             "method": "post",
             "rel": "instances",
             "schema": {
-                "type": "object",
-                "properties": {
-                    "version": {
-                        "type": "integer",
-                        "description": "Action Version",
-                        "example": 1
-                    },
-                    "action": {
-                        "type": "string",
-                        "description": "Action Name name",
-                        "example": "catalog_push"
-                    },
-                    "catalog_items": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "item_type": {
-                                    "type": "string",
-                                    "description": "The type of RetailOps data item being expressed",
-                                    "enum": [
-                                        "sku",
-                                        "product_family",
-                                        "sku_group",
-                                        "collection"
-                                    ]
-                                },
-                                "item_info": {
-                                    "type": "object",
-                                    "description": "Details about the RetailOps data item being expressed",
-                                    "properties": {
-                                        "sku_number": {
-                                            "type": "string"
-                                        },
-                                        "product_id": {
-                                            "type": "string"
-                                        },
-                                        "skugroup_number": {
-                                            "type": "string"
-                                        }
+                "allOf": [
+                    {
+                        "type": "object",
+                        "required": [
+                            "action",
+                            "version",
+                            "client_id",
+                            "channel_info"
+                        ],
+                        "properties": {
+                            "integration_auth_token": {
+                                "type": "string",
+                                "description": "Randomly generated authorization token, for authenticating genuine RetailOps- originated requests.",
+                                "example": "2KuxqV9rsAtAM78i47CITMvtnflUapNmgGJAvWiHqgUrk1xkeDNWlM3EsrmJEtmV"
+                            },
+                            "action": {
+                                "type": "string",
+                                "description": "Action Name name",
+                                "example": "catalog_get_config"
+                            },
+                            "version": {
+                                "type": "integer",
+                                "description": "Action Version",
+                                "example": 1
+                            },
+                            "client_id": {
+                                "description": "RetailOPS client id",
+                                "type": "integer",
+                                "example": 497
+                            },
+                            "channel_info": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "description": "channel id",
+                                        "example": 21
                                     }
-                                },
-                                "template_output": {
-                                    "description": "Data structure as provided by the RetailOps feed system template which has been evaluated against the retailops catalog item in question",
-                                    "type": "object"
                                 }
                             }
                         }
                     },
-                    "client_id": {
-                        "type": "integer",
-                        "description": "client ID",
-                        "example": 1
-                    },
-                    "channel": {
+                    {
                         "type": "object",
                         "properties": {
-                            "id": {
-                                "type": "integer",
-                                "description": "channel ID",
-                                "example": 12
+                            "catalog_items": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "item_type": {
+                                            "type": "string",
+                                            "description": "The type of RetailOps data item being expressed",
+                                            "enum": [
+                                                "sku",
+                                                "product_family",
+                                                "sku_group",
+                                                "collection"
+                                            ]
+                                        },
+                                        "item_info": {
+                                            "type": "object",
+                                            "description": "Details about the RetailOps data item being expressed",
+                                            "properties": {
+                                                "sku_number": {
+                                                    "type": "string"
+                                                },
+                                                "product_id": {
+                                                    "type": "string"
+                                                },
+                                                "skugroup_number": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "template_output": {
+                                            "description": "Data structure as provided by the RetailOps feed system template which has been evaluated against the retailops catalog item in question",
+                                            "type": "object"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
-                }
+                ]
             },
             "targetSchema": {
                 "type": "object",

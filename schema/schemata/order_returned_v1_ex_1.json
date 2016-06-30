@@ -1,131 +1,78 @@
 {
+    "integration_auth_token": "RETAILOPS_SDK",
+    "action": "catalog_get_config",
     "version": 1,
-    "action": "order_returned_v1",
-    "data": {
-        "order": {
-            "channel_payment": {
-                "success": 1,
-                "unsettled_external": 0,
-                "unsettled_deferred": 0,
-                "channel_id": 12,
-                "authed": 0,
-                "captures_are_external": 1,
-                "unsettled": 0,
-                "settled": 35,
-                "charged": 35,
-                "captured": 0,
-                "captures_are_deferred": 0,
-                "voided": 0,
-                "id": 6,
-                "method": "channel",
-                "credited": 0,
-                "module": "Channel",
-                "available": 35
+    "client_id": 497,
+    "channel_info": {
+        "id": 21
+    },
+    "order": {
+        "channel_order_refnum": "string",
+        "retailops_order_id": 0,
+        "grand_total": 0,
+        "unshipped_items": [
+            {
+                "channel_item_refnum": "string",
+                "sku": "string",
+                "ordered_quantity": 0,
+                "unshipped_quantity": 0,
+                "effective_unit_price": 0,
+                "effective_extended_price": 0
             }
-        },
-        "grand_total": 35,
-        "unshipped_items_ref": [
-            496
         ],
-        "payment_series_id": 2572,
-        "from_counterparty_rate": 1,
-        "ship_service_name": "Will Call",
-        "channel_refnum": "496",
         "shipments": [
             {
-                "id": 100000084,
+                "retailops_shipment_id": 0,
                 "packages": [
                     {
-                        "class_name": "Standard",
-                        "carrier_code": "WILLCALL",
-                        "carrier_name": "WillCall",
-                        "ship_items": [],
+                        "retailops_package_id": 0,
+                        "carrier_name": "UPS",
+                        "carrier_class_name": "Ground",
+                        "channel_ship_code": "string",
                         "tracking_number": "ZX29827782929",
-                        "mapped_shipcode": "null",
+                        "weight_kg": 0,
                         "date_shipped": "2016-04-08T21:13:11Z",
-                        "carrier_class_code": "WILLCALL",
-                        "weight": 1,
-                        "id": 370,
-                        "carrier_class_name": "WillCall Standard"
+                        "package_items": [
+                            {
+                                "sku": "string",
+                                "retailops_order_item_id": 0,
+                                "retailops_shipment_item_id": 0,
+                                "channel_item_refnum": "string",
+                                "quantity": 0
+                            }
+                        ]
                     }
                 ]
             }
-        ],
-        "id": 4897,
-        "payment_status": {
-            "success": 1,
-            "unsettled_external": 0,
-            "unsettled_deferred": 0,
-            "by_account": [
-                {
-                    "success": 1,
-                    "unsettled_external": 0,
-                    "unsettled_deferred": 0,
-                    "channel_id": 12,
-                    "authed": 0,
-                    "captures_are_external": 1,
-                    "unsettled": 0,
-                    "settled": 35,
-                    "charged": 35,
-                    "captured": 0,
-                    "captures_are_deferred": 0,
-                    "voided": 0,
-                    "id": 6,
-                    "method": "channel",
-                    "credited": 0,
-                    "module": "Channel",
-                    "available": 35
-                }
-            ],
-            "unsettled": 0,
-            "settled": 35,
-            "charged": 35,
-            "captured": 0,
-            "authed": 0,
-            "credited": 0,
-            "available": 35
-        }
-    },
-    "channel": {
-        "id": 21
+        ]
     },
     "return": {
-        "shipping_amt": 0,
-        "subtotal_amt": 30,
+        "retailops_return_id": 87,
+        "retailops_rma_id": "null",
         "product_amt": 30,
-        "refund_amt": 30,
-        "tax_amt": 0,
-        "rma_id": "null",
-        "refund_action": "refund",
+        "subtotal_amt": 30,
         "discount_amt": 0,
-        "credit_items_ref": [
-            {
-                "sku": 132,
-                "item_shipping_tax_amt": 30,
-                "credit_item_refnum": "return_item 90",
-                "item_tax_amt": 0,
-                "channel_order_refnum": "100000084",
-                "item_shipping_amt": 0,
-                "item_restock_fee_amt": 0,
-                "channel_id": 12,
-                "item_giftwrap_amt": 0,
-                "channel_item_refnum": 88,
-                "quantity": 1,
-                "reason": "CustomerReturn",
-                "item_product_amt": 30,
-                "item_recycling_amt": 0,
-                "item_subtotal_amt": 30,
-                "item_credit_amt": 30,
-                "item_giftwrap_tax_amt": 0
-            }
-        ],
-        "id": 87,
+        "shipping_amt": 0,
+        "tax_amt": 0,
+        "refund_amt": 30,
+        "refund_action": "refund",
         "items": [
             {
-                "channel_refnum": "496",
-                "order_item_id": 7395,
-                "sku": 53,
-                "quantity": 1
+                "retailops_item_id": 7395,
+                "channel_item_refnum": "return_item 90",
+                "sku": 132,
+                "quantity": 1,
+                "reason": "CustomerReturn",
+                "item_shipping_tax_amt": 30,
+                "tax_amt": 0,
+                "shipping_amt": 0,
+                "restock_fee_amt": 0,
+                "giftwrap_amt": 0,
+                "product_amt": 30,
+                "recycling_amt": 0,
+                "subtotal_amt": 30,
+                "credit_amt": 30,
+                "giftwrap_tax_amt": 0
             }
         ]
     }

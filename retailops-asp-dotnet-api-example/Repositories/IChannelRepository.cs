@@ -9,6 +9,8 @@ namespace dotnet_example_api.Repositories
 {
     public interface IChannelRepository
     {
+        bool checkToken(string token);
+
         ConfigResponse catalog_get_config();
         
         EventResponse catalog_push();

@@ -2,6 +2,9 @@ using Microsoft.AspNet.Mvc;
 using dotnet_example_api.Repositories;
 using dotnet_example_api.Models;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNet.Http;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace dotnet_example_api.Controllers
 {
@@ -9,16 +12,16 @@ namespace dotnet_example_api.Controllers
     public class ChannelController : Controller
     {
         [FromServices]
-        public IChannelRepository ChannelRepo { get; set; } //TODO: add Channel Model
+        public IChannelRepository ChannelRepo { get; set; } 
         
         private readonly ILogger<ChannelController> _logger;
         
         public ChannelController(ILogger<ChannelController> logger)
         {
-            //could inject repository here as well
             _logger = logger;
         }
-        
+
+
         // The api actions defined below do not parse the incoming JSON included
         // in the request body. In a production application you would parse this JSON
         // and pass the data to your repository where the business logic resides.
@@ -28,8 +31,19 @@ namespace dotnet_example_api.Controllers
         {
             ConfigResponse response = ChannelRepo.catalog_get_config();
             
-            //_logger.LogInformation("request body", request);
-            
+            // dynamic req = JObject.Parse(request); 
+            // string token = req["integration_auth_token"];
+
+            //  _logger.LogInformation("Handled in {0} ms", token);
+
+            //test token 
+            // if(!ChannelRepo.checkToken(token) ){
+            // if(token != "")
+            // {
+            //     // _logger.LogInformation("token", token);    
+            //     return this.HttpUnauthorized();
+            // }
+
             // the repository methods return a response object if 
             // they are successful, if not they return a null object and 
             // we return an HTTP not found error 

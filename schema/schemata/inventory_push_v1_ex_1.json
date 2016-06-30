@@ -1,6 +1,11 @@
 {
+    "integration_auth_token": "RETAILOPS_SDK",
+    "action": "catalog_get_config",
     "version": 1,
-    "action": "inventory_push",
+    "client_id": 497,
+    "channel_info": {
+        "id": 21
+    },
     "inventory_updates": [
         {
             "sku": "S12345",
@@ -8,18 +13,15 @@
             "quantity_detail": [
                 {
                     "quantity_type": "internal",
-                    "estimated_availability_date": "May 25 2016",
-                    "available_quantity": 5,
-                    "total_quantity": 5,
-                    "vendor_name": "Acme Co",
-                    "po": "P132131",
-                    "facility_name": "main"
+                    "estimated_availability_date": "string",
+                    "available_quantity": 0,
+                    "total_quantity": 0,
+                    "vendor_name": "string",
+                    "po": "string",
+                    "po_destination": "string",
+                    "facility_name": "string"
                 }
             ]
         }
-    ],
-    "client_id": 1,
-    "channel": {
-        "id": 21
-    }
+    ]
 }
