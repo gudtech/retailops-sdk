@@ -67,7 +67,7 @@ type V1FileLink struct {
   Title          string `json:"title"`
 }
 
-func Request(baseUrlStr string, hyperSchema io.Reader, example io.Reader, verbose bool) (err error) {
+func Request(baseUrlStr, integrationAuthKey string, hyperSchema io.Reader, example io.Reader, verbose bool) (err error) {
   requestUrl,err := url.Parse(baseUrlStr)
   if err != nil {
     return
@@ -79,6 +79,10 @@ func Request(baseUrlStr string, hyperSchema io.Reader, example io.Reader, verbos
   err = json.NewDecoder(hyperSchema).Decode(&v1file)
 
   exampleBytes,err := ioutil.ReadAll(example)
+  if err != nil {
+    return
+  }
+  exampleBytes,err = insertIntegrationAuthKey(exampleBytes, integrationAuthKey)
   if err != nil {
     return
   }
@@ -157,11 +161,19 @@ func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, request
   /* 
     HTTP request issuance
   */
+  requestBuf := bytes.NewBuffer(exampleBytes)
   requestUrl.Path = fmt.Sprintf("%s%s", basePath, link.Href)
-  response,err := client.Do(&http.Request {
-    Method: strings.ToUpper(link.Method),
-    URL: requestUrl,
-  })
+
+  request,err := http.NewRequest(
+    strings.ToUpper(link.Method),
+    requestUrl.String(),
+    requestBuf,
+  )
+  if err != nil {
+    return
+  }
+
+  response,err := client.Do(request)
   if err != nil {
     return err
   }
@@ -207,6 +219,27 @@ func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, request
     }
     return fmt.Errorf(buf.String())
   }
+
+  return
+}
+
+func insertIntegrationAuthKey(in []byte, integrationAuthKey string) (out []byte, err error) {
+  var asMap map[string]interface{}
+  inReader := bytes.NewReader(in)
+  err = json.NewDecoder(inReader).Decode(&asMap)
+  if err != nil {
+    return
+  }
+
+  asMap["integration_auth_token"] = integrationAuthKey
+
+  var buf bytes.Buffer
+  err = json.NewEncoder(&buf).Encode(asMap)
+  if err != nil {
+    return
+  }
+
+  out = buf.Bytes()
 
   return
 }

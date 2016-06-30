@@ -3,11 +3,13 @@ package common
 import (
   "fmt"
   "strings"
+  "bytes"
+  "text/template"
 )
 
 type VerifyRequest struct {
   ApiKey string `json:"apikey,omitempty"`
-  IntegrationAuthKey string `json:"integration_auth_key,omitempty"`
+  IntegrationAuthKey string `json:"integration_auth_key"`
   Version int `json:"version"`
   TargetUrl string `json:"target_url"`
   SupportedActions []string `json:"supported_actions"`
@@ -36,12 +38,47 @@ type VerifyResponse struct {
   Status string `json:"status"`
   Message string `json:"message"`
   ActionResults []ActionResult `json:"action_results"`
+
+  // The following can be injected by the API dispatcher
+  Error string `json:"ERROR"`
+  ErrorCode string `json:"ERRORCODE"`
 }
 
 func NewVerifyResponse() (verResp VerifyResponse) {
   return VerifyResponse {
     ActionResults: make([]ActionResult,0),
   }
+}
+
+func (verResp VerifyResponse) NiceError() (errMsg string) {
+  var buf bytes.Buffer
+
+  tmpl,err := template.New("T").Parse(`{{.FailCount}} of {{len .ActionResults}} actions failed
+{{range .ActionResults}}{{.Status}}: {{.TargetUrl}} {{.Message}}
+{{end}}
+`)
+  if err != nil {
+    panic(err.Error())
+  }
+
+
+  err = tmpl.Execute(&buf, verResp)
+  if err != nil {
+    panic(err.Error())
+  }
+
+  return string(buf.Bytes())
+}
+
+func (verResp VerifyResponse) FailCount() (count int) {
+  count = 0
+  for _,actionResult := range verResp.ActionResults {
+    if actionResult.Status == "error" {
+      count += 1
+    }
+  }
+
+  return count
 }
 
 type ActionResult struct {

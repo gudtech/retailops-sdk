@@ -22,7 +22,7 @@ type schemaExample struct {
 var HR string = "----------------"
 
 func main() {
-  var cliExec verify.CLIExecution
+  var cliExec = verify.CLIExecution{}
   var err error
 
   schemaPathPtr := flag.String("schema-path", "", "path to JSON or directory with JSON")
@@ -99,7 +99,7 @@ func main() {
 
   err = verify.Execute(cliExec)
   if err != nil {
-    fmt.Println("failed:", err.Error())
+    fmt.Println(err.Error())
     os.Exit(1)
   } else {
     if cliExec.Action == "test" {

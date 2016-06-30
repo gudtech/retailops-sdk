@@ -8,7 +8,7 @@ import (
 
   p "path"
   fp "path/filepath"
-  
+
 )
 
 func doLocalTest(cliExec CLIExecution) (err error) {
@@ -77,7 +77,7 @@ func loadFilesAndMakeRequest(baseUrl, schemaPath, examplePath string, verbose bo
     return
   }
 
-  err = Request(baseUrl, f, exampleF, verbose)
+  err = Request(baseUrl, "DEADBEEF", f, exampleF, verbose)
   if err != nil {
     return
   }

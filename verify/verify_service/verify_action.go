@@ -46,7 +46,7 @@ func VerifyAction(msg *scamp.Message, client *scamp.Client) {
     return
   }
 
-  doVerificationRequest(req, &verResp)
+  doVerificationRequest(req, &verResp, false)
 
   if verResp.Status == "success" {    
     err = doRegistration(msg.GetTicket(), req, &verResp)
@@ -114,7 +114,7 @@ func doRegistration(identifyingToken string, req *common.VerifyRequest, resp *co
   return
 }
 
-func doVerificationRequest(verReq *common.VerifyRequest, verResp *common.VerifyResponse) {
+func doVerificationRequest(verReq *common.VerifyRequest, verResp *common.VerifyResponse, mungeAuthToken bool) {
   var failCount int = 0
 
   for _,action := range verReq.SupportedActions {
@@ -146,11 +146,38 @@ func doVerificationRequest(verReq *common.VerifyRequest, verResp *common.VerifyR
       continue
     }
 
-    err = verify.Request(verReq.TargetUrl, schemaFile, exampleFile, true)
+    var integrationAuthKey = verReq.IntegrationAuthKey
+    if mungeAuthToken {
+      integrationAuthKey = fmt.Sprintf("!!%s!!",verReq.IntegrationAuthKey)
+    }
+
+    /*
+      Make the normal request, proper settings, and everything
+    */
+    err = verify.Request(verReq.TargetUrl, integrationAuthKey, schemaFile, exampleFile, true)
     if err != nil {
       verResp.ActionResults = append(verResp.ActionResults, common.ActionResult {
         Status: "error",
         Message: err.Error(),
+        Action: action,
+        Version: verReq.Version,
+        TargetUrl: fmt.Sprintf("%s/%s", verReq.TargetUrl, action),
+      })
+
+      failCount += 1
+      continue
+    }
+
+    // Check that they reject requests with bad integration_auth_tokens
+    _,err = schemaFile.Seek(0,0)
+    if err != nil { return }
+    _,err = exampleFile.Seek(0,0)
+    if err != nil { return }
+    err = verify.Request(verReq.TargetUrl, fmt.Sprintf("!!!%s", integrationAuthKey), schemaFile, exampleFile, true)
+    if err == nil {
+      verResp.ActionResults = append(verResp.ActionResults, common.ActionResult {
+        Status: "error",
+        Message: "failed to check integration_auth_token. expected HTTP 401",
         Action: action,
         Version: verReq.Version,
         TargetUrl: fmt.Sprintf("%s/%s", verReq.TargetUrl, action),
@@ -173,7 +200,7 @@ func doVerificationRequest(verReq *common.VerifyRequest, verResp *common.VerifyR
     verResp.Status = "success"
   } else {
     verResp.Status = "error"
-    verResp.Message = fmt.Sprintf("%d verification requests failed", failCount)
+    verResp.Message = verResp.NiceError() // fmt.Sprintf("%d verification requests failed", failCount)
   }
 
   return

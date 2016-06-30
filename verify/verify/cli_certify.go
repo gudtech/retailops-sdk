@@ -8,7 +8,7 @@ import (
   "net/http"
   "time"
 
-  "io/ioutil"
+  // "io/ioutil"
 
   "github.com/gudtech/retailops-sdk/verify/common"
 )
@@ -47,12 +47,11 @@ func doCertify(cliExec CLIExecution) (err error) {
     return
   }
 
-
-  respBuf,err := ioutil.ReadAll(resp.Body)
-  if err != nil {
-    return
-  }
-  panic(string(respBuf))
+  // respBuf,err := ioutil.ReadAll(resp.Body)
+  // if err != nil {
+  //   return
+  // }
+  // panic(string(respBuf))
 
   var apiResp common.VerifyResponse
   err = json.NewDecoder(resp.Body).Decode(&apiResp)
@@ -61,7 +60,10 @@ func doCertify(cliExec CLIExecution) (err error) {
   }
 
   if apiResp.Status == "error" {
-    err = fmt.Errorf("certification failed: %s", apiResp.Message)
+    err = fmt.Errorf("certification failed:\n%s", apiResp.Message)
+    return
+  } else if apiResp.Error != "" {
+    err = fmt.Errorf("certification failed: %s/%s", apiResp.Error, apiResp.ErrorCode)
     return
   }
 

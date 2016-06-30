@@ -23,8 +23,6 @@ func doInstallIntegrationAuthKey(cliExec CLIExecution) (err error) {
   return
 }
 
-
-
 func doGenerateToken(cliExec CLIExecution) (err error) {
   ats,err := NewAuthTokenStorage()
   if err != nil {
