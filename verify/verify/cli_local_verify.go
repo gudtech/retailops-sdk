@@ -82,6 +82,7 @@ func loadFilesAndMakeRequest(baseUrl, schemaPath, examplePath string, verbose bo
     return
   }
 
+  /*
   _,err = exampleF.Seek(0,0)
   if err != nil {
     return
@@ -95,6 +96,7 @@ func loadFilesAndMakeRequest(baseUrl, schemaPath, examplePath string, verbose bo
     err = fmt.Errorf("failed to check integration_auth_token. expected HTTP 401")
     return
   }
+  */
 
   return
 }
