@@ -7,6 +7,7 @@ import (
   "github.com/gudtech/scamp-go/scamp"
 
   "github.com/gudtech/retailops-sdk/verify/verify_service"
+  "github.com/gudtech/retailops-sdk/verify/sdk_actions"
 )
 
 var gtsoaConfigPath = flag.String("config", "/etc/GTSOA/soa.conf", "path to the GTSOA soa.conf")
@@ -29,16 +30,29 @@ func main() {
     scamp.Error.Printf("could not create service: `%s`", err.Error())
     os.Exit(1)
   }
-
-  /*
-  * {
-  *   "target_url": "http://bob.com/ro_api",
-  *   "supported_actions": ["asdf", "fdsa"]
-  * }
-  */
-
   verify_service.TicketPath = *registrationTicket
   verifierSvc.Register("Integration.Channel.certify", verify_service.VerifyAction)
+
+  callbackSvc,err := scamp.NewService("sdk", "0.0.0.0:","sdk_service")
+  if err != nil {
+    scamp.Error.Printf("could not create serivce: `%s`", err.Error())
+    os.Exit(1)
+  }
+  callbackSvc.Register("SDK.items_returned",sdk_actions.ItemsReturnedV1) // , SDK callback: order_returned
+  callbackSvc.Register("SDK.shipment_submit",sdk_actions.ShipmentSubmitV1) // , SDK callback: order_shipment_submit
+  callbackSvc.Register("SDK.writeback",sdk_actions.WritebackV1) // , SDK callback: unknown
+  callbackSvc.Register("SDK.order_cancel",sdk_actions.OrderCancelV1) // , SDK callback: order_cancel
+  callbackSvc.Register("SDK.order_complete",sdk_actions.OrderCompleteV1) // , SDK callback: order_complete
+  callbackSvc.Register("SDK.capture_channel_payments",sdk_actions.CaptureChannelPaymentsV1) // , SDK callback:
+  callbackSvc.Register("SDK.order_ack",sdk_actions.OrderAckV1) // , SDK callback: order_acknowledge
+  callbackSvc.Register("SDK.order_fetch",sdk_actions.OrderFetchV1) // , SDK callback: order_pull
+  callbackSvc.Register("SDK.catpush_config",sdk_actions.CatpushConfigV1) // , SDK callback: catalog_get_config
+  callbackSvc.Register("SDK.catpush_transmit",sdk_actions.CatpushTransmitV1) // , SDK callback: catalog_push
+  callbackSvc.Register("SDK.invpush_transmit",sdk_actions.InvpushTransmitV1) // , SDK callback: inventory_push
+  callbackSvc.Register("SDK.order_update",sdk_actions.OrderUpdateV1) // , SDK callback: order_update
+  callbackSvc.Register("SDK.order_settle_payment",sdk_actions.OrderSettlePaymentV1) // , SDK callback: order_settle_payment
+
+
 
   announcer,err := scamp.NewDiscoveryAnnouncer()
   if err != nil {
@@ -46,6 +60,7 @@ func main() {
     return
   }
   announcer.Track(verifierSvc)
+  announcer.Track(callbackSvc)
   go announcer.AnnounceLoop()
 
   verifierSvc.Run()
