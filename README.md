@@ -55,8 +55,8 @@ RetailOps then pulls this order information, fulfills said orders, and pushes st
 - [calculate_order](http://gudtech.github.io/retailops-sdk/v1/tax#!/Tax/post_calculate_order_v1) - Tax Calculation for order
 
 ### Shipping Integrations
-- [get_labels](http://gudtech.github.io/retailops-sdk/v1/shipping/#!/Shipping_Labels/post_get_labels_v1) - Get shipping labels
-- [void_label](http://gudtech.github.io/retailops-sdk/v1/shipping/#!/Shipping_Labels/post_void_label_v1) - void shipping label
-- [get_rate](http://gudtech.github.io/retailops-sdk/v1/shipping/#!/Rate_and_Time/post_get_rate_v1) - Get rate
-- [get_rate_and_time](http://gudtech.github.io/retailops-sdk/v1/shipping/#!/Rate_and_Time/post_get_rate_and_time_v1) - Get rate and time
-- [get_time](http://gudtech.github.io/retailops-sdk/v1/shipping/#!/Rate_and_Time/post_get_time_v1) - Get rate
+- [get_labels](http://gudtech.github.io/retailops-sdk/v1/shipping/#!/Shipping_Labels/post_get_labels_v1) - Get shipping labels for ROP shipments
+- [void_label](http://gudtech.github.io/retailops-sdk/v1/shipping/#!/Shipping_Labels/post_void_label_v1) - void shipping label for ROP shipment
+- [get_rate](http://gudtech.github.io/retailops-sdk/v1/shipping/#!/Rate_and_Time/post_get_rate_v1) - Get rate for carrier class
+- [get_rate_and_time](http://gudtech.github.io/retailops-sdk/v1/shipping/#!/Rate_and_Time/post_get_rate_and_time_v1) - Get rate and estimated delivery time for carrier class
+- [get_time](http://gudtech.github.io/retailops-sdk/v1/shipping/#!/Rate_and_Time/post_get_time_v1) - Get estimated delivery time for carrier class
