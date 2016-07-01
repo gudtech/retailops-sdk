@@ -7,7 +7,8 @@
     },
     "host": "your.servername-here.com",
     "schemes": [
-        "https"
+        "https",
+        "http"
     ],
     "basePath": "/",
     "produces": [
@@ -22,7 +23,7 @@
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "Get Label request. Request shipping label(s) for ROP shipment(s)",
+                        "description": "Request shipping labels for ROP shipments",
                         "schema": {
                             "$ref": "#/definitions/GetLabelsRequest"
                         }
@@ -36,9 +37,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "Shipping Labels"
-                ]
+                "tags": ["Shipping Labels"]
             }
         },
         "/get_rate_v1": {
@@ -76,7 +75,7 @@
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "Get Rete and Time request. Request both shipping rate(s), and estimated delivery days for package(s)",
+                        "description": "Get Rate and Time request. Request both shipping rate(s), and estimated delivery days for package(s)",
                         "schema": {
                             "$ref": "#/definitions/GetRateAndTimeRequest"
                         }
@@ -256,21 +255,17 @@
                     "properties": {
                         "account_params": {
                             "type": "object",
-                            "properties": {
-                            }
+                            "properties": {}
                         },
                         "carrier_params": {
                             "type": "object",
-                            "properties": {
-
-                            }
+                            "properties": {}
                         },
                         "session": {
                             "type": "object",
-                            "properties": {
-                            }
+                            "properties": {}
                         },
-                        "shipment":{
+                        "shipment": {
                             "$ref": "#/definitions/Shipment"
                         },
                         "testing": {
@@ -315,11 +310,11 @@
                 {
                     "type": "object",
                     "properties": {
-                        "shipment": {
-
-                        }
+                        "shipment": {}
                     },
-                    "required": ["shipment"]
+                    "required": [
+                        "shipment"
+                    ]
                 }
             ]
         },
@@ -339,11 +334,11 @@
                 {
                     "type": "object",
                     "properties": {
-                        "shipment":{
-
-                        }
+                        "shipment": {}
                     },
-                    "required": ["shipment"]
+                    "required": [
+                        "shipment"
+                    ]
                 }
             ]
         },
@@ -355,7 +350,7 @@
                 }
             }
         },
-        "GetTimeRequest":{
+        "GetTimeRequest": {
             "allOf": [
                 {
                     "$ref": "#/definitions/BaseRequest"
@@ -363,11 +358,11 @@
                 {
                     "type": "object",
                     "properties": {
-                        "shipment": {
-
-                        }
+                        "shipment": {}
                     },
-                    "required": ["shipment"]
+                    "required": [
+                        "shipment"
+                    ]
                 }
             ]
         },
@@ -379,7 +374,7 @@
                 }
             }
         },
-        "VoidLabelRequest":{
+        "VoidLabelRequest": {
             "allOf": [
                 {
                     "$ref": "#/definitions/BaseRequest"
@@ -387,11 +382,11 @@
                 {
                     "type": "object",
                     "properties": {
-                        "shipment": {
-
-                        }
+                        "shipment": {}
                     },
-                    "required": ["shipment"]
+                    "required": [
+                        "shipment"
+                    ]
                 }
             ]
         },
@@ -400,60 +395,6 @@
             "properties": {
                 "events": {
                     "$ref": "#/definitions/ResponseEventArray"
-                }
-            }
-        },
-        "Package": {
-            "type": "object",
-            "properties": {
-                "retailops_shipment_id": {
-                    "type": "integer",
-                    "description": "RetailOps Shipment ID"
-                },
-                "retailops_package_id": {
-                    "type": "integer",
-                    "description": "RetailOps Package ID",
-                    "example": 436
-                },
-                "piece_number": {
-                    "type": "integer",
-                    "description": "Piece (package) number in shipment",
-                    "example": 1
-                },
-                "piece_count": {
-                    "type": "integer",
-                    "description": "total number of peices in shipment",
-                    "example": 2
-                },
-                "carrier_name": {
-                    "type": "string",
-                    "description": "Ship Carrier Name",
-                    "example": "UPS"
-                },
-                "carrier_class_name": {
-                    "type": "string",
-                    "description": "Ship Carrier's Class Name",
-                    "example": "Ground"
-                },
-                "content_description": {
-                    "type": "string",
-                    "description": "description of package contents",
-                    "example": "Consumer goods"
-                },
-                "shipment_id": {
-                    "type": "integer",
-                    "description": "RetailOps Shipment ID",
-                    "example": 435
-                },
-                "weight_kg": {
-                    "type": "number",
-                    "description": "Weight in Kilograms",
-                    "example": 0.453592
-                },
-                "weight_lbs": {
-                    "type": "number",
-                    "description": "Weight in lbs",
-                    "example": 1.0
                 }
             }
         },
@@ -519,203 +460,16 @@
                 }
             }
         },
-        "OrderShipmentItems":{
-            "type": "object",
-            "properties": {
-                "country_of_origin": {
-                    "type": "string",
-                    "description": "Country of origin, country code",
-                    "example": "US"
-                },
-                "quantity":{
-                    "type": "integer",
-                    "description": "Item quantity",
-                    "example": 2
-                },
-                "declared_unit_price": {
-                    "type": "number",
-                    "description": "declared unit price",
-                    "example": 1.50
-                },
-                "declared_value": {
-                    "type": "number",
-                    "description": "declared value",
-                    "example": 1.50
-                },
-                "customs_description": {
-                    "type": "string",
-                    "description": "Customs description",
-                    "example": ""
-                },
-                "weight_kg": {
-                    "type": "number",
-                    "description": "Weight in Kilograms",
-                    "example": 0.453592
-                },
-                "sku": {
-                    "$ref": "#/definitions/Sku"
-                },
-                "channel_refnum": {
-                    "type": "string",
-                    "description": "Channel reference number for order",
-                    "example": "141"
-                }
-            }
-        },
-        "Piece": {
-            "type": "object",
-            "properties": {
-                "order_items": {
-                    "type": "arrray",
-                    "description": "Order Shipment Items included in this piece (package)",
-                    "maxItems": 100,
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "country_of_origin": {
-                                "type": "string",
-                                "description": "Country of origin, country code",
-                                "example": "US"
-                            },
-                            "quantity":{
-                                "type": "integer",
-                                "description": "Item quantity",
-                                "example": 2
-                            },
-                            "declared_unit_price": {
-                                "type": "number",
-                                "description": "declared unit price",
-                                "example": 1.50
-                            },
-                            "declared_value": {
-                                "type": "number",
-                                "description": "declared value",
-                                "example": 1.50
-                            },
-                            "customs_description": {
-                                "type": "string",
-                                "description": "Customs description",
-                                "example": ""
-                            },
-                            "weight_kg": {
-                                "type": "number",
-                                "description": "Weight in Kilograms",
-                                "example": 0.453592
-                            },
-                            "sku": {
-                                "$ref": "#/definitions/Sku"
-                            },
-                            "channel_refnum": {
-                                "type": "string",
-                                "description": "Channel reference number for order",
-                                "example": "141"
-                            }
-                        }
-                    }
-                },
-                "ship_to": {
-                    "$ref": "#/definitions/Address"
-                },
-                "fromaddr": {
-                    "$ref": "#/definitions/Address"
-                },
-                "order_id": {
-                    "type": "integer",
-                    "description": "RetailOps order ID",
-                    "example": 1052
-                },
-                "weight_kg": {
-                    "type": "number",
-                    "description": "Weight in Kilograms",
-                    "example": 0.453592
-                },
-                "height_cm": {
-                    "type": "number",
-                    "description": "height of package in centimeters",
-                    "example": 20.32
-                },
-                "width_cm": {
-                    "type": "number",
-                    "description": "width of package in centimeters",
-                    "example": 20.32
-                },
-                "length_cm": {
-                    "type": "number",
-                    "description": "length of package in centimeters",
-                    "example": 20.32
-                },
-                "description": {
-                    "type": "string",
-                    "description": "",
-                    "example": ""
-                },
-                "class": {
-                    "$ref": "#/definitions/ShipClass"
-                },
-                "tracking_number": {
-                    "type": "string",
-                    "description": "Package tracking number",
-                    "example": "Z152588191910AD"
-                },
-                "product_total_dollars": {
-                    "type": "number",
-                    "description": "",
-                    "example": 50
-                }
-            }
-        },
         "Pieces": {
             "type": "array",
-            "description": "Pieces (packages) included in this shipment",
             "items": {
                 "type": "object",
+                "description": "",
                 "properties": {
                     "order_items": {
-                        "type": "arrray",
-                        "description": "Order Shipment Items included in this piece (package)",
-                        "maxItems": 100,
+                        "type": "array",
                         "items": {
-                            "type": "object",
-                            "properties": {
-                                "country_of_origin": {
-                                    "type": "string",
-                                    "description": "Country of origin, country code",
-                                    "example": "US"
-                                },
-                                "quantity":{
-                                    "type": "integer",
-                                    "description": "Item quantity",
-                                    "example": 2
-                                },
-                                "declared_unit_price": {
-                                    "type": "number",
-                                    "description": "declared unit price",
-                                    "example": 1.50
-                                },
-                                "declared_value": {
-                                    "type": "number",
-                                    "description": "declared value",
-                                    "example": 1.50
-                                },
-                                "customs_description": {
-                                    "type": "string",
-                                    "description": "Customs description",
-                                    "example": ""
-                                },
-                                "weight_kg": {
-                                    "type": "number",
-                                    "description": "Weight in Kilograms",
-                                    "example": 0.453592
-                                },
-                                "sku": {
-                                    "$ref": "#/definitions/Sku"
-                                },
-                                "channel_refnum": {
-                                    "type": "string",
-                                    "description": "Channel reference number for order",
-                                    "example": "141"
-                                }
-                            }
+                            "$ref": "#/definitions/OrderItem"
                         }
                     },
                     "ship_to": {
@@ -866,7 +620,7 @@
                 "declared_value": {
                     "type": "number",
                     "description": "Value for customs declaration",
-                    "example": 35.00
+                    "example": 35
                 },
                 "duty_type": {
                     "type": "string",
@@ -879,7 +633,7 @@
                 "generate_bogus_tracking_numbers": {
                     "type": "boolean",
                     "description": "Generate private tracking numbers for untrackable shipments",
-                    "example":""
+                    "example": ""
                 },
                 "intl_export_license": {
                     "type": "string",
@@ -916,8 +670,7 @@
                 },
                 "pcm_params": {
                     "type": "object",
-                    "properties": {
-                    }
+                    "properties": {}
                 },
                 "pcm_code": {
                     "type": "string",
@@ -929,9 +682,9 @@
                     "example": ""
                 },
                 "rcpt_duty_account_nbr": {
-                     "type": "string",
-                     "description": "Recipient duty account number",
-                     "example": ""
+                    "type": "string",
+                    "description": "Recipient duty account number",
+                    "example": ""
                 },
                 "ship_customs_signer": {
                     "type": "string",
@@ -982,9 +735,9 @@
                     "example": 10
                 },
                 "active": {
-                     "type": "string",
-                     "description": "",
-                     "example": ""
+                    "type": "string",
+                    "description": "",
+                    "example": ""
                 },
                 "name": {
                     "type": "string",
@@ -1016,22 +769,22 @@
                     "description": "RetailOps sku number",
                     "example": ""
                 },
-                "weight":{
+                "weight": {
                     "type": "number",
                     "description": "Sku weight",
                     "example": 0.95
                 },
-                "country_of_origin":{
+                "country_of_origin": {
                     "type": "string",
                     "description": "Country of origin, code2",
                     "example": "US"
                 },
-                "harmonized_code":{
+                "harmonized_code": {
                     "type": "string",
                     "description": "",
                     "example": ""
                 },
-                "customs_description":{
+                "customs_description": {
                     "type": "string",
                     "description": "Customs description",
                     "example": ""
@@ -1055,6 +808,49 @@
                     "type": "string",
                     "description": "",
                     "example": ""
+                }
+            }
+        },
+        "OrderItem": {
+            "type": "object",
+            "properties": {
+                "country_of_origin": {
+                    "type": "string",
+                    "description": "Country of origin, country code",
+                    "example": "US"
+                },
+                "quantity": {
+                    "type": "integer",
+                    "description": "Item quantity",
+                    "example": 2
+                },
+                "declared_unit_price": {
+                    "type": "number",
+                    "description": "declared unit price",
+                    "example": 1.5
+                },
+                "declared_value": {
+                    "type": "number",
+                    "description": "declared value",
+                    "example": 1.5
+                },
+                "customs_description": {
+                    "type": "string",
+                    "description": "Customs description",
+                    "example": ""
+                },
+                "weight_kg": {
+                    "type": "number",
+                    "description": "Weight in Kilograms",
+                    "example": 0.453592
+                },
+                "sku": {
+                    "$ref": "#/definitions/Sku"
+                },
+                "channel_refnum": {
+                    "type": "string",
+                    "description": "Channel reference number for order",
+                    "example": "141"
                 }
             }
         }
