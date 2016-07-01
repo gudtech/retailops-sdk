@@ -26,8 +26,9 @@ All parts of the SDK package are available for Windows, Linux, and OSX. Each rel
 [Read darwin (Mac OSX) verifier instructions here](https://github.com/gudTECH/retailops-sdk/blob/master/verify/README.darwin.md)
 
 ## Interactive Documentation
-- [RetailOps SDK](http://gudtech.github.io/retailops-sdk/v1/channel)
+- [RetailOps Channel SDK](http://gudtech.github.io/retailops-sdk/v1/channel)
 - [RetailOps Tax Calculation SDK](http://gudtech.github.io/retailops-sdk/v1/tax)
+- [RetailOps Shipment Processor SDK](http://gudtech.github.io/retailops-sdk/v1/shipping)
 
 ## Channel Integrations
 
@@ -54,5 +55,4 @@ RetailOps then pulls this order information, fulfills said orders, and pushes st
 - [calculate_order](http://gudtech.github.io/retailops-sdk/v1/tax#!/Tax/post_calculate_order_v1) - Tax Calculation for order
 
 ## Shipper Integrations
-
-*Coming soon*
+- [get_labels](http://gudtech.github.io/retailops-sdk/v1/shipping#!/Shipping Labels/get_labels_v1) - Get shipping labels
