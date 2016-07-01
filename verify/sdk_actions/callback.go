@@ -24,9 +24,7 @@ func OrderCompleteV1(msg *scamp.Message, client *scamp.Client) {
 
 }
 
-func CaptureChannelPaymentsV1(msg *scamp.Message, client *scamp.Client) {
 
-}
 
 func OrderAckV1(msg *scamp.Message, client *scamp.Client) {
 
@@ -41,10 +39,6 @@ func CatpushConfigV1(msg *scamp.Message, client *scamp.Client) {
 }
 
 func CatpushTransmitV1(msg *scamp.Message, client *scamp.Client) {
-
-}
-
-func InvpushTransmitV1(msg *scamp.Message, client *scamp.Client) {
 
 }
 
