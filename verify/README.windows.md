@@ -23,7 +23,7 @@ Self-verify your RetailOps integration with this SDK.
     > Do not attempt to use it in place of writing your own channel integration, it exists to help set up and test
     > the verifier tool, and to provide a suggested starting point for .NET developers. It returns hard-coded JSON
     > responses for testing the verifier tool and does not implement any required integration logic, or authentication._      
-    
+
  6. From another terminal run the `verify` utility:
 
     ```
@@ -32,7 +32,7 @@ Self-verify your RetailOps integration with this SDK.
     [[ TRUNCATED OUTPUT ]]
     ```
 
- 7. After you have completely developed your channel integration, and have successfully used the verifier tool to
+ After you have completely developed your channel integration, and have successfully used the verifier tool to
  test that your integration is operating correctly, you are ready to attempt certification
  with RetailOps.
 

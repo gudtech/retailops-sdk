@@ -32,7 +32,7 @@ Self-verify your RetailOps integration with this SDK.
     [[ TRUNCATED OUTPUT ]]
     ```
 
- 7. After you have completely developed your channel integration, and have successfully used the verifier tool to
+ After you have completely developed your channel integration, and have successfully used the verifier tool to
  test that your integration is operating correctly, you are ready to attempt certification
  with RetailOps.
 
