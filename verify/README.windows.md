@@ -19,7 +19,7 @@ Self-verify your RetailOps integration with this SDK.
 
     The example web server should now be running on http://0.0.0.0:5000 .
 
-    > _Note: the example application is provided for testing purposes only, and is not a production application.
+    > _Note: the example application is provided for testing purposes only, and is not a production-ready application.
     > Do not attempt to use it in place of writing your own channel integration, it exists to help set up and test
     > the verifier tool, and to provide a suggested starting point for .NET developers. It returns hard-coded JSON
     > responses for testing the verifier tool and does not implement any required integration logic, or authentication._      
