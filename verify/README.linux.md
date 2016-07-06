@@ -5,7 +5,7 @@
 
 Self-verify your RetailOps integration with this SDK.
 
- 1. Follow the [prerequisite](#linux-prerequisites) steps below
+ 1. Follow the [prerequisite steps](#linux-prerequisites) below
  2. Download the `Verify Service` release for your operating system here: [RetailOps SDK Releases Page](https://github.com/gudTECH/retailops-sdk/releases)
  3. Unzip downloaded file
  4. Use terminal and enter unzipped directory (e.g., `verify_linux_v0.0.6`)
@@ -65,7 +65,7 @@ FOOBARBAZ
 ==== INTEGRATION AUTH KEY DONE ====
 ```
 
-Note: the integration auth key generated here is only for certification of a production service. The local verification will use the the integration_auth_key "RETAILOPS_SDK" and you should reject all other values.
+> _Note: the integration auth key generated here is only for certification of a production service. The local verification will use the the integration_auth_key "RETAILOPS_SDK" and you should reject all other values._
 
 Linux Prerequisites
 ---

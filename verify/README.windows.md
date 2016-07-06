@@ -5,7 +5,7 @@
 
 Self-verify your RetailOps integration with this SDK.
 
- 1. Follow the prerequisite steps below
+ 1. Follow the [prerequisite steps](#windows-prerequisites) below
  2. Download the `Verify Service` release for your operating system here: [RetailOps SDK Releases Page](https://github.com/gudTECH/retailops-sdk/releases)
  3. Unzip downloaded file
  4. Use terminal and enter unzipped directory (e.g., `verify_windows_v0.0.6`)
@@ -19,6 +19,11 @@ Self-verify your RetailOps integration with this SDK.
 
     The example web server should now be running on http://0.0.0.0:5000 .
 
+    > _Note: the example application is provided for testing purposes only, and is not a production application.
+    > Do not attempt to use it in place of writing your own channel integration, it exists to help set up and test
+    > the verifier tool, and to provide a suggested starting point for .NET developers. It returns hard-coded JSON
+    > responses for testing the verifier tool and does not implement any required integration logic, or authentication._      
+    
  6. From another terminal run the `verify` utility:
 
     ```
@@ -27,12 +32,11 @@ Self-verify your RetailOps integration with this SDK.
     [[ TRUNCATED OUTPUT ]]
     ```
 
- 7. When ready for certification with RetailOps
+ 7. After you have completely developed your channel integration, and have successfully used the verifier tool to
+ test that your integration is operating correctly, you are ready to attempt certification
+ with RetailOps.
 
-    ```
-    $ ./verify.exe -api-key $API_KEY -base-url http://www.example.com/api/channel certify
-    remote certification was a success
-    ```
+ Follow the instructions here: [Certifying Your RetailOps SDK Channel Integration](https://github.com/gudTECH/retailops-sdk/blob/master/verify/CERTIFY_README.md)
 
 Managing Your Integration Auth Key
 ---
@@ -61,7 +65,7 @@ FOOBARBAZ
 ==== INTEGRATION AUTH KEY DONE ====
 ```
 
-Note: the integration auth key generated here is only for certification of a production service. The local verification will use the the integration_auth_key "RETAILOPS_SDK" and you should reject all other values.
+> _Note: the integration auth key generated here is only for certification of a production service. The local verification will use the the integration_auth_key "RETAILOPS_SDK" and you should reject all other values._
 
 Windows Prerequisites
 ---
