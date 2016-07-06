@@ -32,11 +32,11 @@ Self-verify your RetailOps integration with this SDK.
     [[ TRUNCATED OUTPUT ]]
     ```
 
- After you have completely developed your channel integration, and have successfully used the verifier tool to
- test that your integration is operating correctly, you are ready to attempt certification
- with RetailOps.
+After you have completely developed your channel integration, and have successfully used
+the verifier tool to test that your integration is operating correctly, you are ready to
+attempt certification with RetailOps.
 
- Follow the instructions here: [Certifying Your RetailOps SDK Channel Integration](https://github.com/gudTECH/retailops-sdk/blob/master/verify/CERTIFY_README.md)
+Follow the instructions here: [Certifying Your RetailOps SDK Channel Integration](https://github.com/gudTECH/retailops-sdk/blob/master/verify/CERTIFY_README.md)
 
 Managing Your Integration Auth Key
 ---
