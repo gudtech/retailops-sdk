@@ -5,8 +5,8 @@
 Using the RetailOps SDK, you can create, test, and certify custom integrations for use with RetailOps.
 
 - [Channel Integrations](#channel-integrations)
-- [Shipper Integrations (coming soon)](#shipping-integrations)
-- [Tax Calculation Integration (coming soon)](#tax-calculation-integrations)
+- [Shipper Integrations](#shipping-integrations)
+- [Tax Calculation Integrations](#tax-calculation-integrations)
 
 [![Build Status](https://travis-ci.org/gudTECH/retailops-sdk.svg?branch=web-hook-design)](https://travis-ci.org/gudTECH/retailops-sdk)
 
@@ -14,7 +14,7 @@ Using the RetailOps SDK, you can create, test, and certify custom integrations f
 
 The SDK includes
 
- * Example ASP.NET web server with all callbacks implemented
+ * Example ASP.NET web server with samples of all callbacks implemented
  * Verify Service command line tool for exercising callbacks
 
 All parts of the SDK package are available for Windows, Linux, and OSX. Each release includes specific instructions for your platform.
@@ -51,10 +51,20 @@ RetailOps then pulls this order information, fulfills said orders, and pushes st
 - [order_settle_payment](http://gudtech.github.io/retailops-sdk/v1/channel/#!/default/post_order_settle_payment_v1) - Cause the channel to collect/capture payment, or otherwise verify payment has been collected
 - [order_returned](http://gudtech.github.io/retailops-sdk/v1/channel/#!/default/post_order_returned_v1) - Notify the channel that a return has been processed against the order
 
-### Tax Calculation Integrations
+## Tax Calculation Integrations
+
+RetailOps supports integration with third party sales tax management services. RetailOps serves as the system-of-record for
+customer and order data and provides necessary data to third party tax services for calculation of sales tax. 
+
+### Tax Calculation Interactions
 - [calculate_order](http://gudtech.github.io/retailops-sdk/v1/tax#!/Tax/post_calculate_order_v1) - Tax Calculation for order
 
-### Shipping Integrations
+## Shipping Integrations
+
+RetailOps supports shipping orders via direct integrations with shipping processors and carriers. RetailOps serves as the system-of-record
+for package/shipment data, and provides this data to shippers for the generation of shipping labels and tracking numbers.
+
+### Shipping Interactions
 - [get_labels](http://gudtech.github.io/retailops-sdk/v1/shipping/#!/Shipping_Labels/post_get_labels_v1) - Get shipping labels for ROP shipments
 - [void_label](http://gudtech.github.io/retailops-sdk/v1/shipping/#!/Shipping_Labels/post_void_label_v1) - void shipping label for ROP shipment
 - [get_rate](http://gudtech.github.io/retailops-sdk/v1/shipping/#!/Rate_and_Time/post_get_rate_v1) - Get rate for carrier class
