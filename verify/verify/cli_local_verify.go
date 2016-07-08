@@ -14,10 +14,8 @@ import (
 func doLocalVerify(cliExec CLIExecution) (err error) {
   var examples []SchemaExample
   if cliExec.SchemaPathIsDir {
-    fmt.Println("SchemaPathIsDir")
     examples,err = allExamples(cliExec)
   } else {
-    fmt.Println("SchemaPathIsNOTDir")
     examples,err = examplesForSchema(cliExec.SchemaPath, cliExec)
   }
 
@@ -99,11 +97,11 @@ func loadFilesAndMakeRequest(baseUrl, schemaPath, examplePath string, verbose bo
   if err != nil {
     return
   }
-  // err = Request(baseUrl, "KDS_SPOLIATER", f, exampleF, verbose)
-  // if err == nil {
-  //   err = fmt.Errorf("failed to check integration_auth_token. expected HTTP 401")
-  //   return
-  // }
+  err = Request(baseUrl, "KDS_SPOLIATER", f, exampleF, verbose)
+  if err == nil {
+    err = fmt.Errorf("failed to check integration_auth_token. expected HTTP 401")
+    return
+  }
 
 
   return
@@ -127,7 +125,6 @@ func examplesForSchema(schemaPath string, cliExec CLIExecution) (verifications [
 
   verifications = make([]SchemaExample,0)
   for _,exPath := range examplePaths {
-      fmt.Println("expath: ", expath)
     verifications = append(verifications, SchemaExample{
       SchemaPath: cliExec.SchemaPath,
       ExamplePath: exPath,
@@ -157,7 +154,6 @@ func allExamples(cliExec CLIExecution) (verifications []SchemaExample, err error
   }
 
   for _,schemaPath := range allSchemaPaths {
-    fmt.Println("schemaPath ", schemaPath)
     exs,err := examplesForSchema(schemaPath, cliExec)
     if err != nil {
       return nil,err

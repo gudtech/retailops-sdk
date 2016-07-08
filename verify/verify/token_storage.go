@@ -43,8 +43,6 @@ func (ats *AuthTokenStorage) CreateDirectoryIfMissing() (err error) {
 
 func (ats *AuthTokenStorage) OverwriteIntegrationAuthKey(token string) (err error) {
   tokenPath := path.Join(ats.Path, "integration_auth_token")
-  fmt.Println("tokenPath: ", tokenPath)
-  fmt.Println("newToken: ", token)
   var file *os.File
   if _,err = os.Stat(tokenPath); os.IsNotExist(err) {
     file,err = os.Create(tokenPath)

@@ -49,7 +49,6 @@ func main() {
   args := flag.Args()
   if len(args) > 0 {
     action := args[0]
-    fmt.Println("action: ", args[0])
     if action == "certify" {
       cliExec.Action = "certify"
     } else if action == "show-auth-key" {
