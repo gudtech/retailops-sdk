@@ -94,7 +94,15 @@ namespace dotnet_example_api.Repositories
            List<Order> orders = new List<Order>();
            List<ChannelPayment> payment = new List<ChannelPayment>();
            List<OrderItem> order_items = new List<OrderItem>();
-           
+           List<OrderAttribute> order_attributes = new List<OrderAttribute>();
+
+           OrderAttribute attribute = new OrderAttribute(){ 
+               attribute_type = "text", 
+               handle = "customer_rewards_number" 
+            };
+
+           order_attributes.Add(attribute);
+
            OrderItem orderItem = new OrderItem() {
                channel_refnum   = "496",
                sku              = 299,
@@ -139,7 +147,7 @@ namespace dotnet_example_api.Repositories
            Order newOrder = new Order(){
              shipping_amt           = 0.25,
              calc_mode              = "order",
-             channel_date_created   = 1460142547,
+             channel_date_created   = "2016-01-01T00:42:42Z",
              payment                = payment.ToArray(),
              tax_amt                = 0.07,
              bill_addr              = address,
@@ -150,10 +158,10 @@ namespace dotnet_example_api.Repositories
              discount_amt           = 0,
              shipcode               = "Ground (5-7 days)",
              ip_address             = "192.168.1.187",
-             attributes             = new object(),
-             items                  = order_items.ToArray()
+             items                  = order_items.ToArray(),
+             attributes             = order_attributes.ToArray()
            }; 
-           
+
            orders.Add(newOrder);
            
            OrderPullResponse response = new OrderPullResponse(){

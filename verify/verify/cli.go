@@ -12,6 +12,7 @@ type SchemaExample struct {
 type CLIExecution struct {
   Action string
   SchemaPath string
+  ExamplesPath string
   BaseURL string
   SchemaFilter string
 
@@ -20,11 +21,12 @@ type CLIExecution struct {
   IntegrationName string
 
   SchemaPathIsDir bool
+  ExamplesPathIsDir bool
   StopOnError bool
   Verbose bool
 
   CertifyActions []string
-  ROCertifyURL string
+  // ROCertifyURL string
 }
 
 var HR string = "----------------"
@@ -46,4 +48,3 @@ func Execute(cliExec CLIExecution) (err error) {
 
   return
 }
-

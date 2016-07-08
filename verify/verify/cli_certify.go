@@ -40,7 +40,8 @@ func doCertify(cliExec CLIExecution) (err error) {
     return
   }
 
-  url := fmt.Sprintf("%s?apikey=%s",cliExec.ROCertifyURL,cliExec.ApiKey)
+  // url := fmt.Sprintf("%s?apikey=%s",cliExec.ROCertifyURL,cliExec.ApiKey)
+  url := fmt.Sprintf("%s?apikey=%s","https://api.retailops.com/integration/channel/certify.json",cliExec.ApiKey);
   resp,err := certifyClient.Post(url, "application/json", &buf)
   defer resp.Body.Close()
   if err != nil {
@@ -60,9 +61,11 @@ func doCertify(cliExec CLIExecution) (err error) {
   }
 
   if apiResp.Status == "error" {
+    fmt.Println("apiResp.Message(1): ", apiResp.Message)
     err = fmt.Errorf("certification failed:\n%s", apiResp.Message)
     return
   } else if apiResp.Error != "" {
+      fmt.Println("apiResp.Message(2): ", apiResp.Message)
     err = fmt.Errorf("certification failed: %s/%s", apiResp.Error, apiResp.ErrorCode)
     return
   }

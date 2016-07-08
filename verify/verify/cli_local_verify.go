@@ -14,30 +14,36 @@ import (
 func doLocalVerify(cliExec CLIExecution) (err error) {
   var examples []SchemaExample
   if cliExec.SchemaPathIsDir {
-    examples,err = allExamples(cliExec.SchemaPath, cliExec.SchemaFilter)
+    examples,err = allExamples(cliExec)
   } else {
-    examples,err = examplesForSchema(cliExec.SchemaPath)
+    examples,err = examplesForSchema(cliExec.SchemaPath, cliExec)
   }
 
   if err != nil {
     return
   } else if len(examples) == 0 {
-    err = fmt.Errorf("no verification files found. try `--help` for more information")
+    err = fmt.Errorf("no test JSON files found. try `--help` for more information")
     return
   }
 
   fmt.Println(len(examples),"TESTS TO BE GENERATED")
+  errorCount := 0
   for index,example := range examples {
-    doVerify(cliExec, index, example)
+    err = doVerify(cliExec, index, example)
+    if err != nil {
+        errorCount ++
+    }
+  }
+  if errorCount > 0 {
+      err = fmt.Errorf("\nLocal verify experienced %d errors", errorCount)
+      return
   }
 
   return
 }
 
-
 func doVerify(cliExec CLIExecution, index int, testCase SchemaExample) (err error) {
   var thereWasAnError bool
-
   fmt.Println(HR)
   fmt.Printf("TEST %d (%s)", index+1, p.Base(testCase.ExamplePath))
   err = loadFilesAndMakeRequest(cliExec.BaseURL, testCase.SchemaPath, testCase.ExamplePath, cliExec.Verbose)
@@ -101,12 +107,17 @@ func loadFilesAndMakeRequest(baseUrl, schemaPath, examplePath string, verbose bo
   return
 }
 
-func examplesForSchema(schemaPath string) (verifications []SchemaExample, err error) {
+func examplesForSchema(schemaPath string, cliExec CLIExecution) (verifications []SchemaExample, err error) {
   dirname,filename := p.Split(schemaPath)
   exampleFilename := strings.Replace(filename, ".json", "", -1)
-
   exampleFilenameGlob := fmt.Sprintf("%s_ex_*.json", exampleFilename)
+
+  if cliExec.ExamplesPathIsDir {
+      dirname = cliExec.ExamplesPath
+  }
+
   pathGlob := p.Join(dirname, exampleFilenameGlob)
+  // fmt.Println("pathGlob", pathGlob)
 
   examplePaths,err := fp.Glob(pathGlob)
   if err != nil {
@@ -116,7 +127,7 @@ func examplesForSchema(schemaPath string) (verifications []SchemaExample, err er
   verifications = make([]SchemaExample,0)
   for _,exPath := range examplePaths {
     verifications = append(verifications, SchemaExample{
-      SchemaPath: schemaPath,
+      SchemaPath: cliExec.SchemaPath,
       ExamplePath: exPath,
     })
   }
@@ -124,8 +135,10 @@ func examplesForSchema(schemaPath string) (verifications []SchemaExample, err er
   return
 }
 
-func allExamples(dirname, filter string) (verifications []SchemaExample, err error) {
+func allExamples(cliExec CLIExecution) (verifications []SchemaExample, err error) {
   verifications = make([]SchemaExample,0)
+  dirname := cliExec.SchemaPath
+  filter := cliExec.SchemaFilter
   var allSchemasGlob string
   if filter == "" {
     allSchemasGlob = p.Join(dirname, "*v1.json")
@@ -142,8 +155,8 @@ func allExamples(dirname, filter string) (verifications []SchemaExample, err err
   }
 
   for _,schemaPath := range allSchemaPaths {
-    // fmt.Println(schemaPath)
-    exs,err := examplesForSchema(schemaPath)
+    // fmt.Println("schemaPath ", schemaPath)
+    exs,err := examplesForSchema(schemaPath, cliExec)
     if err != nil {
       return nil,err
     }

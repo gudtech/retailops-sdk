@@ -28,6 +28,13 @@ namespace dotnet_example_api.Models
         public Event[] events {get; set;}
     }
     
+    public class OrderAttribute
+    {
+        public string attribute_type {get; set;}
+        public string handle {get; set;}
+
+    }
+
     public class Association
     {
         public string identifier_type {get; set;}
@@ -80,7 +87,7 @@ namespace dotnet_example_api.Models
     {
         public double shipping_amt {get; set;}
         public string calc_mode {get; set;}
-        public int channel_date_created {get; set;}
+        public string channel_date_created {get; set;}
         public ChannelPayment[] payment {get; set;}
         public double tax_amt {get; set;}
         public Address bill_addr {get; set;}
@@ -91,7 +98,7 @@ namespace dotnet_example_api.Models
         public double discount_amt {get; set;}
         public string shipcode {get; set;}
         public string ip_address {get; set;}
-        public object attributes {get; set;}
+        public OrderAttribute[] attributes {get; set;}
         public OrderItem[] items {get; set;}
     }
     

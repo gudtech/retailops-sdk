@@ -6,7 +6,8 @@ import (
 
 func doInstallIntegrationAuthKey(cliExec CLIExecution) (err error) {
   if len(cliExec.IntegrationAuthKey) == 0 {
-    err = fmt.Errorf("usage: `verify -integration-auth-key AUTH_KEY install-token`")
+      //TODO: check format of usage below
+    err = fmt.Errorf("usage: `verify install-auth-key INTEGRATION_AUTH_KEY`")
     return
   }
 
@@ -14,7 +15,7 @@ func doInstallIntegrationAuthKey(cliExec CLIExecution) (err error) {
   if err != nil {
     return
   }
-
+  fmt.Println("cliExec.IntegrationAuthKey: ", cliExec.IntegrationAuthKey)
   err = ats.OverwriteIntegrationAuthKey(cliExec.IntegrationAuthKey)
   if err != nil {
     return

@@ -48,7 +48,7 @@ func VerifyAction(msg *scamp.Message, client *scamp.Client) {
 
   doVerificationRequest(req, &verResp, false)
 
-  if verResp.Status == "success" {    
+  if verResp.Status == "success" {
     err = doRegistration(msg.GetTicket(), req, &verResp)
     if err != nil {
       scamp.Error.Printf("error calling registration: %s", err.Error())
@@ -118,7 +118,7 @@ func doVerificationRequest(verReq *common.VerifyRequest, verResp *common.VerifyR
   var failCount int = 0
 
   for _,action := range verReq.SupportedActions {
-    schemaFile,err := os.Open(fmt.Sprintf("/go/src/github.com/gudtech/retailops-sdk/schema/schemata/%s_v%d.json", action, verReq.Version))
+    schemaFile,err := os.Open(fmt.Sprintf("/go/src/github.com/gudtech/retailops-sdk/schema/%s_v%d.json", action, verReq.Version))
     if err != nil {
       verResp.ActionResults = append(verResp.ActionResults, common.ActionResult {
         Status: "error",
@@ -132,7 +132,7 @@ func doVerificationRequest(verReq *common.VerifyRequest, verResp *common.VerifyR
       continue
     }
 
-    exampleFile,err := os.Open(fmt.Sprintf("/go/src/github.com/gudtech/retailops-sdk/schema/schemata/%s_v%d_ex_1.json", action, verReq.Version))
+    exampleFile,err := os.Open(fmt.Sprintf("/go/src/github.com/gudtech/retailops-sdk/tests/%s_v%d_ex_1.json", action, verReq.Version))
     if err != nil {
       verResp.ActionResults = append(verResp.ActionResults, common.ActionResult {
         Status: "error",
