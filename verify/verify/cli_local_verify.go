@@ -14,8 +14,10 @@ import (
 func doLocalVerify(cliExec CLIExecution) (err error) {
   var examples []SchemaExample
   if cliExec.SchemaPathIsDir {
+    fmt.Println("SchemaPathIsDir")
     examples,err = allExamples(cliExec)
   } else {
+    fmt.Println("SchemaPathIsNOTDir")
     examples,err = examplesForSchema(cliExec.SchemaPath, cliExec)
   }
 
@@ -88,7 +90,7 @@ func loadFilesAndMakeRequest(baseUrl, schemaPath, examplePath string, verbose bo
     return
   }
 
-  
+
   _,err = exampleF.Seek(0,0)
   if err != nil {
     return
@@ -97,12 +99,12 @@ func loadFilesAndMakeRequest(baseUrl, schemaPath, examplePath string, verbose bo
   if err != nil {
     return
   }
-  err = Request(baseUrl, "KDS_SPOLIATER", f, exampleF, verbose)
-  if err == nil {
-    err = fmt.Errorf("failed to check integration_auth_token. expected HTTP 401")
-    return
-  }
-  
+  // err = Request(baseUrl, "KDS_SPOLIATER", f, exampleF, verbose)
+  // if err == nil {
+  //   err = fmt.Errorf("failed to check integration_auth_token. expected HTTP 401")
+  //   return
+  // }
+
 
   return
 }
@@ -117,7 +119,6 @@ func examplesForSchema(schemaPath string, cliExec CLIExecution) (verifications [
   }
 
   pathGlob := p.Join(dirname, exampleFilenameGlob)
-  // fmt.Println("pathGlob", pathGlob)
 
   examplePaths,err := fp.Glob(pathGlob)
   if err != nil {

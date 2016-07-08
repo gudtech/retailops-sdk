@@ -61,11 +61,9 @@ func doCertify(cliExec CLIExecution) (err error) {
   }
 
   if apiResp.Status == "error" {
-    fmt.Println("apiResp.Message(1): ", apiResp.Message)
     err = fmt.Errorf("certification failed:\n%s", apiResp.Message)
     return
   } else if apiResp.Error != "" {
-      fmt.Println("apiResp.Message(2): ", apiResp.Message)
     err = fmt.Errorf("certification failed: %s/%s", apiResp.Error, apiResp.ErrorCode)
     return
   }
