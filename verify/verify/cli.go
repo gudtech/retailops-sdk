@@ -24,7 +24,7 @@ type CLIExecution struct {
   ExamplesPathIsDir bool
   StopOnError bool
   Verbose bool
-
+  CIBuild bool //added for CI build via travis
   CertifyActions []string
   // ROCertifyURL string
 }

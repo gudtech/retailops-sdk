@@ -50,6 +50,9 @@ func main() {
     action := args[0]
     if action == "certify" {
       cliExec.Action = "certify"
+    } else if action == "debug"{
+      cliExec.Action = "test"
+      cliExec.CIBuild = true
     } else if action == "show-auth-key" {
       cliExec.Action = "show_token"
     } else if action == "generate-auth-key" {

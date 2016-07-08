@@ -46,7 +46,7 @@ func doVerify(cliExec CLIExecution, index int, testCase SchemaExample) (err erro
   var thereWasAnError bool
   fmt.Println(HR)
   fmt.Printf("TEST %d (%s)", index+1, p.Base(testCase.ExamplePath))
-  err = loadFilesAndMakeRequest(cliExec.BaseURL, testCase.SchemaPath, testCase.ExamplePath, cliExec.Verbose)
+  err = loadFilesAndMakeRequest(cliExec.BaseURL, testCase.SchemaPath, testCase.ExamplePath, cliExec.Verbose, cliExec.CIBuild)
   if err != nil {
     fmt.Printf("\rTEST %d (%s) FAILED: %s\n", index+1, p.Base(testCase.ExamplePath), err.Error())
     if cliExec.StopOnError {
@@ -72,7 +72,7 @@ func doVerify(cliExec CLIExecution, index int, testCase SchemaExample) (err erro
   return
 }
 
-func loadFilesAndMakeRequest(baseUrl, schemaPath, examplePath string, verbose bool) (err error) {
+func loadFilesAndMakeRequest(baseUrl, schemaPath, examplePath string, verbose bool, debug bool) (err error) {
   f,err := os.Open(schemaPath)
   if err != nil {
     return
@@ -97,11 +97,14 @@ func loadFilesAndMakeRequest(baseUrl, schemaPath, examplePath string, verbose bo
   if err != nil {
     return
   }
-  // err = Request(baseUrl, "KDS_SPOLIATER", f, exampleF, verbose)
-  // if err == nil {
-  //   err = fmt.Errorf("failed to check integration_auth_token. expected HTTP 401")
-  //   return
-  // }
+
+  if !debug {
+      err = Request(baseUrl, "KDS_SPOLIATER", f, exampleF, verbose)
+      if err == nil {
+        err = fmt.Errorf("failed to check integration_auth_token. expected HTTP 401")
+        return
+      }
+  }
 
 
   return

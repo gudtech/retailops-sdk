@@ -10,7 +10,7 @@ before_script:
 - while ! echo exit | curl http://localhost:5000; do sleep 10; done
 script: go run $GOPATH/src/github.com/gudtech/retailops-sdk/verify/bin/verify.go
   -schema-path $GOPATH/src/github.com/gudtech/retailops-sdk/verify/schema/
-  -tests-path $GOPATH/src/github.com/gudtech/retailops-sdk/verify/tests/
+  -tests-path $GOPATH/src/github.com/gudtech/retailops-sdk/verify/tests/ debug
 after_success: pushd verify && bash generate_packages.sh && popd
 deploy:
   provider: releases
