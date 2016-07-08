@@ -126,7 +126,7 @@ fmt.Println("dirname(2): ", dirname)
   if err != nil {
     return
   }
-fmt.Println("examplePaths: ", examplePaths)
+  fmt.Println("examplePaths: ", examplePaths)
   verifications = make([]SchemaExample,0)
   for _,exPath := range examplePaths {
       fmt.Println("exPath: ", exPath)
@@ -160,7 +160,7 @@ func allExamples(cliExec CLIExecution) (verifications []SchemaExample, err error
 
   for _,schemaPath := range allSchemaPaths {
       fmt.Println("schemaPath: ", schemaPath)
-      fmt.Println("cliExec", cliExec)
+    //   fmt.Println("cliExec", cliExec)
     exs,err := examplesForSchema(schemaPath, cliExec)
     if err != nil {
       return nil,err

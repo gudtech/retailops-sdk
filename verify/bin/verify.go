@@ -32,6 +32,7 @@ func main() {
   fmt.Println("pwd: ", pwd)
   schemaPath := path.Join(pwd, "schema")
   testsPath := path.Join(pwd, "tests")
+  fmt.Println("path.Join(pwd...)", path.Join(pwd, "schema/"))
 
   schemaPathPtr := flag.String("schema-path", schemaPath, "path to JSON or directory with JSON")
   schemaTestsPathPtr := flag.String("tests-path", testsPath, "path to JSON test files or directory with JSON")
