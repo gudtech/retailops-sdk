@@ -29,7 +29,7 @@ func main() {
   if err != nil {
        fmt.Println(err)
   }
-
+  fmt.Println("pwd: ", pwd)
   schemaPath := path.Join(pwd, "schema")
   testsPath := path.Join(pwd, "tests")
 
