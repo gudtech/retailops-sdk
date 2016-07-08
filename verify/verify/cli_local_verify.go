@@ -127,6 +127,7 @@ func examplesForSchema(schemaPath string, cliExec CLIExecution) (verifications [
 
   verifications = make([]SchemaExample,0)
   for _,exPath := range examplePaths {
+      fmt.Println("expath: ", expath)
     verifications = append(verifications, SchemaExample{
       SchemaPath: cliExec.SchemaPath,
       ExamplePath: exPath,
@@ -156,7 +157,7 @@ func allExamples(cliExec CLIExecution) (verifications []SchemaExample, err error
   }
 
   for _,schemaPath := range allSchemaPaths {
-    // fmt.Println("schemaPath ", schemaPath)
+    fmt.Println("schemaPath ", schemaPath)
     exs,err := examplesForSchema(schemaPath, cliExec)
     if err != nil {
       return nil,err
