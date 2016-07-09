@@ -50,8 +50,8 @@ for PLATFORM in {darwin,linux,windows}; do
       fi
     fi
   done
-  cp -r ./schema $FOLDERNAME/schema
-  cp -r ./schema $FOLDERNAME/tests
+  cp -r ./../schema $FOLDERNAME/schema
+  cp -r ./../tests $FOLDERNAME/tests
   cp -r ../../retailops-asp-dotnet-api-example $FOLDERNAME/retailops-asp-dotnet-api-example
   cp ../README.${PLATFORM}.md $FOLDERNAME/README.md
   zip -r $ZIPNAME $FOLDERNAME
