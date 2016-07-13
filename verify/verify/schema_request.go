@@ -41,7 +41,7 @@ type V1FileDefinitions struct {
 }
 */
 
-/* 
+/*
   Outgoing request
    * Links
     * HREF/Method/Schema of outgoing data
@@ -68,6 +68,7 @@ type V1FileLink struct {
 }
 
 func Request(baseUrlStr, integrationAuthKey string, hyperSchema io.Reader, example io.Reader, verbose bool) (err error) {
+
   requestUrl,err := url.Parse(baseUrlStr)
   if err != nil {
     return
@@ -76,16 +77,24 @@ func Request(baseUrlStr, integrationAuthKey string, hyperSchema io.Reader, examp
   basePath := requestUrl.Path
 
   var v1file V1File
+  // fmt.Errorf("v1file: ", v1file)
   err = json.NewDecoder(hyperSchema).Decode(&v1file)
+  if err != nil{
+      fmt.Println("\nv1file err:", err)
+  }
 
   exampleBytes,err := ioutil.ReadAll(example)
   if err != nil {
+      fmt.Errorf("error: %s ", err)
     return
   }
+  // fmt.Println("exampleBytes", exampleBytes)
   exampleBytes,err = insertIntegrationAuthKey(exampleBytes, integrationAuthKey)
   if err != nil {
     return
   }
+
+  // fmt.Println("exampleBytes 2", exampleBytes)
 
   for _,link := range v1file.Links {
     err = requestAgainstLink(v1file, link, basePath, requestUrl, exampleBytes, verbose)
@@ -100,6 +109,7 @@ func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, request
   /*
     schema lib data setup
   */
+
   indentedReqSchemaStr,err := indentJson(*link.RequestSchema)
   if err != nil {
     return err
@@ -113,25 +123,30 @@ func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, request
 
   respSchemaStr := string(*link.ResponseSchema)
   respSchemaWDefs,err := insertDefinitions(v1file.Definitions, respSchemaStr)
+
   if err != nil {
     return err
   }
+
   respSchemaLoader := schema.NewStringLoader(respSchemaWDefs)
 
   exampleStr := string(exampleBytes)
+
   exampleDataLoader := schema.NewStringLoader(exampleStr)
 
   /*
     Echo request to be performed
   */
   if verbose {
-    fmt.Println()
+    indentedExampleSchemaStr,err := indentJson(exampleBytes)
+    if err != nil {
+      return err
+    }
     fmt.Println(strings.ToUpper(link.Method), fmt.Sprintf("%s%s", basePath, link.Href))
-
     // fmt.Println("schema (with definitions omitted):")
     // fmt.Println(indentedReqSchemaStr)
     fmt.Println("HTTP request body:")
-    fmt.Println(exampleStr)
+    fmt.Println(indentedExampleSchemaStr)
   }
 
   result,err := schema.Validate(reqSchemaLoader, exampleDataLoader)
@@ -158,11 +173,16 @@ func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, request
 
   // fmt.Println("example is valid:", result.Valid())
 
-  /* 
+  /*
     HTTP request issuance
   */
   requestBuf := bytes.NewBuffer(exampleBytes)
   requestUrl.Path = fmt.Sprintf("%s%s", basePath, link.Href)
+
+  // req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonStr))
+  //     req.Header.Set("X-Custom-Header", "myvalue")
+  //     req.Header.Set("Content-Type", "application/json")
+
 
   request,err := http.NewRequest(
     strings.ToUpper(link.Method),
@@ -172,8 +192,10 @@ func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, request
   if err != nil {
     return
   }
+  //set Content-Type
+  request.Header.Set("Content-Type", "application/json")
 
-  response,err := client.Do(request)
+  response,err := client.Do(request)//ARE we sending the appropriate header here?
   if err != nil {
     return err
   }

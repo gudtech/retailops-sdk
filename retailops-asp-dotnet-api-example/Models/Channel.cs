@@ -8,6 +8,14 @@ using System;
 
 namespace dotnet_example_api.Models
 { 
+    // This class exists to facilitate model binding for testing teh api key
+    // in a production application you would define a class that corresponsds 
+    // to the SDK schema for that SDK action
+    public class PostJSON
+    {
+        public string integration_auth_token { get; set; }
+    }
+
     public class Event
     {
         public string event_type {get; set;}

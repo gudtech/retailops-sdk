@@ -2,9 +2,10 @@ using Microsoft.AspNet.Mvc;
 using dotnet_example_api.Repositories;
 using dotnet_example_api.Models;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNet.Http;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+// using Microsoft.AspNet.Http;
+// using Newtonsoft.Json;
+// using Newtonsoft.Json.Linq;
+using System;
 
 namespace dotnet_example_api.Controllers
 {
@@ -27,10 +28,20 @@ namespace dotnet_example_api.Controllers
         // and pass the data to your repository where the business logic resides.
         
         [HttpPost("catalog_get_config_v1")]
-        public IActionResult catalog_get_config_v1([FromBody]string request)
+        public IActionResult catalog_get_config_v1([FromBody] PostJSON requestJSON)
         {
+            Console.WriteLine("\nRequestJSON: {0}", requestJSON.integration_auth_token);
+            // Console.WriteLine(requestJSON);
+            Console.WriteLine("\n");
+
+            if( string.IsNullOrEmpty(requestJSON.integration_auth_token) || requestJSON.integration_auth_token != "RETAILOPS_SDK" )
+            {
+                return this.HttpUnauthorized();
+            }
+
             ConfigResponse response = ChannelRepo.catalog_get_config();
             
+            Console.WriteLine("\response: {0}", response);
             // dynamic req = JObject.Parse(request); 
             // string token = req["integration_auth_token"];
 

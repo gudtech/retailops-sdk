@@ -1,6 +1,6 @@
 {
     "integration_auth_token": "RETAILOPS_SDK",
-    "action": "catalog_get_config",
+    "action": "order_settle_payment",
     "version": 1,
     "client_id": 497,
     "channel_info": {

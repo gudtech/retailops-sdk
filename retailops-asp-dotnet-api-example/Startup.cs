@@ -32,8 +32,8 @@ namespace dotnet_example_api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.MinimumLevel = LogLevel.Verbose;
-            loggerFactory.AddConsole(LogLevel.Verbose);
+            loggerFactory.MinimumLevel = LogLevel.Information;
+            loggerFactory.AddConsole(LogLevel.Information);
             loggerFactory.AddDebug();
 
             app.UseIISPlatformHandler();

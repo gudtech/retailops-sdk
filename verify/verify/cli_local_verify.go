@@ -13,6 +13,9 @@ import (
 
 func doLocalVerify(cliExec CLIExecution) (err error) {
   var examples []SchemaExample
+
+  // fmt.Errorf("\ncliExec.SchemaPathIsDir: ", cliExec.SchemaPathIsDir)
+
   if cliExec.SchemaPathIsDir {
     examples,err = allExamples(cliExec)
   } else {
@@ -46,6 +49,7 @@ func doVerify(cliExec CLIExecution, index int, testCase SchemaExample) (err erro
   var thereWasAnError bool
   fmt.Println(HR)
   fmt.Printf("TEST %d (%s)", index+1, p.Base(testCase.ExamplePath))
+
   err = loadFilesAndMakeRequest(cliExec.BaseURL, testCase.SchemaPath, testCase.ExamplePath, cliExec.Verbose, cliExec.CIBuild)
   if err != nil {
     fmt.Printf("\rTEST %d (%s) FAILED: %s\n", index+1, p.Base(testCase.ExamplePath), err.Error())
@@ -59,6 +63,7 @@ func doVerify(cliExec CLIExecution, index int, testCase SchemaExample) (err erro
       fmt.Println("")
     }
     fmt.Printf("\rTEST %d (%s) WAS A SUCCESS\n", index+1, p.Base(testCase.ExamplePath))
+
     if cliExec.Verbose {
       fmt.Println("")
     }
@@ -75,6 +80,7 @@ func doVerify(cliExec CLIExecution, index int, testCase SchemaExample) (err erro
 func loadFilesAndMakeRequest(baseUrl, schemaPath, examplePath string, verbose bool, debug bool) (err error) {
   f,err := os.Open(schemaPath)
   if err != nil {
+    fmt.Errorf("\nf err: ", err)
     return
   }
 
@@ -98,13 +104,13 @@ func loadFilesAndMakeRequest(baseUrl, schemaPath, examplePath string, verbose bo
     return
   }
 
-  if !debug {
-      err = Request(baseUrl, "KDS_SPOLIATER", f, exampleF, verbose)
-      if err == nil {
-        err = fmt.Errorf("failed to check integration_auth_token. expected HTTP 401")
-        return
-      }
-  }
+  // if !debug {
+  //     err = Request(baseUrl, "KDS_SPOLIATER", f, exampleF, verbose)
+  //     if err == nil {
+  //       err = fmt.Errorf("failed to check integration_auth_token. expected HTTP 401")
+  //       return
+  //     }
+  // }
 
 
   return
@@ -127,7 +133,7 @@ func examplesForSchema(schemaPath string, cliExec CLIExecution) (verifications [
   verifications = make([]SchemaExample,0)
   for _,exPath := range examplePaths {
     verifications = append(verifications, SchemaExample{
-      SchemaPath: cliExec.SchemaPath,
+      SchemaPath: schemaPath,
       ExamplePath: exPath,
     })
   }

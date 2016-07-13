@@ -45,26 +45,32 @@ type InventoryPushV1Input struct {
 
 type InventoryPushV1Output struct {
   Action      string `json:"action"`
-  ChannelInfo struct {
-    ID int `json:"id"`
-  } `json:"channel_info"`
+  ChannelInfo ChannelInfo `json:"channel_info"`
   ClientID             int    `json:"client_id"`
   IntegrationAuthToken string `json:"integration_auth_token"`
-  InventoryUpdates     []struct {
-    QuantityAvailable int `json:"quantity_available"`
-    QuantityDetail    []struct {
-      AvailableQuantity         int    `json:"available_quantity"`
-      EstimatedAvailabilityDate string `json:"estimated_availability_date"`
-      FacilityName              string `json:"facility_name"`
-      Po                        string `json:"po"`
-      PoDestination             string `json:"po_destination"`
-      QuantityType              string `json:"quantity_type"`
-      TotalQuantity             int    `json:"total_quantity"`
-      VendorName                string `json:"vendor_name"`
-    } `json:"quantity_detail"`
-    Sku string `json:"sku"`
-  } `json:"inventory_updates"`
+  InventoryUpdates     []InventoryUpdate `json:"inventory_updates"`
   Version int `json:"version"`
+}
+
+type InventoryUpdate struct {
+  QuantityAvailable int `json:"quantity_available"`
+  QuantityDetail    []QuantityDetail `json:"quantity_detail"`
+  Sku string `json:"sku"`
+}
+
+type QuantityDetail struct {
+  AvailableQuantity         int    `json:"available_quantity"`
+  EstimatedAvailabilityDate string `json:"estimated_availability_date"`
+  FacilityName              string `json:"facility_name"`
+  Po                        string `json:"po"`
+  PoDestination             string `json:"po_destination"`
+  QuantityType              string `json:"quantity_type"`
+  TotalQuantity             int    `json:"total_quantity"`
+  VendorName                string `json:"vendor_name"`
+}
+
+type ChannelInfo struct {
+  ID int `json:"id"`
 }
 
 func InvpushTransmitV1(msg *scamp.Message, client *scamp.Client) {
