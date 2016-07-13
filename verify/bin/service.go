@@ -5,6 +5,7 @@ import (
   "fmt"
   "flag"
   "github.com/gudtech/scamp-go/scamp"
+  "sync"
 
   "github.com/gudtech/retailops-sdk/verify/verify_service"
   "github.com/gudtech/retailops-sdk/verify/sdk_actions"
@@ -52,8 +53,6 @@ func main() {
   callbackSvc.Register("SDK.order_update",sdk_actions.OrderUpdateV1) // , SDK callback: order_update
   callbackSvc.Register("SDK.order_settle_payment",sdk_actions.OrderSettlePaymentV1) // , SDK callback: order_settle_payment
 
-
-
   announcer,err := scamp.NewDiscoveryAnnouncer()
   if err != nil {
     scamp.Error.Printf("failed to create announcer: `%s`", err)
@@ -63,5 +62,18 @@ func main() {
   announcer.Track(callbackSvc)
   go announcer.AnnounceLoop()
 
-  verifierSvc.Run()
+  var wg sync.WaitGroup
+  wg.Add(1)
+  go func() {
+    callbackSvc.Run()
+    wg.Done()
+  }()
+
+  wg.Add(1)
+  go func(){
+    verifierSvc.Run()
+    wg.Done()
+  }()
+
+  wg.Wait()
 }

@@ -74,5 +74,13 @@ type ChannelInfo struct {
 }
 
 func InvpushTransmitV1(msg *scamp.Message, client *scamp.Client) {
+  respMsg := scamp.NewResponseMessage()
+  respMsg.SetRequestId(msg.RequestId)
+
+  respMsg.WriteJson(map[string]string{"sup": "dude"})
+  _,err := client.Send(respMsg)
+  if err != nil {
+    return
+  }
 
 }
