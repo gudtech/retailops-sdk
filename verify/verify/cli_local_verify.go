@@ -14,8 +14,6 @@ import (
 func doLocalVerify(cliExec CLIExecution) (err error) {
   var examples []SchemaExample
 
-  // fmt.Errorf("\ncliExec.SchemaPathIsDir: ", cliExec.SchemaPathIsDir)
-
   if cliExec.SchemaPathIsDir {
     examples,err = allExamples(cliExec)
   } else {
@@ -37,6 +35,7 @@ func doLocalVerify(cliExec CLIExecution) (err error) {
         errorCount ++
     }
   }
+
   if errorCount > 0 {
       err = fmt.Errorf("\nLocal verify experienced %d errors", errorCount)
       return
@@ -80,7 +79,7 @@ func doVerify(cliExec CLIExecution, index int, testCase SchemaExample) (err erro
 func loadFilesAndMakeRequest(baseUrl, schemaPath, examplePath string, verbose bool, debug bool) (err error) {
   f,err := os.Open(schemaPath)
   if err != nil {
-    fmt.Errorf("\nf err: ", err)
+    // fmt.Errorf("\nf err: ", err)
     return
   }
 
@@ -103,14 +102,15 @@ func loadFilesAndMakeRequest(baseUrl, schemaPath, examplePath string, verbose bo
   if err != nil {
     return
   }
-
-  if !debug {
-      err = Request(baseUrl, "KDS_SPOLIATER", f, exampleF, verbose)
-      if err == nil {
-        err = fmt.Errorf("failed to check integration_auth_token. expected HTTP 401")
-        return
-      }
+  // Need to handle the first requests returning 200, but the second requests
+  // returning 401 (which is actually a successful test)
+  // if !debug {
+  err = Request(baseUrl, "KDS_SPOLIATER", f, exampleF, verbose)
+  if err == nil {
+    err = fmt.Errorf("failed to check integration_auth_token. expected HTTP 401")
+    return
   }
+  // }
 
 
   return

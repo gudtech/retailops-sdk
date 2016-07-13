@@ -67,7 +67,7 @@ type V1FileLink struct {
   Title          string `json:"title"`
 }
 
-func Request(baseUrlStr, integrationAuthKey string, hyperSchema io.Reader, example io.Reader, verbose bool) (err error) {
+func Request(baseUrlStr, integrationAuthKey string, hyperSchema io.Reader, example io.Reader, verbose bool, expectedStatusResponseCode int) (err error) {
 
   requestUrl,err := url.Parse(baseUrlStr)
   if err != nil {
@@ -97,7 +97,7 @@ func Request(baseUrlStr, integrationAuthKey string, hyperSchema io.Reader, examp
   // fmt.Println("exampleBytes 2", exampleBytes)
 
   for _,link := range v1file.Links {
-    err = requestAgainstLink(v1file, link, basePath, requestUrl, exampleBytes, verbose)
+    err = requestAgainstLink(v1file, link, basePath, requestUrl, exampleBytes, verbose, expectedStatusResponseCode)
     if err != nil {
       return err
     }
@@ -105,7 +105,7 @@ func Request(baseUrlStr, integrationAuthKey string, hyperSchema io.Reader, examp
   return
 }
 
-func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, requestUrl *url.URL, exampleBytes []byte, verbose bool) (err error) {
+func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, requestUrl *url.URL, exampleBytes []byte, verbose bool, expectedStatusResponseCode int) (err error) {
   /*
     schema lib data setup
   */
@@ -142,6 +142,7 @@ func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, request
     if err != nil {
       return err
     }
+
     fmt.Println(strings.ToUpper(link.Method), fmt.Sprintf("%s%s", basePath, link.Href))
     // fmt.Println("schema (with definitions omitted):")
     // fmt.Println(indentedReqSchemaStr)
@@ -154,19 +155,19 @@ func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, request
     fmt.Println("error validating:", err.Error())
     return err
   } else if !result.Valid() {
-    // TODO: iterate over result errors
-    var buf bytes.Buffer
-    _,err := buf.WriteString("\n\nFailure validating outgoing test:\n")
-    if err != nil {
-      return err
-    }
+      // TODO: iterate over result errors
+        var buf bytes.Buffer
+        _,err := buf.WriteString("\n\nFailure validating outgoing test:\n")
+        if err != nil {
+          return err
+        }
 
-    for _,resultErr := range result.Errors() {
-      _,err := buf.WriteString(fmt.Sprintf("- %s\n", resultErr))
-      if err != nil {
-        return err
-      }
-    }
+        for _,resultErr := range result.Errors() {
+          _,err := buf.WriteString(fmt.Sprintf("- %s\n", resultErr))
+          if err != nil {
+            return err
+          }
+        }
 
     return fmt.Errorf(buf.String())
   }
@@ -200,10 +201,13 @@ func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, request
     HTTP response validation
   */
   responseBytes,err := ioutil.ReadAll(response.Body)
-  if response.StatusCode != 200 {
+  // if response.StatusCode != 200 {
+  //expected responses should be 401 when we test by sending a bad key
+  if response.StatusCode != expectedStatusResponseCode {
     err = fmt.Errorf("HTTP status code: %d", response.StatusCode)
     return err
   }
+
 
   // fmt.Println("response status code:", response.StatusCode)
   indentedResp,err := indentJson(responseBytes)
