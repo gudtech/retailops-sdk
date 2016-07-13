@@ -179,11 +179,6 @@ func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, request
   requestBuf := bytes.NewBuffer(exampleBytes)
   requestUrl.Path = fmt.Sprintf("%s%s", basePath, link.Href)
 
-  // req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonStr))
-  //     req.Header.Set("X-Custom-Header", "myvalue")
-  //     req.Header.Set("Content-Type", "application/json")
-
-
   request,err := http.NewRequest(
     strings.ToUpper(link.Method),
     requestUrl.String(),
@@ -195,7 +190,7 @@ func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, request
   //set Content-Type
   request.Header.Set("Content-Type", "application/json")
 
-  response,err := client.Do(request)//ARE we sending the appropriate header here?
+  response,err := client.Do(request)
   if err != nil {
     return err
   }

@@ -104,13 +104,13 @@ func loadFilesAndMakeRequest(baseUrl, schemaPath, examplePath string, verbose bo
     return
   }
 
-  // if !debug {
-  //     err = Request(baseUrl, "KDS_SPOLIATER", f, exampleF, verbose)
-  //     if err == nil {
-  //       err = fmt.Errorf("failed to check integration_auth_token. expected HTTP 401")
-  //       return
-  //     }
-  // }
+  if !debug {
+      err = Request(baseUrl, "KDS_SPOLIATER", f, exampleF, verbose)
+      if err == nil {
+        err = fmt.Errorf("failed to check integration_auth_token. expected HTTP 401")
+        return
+      }
+  }
 
 
   return

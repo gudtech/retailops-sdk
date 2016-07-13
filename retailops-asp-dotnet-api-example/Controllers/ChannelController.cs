@@ -69,8 +69,16 @@ namespace dotnet_example_api.Controllers
         }
         
         [HttpPost("inventory_push_v1")]
-        public IActionResult inventory_push([FromBody]string request)
+        public IActionResult inventory_push([FromBody] PostJSON requestJSON)
         {
+            Console.WriteLine("\nRequestJSON: {0}", requestJSON.integration_auth_token);
+            Console.WriteLine("\n");
+
+            if (string.IsNullOrEmpty(requestJSON.integration_auth_token) || requestJSON.integration_auth_token != "RETAILOPS_SDK" )
+            {
+                return this.HttpUnauthorized();
+            }
+
             EventResponse response = ChannelRepo.inventory_push();
 
             if (response == null)
@@ -82,8 +90,16 @@ namespace dotnet_example_api.Controllers
         }
         
         [HttpPost("catalog_push_v1")]
-        public IActionResult catalog_push([FromBody]string request)
+        public IActionResult catalog_push([FromBody] PostJSON requestJSON)
         {
+            Console.WriteLine("\nRequestJSON: {0}", requestJSON.integration_auth_token);
+            Console.WriteLine("\n");
+
+            if (string.IsNullOrEmpty(requestJSON.integration_auth_token) || requestJSON.integration_auth_token != "RETAILOPS_SDK" )
+            {
+                return this.HttpUnauthorized();
+            }
+
             EventResponse response = ChannelRepo.catalog_push();
 
             if (response == null)
@@ -95,8 +111,16 @@ namespace dotnet_example_api.Controllers
         }
 
         [HttpPost("order_pull_v1")]
-        public IActionResult order_pull([FromBody]string request)
+        public IActionResult order_pull([FromBody] PostJSON requestJSON)
         {
+            Console.WriteLine("\nRequestJSON: {0}", requestJSON.integration_auth_token);
+            Console.WriteLine("\n");
+
+            if (string.IsNullOrEmpty(requestJSON.integration_auth_token) || requestJSON.integration_auth_token != "RETAILOPS_SDK" )
+            {
+                return this.HttpUnauthorized();
+            }
+
             OrderPullResponse response = ChannelRepo.order_pull();
 
             if (response == null)
@@ -108,8 +132,16 @@ namespace dotnet_example_api.Controllers
         }
         
         [HttpPost("order_acknowledge_v1")]
-        public IActionResult order_acknowledge([FromBody]string request)
+        public IActionResult order_acknowledge([FromBody] PostJSON requestJSON)
         {
+            Console.WriteLine("\nRequestJSON: {0}", requestJSON.integration_auth_token);
+            Console.WriteLine("\n");
+
+            if (string.IsNullOrEmpty(requestJSON.integration_auth_token) || requestJSON.integration_auth_token != "RETAILOPS_SDK" )
+            {
+                return this.HttpUnauthorized();
+            }
+
             EventResponse response = ChannelRepo.order_acknowledge();
 
             if (response == null)
@@ -121,8 +153,16 @@ namespace dotnet_example_api.Controllers
         }
         
         [HttpPost("order_update_v1")]
-        public IActionResult order_update([FromBody]string request)
+        public IActionResult order_update([FromBody] PostJSON requestJSON)
         {
+            Console.WriteLine("\nRequestJSON: {0}", requestJSON.integration_auth_token);
+            Console.WriteLine("\n");
+
+            if (string.IsNullOrEmpty(requestJSON.integration_auth_token) || requestJSON.integration_auth_token != "RETAILOPS_SDK" )
+            {
+                return this.HttpUnauthorized();
+            }
+
             EventResponse response = ChannelRepo.order_update();
 
             if (response == null)
@@ -134,8 +174,16 @@ namespace dotnet_example_api.Controllers
         }
         
         [HttpPost("order_cancel_v1")]
-        public IActionResult order_cancel([FromBody]string request)
+        public IActionResult order_cancel([FromBody] PostJSON requestJSON)
         {
+            Console.WriteLine("\nRequestJSON: {0}", requestJSON.integration_auth_token);
+            Console.WriteLine("\n");
+
+            if (string.IsNullOrEmpty(requestJSON.integration_auth_token) || requestJSON.integration_auth_token != "RETAILOPS_SDK" )
+            {
+                return this.HttpUnauthorized();
+            }
+
             EventResponseWithStatus response = ChannelRepo.order_cancel();
 
             if (response == null)
@@ -147,8 +195,16 @@ namespace dotnet_example_api.Controllers
         }
         
         [HttpPost("order_shipment_submit_v1")]
-        public IActionResult order_shipment_submit([FromBody]string request)
+        public IActionResult order_shipment_submit([FromBody] PostJSON requestJSON)
         {
+            Console.WriteLine("\nRequestJSON: {0}", requestJSON.integration_auth_token);
+            Console.WriteLine("\n");
+
+            if (string.IsNullOrEmpty(requestJSON.integration_auth_token) || requestJSON.integration_auth_token != "RETAILOPS_SDK" )
+            {
+                return this.HttpUnauthorized();
+            }
+
             EventResponse response = ChannelRepo.order_shipment_submit();
 
             if (response == null)
@@ -160,8 +216,16 @@ namespace dotnet_example_api.Controllers
         }
         
         [HttpPost("order_complete_v1")]
-        public IActionResult order_complete([FromBody]string request)
+        public IActionResult order_complete([FromBody] PostJSON requestJSON)
         {
+            Console.WriteLine("\nRequestJSON: {0}", requestJSON.integration_auth_token);
+            Console.WriteLine("\n");
+
+            if (string.IsNullOrEmpty(requestJSON.integration_auth_token) || requestJSON.integration_auth_token != "RETAILOPS_SDK" )
+            {
+                return this.HttpUnauthorized();
+            }
+
             EventResponseWithStatus response = ChannelRepo.order_complete();
 
             if (response == null)
@@ -173,8 +237,16 @@ namespace dotnet_example_api.Controllers
         }
         
         [HttpPost("order_settle_payment_v1")]
-        public IActionResult order_settle_payment([FromBody]string request)
+        public IActionResult order_settle_payment([FromBody] PostJSON requestJSON)
         {
+            Console.WriteLine("\nRequestJSON: {0}", requestJSON.integration_auth_token);
+            Console.WriteLine("\n");
+
+            if (string.IsNullOrEmpty(requestJSON.integration_auth_token) || requestJSON.integration_auth_token != "RETAILOPS_SDK" )
+            {
+                return this.HttpUnauthorized();
+            }
+
             EventResponse response = ChannelRepo.order_settle_payment();
 
             if (response == null)
@@ -186,8 +258,16 @@ namespace dotnet_example_api.Controllers
         }
         
         [HttpPost("order_returned_v1")]
-        public IActionResult order_returned([FromBody]string request)
+        public IActionResult order_returned([FromBody] PostJSON requestJSON)
         {
+             Console.WriteLine("\nRequestJSON: {0}", requestJSON.integration_auth_token);
+            Console.WriteLine("\n");
+
+            if (string.IsNullOrEmpty(requestJSON.integration_auth_token) || requestJSON.integration_auth_token != "RETAILOPS_SDK" )
+            {
+                return this.HttpUnauthorized();
+            }
+            
             EventResponse response = ChannelRepo.order_returned();
 
             if (response == null)
