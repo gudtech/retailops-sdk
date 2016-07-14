@@ -2,9 +2,6 @@ using Microsoft.AspNet.Mvc;
 using dotnet_example_api.Repositories;
 using dotnet_example_api.Models;
 using Microsoft.Extensions.Logging;
-// using Microsoft.AspNet.Http;
-// using Newtonsoft.Json;
-// using Newtonsoft.Json.Linq;
 using System;
 
 namespace dotnet_example_api.Controllers
@@ -42,19 +39,7 @@ namespace dotnet_example_api.Controllers
             ConfigResponse response = ChannelRepo.catalog_get_config();
             
             Console.WriteLine("\response: {0}", response);
-            // dynamic req = JObject.Parse(request); 
-            // string token = req["integration_auth_token"];
-
-            //  _logger.LogInformation("Handled in {0} ms", token);
-
-            //test token 
-            // if(!ChannelRepo.checkToken(token) ){
-            // if(token != "")
-            // {
-            //     // _logger.LogInformation("token", token);    
-            //     return this.HttpUnauthorized();
-            // }
-
+            
             // the repository methods return a response object if 
             // they are successful, if not they return a null object and 
             // we return an HTTP not found error 

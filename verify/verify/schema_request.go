@@ -67,7 +67,7 @@ type V1FileLink struct {
   Title          string `json:"title"`
 }
 
-func Request(baseUrlStr, integrationAuthKey string, hyperSchema io.Reader, example io.Reader, verbose bool, expectedStatusResponseCode int) (err error) {
+func Request(baseUrlStr, integrationAuthKey string, hyperSchema io.Reader, example io.Reader, verbose bool, expectedStatusCode int) (err error) {
 
   requestUrl,err := url.Parse(baseUrlStr)
   if err != nil {
@@ -85,7 +85,6 @@ func Request(baseUrlStr, integrationAuthKey string, hyperSchema io.Reader, examp
 
   exampleBytes,err := ioutil.ReadAll(example)
   if err != nil {
-      fmt.Errorf("error: %s ", err)
     return
   }
   // fmt.Println("exampleBytes", exampleBytes)
@@ -97,7 +96,7 @@ func Request(baseUrlStr, integrationAuthKey string, hyperSchema io.Reader, examp
   // fmt.Println("exampleBytes 2", exampleBytes)
 
   for _,link := range v1file.Links {
-    err = requestAgainstLink(v1file, link, basePath, requestUrl, exampleBytes, verbose, expectedStatusResponseCode)
+    err = requestAgainstLink(v1file, link, basePath, requestUrl, exampleBytes, verbose, expectedStatusCode)
     if err != nil {
       return err
     }
@@ -105,7 +104,7 @@ func Request(baseUrlStr, integrationAuthKey string, hyperSchema io.Reader, examp
   return
 }
 
-func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, requestUrl *url.URL, exampleBytes []byte, verbose bool, expectedStatusResponseCode int) (err error) {
+func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, requestUrl *url.URL, exampleBytes []byte, verbose bool, expectedStatusCode int) (err error) {
   /*
     schema lib data setup
   */
@@ -114,26 +113,22 @@ func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, request
   if err != nil {
     return err
   }
-
   reqSchemaWDefs,err := insertDefinitions(v1file.Definitions, indentedReqSchemaStr)
   if err != nil {
     return err
   }
   reqSchemaLoader := schema.NewStringLoader(reqSchemaWDefs)
-
   respSchemaStr := string(*link.ResponseSchema)
   respSchemaWDefs,err := insertDefinitions(v1file.Definitions, respSchemaStr)
 
   if err != nil {
     return err
   }
-
   respSchemaLoader := schema.NewStringLoader(respSchemaWDefs)
 
   exampleStr := string(exampleBytes)
 
   exampleDataLoader := schema.NewStringLoader(exampleStr)
-
   /*
     Echo request to be performed
   */
@@ -171,7 +166,6 @@ func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, request
 
     return fmt.Errorf(buf.String())
   }
-
   // fmt.Println("example is valid:", result.Valid())
 
   /*
@@ -190,56 +184,55 @@ func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, request
   }
   //set Content-Type
   request.Header.Set("Content-Type", "application/json")
-
   response,err := client.Do(request)
   if err != nil {
     return err
   }
 
-
   /*
     HTTP response validation
   */
   responseBytes,err := ioutil.ReadAll(response.Body)
-  // if response.StatusCode != 200 {
-  //expected responses should be 401 when we test by sending a bad key
-  if response.StatusCode != expectedStatusResponseCode {
-    err = fmt.Errorf("HTTP status code: %d", response.StatusCode)
-    return err
-  }
 
-
-  // fmt.Println("response status code:", response.StatusCode)
-  indentedResp,err := indentJson(responseBytes)
-  if err != nil {
-    return err
-  }
-  if verbose {
-    fmt.Println("HTTP response status code:",response.StatusCode)
-    fmt.Println("HTTP response body:")
-    fmt.Println(indentedResp)
-  }
-
-  respDataLoader := schema.NewStringLoader(string(responseBytes))
-  result,err = schema.Validate(respSchemaLoader, respDataLoader)
-  if verbose {
-    fmt.Println("response valid:", result.Valid())
-  }
-  if !result.Valid() {
-    var buf bytes.Buffer
-    _,err := buf.WriteString("reason(s):\n")
-    if err != nil {
+  if response.StatusCode != expectedStatusCode {
+      err = fmt.Errorf("Incorrect HTTP status code, expected %v but received %v", expectedStatusCode, response.StatusCode)
       return err
-    }
-
-    for _,validationError := range result.Errors() {
-      _,err := buf.WriteString(fmt.Sprintf(" %s",validationError))
-      if err != nil {
-        return err
-      }
-    }
-    return fmt.Errorf(buf.String())
   }
+
+  if response.StatusCode == 200 {
+      indentedResp,err := indentJson(responseBytes)
+      if err != nil {
+         return err
+      }
+
+        if verbose {
+            fmt.Println("HTTP response status code:",response.StatusCode)
+            fmt.Println("HTTP response body:")
+            fmt.Println(indentedResp)
+        }
+
+        respDataLoader := schema.NewStringLoader(string(responseBytes))
+        result,err = schema.Validate(respSchemaLoader, respDataLoader)
+        if verbose {
+        fmt.Println("response valid:", result.Valid())
+        }
+
+        if !result.Valid() {
+            var buf bytes.Buffer
+            _,err := buf.WriteString("reason(s):\n")
+            if err != nil {
+              return err
+            }
+
+            for _,validationError := range result.Errors() {
+              _,err := buf.WriteString(fmt.Sprintf(" %s",validationError))
+              if err != nil {
+                return err
+              }
+            }
+            return fmt.Errorf(buf.String())
+        }
+    } 
 
   return
 }

@@ -77,9 +77,9 @@ func doVerify(cliExec CLIExecution, index int, testCase SchemaExample) (err erro
 }
 
 func loadFilesAndMakeRequest(baseUrl, schemaPath, examplePath string, verbose bool, debug bool) (err error) {
+
   f,err := os.Open(schemaPath)
   if err != nil {
-    // fmt.Errorf("\nf err: ", err)
     return
   }
 
@@ -88,11 +88,10 @@ func loadFilesAndMakeRequest(baseUrl, schemaPath, examplePath string, verbose bo
     return
   }
 
-  err = Request(baseUrl, "RETAILOPS_SDK", f, exampleF, verbose)
+  err = Request(baseUrl, "RETAILOPS_SDK", f, exampleF, verbose, 200)
   if err != nil {
     return
   }
-
 
   _,err = exampleF.Seek(0,0)
   if err != nil {
@@ -102,16 +101,11 @@ func loadFilesAndMakeRequest(baseUrl, schemaPath, examplePath string, verbose bo
   if err != nil {
     return
   }
-  // Need to handle the first requests returning 200, but the second requests
-  // returning 401 (which is actually a successful test)
-  // if !debug {
-  err = Request(baseUrl, "KDS_SPOLIATER", f, exampleF, verbose)
+  // send invalid test key, should receive 401 error to pass 
+  err = Request(baseUrl, "KDS_SPOLIATER", f, exampleF, verbose, 401)
   if err == nil {
-    err = fmt.Errorf("failed to check integration_auth_token. expected HTTP 401")
-    return
+    return err
   }
-  // }
-
 
   return
 }

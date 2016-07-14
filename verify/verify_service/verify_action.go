@@ -154,7 +154,7 @@ func doVerificationRequest(verReq *common.VerifyRequest, verResp *common.VerifyR
     /*
       Make the normal request, proper settings, and everything
     */
-    err = verify.Request(verReq.TargetUrl, integrationAuthKey, schemaFile, exampleFile, true)
+    err = verify.Request(verReq.TargetUrl, integrationAuthKey, schemaFile, exampleFile, true, 200)//TODO double check 200
     if err != nil {
       verResp.ActionResults = append(verResp.ActionResults, common.ActionResult {
         Status: "error",
@@ -173,11 +173,11 @@ func doVerificationRequest(verReq *common.VerifyRequest, verResp *common.VerifyR
     if err != nil { return }
     _,err = exampleFile.Seek(0,0)
     if err != nil { return }
-    err = verify.Request(verReq.TargetUrl, fmt.Sprintf("!!!%s", integrationAuthKey), schemaFile, exampleFile, true)
+    err = verify.Request(verReq.TargetUrl, fmt.Sprintf("!!!%s", integrationAuthKey), schemaFile, exampleFile, true, 200) //TODO check 200
     if err == nil {
       verResp.ActionResults = append(verResp.ActionResults, common.ActionResult {
         Status: "error",
-        Message: "failed to check integration_auth_token. expected HTTP 401",
+        Message: "failed to check integration_auth_token. expected HTTP 401", //NOTE: may need to allow 401 in certain cases
         Action: action,
         Version: verReq.Version,
         TargetUrl: fmt.Sprintf("%s/%s", verReq.TargetUrl, action),

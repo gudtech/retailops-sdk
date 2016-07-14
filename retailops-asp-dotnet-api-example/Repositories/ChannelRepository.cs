@@ -39,6 +39,30 @@ namespace dotnet_example_api.Repositories
             };
         }
 
+        private EventResponse _GetErrorResponse()
+        {
+            List<Event> responseEvents = new List<Event>();
+            
+            Association assoc = new Association(){
+                identifier_type = "order_id",
+                identifier      = "S1234"
+            };
+            
+            Event responseEvent = new Event(){
+                event_type      = "bad_auth_token",
+                code            = "123456",
+                message         = "integration_auth_token invalid",
+                diagnostic_data = "",
+                associations    = new []{assoc}
+            };
+            
+            responseEvents.Add(responseEvent);
+
+            return new EventResponse(){
+                events = responseEvents.ToArray()
+            };
+        }
+
         private EventResponseWithStatus _GetStandardResponseWithStatus()
         {
             List<Event> responseEvents = new List<Event>();
@@ -88,6 +112,11 @@ namespace dotnet_example_api.Repositories
            //return a canned response            
            return _GetStandardResponse();
         } 
+
+        public EventResponse BadTokenResponse()
+        {
+            return _GetErrorResponse();
+        }
           
         public OrderPullResponse order_pull()
         {

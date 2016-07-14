@@ -2,6 +2,7 @@ package sdk_actions
 
 import (
   "github.com/gudtech/scamp-go/scamp"
+  "encoding/json"
 )
 
 type InventoryPushV1Input struct {
@@ -74,11 +75,22 @@ type ChannelInfo struct {
 }
 
 func InvpushTransmitV1(msg *scamp.Message, client *scamp.Client) {
+  scamp.Info.Printf("incoming: %s", string(msg.Bytes()))
+  var input InventoryPushV1Input
+
+  err := json.Unmarshal(msg.Bytes(), &input)
+  if err != nil {
+      panic("error!!!!")
+  }
+
+  var output InventoryPushV1Output
+  output.InventoryUpdates = make([]InventoryUpdate, 0)
+
   respMsg := scamp.NewResponseMessage()
+  respMsg.WriteJson(output)
   respMsg.SetRequestId(msg.RequestId)
 
-  respMsg.WriteJson(map[string]string{"sup": "dude"})
-  _,err := client.Send(respMsg)
+  _,err = client.Send(respMsg) 
   if err != nil {
     return
   }
