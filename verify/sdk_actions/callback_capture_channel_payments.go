@@ -2,9 +2,10 @@ package sdk_actions
 
 import (
   "github.com/gudtech/scamp-go/scamp"
+  "encoding/json"
 )
 
-type CaptureChannelPaymentsV1Incoming struct {
+type OrderSettlePaymentV1Input struct {
   Action string `json:"action"`
   Data   struct {
     Channel struct {
@@ -112,10 +113,56 @@ type CaptureChannelPaymentsV1Incoming struct {
   Version int `json:"version"`
 }
 
-
-type CaptureChannelPaymentsV1Outgoing struct {
+type OrderSettlePaymentV1Output struct {
+    Action      string `json:"action"`
+    ChannelInfo struct {
+        ID int `json:"id"`
+    } `json:"channel_info"`
+    ClientID             int    `json:"client_id"`
+    IntegrationAuthToken string `json:"integration_auth_token"`
+    Order                struct {
+        ChannelOrderRefnum string `json:"channel_order_refnum"`
+        GrandTotal         int    `json:"grand_total"`
+        RetailopsOrderID   int    `json:"retailops_order_id"`
+        Shipments          []Shipment `json:"shipments"` //Shipment struct declared in callback_items_returned.go
+        UnshippedItems []UnshippedItem `json:"unshipped_items"`//UnshippedItem struct declared in callback_items_returned.go
+    } `json:"order"`
+    Payment struct {
+        CurrencyCode        string `json:"currency_code"`
+        PaymentSeriesID     int    `json:"payment_series_id"`
+        PaymentTransactions []PaymentTransaction `json:"payment_transactions"`
+    } `json:"payment"`
+    Version int `json:"version"`
 }
 
-func CaptureChannelPaymentsV1(msg *scamp.Message, client *scamp.Client) {
+type PaymentTransaction struct {
+    Amount                float64 `json:"amount"`
+    PaymentProcessingType string  `json:"payment_processing_type"`
+    PaymentType           string  `json:"payment_type"`
+    TransactionType       string  `json:"transaction_type"`
+}
 
+
+func OrderSettlePaymentV1(msg *scamp.Message, client *scamp.Client) {
+    scamp.Info.Printf("incoming: %s", string(msg.Bytes()))
+    var input OrderSettlePaymentV1Input
+
+    err := json.Unmarshal(msg.Bytes(), &input)
+    if err != nil {
+        scamp.Info.Printf("Input Data Error: %s ", input)
+    }
+
+    //TODO: need to munge actual input data to output format for sdk
+    var output OrderSettlePaymentV1Output
+    output.Order.Shipments = make([]Shipment, 0)
+    output.Order.UnshippedItems = make([]UnshippedItem, 0)
+
+    respMsg := scamp.NewResponseMessage()
+    respMsg.WriteJson(output)
+    respMsg.SetRequestId(msg.RequestId)
+
+    _,err = client.Send(respMsg)
+    if err != nil {
+        return
+    }
 }

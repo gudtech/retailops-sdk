@@ -44,6 +44,7 @@ type InventoryPushV1Input struct {
   Version int `json:"version"`
 }
 
+//output structs
 type InventoryPushV1Output struct {
   Action      string `json:"action"`
   ChannelInfo ChannelInfo `json:"channel_info"`
@@ -74,15 +75,17 @@ type ChannelInfo struct {
   ID int `json:"id"`
 }
 
-func InvpushTransmitV1(msg *scamp.Message, client *scamp.Client) {
+//service method - receives JSON data from PERL caller, forwards to service endpoint
+func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
   scamp.Info.Printf("incoming: %s", string(msg.Bytes()))
   var input InventoryPushV1Input
 
   err := json.Unmarshal(msg.Bytes(), &input)
   if err != nil {
-      panic("error!!!!")
+      scamp.Info.Printf("Input Data Error: %s ", input)
   }
 
+  //TODO: need to munge actual input data to output format for sdk
   var output InventoryPushV1Output
   output.InventoryUpdates = make([]InventoryUpdate, 0)
 
@@ -90,9 +93,8 @@ func InvpushTransmitV1(msg *scamp.Message, client *scamp.Client) {
   respMsg.WriteJson(output)
   respMsg.SetRequestId(msg.RequestId)
 
-  _,err = client.Send(respMsg) 
+  _,err = client.Send(respMsg)
   if err != nil {
     return
   }
-
 }

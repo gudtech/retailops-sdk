@@ -2,11 +2,7 @@ package main
 
 import (
   // "encoding/json"
-
   "github.com/gudTECH/scamp-go/scamp"
-  // "bytes"
-
-  // "os"
 )
 
 func main() {
@@ -17,7 +13,10 @@ func main() {
       scamp.Info.Printf("err: ", err)
   }
   msg := scamp.NewRequestMessage()
-  msg.SetAction("SDK.invpush_transmit")
+  // msg.SetAction("SDK.invpush_transmit")
+  // msg.SetAction("SDK.capture_channel_payments")
+  msg.SetAction("SDK.catpush_config")
+
   msg.SetRequestId(1 /*reqId*/)
   scamp.Info.Printf("reqId: %d", 1/* reqId */)
 
