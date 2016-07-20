@@ -193,7 +193,7 @@ type Package struct {
     PackageItems     []PackageItem `json:"package_items"`
     RetailopsPackageID int    `json:"retailops_package_id"`
     TrackingNumber     string `json:"tracking_number"`
-    WeightKg           int    `json:"weight_kg"`
+    WeightKg           float64  `json:"weight_kg"`
 }
 
 type PackageItem struct {
@@ -206,10 +206,10 @@ type PackageItem struct {
 
 type ReturnItem struct {
     ChannelItemRefnum  string `json:"channel_item_refnum"`
-    CreditAmt          int    `json:"credit_amt"`
-    GiftwrapAmt        int    `json:"giftwrap_amt"`
-    GiftwrapTaxAmt     int    `json:"giftwrap_tax_amt"`
-    ItemShippingTaxAmt int    `json:"item_shipping_tax_amt"`
+    CreditAmt          float32    `json:"credit_amt"`
+    GiftwrapAmt        float32    `json:"giftwrap_amt"`
+    GiftwrapTaxAmt     float32    `json:"giftwrap_tax_amt"`
+    ItemShippingTaxAmt float32    `json:"item_shipping_tax_amt"`
     ProductAmt         int    `json:"product_amt"`
     Quantity           int    `json:"quantity"`
     Reason             string `json:"reason"`
@@ -218,14 +218,14 @@ type ReturnItem struct {
     RetailopsItemID    int    `json:"retailops_item_id"`
     ShippingAmt        int    `json:"shipping_amt"`
     Sku                int    `json:"sku"`
-    SubtotalAmt        int    `json:"subtotal_amt"`
-    TaxAmt             int    `json:"tax_amt"`
+    SubtotalAmt        float32    `json:"subtotal_amt"`
+    TaxAmt             float32    `json:"tax_amt"`
 }
 
 type UnshippedItem struct {
     ChannelItemRefnum      string `json:"channel_item_refnum"`
-    EffectiveExtendedPrice int    `json:"effective_extended_price"`
-    EffectiveUnitPrice     int    `json:"effective_unit_price"`
+    EffectiveExtendedPrice float32    `json:"effective_extended_price"`
+    EffectiveUnitPrice     float32    `json:"effective_unit_price"`
     OrderedQuantity        int    `json:"ordered_quantity"`
     Sku                    string `json:"sku"`
     UnshippedQuantity      int    `json:"unshipped_quantity"`
