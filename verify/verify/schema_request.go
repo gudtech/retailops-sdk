@@ -232,7 +232,7 @@ func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, request
             }
             return fmt.Errorf(buf.String())
         }
-    } 
+    }
 
   return
 }

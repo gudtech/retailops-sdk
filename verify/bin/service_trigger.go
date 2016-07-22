@@ -23,7 +23,7 @@ func main() {
   var req = []byte (`{
   "headers": {
     "client_id": 1,
-    "ticket": "1,1,0,1456437061,315576060,111,WEIhLHAyXHpjZA27OdENwAn1_fHx8fGA-ekng7lhkAvc27Uhnxgd4PZx4VnR_SJ-K85M_5dTAChTXgI3RsmGvfTbaOZ1_U-YJw3G0w1UVWFZ2EC83wjO6bmp91VZdR0tT_b2R1kK4qO1QTJrBk53ZyIuidsOa13lihh8VMgAvSDqCnTwxV2NVV7oN4v-h_tQtpUvklfbW1bnULR3bbaDvoOlb1CVQ_3BdNdo1MaAh-JxrRjf7MkzcHQYs3dN0GuaBZ1KBHvLdrLmGerNYv2p6AMC-fu8YeuukUU3Q6RL9AtF5AA6TPhfwfBM5r05B7QZiSEGySF65FCcfQFT_6lMxQ"
+    "ticket": "RETAILOPS_SDK"
   },
   "version": 1,
   "action": "MagentoExtension.order.writeback",
@@ -178,7 +178,7 @@ func main() {
         "inv_suspended_instock": 0,
         "unset_other_media": 0,
         "import_order_attrs": "",
-        "base_uri": "http://172.16.4.130/magento1921",
+        "base_uri": "http://localhost:5000/api/channel",
         "express_configurable_super_links": 0,
         "unset_other_attributes": 0,
         "push_cancel": 0,
