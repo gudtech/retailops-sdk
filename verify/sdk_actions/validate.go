@@ -2,12 +2,10 @@ package sdk_actions
 
 import (
     "fmt"
-    // "path/filepath"
      "encoding/json"
-    // "io/ioutil"
-    gojsonschema "github.com/xeipuuv/gojsonschema"
-    "os"
-    // "bytes"
+     gojsonschema "github.com/xeipuuv/gojsonschema"
+     "os"
+     "github.com/gudtech/scamp-go/scamp"
 )
 
 type V1FileLink struct {
@@ -47,11 +45,7 @@ func ValidateResponse(schemaPath string, jsonBody interface{}) (bool, error) {
         err := fmt.Errorf("SchemaPath missing")
         return false, err
     }
-    // if len(jsonBody)== 0 {
-    //     err := fmt.Errorf("json response body is missing")
-    //     return false, err
-    // }
-    // fmt.Printf("jsonBody: %s\n", jsonBody)
+
     schemaFile,err := os.Open(schemaPath)
     if err != nil {
         fmt.Printf("schemaFile open error: %s\n", err)
@@ -70,14 +64,11 @@ func ValidateResponse(schemaPath string, jsonBody interface{}) (bool, error) {
         fmt.Printf("unmarshal err: %s\n", err)
     }
 
-    // fmt.Printf("respSchemaString: %s", respSchemaString)
-
     indentedReqSchemaStr,err := indentJson(respSchemaString)
     if err != nil {
         fmt.Printf("indentedReqSchemaStr err: %s", err)
         return false, err
     }
-    // fmt.Printf("indentedReqSchemaStr: %v\n", indentedReqSchemaStr)
 
     responseLoader := gojsonschema.NewGoLoader(jsonBody)
     schemaLoader := gojsonschema.NewStringLoader(indentedReqSchemaStr)
@@ -88,7 +79,7 @@ func ValidateResponse(schemaPath string, jsonBody interface{}) (bool, error) {
         return false, err
     }
     if result.Valid() {
-        fmt.Printf("The JSON response is valid\n")
+        scamp.Info.Printf("The JSON response is valid\n")
     } else {
         fmt.Errorf("The document is not valid. see errors :\n")
         for _, err := range result.Errors() {

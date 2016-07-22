@@ -180,57 +180,6 @@ type OrderReturnedV1Output struct {
 	Version int `json:"version"`
 }
 
-type Shipment struct {
-    Packages []Package `json:"packages"`
-    RetailopsShipmentID int `json:"retailops_shipment_id"`
-}
-
-type Package struct {
-    CarrierClassName string `json:"carrier_class_name"`
-    CarrierName      string `json:"carrier_name"`
-    ChannelShipCode  string `json:"channel_ship_code"`
-    DateShipped      string `json:"date_shipped"`
-    PackageItems     []PackageItem `json:"package_items"`
-    RetailopsPackageID int    `json:"retailops_package_id"`
-    TrackingNumber     string `json:"tracking_number"`
-    WeightKg           float64  `json:"weight_kg"`
-}
-
-type PackageItem struct {
-    ChannelItemRefnum       string `json:"channel_item_refnum"`
-    Quantity                int    `json:"quantity"`
-    RetailopsOrderItemID    int    `json:"retailops_order_item_id"`
-    RetailopsShipmentItemID int    `json:"retailops_shipment_item_id"`
-    Sku                     string `json:"sku"`
-}
-
-type ReturnItem struct {
-    ChannelItemRefnum  string `json:"channel_item_refnum"`
-    CreditAmt          float32    `json:"credit_amt"`
-    GiftwrapAmt        float32    `json:"giftwrap_amt"`
-    GiftwrapTaxAmt     float32    `json:"giftwrap_tax_amt"`
-    ItemShippingTaxAmt float32    `json:"item_shipping_tax_amt"`
-    ProductAmt         int    `json:"product_amt"`
-    Quantity           int    `json:"quantity"`
-    Reason             string `json:"reason"`
-    RecyclingAmt       int    `json:"recycling_amt"`
-    RestockFeeAmt      int    `json:"restock_fee_amt"`
-    RetailopsItemID    int    `json:"retailops_item_id"`
-    ShippingAmt        int    `json:"shipping_amt"`
-    Sku                int    `json:"sku"`
-    SubtotalAmt        float32    `json:"subtotal_amt"`
-    TaxAmt             float32    `json:"tax_amt"`
-}
-
-type UnshippedItem struct {
-    ChannelItemRefnum      string `json:"channel_item_refnum"`
-    EffectiveExtendedPrice float32    `json:"effective_extended_price"`
-    EffectiveUnitPrice     float32    `json:"effective_unit_price"`
-    OrderedQuantity        int    `json:"ordered_quantity"`
-    Sku                    string `json:"sku"`
-    UnshippedQuantity      int    `json:"unshipped_quantity"`
-}
-
 func OrderReturnedV1(msg *scamp.Message, client *scamp.Client) {
     scamp.Info.Printf("incoming: %s", string(msg.Bytes()))
     var input OrderReturnedV1Input
