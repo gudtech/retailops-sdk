@@ -13,9 +13,10 @@ func main() {
       scamp.Info.Printf("err: ", err)
   }
   msg := scamp.NewRequestMessage()
-  msg.SetAction("SDK.invpush_transmit")
+  // msg.SetAction("SDK.invpush_transmit")
   // msg.SetAction("SDK.capture_channel_payments")
   // msg.SetAction("SDK.writeback")
+  msg.SetAction("SDK.order_ack")
 
   msg.SetRequestId(1 /*reqId*/)
   scamp.Info.Printf("reqId: %d", 1/* reqId */)
@@ -26,52 +27,24 @@ func main() {
       "ticket": "RETAILOPS_SDK"
     },
     "version": 1,
-    "action": "Mozu.inventory.invpush_transmit",
+    "action": "Aabaco.orderpull.order_ack",
     "data": {
-      "inventory": {
-        "data": [
-          {
-            "sku": "53",
-            "id": "66",
-            "concept": "sku",
-            "qty_breakdown": [
-              {
-                "sku": "53",
-                "sellable": 5,
-                "unclaimed": 0,
-                "zones": [
-                  {
-                    "zone": "Default",
-                    "pick": 0,
-                    "npick": 5
-                  }
-                ],
-                "facility": "Testoria"
-              },
-              {
-                "est_ship": "2016-04-22T11:02:47-07:00",
-                "sku": "53",
-                "reserving_orders": [
-                  "2390"
-                ],
-                "sellable": 32,
-                "unclaimed": 24,
-                "vendor": "002_Acme Corp"
-              }
-            ],
-            "qty_available": 24
-          }
+      "order": {
+        "acks": [
+          "496"
         ]
       },
       "client_id": 1,
       "channel": {
         "params": {
-          "breakdown_inventory": 0,
-          "tenant": "15394",
-          "appKey": "dripclub.retailops.0.1.0.Release",
+          "StoreID": "yhst-18909142938879050075142",
+          "next_order_refnum": 496,
+          "order_ack_status_id": "32",
+          "order_fulfilled_status_id": "34",
+          "order_in_filfillment_status_id": "33",
           "base_uri": "http://localhost:5000/api/channel"
         },
-        "id": 30
+        "id": 21
       }
     }
   }
@@ -97,6 +70,6 @@ func main() {
   //   os.Exit(1)
   // }
 
-  scamp.Info.Printf("response received")
+  scamp.Info.Printf("success: response received")
   // }
 }

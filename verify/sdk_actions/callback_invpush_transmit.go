@@ -53,7 +53,6 @@ type InventoryPushV1Output struct {
 func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
     var input InventoryPushV1Input
     err := json.Unmarshal(msg.Bytes(), &input)
-    scamp.Info.Printf("made it this far")
     if err != nil {
         scamp.Info.Printf("Input Data Error: %+v\n ", err)
         respMsg := scamp.NewResponseMessage()
@@ -153,7 +152,7 @@ func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
             }
             return
         }
-        // TODO: munge API response back into what perl modules expect and return JSON below.
+        // munge API response back into what perl modules expect and return JSON below.
 
         var invpushResponse InvPushTransmitResponse
         eventArray := make([]InvPushTransmitResponseEvent, len(apiResp.Events), (cap(apiResp.Events)+1)*2)
