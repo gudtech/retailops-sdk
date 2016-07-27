@@ -16,7 +16,8 @@ func main() {
   // msg.SetAction("SDK.invpush_transmit")
   // msg.SetAction("SDK.capture_channel_payments")
   // msg.SetAction("SDK.writeback")
-  msg.SetAction("SDK.order_ack")
+  // msg.SetAction("SDK.order_ack")
+  msg.SetAction("SDK.order_fetch")
 
   msg.SetRequestId(1 /*reqId*/)
   scamp.Info.Printf("reqId: %d", 1/* reqId */)
@@ -27,25 +28,26 @@ func main() {
       "ticket": "RETAILOPS_SDK"
     },
     "version": 1,
-    "action": "Aabaco.orderpull.order_ack",
+    "action": "Aabaco.orderpull.order_fetch",
     "data": {
+      "single": 0,
       "order": {
-        "acks": [
-          "496"
-        ]
+        "channel_refnum": 496
       },
       "client_id": 1,
       "channel": {
         "params": {
+          "base_uri": "http://localhost:5000/api/channel",
           "StoreID": "yhst-18909142938879050075142",
           "next_order_refnum": 496,
           "order_ack_status_id": "32",
           "order_fulfilled_status_id": "34",
-          "order_in_filfillment_status_id": "33",
-          "base_uri": "http://localhost:5000/api/channel"
+          "order_in_filfillment_status_id": "33"
         },
         "id": 21
-      }
+      },
+      "page_state": null,
+      "max_page_size": 50
     }
   }
 `)
