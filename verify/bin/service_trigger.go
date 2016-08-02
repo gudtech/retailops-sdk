@@ -49,8 +49,7 @@ func main() {
       "page_state": null,
       "max_page_size": 50
     }
-  }
-`)
+  }`)
 
   msg.Write(req)
   respChan,err := client.Send(msg)

@@ -16,7 +16,7 @@ type OrderPullV1Input struct {
 			Params struct {
                 BaseURI                    string `json:"base_uri"`//added was not in original perl request
 				StoreID                    string `json:"StoreID"`
-				NextOrderRefnum            int    `json:"next_order_refnum"`
+				NextOrderRefnum            int    `json:"next_order_refnum,"`
 				OrderAckStatusID           string `json:"order_ack_status_id"`
 				OrderFulfilledStatusID     string `json:"order_fulfilled_status_id"`
 				OrderInFilfillmentStatusID string `json:"order_in_filfillment_status_id"`
@@ -27,7 +27,8 @@ type OrderPullV1Input struct {
 		Order       struct {
 			ChannelRefnum int `json:"channel_refnum"`
 		} `json:"order"`
-		PageState interface{} `json:"page_state"`
+		// PageState interface{} `json:"page_state"`
+        PageState string `json:"page_state"`
 		Single    int         `json:"single"`
 	} `json:"data"`
 	Headers struct {
@@ -79,10 +80,9 @@ func OrderPullV1(msg *scamp.Message, client *scamp.Client) {
         output.Version = input.Version
         output.PageToken = input.Data.PageState
 
-
         baseURI := input.Data.Channel.Params.BaseURI
         if len(baseURI) == 0 {
-            return
+            return //TODO: return relevant scamp error msg (for all callbacks)
         }
         channelURI := BuildURI(baseURI, "inventory_push_v1")
 
