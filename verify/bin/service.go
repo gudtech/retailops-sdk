@@ -26,7 +26,7 @@ func main() {
     os.Exit(1)
   }
 
-  verifierSvc,err := scamp.NewService("main","0.0.0.0:","sdk_service")
+  verifierSvc,err := scamp.NewService("main",":30100","sdk_service")
   if err != nil {
     scamp.Error.Printf("could not create service: `%s`", err.Error())
     os.Exit(1)
@@ -34,7 +34,7 @@ func main() {
   verify_service.TicketPath = *registrationTicket
   verifierSvc.Register("Integration.Channel.certify", verify_service.VerifyAction)
 
-  callbackSvc,err := scamp.NewService("sdk", "127.0.0.1:6000","sdk_service")
+  callbackSvc,err := scamp.NewService("sdk", ":30200","sdk_service")
   if err != nil {
     scamp.Error.Printf("could not create serivce: `%s`", err.Error())
     os.Exit(1)
@@ -49,13 +49,16 @@ func main() {
   callbackSvc.Register("SDK.catpush_config",sdk_actions.CatalogGetConfigV1) // , SDK callback: catalog_get_config_v1
   callbackSvc.Register("SDK.catpush_transmit",sdk_actions.CatalogPushV1) // , SDK callback: catalog_push_v1
   callbackSvc.Register("SDK.invpush_transmit",sdk_actions.InventoryPushV1) // , SDK callback: inventory_push_v1
-  callbackSvc.Register("SDK.writeback",sdk_actions.OrderUpdateV1) // , SDK callback: order_update_v1
+  // callbackSvc.Register("SDK.writeback",sdk_actions.OrderUpdateV1) // , SDK callback: order_update_v1
 
   announcer,err := scamp.NewDiscoveryAnnouncer()
   if err != nil {
     scamp.Error.Printf("failed to create announcer: `%s`", err)
     return
   }
+
+  callbackSvc.Register("SDK.writeback",sdk_actions.OrderUpdateV1)
+
   announcer.Track(verifierSvc)
   announcer.Track(callbackSvc)
   go announcer.AnnounceLoop()
