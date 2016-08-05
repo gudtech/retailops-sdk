@@ -71,6 +71,12 @@ type ROPInputZone struct {
   Zone  string `json:"zone"`
 }
 
+type ChannelInteraction struct {
+    Action      string `json:"action"`
+    EndpointURL string `json:"endpoint_url"`
+    Version     int    `json:"version"`
+}
+
 //common output structs
 type Shipment struct {
     Packages []Package `json:"packages"`

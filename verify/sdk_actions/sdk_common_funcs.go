@@ -3,6 +3,7 @@ package sdk_actions
 import (
     "bytes"
     "strings"
+    "strconv"
 )
 
 func BuildShipments(input []ROPInputShipment) ([]Shipment) {
@@ -55,15 +56,17 @@ func BuildUnshippedItems(input []ROPInputUnshippedItem) ([]UnshippedItem) {
     return unshippedItemsArray
 }
 
-func BuildURI(baseURI string, action string) (string) {
+func BuildURI(baseURI string, version int) (string) {
     var buffer bytes.Buffer
+    versionString := strconv.Itoa(version)
+
     buffer.WriteString(baseURI)
     //test if baseURI ends with a slash and append action accordingly
-    if strings.HasSuffix(baseURI, "/") {
-        buffer.WriteString(action)
+    if strings.HasSuffix(baseURI, "_v") {
+        return buffer.String()
     }else{
-        buffer.WriteString("/")
-        buffer.WriteString(action)
+        buffer.WriteString("_v")
+        buffer.WriteString(versionString)
     }
     return buffer.String()
 }

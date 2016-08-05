@@ -7,18 +7,23 @@ import (
   "net/http"
   "time"
 )
-
+// TODO Update struct to match what the caller is sending
 type InventoryPushV1Input struct {
   Action string `json:"action"`
   Data   struct {
     Channel struct {
       ID     int `json:"id"`
       Params struct {
-        BaseURI            string `json:"base_uri"`//added was not in original perl request
         AppKey             string `json:"appKey"`
         BreakdownInventory int    `json:"breakdown_inventory"`
         Tenant             string `json:"tenant"`
       } `json:"params"`
+      Definition struct {
+    	Handle string `json:"handle"`
+    	Params struct {
+    			Interactions []ChannelInteraction `json:"interactions"`
+    	} `json:"params"`
+       } `json:"definition"`
     } `json:"channel"`
     ClientID  int `json:"client_id"`
     Inventory struct {
@@ -98,11 +103,23 @@ func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
         }
         output.InventoryUpdates = inventoryArray
 
-        baseURI := input.Data.Channel.Params.BaseURI
-        if len(baseURI) == 0 {
+        // TODO: convert all actions to use code below, baseuri not valid, channel def passes endpointurl for each action
+        // need to search channel.definition.params.Interactions for correct action and
+        // retreive endpointurl
+        var endPointURI string
+        var version string
+        interactions := input.Data.Channel.Params.Definition.Interactions
+        for i := range interactions {
+            if interactions[i].Action == "inventory_push" {
+                endPointURI = interactions[i].endpoint_url
+                version = interactions[i].Version
+            }
+        }
+
+        if len(endPointURI) == 0 || version == nil {
             return
         }
-        channelURI := BuildURI(baseURI, "inventory_push_v1")
+        channelURI := BuildURI(endPointURI, version )
 
         var requestBuffer bytes.Buffer
         err := json.NewEncoder(&requestBuffer).Encode(output)
