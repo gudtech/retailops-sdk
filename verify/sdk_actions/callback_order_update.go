@@ -35,11 +35,25 @@ func OrderUpdateV1(msg *scamp.Message, client *scamp.Client) {
         output.Order.Shipments = BuildShipments(input.Data.Order.Shipments)
         output.Order.UnshippedItems = BuildUnshippedItems(input.Data.Order.UnshippedItemsRef)
 
-        baseURI := input.Data.Channel.Params.BaseURI
-        if len(baseURI) == 0 {
+        // baseURI := input.Data.Channel.Params.BaseURI
+        // if len(baseURI) == 0 {
+        //     return
+        // }
+        // channelURI := BuildURI(baseURI, "order_update_v1")
+        var endPointURI string
+        var version int
+        interactions := input.Data.Channel.Definition.Params.Interactions
+        for i := range interactions {
+            if interactions[i].Action == "order_update" {
+                endPointURI = interactions[i].EndpointURL
+                version = interactions[i].Version
+            }
+        }
+
+        if len(endPointURI) == 0 || version <= 0 {
             return
         }
-        channelURI := BuildURI(baseURI, "order_update_v1")
+        channelURI := BuildURI(endPointURI, version )
 
         var requestBuffer bytes.Buffer
         err := json.NewEncoder(&requestBuffer).Encode(output)

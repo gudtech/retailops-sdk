@@ -21,6 +21,12 @@ type OrderPullV1Input struct {
 				OrderFulfilledStatusID     string `json:"order_fulfilled_status_id"`
 				OrderInFilfillmentStatusID string `json:"order_in_filfillment_status_id"`
 			} `json:"params"`
+            Definition struct {
+              	Handle string `json:"handle"`
+              	Params struct {
+              			Interactions []ChannelInteraction `json:"interactions"`
+              	} `json:"params"`
+             } `json:"definition"`
 		} `json:"channel"`
 		ClientID    int `json:"client_id"`
 		MaxPageSize int `json:"max_page_size"`
@@ -80,11 +86,26 @@ func OrderPullV1(msg *scamp.Message, client *scamp.Client) {
         output.Version = input.Version
         output.PageToken = input.Data.PageState
 
-        baseURI := input.Data.Channel.Params.BaseURI
-        if len(baseURI) == 0 {
-            return //TODO: return relevant scamp error msg (for all callbacks)
+        // baseURI := input.Data.Channel.Params.BaseURI
+        // if len(baseURI) == 0 {
+        //     return //TODO: return relevant scamp error msg (for all callbacks)
+        // }
+        // channelURI := BuildURI(baseURI, "inventory_push_v1")
+
+        var endPointURI string
+        var version int
+        interactions := input.Data.Channel.Definition.Params.Interactions
+        for i := range interactions {
+            if interactions[i].Action == "order_pull" {
+                endPointURI = interactions[i].EndpointURL
+                version = interactions[i].Version
+            }
         }
-        channelURI := BuildURI(baseURI, "inventory_push_v1")
+
+        if len(endPointURI) == 0 || version <= 0 {
+            return
+        }
+        channelURI := BuildURI(endPointURI, version )
 
         var requestBuffer bytes.Buffer
         err := json.NewEncoder(&requestBuffer).Encode(output)

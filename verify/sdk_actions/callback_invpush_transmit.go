@@ -19,10 +19,10 @@ type InventoryPushV1Input struct {
         Tenant             string `json:"tenant"`
       } `json:"params"`
       Definition struct {
-    	Handle string `json:"handle"`
-    	Params struct {
-    			Interactions []ChannelInteraction `json:"interactions"`
-    	} `json:"params"`
+        	Handle string `json:"handle"`
+        	Params struct {
+        			Interactions []ChannelInteraction `json:"interactions"`
+        	} `json:"params"`
        } `json:"definition"`
     } `json:"channel"`
     ClientID  int `json:"client_id"`
@@ -107,16 +107,16 @@ func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
         // need to search channel.definition.params.Interactions for correct action and
         // retreive endpointurl
         var endPointURI string
-        var version string
-        interactions := input.Data.Channel.Params.Definition.Interactions
+        var version int
+        interactions := input.Data.Channel.Definition.Params.Interactions
         for i := range interactions {
             if interactions[i].Action == "inventory_push" {
-                endPointURI = interactions[i].endpoint_url
+                endPointURI = interactions[i].EndpointURL
                 version = interactions[i].Version
             }
         }
 
-        if len(endPointURI) == 0 || version == nil {
+        if len(endPointURI) == 0 || version <= 0 {
             return
         }
         channelURI := BuildURI(endPointURI, version )

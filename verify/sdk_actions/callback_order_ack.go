@@ -21,6 +21,12 @@ type OrderAcknowledgeV1Input struct {
 				OrderInFilfillmentStatusID string `json:"order_in_filfillment_status_id"`
                 BaseURI                    string `json:"base_uri"` //need to add to perl JSON
 			} `json:"params"`
+            Definition struct {
+              	Handle string `json:"handle"`
+              	Params struct {
+              			Interactions []ChannelInteraction `json:"interactions"`
+              	} `json:"params"`
+             } `json:"definition"`
 		} `json:"channel"`
 		ClientID int `json:"client_id"`
 		Order    struct {
@@ -82,11 +88,28 @@ func OrderAcknowledgeV1(msg *scamp.Message, client *scamp.Client) {
             orderArray[i] = tempAck
         }
 
-        baseURI := input.Data.Channel.Params.BaseURI
-        if len(baseURI) == 0 {
+        // TODO: convert all actions to use code below, baseuri not valid, channel def passes endpointurl for each action
+        // need to search channel.definition.params.Interactions for correct action and
+        // retreive endpointurl
+        var endPointURI string
+        var version int
+        interactions := input.Data.Channel.Definition.Params.Interactions
+        for i := range interactions {
+            if interactions[i].Action == "order_acknowledge" {
+                endPointURI = interactions[i].EndpointURL
+                version = interactions[i].Version
+            }
+        }
+
+        if len(endPointURI) == 0 || version <= 0 {
             return
         }
-        channelURI := BuildURI(baseURI, "order_acknowledge_v1")
+        channelURI := BuildURI(endPointURI, version )
+        // baseURI := input.Data.Channel.Params.BaseURI
+        // if len(baseURI) == 0 {
+        //     return
+        // }
+        // channelURI := BuildURI(baseURI, "order_acknowledge_v1")
 
         var requestBuffer bytes.Buffer
         err := json.NewEncoder(&requestBuffer).Encode(output)

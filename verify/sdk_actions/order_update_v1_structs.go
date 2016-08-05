@@ -19,6 +19,12 @@ type OrderUpdateV1Input struct {
 				UnsetOtherAttributes          int         `json:"unset_other_attributes"`
 				UnsetOtherMedia               int         `json:"unset_other_media"`
 			} `json:"params"`
+            Definition struct {
+              	Handle string `json:"handle"`
+              	Params struct {
+              			Interactions []ChannelInteraction `json:"interactions"`
+              	} `json:"params"`
+             } `json:"definition"`
 		} `json:"channel"`
 		LineItems []struct {
 			ApportionedShipAmt    string      `json:"apportioned_ship_amt"`
