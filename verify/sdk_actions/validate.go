@@ -46,11 +46,11 @@ func ValidateResponse(schemaPath string, jsonBody interface{}) (bool, error) {
         return false, err
     }
 
-    pwd, err := os.Getwd()
-    if err != nil {
-        scamp.Info.Printf("err: %s", err)
-    }
-    scamp.Info.Printf("pwd: %s", pwd)
+    // pwd, err := os.Getwd()
+    // if err != nil {
+    //     scamp.Info.Printf("err: %s", err)
+    // }
+    // scamp.Info.Printf("pwd: %s", pwd)
 
     schemaFile,err := os.Open(schemaPath)
     if err != nil {

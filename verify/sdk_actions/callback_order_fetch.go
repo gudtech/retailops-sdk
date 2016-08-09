@@ -7,42 +7,69 @@ import (
   "net/http"
   "time"
 )
-
 type OrderPullV1Input struct {
-    Action string `json:"action"`
-	Data   struct {
-		Channel struct {
-			ID     int `json:"id"`
-			Params struct {
-                BaseURI                    string `json:"base_uri"`//added was not in original perl request
-				StoreID                    string `json:"StoreID"`
-				NextOrderRefnum            int    `json:"next_order_refnum,"`
-				OrderAckStatusID           string `json:"order_ack_status_id"`
-				OrderFulfilledStatusID     string `json:"order_fulfilled_status_id"`
-				OrderInFilfillmentStatusID string `json:"order_in_filfillment_status_id"`
-			} `json:"params"`
-            Definition struct {
-              	Handle string `json:"handle"`
-              	Params struct {
-              			Interactions []ChannelInteraction `json:"interactions"`
-              	} `json:"params"`
-             } `json:"definition"`
-		} `json:"channel"`
-		ClientID    int `json:"client_id"`
-		MaxPageSize int `json:"max_page_size"`
-		Order       struct {
-			ChannelRefnum int `json:"channel_refnum"`
-		} `json:"order"`
-		// PageState interface{} `json:"page_state"`
-        PageState string `json:"page_state"`
-		Single    int         `json:"single"`
-	} `json:"data"`
-	Headers struct {
-		ClientID int    `json:"client_id"`
-		Ticket   string `json:"ticket"`
-	} `json:"headers"`
-	Version int `json:"version"`
+	Channel struct {
+		ID     int `json:"id"`
+		Params struct {
+            BaseURI                    string `json:"base_uri"`//added was not in original perl request
+			StoreID                    string `json:"StoreID"`
+			NextOrderRefnum            int    `json:"next_order_refnum,"`
+			OrderAckStatusID           string `json:"order_ack_status_id"`
+			OrderFulfilledStatusID     string `json:"order_fulfilled_status_id"`
+			OrderInFilfillmentStatusID string `json:"order_in_filfillment_status_id"`
+		} `json:"params"`
+        Definition struct {
+          	Handle string `json:"handle"`
+          	Params struct {
+          			Interactions []ChannelInteraction `json:"interactions"`
+          	} `json:"params"`
+         } `json:"definition"`
+	} `json:"channel"`
+	ClientID    int `json:"client_id,string"`
+	MaxPageSize int `json:"max_page_size"`
+	Order       struct {
+		ChannelRefnum int `json:"channel_refnum"`
+	} `json:"order"`
+	// PageState interface{} `json:"page_state"`
+    PageState string `json:"page_state"`
+	Single    int         `json:"single"`
 }
+
+// type OrderPullV1Input struct {
+//     Action string `json:"action"`
+// 	Data   struct {
+// 		Channel struct {
+// 			ID     int `json:"id"`
+// 			Params struct {
+//                 BaseURI                    string `json:"base_uri"`//added was not in original perl request
+// 				StoreID                    string `json:"StoreID"`
+// 				NextOrderRefnum            int    `json:"next_order_refnum,"`
+// 				OrderAckStatusID           string `json:"order_ack_status_id"`
+// 				OrderFulfilledStatusID     string `json:"order_fulfilled_status_id"`
+// 				OrderInFilfillmentStatusID string `json:"order_in_filfillment_status_id"`
+// 			} `json:"params"`
+//             Definition struct {
+//               	Handle string `json:"handle"`
+//               	Params struct {
+//               			Interactions []ChannelInteraction `json:"interactions"`
+//               	} `json:"params"`
+//              } `json:"definition"`
+// 		} `json:"channel"`
+// 		ClientID    int `json:"client_id"`
+// 		MaxPageSize int `json:"max_page_size"`
+// 		Order       struct {
+// 			ChannelRefnum int `json:"channel_refnum"`
+// 		} `json:"order"`
+// 		// PageState interface{} `json:"page_state"`
+//         PageState string `json:"page_state"`
+// 		Single    int         `json:"single"`
+// 	} `json:"data"`
+// 	Headers struct {
+// 		ClientID int    `json:"client_id"`
+// 		Ticket   string `json:"ticket"`
+// 	} `json:"headers"`
+// 	Version int `json:"version"`
+// }
 
 type OrderPullV1Output struct {
     Action      string `json:"action"`
@@ -53,7 +80,7 @@ type OrderPullV1Output struct {
 	IntegrationAuthToken string `json:"integration_auth_token"`
 	PageToken            string `json:"page_token"`
 	SpecificOrders       []SpecificOrder `json:"specific_orders"`
-	Version int `json:"version"`
+	Version int64 `json:"version"`
 }
 
 type SpecificOrder struct {
@@ -79,14 +106,14 @@ func OrderPullV1(msg *scamp.Message, client *scamp.Client) {
     } else {
         var output OrderPullV1Output
         //TODO: need to munge actual input data to output format for sdk
-        output.Action = input.Action
-        output.ChannelInfo.ID = input.Data.Channel.ID
-        output.ClientID = input.Headers.ClientID
-        output.IntegrationAuthToken = input.Headers.Ticket
-        output.Version = input.Version
-        output.PageToken = input.Data.PageState
+        output.Action = msg.Action
+        output.ChannelInfo.ID = input.Channel.ID
+        output.ClientID = input.ClientID
+        output.IntegrationAuthToken = msg.Ticket
+        output.Version = msg.Version
+        output.PageToken = input.PageState
 
-        // baseURI := input.Data.Channel.Params.BaseURI
+        // baseURI := input.Channel.Params.BaseURI
         // if len(baseURI) == 0 {
         //     return //TODO: return relevant scamp error msg (for all callbacks)
         // }
@@ -94,7 +121,7 @@ func OrderPullV1(msg *scamp.Message, client *scamp.Client) {
 
         var endPointURI string
         var version int
-        interactions := input.Data.Channel.Definition.Params.Interactions
+        interactions := input.Channel.Definition.Params.Interactions
         for i := range interactions {
             if interactions[i].Action == "order_pull" {
                 endPointURI = interactions[i].EndpointURL
@@ -130,7 +157,8 @@ func OrderPullV1(msg *scamp.Message, client *scamp.Client) {
             return
         }
 
-        validResponse, err := ValidateResponse("../verify/schema/order_pull_v1.json", &apiResp )
+        // validResponse, err := ValidateResponse("../verify/schema/order_pull_v1.json", &apiResp )
+        validResponse, err := ValidateResponse("./src/github.com/gudtech/retailops-sdk/verify/schema/order_pull_v1.json", &apiResp )
         if err != nil {
             scamp.Info.Printf("There was an error validating the response: %+v\n ", err)
             respMsg := scamp.NewResponseMessage()

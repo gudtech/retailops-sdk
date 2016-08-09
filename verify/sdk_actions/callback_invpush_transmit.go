@@ -57,11 +57,7 @@ type InventoryPushV1Output struct {
 
 func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
     var input InventoryPushV1Input
-    scamp.Info.Printf("Action: %s", msg.Action)
-    scamp.Info.Printf("Version: %v", msg.Version)
-    scamp.Info.Printf("Envelope: %v", msg.Envelope)
-    scamp.Info.Printf("Ticket: %s", msg.Ticket)
-    scamp.Info.Printf("json: %s", string(msg.Bytes()))
+    // scamp.Info.Printf("json: %s", string(msg.Bytes()))
 
     err := json.Unmarshal(msg.Bytes(), &input)
     if err != nil {
@@ -72,12 +68,12 @@ func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
         respMsg.SetRequestId(msg.RequestId)
         _,err := client.Send(respMsg)
         if err != nil {
-            scamp.Info.Printf("SDK: callback_order_update error %s", err)
+            scamp.Info.Printf("SDK: callback_invpush_transmit error %s", err)
         }
         return
     } else {
         //TODO: need to munge actual input data to output format for sdk
-        scamp.Info.Printf("input: %v", &input)
+        // scamp.Info.Printf("input: %v", &input)
         var output InventoryPushV1Output
         output.Action = msg.Action //input.Action // this may need to be munged
         output.ChannelInfo.ID = input.Channel.ID
@@ -118,21 +114,21 @@ func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
 
         var version int
         interactions := input.Channel.Definition.Params.Interactions
-        scamp.Info.Printf("interactions: %v", interactions)
+        // scamp.Info.Printf("interactions: %v", interactions)
         for i := range interactions {
             if interactions[i].Action == "inventory_push" {
-                scamp.Info.Printf("action: %s\n", interactions[i].Action)
+                // scamp.Info.Printf("action: %s\n", interactions[i].Action)
                 endPointURI = interactions[i].EndpointURL
                 version = interactions[i].Version
             }
         }
-        scamp.Info.Printf("endPointURI: %s\n", endPointURI)
+        // scamp.Info.Printf("endPointURI: %s\n", endPointURI)
         if len(endPointURI) == 0 || version <= 0 {
             scamp.Info.Printf("endpoint or version is blank")
             return
         }
         channelURI := BuildURI(endPointURI, version )
-        scamp.Info.Printf("channelURI: %s\n", channelURI)
+        // scamp.Info.Printf("channelURI: %s\n", channelURI)
 
         var requestBuffer bytes.Buffer
         err := json.NewEncoder(&requestBuffer).Encode(output)
@@ -158,8 +154,9 @@ func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
         if err != nil {
             return
         }
-
-        validResponse, err := ValidateResponse("../verify/schema/inventory_push_v1.json", &apiResp )
+        // ./src/github.com/gudtech/retailops-sdk/verify/schema/
+        // validResponse, err := ValidateResponse("../verify/schema/inventory_push_v1.json", &apiResp )
+        validResponse, err := ValidateResponse("./src/github.com/gudtech/retailops-sdk/verify/schema/inventory_push_v1.json", &apiResp )
         if err != nil {
             scamp.Info.Printf("There was an error validating the response: %+v\n ", err)
             respMsg := scamp.NewResponseMessage()
