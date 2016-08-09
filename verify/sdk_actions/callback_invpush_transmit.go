@@ -25,7 +25,7 @@ type InventoryPushV1Input struct {
         	} `json:"params"`
        } `json:"definition"`
     } `json:"channel"`
-    ClientID  int `json:"client_id, string"`
+    ClientID  int `json:"client_id,string"`
     Inventory struct {
       Data []InventoryPushInputDataItem `json:"data"`
     } `json:"inventory"`
