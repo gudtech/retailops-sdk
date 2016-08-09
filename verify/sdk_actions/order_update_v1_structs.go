@@ -6,7 +6,6 @@ type OrderUpdateV1Input struct {
 		Channel struct {
 			ID     int `json:"id,string"`
 			Params struct {
-				BaseURI                       string      `json:"base_uri"`
 				EmailInvoice                  int         `json:"email_invoice"`
 				EmailReturn                   int         `json:"email_return"`
 				EmailTracking                 int         `json:"email_tracking"`

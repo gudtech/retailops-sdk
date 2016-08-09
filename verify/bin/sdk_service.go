@@ -26,7 +26,7 @@ func main() {
     os.Exit(1)
   }
 
-  verifierSvc,err := scamp.NewService("main",":30100","sdk_service")
+  verifierSvc,err := scamp.NewService("main","127.0.0.1:0","sdk_service")
   if err != nil {
     scamp.Error.Printf("could not create service: `%s`", err.Error())
     os.Exit(1)
@@ -34,22 +34,22 @@ func main() {
   verify_service.TicketPath = *registrationTicket
   verifierSvc.Register("Integration.Channel.certify", verify_service.VerifyAction)
 
-  callbackSvc,err := scamp.NewService("sdk", ":30200","sdk_service")
+  callbackSvc,err := scamp.NewService("channelmodule", "127.0.0.1:0","sdk_service")
   if err != nil {
     scamp.Error.Printf("could not create serivce: `%s`", err.Error())
     os.Exit(1)
   }
-  callbackSvc.Register("SDK.items_returned",sdk_actions.OrderReturnedV1) // , SDK callback: order_returned_v1
-  callbackSvc.Register("SDK.shipment_submit",sdk_actions.OrderShipmentSubmitV1) // , SDK callback: order_shipment_submit_v1
-  callbackSvc.Register("SDK.order_cancel",sdk_actions.OrderCancelV1) // , SDK callback: order_cancel_v1
-  callbackSvc.Register("SDK.order_complete",sdk_actions.OrderCompleteV1) // , SDK callback: order_complete_v1
-  callbackSvc.Register("SDK.capture_channel_payments",sdk_actions.OrderSettlePaymentV1) // , SDK callback: order_settle_payment_v1
-  callbackSvc.Register("SDK.order_ack",sdk_actions.OrderAcknowledgeV1) // , SDK callback: order_acknowledge_v1
-  callbackSvc.Register("SDK.order_fetch",sdk_actions.OrderPullV1) // , SDK callback: order_pull_v1
-  callbackSvc.Register("SDK.catpush_config",sdk_actions.CatalogGetConfigV1) // , SDK callback: catalog_get_config_v1
-  callbackSvc.Register("SDK.catpush_transmit",sdk_actions.CatalogPushV1) // , SDK callback: catalog_push_v1
-  callbackSvc.Register("SDK.invpush_transmit",sdk_actions.InventoryPushV1) // , SDK callback: inventory_push_v1
-  callbackSvc.Register("SDK.writeback",sdk_actions.OrderUpdateV1) // , SDK callback: order_update_v1
+  // callbackSvc.Register("SDK.items_returned",sdk_actions.OrderReturnedV1) // , SDK callback: order_returned_v1
+  // callbackSvc.Register("SDK.shipment_submit",sdk_actions.OrderShipmentSubmitV1) // , SDK callback: order_shipment_submit_v1
+  // callbackSvc.Register("SDK.order_cancel",sdk_actions.OrderCancelV1) // , SDK callback: order_cancel_v1
+  // callbackSvc.Register("SDK.order_complete",sdk_actions.OrderCompleteV1) // , SDK callback: order_complete_v1
+  // callbackSvc.Register("SDK.capture_channel_payments",sdk_actions.OrderSettlePaymentV1) // , SDK callback: order_settle_payment_v1
+  // callbackSvc.Register("SDK.order_ack",sdk_actions.OrderAcknowledgeV1) // , SDK callback: order_acknowledge_v1
+  // callbackSvc.Register("SDK.order_fetch",sdk_actions.OrderPullV1) // , SDK callback: order_pull_v1
+  // callbackSvc.Register("SDK.catpush_config",sdk_actions.CatalogGetConfigV1) // , SDK callback: catalog_get_config_v1
+  // callbackSvc.Register("SDK.catpush_transmit",sdk_actions.CatalogPushV1) // , SDK callback: catalog_push_v1
+  callbackSvc.Register("SDK.inventory.invpush_transmit",sdk_actions.InventoryPushV1) // , SDK callback: inventory_push_v1
+  // callbackSvc.Register("SDK.writeback",sdk_actions.OrderUpdateV1) // , SDK callback: order_update_v1
 
   announcer,err := scamp.NewDiscoveryAnnouncer()
   if err != nil {

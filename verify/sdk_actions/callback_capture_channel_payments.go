@@ -11,7 +11,6 @@ type OrderSettlePaymentV1Input struct {
     Channel struct {
       ID     string `json:"id"`
       Params struct {
-        BaseURI                       string      `json:"base_uri"`
         EmailInvoice                  int         `json:"email_invoice"`
         EmailReturn                   int         `json:"email_return"`
         EmailTracking                 int         `json:"email_tracking"`
@@ -23,6 +22,12 @@ type OrderSettlePaymentV1Input struct {
         UnsetOtherAttributes          int         `json:"unset_other_attributes"`
         UnsetOtherMedia               int         `json:"unset_other_media"`
       } `json:"params"`
+      Definition struct {
+          Handle string `json:"handle"`
+          Params struct {
+                  Interactions []ChannelInteraction `json:"interactions"`
+          } `json:"params"`
+       } `json:"definition"`
     } `json:"channel"`
     Order struct {
       ChannelPayment struct {

@@ -107,23 +107,28 @@ func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
         // need to search channel.definition.params.Interactions for correct action and
         // retreive endpointurl
         var endPointURI string
+        scamp.Info.Printf("endPointURI: %s\n", endPointURI)
         var version int
         interactions := input.Data.Channel.Definition.Params.Interactions
         for i := range interactions {
             if interactions[i].Action == "inventory_push" {
+                scamp.Info.Printf("action: %s\n", interactions[i].Action)
                 endPointURI = interactions[i].EndpointURL
                 version = interactions[i].Version
             }
         }
 
         if len(endPointURI) == 0 || version <= 0 {
+            scamp.Info.Printf("endpoint or version is blank")
             return
         }
         channelURI := BuildURI(endPointURI, version )
+        scamp.Info.Printf("channelURI: %s\n", channelURI)
 
         var requestBuffer bytes.Buffer
         err := json.NewEncoder(&requestBuffer).Encode(output)
         if err != nil {
+            scamp.Info.Printf("err: %s\n", err)
             return
         }
 
@@ -135,6 +140,7 @@ func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
         response,err := httpClient.Post(channelURI, "application/json", &requestBuffer)
         defer response.Body.Close()
         if err != nil {
+            scamp.Info.Printf("err: %s\n", err)
             return
         }
 
