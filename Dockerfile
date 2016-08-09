@@ -24,11 +24,11 @@ COPY verify/provision-soa-service /usr/local/bin
 COPY . /go/src/github.com/gudtech/retailops-sdk
 
 RUN go get -d github.com/gudtech/scamp-go/scamp && \
-    go install /go/src/github.com/gudtech/retailops-sdk/verify/bin/service.go && \
+    go install /go/src/github.com/gudtech/retailops-sdk/verify/bin/sdk_service.go && \
     go install /go/src/github.com/gudtech/scamp-go/bin/scamp.go
 
     # && \
     #rm -rf /go/src/*
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["service", "-config", "/backplane/etc/soa.conf"]
+CMD ["sdk_service", "-config", "/backplane/etc/soa.conf"]

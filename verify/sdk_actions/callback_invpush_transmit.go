@@ -9,8 +9,8 @@ import (
 )
 // TODO Update struct to match what the caller is sending
 type InventoryPushV1Input struct {
-  Action string `json:"action"`
-  Data   struct {
+  // Action string `json:"action"`
+  // Data   struct {
     Channel struct {
       ID     int `json:"id"`
       Params struct {
@@ -25,16 +25,16 @@ type InventoryPushV1Input struct {
         	} `json:"params"`
        } `json:"definition"`
     } `json:"channel"`
-    ClientID  int `json:"client_id"`
+    ClientID  int `json:"client_id, string"`
     Inventory struct {
       Data []InventoryPushInputDataItem `json:"data"`
     } `json:"inventory"`
-  } `json:"data"`
-  Headers struct {
-    ClientID int    `json:"client_id"`
-    Ticket   string `json:"ticket"`
-  } `json:"headers"`
-  Version int `json:"version"`
+  // } `json:"data"`
+  // Headers struct {
+  //   ClientID int    `json:"client_id"`
+  //   Ticket   string `json:"ticket"`
+  // } `json:"headers"`
+  // Version int `json:"version"`
 }
 
 type InventoryPushInputDataItem struct {
@@ -52,11 +52,17 @@ type InventoryPushV1Output struct {
   ClientID             int    `json:"client_id"`
   IntegrationAuthToken string `json:"integration_auth_token"`
   InventoryUpdates     []InventoryUpdate `json:"inventory_updates"`
-  Version int `json:"version"`
+  Version int64 `json:"version"`
 }
 
 func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
     var input InventoryPushV1Input
+    scamp.Info.Printf("Action: %s", msg.Action)
+    scamp.Info.Printf("Version: %v", msg.Version)
+    scamp.Info.Printf("Envelope: %v", msg.Envelope)
+    scamp.Info.Printf("Ticket: %s", msg.Ticket)
+    scamp.Info.Printf("json: %s", string(msg.Bytes()))
+
     err := json.Unmarshal(msg.Bytes(), &input)
     if err != nil {
         scamp.Info.Printf("Input Data Error: %+v\n ", err)
@@ -71,24 +77,26 @@ func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
         return
     } else {
         //TODO: need to munge actual input data to output format for sdk
+        scamp.Info.Printf("input: %v", &input)
         var output InventoryPushV1Output
-        output.Action = input.Action
-        output.ChannelInfo.ID = input.Data.Channel.ID
-        output.ClientID = input.Headers.ClientID
-        output.IntegrationAuthToken = input.Headers.Ticket
-        output.Version = input.Version
+        output.Action = msg.Action //input.Action // this may need to be munged
+        output.ChannelInfo.ID = input.Channel.ID
+        output.ClientID = input.ClientID
+        output.IntegrationAuthToken = msg.Ticket
+        output.Version = msg.Version
+
 
         //ouput.InventoryUpdates
-        inventoryArray := make([]InventoryUpdate, len(input.Data.Inventory.Data), (cap(input.Data.Inventory.Data)+1)*2)
+        inventoryArray := make([]InventoryUpdate, len(input.Inventory.Data), (cap(input.Inventory.Data)+1)*2)
         sumQuantity := 0
-        for i := range input.Data.Inventory.Data {
+        for i := range input.Inventory.Data {
             var tempInvUpdate InventoryUpdate
 
-            tempInvUpdate.Sku = input.Data.Inventory.Data[i].Sku
-            quantityDetailArray := make([]QuantityDetail, len(input.Data.Inventory.Data[i].QtyBreakdown), (cap(input.Data.Inventory.Data[i].QtyBreakdown)+1)*2)
-            for j := range input.Data.Inventory.Data[i].QtyBreakdown {
+            tempInvUpdate.Sku = input.Inventory.Data[i].Sku
+            quantityDetailArray := make([]QuantityDetail, len(input.Inventory.Data[i].QtyBreakdown), (cap(input.Inventory.Data[i].QtyBreakdown)+1)*2)
+            for j := range input.Inventory.Data[i].QtyBreakdown {
                 var tempQuantityDetail QuantityDetail
-                inputBreakdownItem := input.Data.Inventory.Data[i].QtyBreakdown[j]
+                inputBreakdownItem := input.Inventory.Data[i].QtyBreakdown[j]
                 // rannge over breakdown items, update sumQuantity
                 tempQuantityDetail.AvailableQuantity = inputBreakdownItem.Sellable
                 tempQuantityDetail.FacilityName = inputBreakdownItem.Facility
@@ -107,9 +115,10 @@ func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
         // need to search channel.definition.params.Interactions for correct action and
         // retreive endpointurl
         var endPointURI string
-        scamp.Info.Printf("endPointURI: %s\n", endPointURI)
+
         var version int
-        interactions := input.Data.Channel.Definition.Params.Interactions
+        interactions := input.Channel.Definition.Params.Interactions
+        scamp.Info.Printf("interactions: %v", interactions)
         for i := range interactions {
             if interactions[i].Action == "inventory_push" {
                 scamp.Info.Printf("action: %s\n", interactions[i].Action)
@@ -117,7 +126,7 @@ func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
                 version = interactions[i].Version
             }
         }
-
+        scamp.Info.Printf("endPointURI: %s\n", endPointURI)
         if len(endPointURI) == 0 || version <= 0 {
             scamp.Info.Printf("endpoint or version is blank")
             return
