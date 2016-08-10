@@ -44,8 +44,8 @@ func main() {
   // callbackSvc.Register("SDK.order_cancel",sdk_actions.OrderCancelV1) // , SDK callback: order_cancel_v1
   // callbackSvc.Register("SDK.order_complete",sdk_actions.OrderCompleteV1) // , SDK callback: order_complete_v1
   // callbackSvc.Register("SDK.capture_channel_payments",sdk_actions.OrderSettlePaymentV1) // , SDK callback: order_settle_payment_v1
-  callbackSvc.Register("SDK.OrderPull.order_ack",sdk_actions.OrderAcknowledgeV1) // , SDK callback: order_acknowledge_v1
-  callbackSvc.Register("SDK.OrderPull.order_fetch",sdk_actions.OrderPullV1) // , SDK callback: order_pull_v1
+  // callbackSvc.Register("SDK.orderpull.order_ack",sdk_actions.OrderAcknowledgeV1) // , SDK callback: order_acknowledge_v1
+  callbackSvc.Register("SDK.orderpull.order_fetch",sdk_actions.OrderPullV1) // , SDK callback: order_pull_v1
   // callbackSvc.Register("SDK.catpush_config",sdk_actions.CatalogGetConfigV1) // , SDK callback: catalog_get_config_v1
   // callbackSvc.Register("SDK.catpush_transmit",sdk_actions.CatalogPushV1) // , SDK callback: catalog_push_v1
   callbackSvc.Register("SDK.inventory.invpush_transmit",sdk_actions.InventoryPushV1) // , SDK callback: inventory_push_v1
