@@ -48,8 +48,11 @@ func doVerify(cliExec CLIExecution, index int, testCase SchemaExample) (err erro
   var thereWasAnError bool
   fmt.Println(HR)
   fmt.Printf("TEST %d (%s)", index+1, p.Base(testCase.ExamplePath))
+  if(cliExec.Verbose){
+      fmt.Printf("\nAuth Key: %s\n", cliExec.IntegrationAuthKey)
+  }
 
-  err = loadFilesAndMakeRequest(cliExec.BaseURL, testCase.SchemaPath, testCase.ExamplePath, cliExec.Verbose)
+  err = loadFilesAndMakeRequest(cliExec, cliExec.BaseURL, testCase.SchemaPath, testCase.ExamplePath, cliExec.Verbose)
   if err != nil {
     fmt.Printf("\rTEST %d (%s) FAILED: %s\n", index+1, p.Base(testCase.ExamplePath), err.Error())
     if cliExec.StopOnError {
@@ -76,7 +79,8 @@ func doVerify(cliExec CLIExecution, index int, testCase SchemaExample) (err erro
   return
 }
 
-func loadFilesAndMakeRequest(baseUrl, schemaPath, examplePath string, verbose bool) (err error) {
+func loadFilesAndMakeRequest(cliExec CLIExecution, baseUrl string, schemaPath string, examplePath string, verbose bool) (err error) {
+  requestKey := "RETAILOPS_SDK"
 
   f,err := os.Open(schemaPath)
   if err != nil {
@@ -88,7 +92,13 @@ func loadFilesAndMakeRequest(baseUrl, schemaPath, examplePath string, verbose bo
     return
   }
 
-  err = Request(baseUrl, "RETAILOPS_SDK", f, exampleF, verbose, 200)
+  if cliExec.UseAuthKey {
+      if cliExec.IntegrationAuthKey != "" {
+          requestKey = cliExec.IntegrationAuthKey
+      }
+  }
+
+  err = Request(baseUrl, requestKey, f, exampleF, verbose, 200)
   if err != nil {
     return
   }

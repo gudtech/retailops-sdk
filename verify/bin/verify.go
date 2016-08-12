@@ -41,6 +41,7 @@ func main() {
   apiKeyPtr := flag.String("api-key", "", "your retailops API key")
   // certifyActionsPtr := flag.String("certify-actions", "catalog_get_config,catalog_push,inventory_push,order_acknowledge,order_cancel,order_complete,order_pull,order_returned,order_settle_payment,order_shipment_submit,order_update", "subset of actions to test for certification")
   integrationNamePtr := flag.String("integration-name", "", "human readable name for identifying the integration")
+  useAuthKeyPtr := flag.Bool("use-auth-key", false, "use installed key, rather than test key")
   // roCertifyURLPtr := flag.String("retailops-certify-url", "https://api.retailops.com/integration/channel/certify.json", "")
 
   flag.Parse()
@@ -97,6 +98,7 @@ func main() {
   cliExec.ApiKey = *apiKeyPtr
   // cliExec.ROCertifyURL = *roCertifyURLPtr
   cliExec.IntegrationName = *integrationNamePtr
+  cliExec.UseAuthKey = *useAuthKeyPtr
 
   defaultCertActions := "catalog_get_config,catalog_push,inventory_push,order_acknowledge,order_cancel,order_complete,order_pull,order_returned,order_settle_payment,order_shipment_submit,order_update"
 

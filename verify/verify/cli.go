@@ -25,6 +25,7 @@ type CLIExecution struct {
   StopOnError bool
   Verbose bool
   CertifyActions []string
+  UseAuthKey bool
   // ROCertifyURL string
 }
 
