@@ -66,7 +66,7 @@ FOOBARBAZ
 ==== INTEGRATION AUTH KEY DONE ====
 ```
 
-> _Note: the integration auth key generated here is only for certification of a production service. The local verification will use the the integration_auth_key "RETAILOPS_SDK" and you should reject all other values._
+> _Note: the integration auth key generated here is only for verifitcation during use of a production service. This is the key that RetailOps passes to your service to verify that it is RetailOps making an API call to your server. The local verification will use the the integration_auth_key "RETAILOPS_SDK" and you should reject all other values._
 
 Linux Prerequisites
 ---
