@@ -20,8 +20,10 @@ The following instructions will aid you in setting up your local environment, in
 
     The example web server should now be running on http://0.0.0.0:5000.
 
-> _Note: the integration auth key generated here is only for verifitcation during use of a production service. This is the key that RetailOps passes to your service to verify that it is RetailOps making an API call to your server. The verification utility will use the test integration_auth_key "RETAILOPS_SDK". During testing and verification your server should allow the test key, once in production it should only authorized calls made with the actual integration key that you've generated._
-
+    > _Note: the example application is provided for testing purposes only, and is not a production-ready application.
+    > Do not attempt to use it in place of writing your own channel integration, it exists to help set up and test
+    > the verifier utility, and to provide a suggested starting point for .NET developers. It returns hard-coded JSON
+    > responses for testing the verifier utility and does not implement any required integration logic, or authentication._
 
  6. From another terminal run the `verify` utility:
 
