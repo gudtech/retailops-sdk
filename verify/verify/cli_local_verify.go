@@ -121,7 +121,7 @@ func loadFilesAndMakeRequest(cliExec CLIExecution, baseUrl string, schemaPath st
 }
 
 func examplesForSchema(schemaPath string, cliExec CLIExecution) (verifications []SchemaExample, err error) {
-  dirname,filename := p.Split(schemaPath)
+  dirname,filename := fp.Split(schemaPath)
   exampleFilename := strings.Replace(filename, ".json", "", -1)
   exampleFilenameGlob := fmt.Sprintf("%s_ex_*.json", exampleFilename)
 
