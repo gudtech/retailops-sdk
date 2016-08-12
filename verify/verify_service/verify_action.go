@@ -117,7 +117,7 @@ func doRegistration(identifyingToken string, req *common.VerifyRequest, resp *co
 func doVerificationRequest(verReq *common.VerifyRequest, verResp *common.VerifyResponse, mungeAuthToken bool) {
   var failCount int = 0
   for _,action := range verReq.SupportedActions {
-    //TODO: abs path  
+    //TODO: abs path
     schemaFile,err := os.Open(fmt.Sprintf("/go/src/github.com/gudtech/retailops-sdk/verify/schema/%s_v%d.json", action, verReq.Version))
     if err != nil {
       verResp.ActionResults = append(verResp.ActionResults, common.ActionResult {
@@ -132,7 +132,7 @@ func doVerificationRequest(verReq *common.VerifyRequest, verResp *common.VerifyR
       continue
     }
 
-    exampleFile,err := os.Open(fmt.Sprintf("/go/src/github.com/gudtech/retailops-sdk/tests/%s_v%d_ex_1.json", action, verReq.Version))
+    exampleFile,err := os.Open(fmt.Sprintf("/go/src/github.com/gudtech/retailops-sdk/verify/tests/%s_v%d_ex_1.json", action, verReq.Version))
     if err != nil {
       verResp.ActionResults = append(verResp.ActionResults, common.ActionResult {
         Status: "error",
