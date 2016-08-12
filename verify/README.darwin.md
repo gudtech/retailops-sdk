@@ -66,8 +66,7 @@ FOOBARBAZ
 ==== INTEGRATION AUTH KEY DONE ====
 ```
 
-> _Note: the integration auth key generated here is only for verifitcation during use of a production service. This is the key that RetailOps passes to your service to verify that it is RetailOps making an API call to your server. The verification utility will use the test integration_auth_key "RETAILOPS_SDK". During testing and verification your server should allow the test key, once in production it should only allow API calls made with the actual integration key that you've generated._
-
+> _Note: the integration auth key generated here is only for verification during use of a production service. This is the key that RetailOps passes to your service to verify that it's RetailOps making an API call to your server. The verification utility will use the test integration_auth_key: "RETAILOPS_SDK". During testing and verification your server should allow the test key, once in production it should only allow API calls made with the actual integration key that you've generated._
 
 OSX Prerequisites
 ---
