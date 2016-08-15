@@ -12,6 +12,7 @@ with RetailOps.
 Run the following command to certify your RetailOps Channel Integration:
 
    ```
-   $ ./verify -api-key $API_KEY -base-url http://www.example.com/api/channel certify
+   $ ./verify.go -verbose -api-key $API_KEY -base-url http://api.your-server.com -integration-name 'YOUR-INTEGRATION-NAME-HERE' certify
+   
    remote certification was a success
    ```
