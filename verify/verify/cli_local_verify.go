@@ -140,19 +140,29 @@ func allExamples(cliExec CLIExecution) (verifications []SchemaExample, err error
   dirname := cliExec.SchemaPath
   filter := cliExec.SchemaFilter
   var allSchemasGlob string
-  if filter == "" {
-    allSchemasGlob = p.Join(dirname, "*v1.json")
-  } else {
-    allSchemasGlob = p.Join(dirname, fmt.Sprintf("*%s*v1.json", filter))
-  }
-  allSchemaPaths,err := fp.Glob(allSchemasGlob)
-  if err != nil {
-    return
-  }
-  if len(allSchemaPaths) == 0 {
-    err = fmt.Errorf("`%s` did not contain schemas", dirname)
-    return
-  }
+  var allSchemaPaths []string
+
+    if filter == "" {
+        allSchemasGlob = p.Join(dirname, "*v1.json")
+        allSchemaPaths, err = fp.Glob(allSchemasGlob)
+        if err != nil {
+            return
+        }
+    } else {
+        for _, action := range cliExec.CertifyActions {
+            globPath := p.Join(dirname, fmt.Sprintf("*%s*v1.json", action))
+            path, err := fp.Glob(globPath)
+            if err != nil {
+                return nil, fmt.Errorf("No schemas found for pattern: `%s`", globPath)
+            }
+            allSchemaPaths = append(allSchemaPaths, path...)
+        }
+    }
+    
+    if len(allSchemaPaths) == 0 {
+        err = fmt.Errorf("`%s` did not contain schemas", dirname)
+        return
+    }
 
   for _,schemaPath := range allSchemaPaths {
     exs,err := examplesForSchema(schemaPath, cliExec)
