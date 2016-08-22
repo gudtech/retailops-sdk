@@ -26,6 +26,7 @@ func main() {
     os.Exit(1)
   }
 
+  // verifierSvc,err := scamp.NewService("main","0.0.0.0:0","sdk_service")
   verifierSvc,err := scamp.NewService("main","0.0.0.0:0","sdk_service")
   if err != nil {
     scamp.Error.Printf("could not create service: `%s`", err.Error())
@@ -34,7 +35,7 @@ func main() {
   verify_service.TicketPath = *registrationTicket
   verifierSvc.Register("Integration.Channel.certify", verify_service.VerifyAction)
 
-  callbackSvc,err := scamp.NewService("channelmodule", "0.0.0.0:0","sdk_service")
+  callbackSvc,err := scamp.NewService("channelmodule", "127.0.0.1:6000","sdk_service")
   if err != nil {
     scamp.Error.Printf("could not create serivce: `%s`", err.Error())
     os.Exit(1)
@@ -45,7 +46,7 @@ func main() {
   // callbackSvc.Register("SDK.order_complete",sdk_actions.OrderCompleteV1) // , SDK callback: order_complete_v1
   // callbackSvc.Register("SDK.capture_channel_payments",sdk_actions.OrderSettlePaymentV1) // , SDK callback: order_settle_payment_v1
   // callbackSvc.Register("SDK.orderpull.order_ack",sdk_actions.OrderAcknowledgeV1) // , SDK callback: order_acknowledge_v1
-  callbackSvc.Register("SDK.orderpull.order_fetch",sdk_actions.OrderPullV1) // , SDK callback: order_pull_v1
+  // callbackSvc.Register("SDK.orderpull.order_fetch",sdk_actions.OrderPullV1) // , SDK callback: order_pull_v1
   // callbackSvc.Register("SDK.catpush_config",sdk_actions.CatalogGetConfigV1) // , SDK callback: catalog_get_config_v1
   // callbackSvc.Register("SDK.catpush_transmit",sdk_actions.CatalogPushV1) // , SDK callback: catalog_push_v1
   callbackSvc.Register("SDK.inventory.invpush_transmit",sdk_actions.InventoryPushV1) // , SDK callback: inventory_push_v1

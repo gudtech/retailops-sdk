@@ -6,11 +6,11 @@ import (
   "bytes"
   "net/http"
   "time"
+  "fmt"
+  "strings"
 )
 // TODO Update struct to match what the caller is sending
 type InventoryPushV1Input struct {
-  // Action string `json:"action"`
-  // Data   struct {
     Channel struct {
       ID     int `json:"id"`
       Params struct {
@@ -29,12 +29,6 @@ type InventoryPushV1Input struct {
     Inventory struct {
       Data []InventoryPushInputDataItem `json:"data"`
     } `json:"inventory"`
-  // } `json:"data"`
-  // Headers struct {
-  //   ClientID int    `json:"client_id"`
-  //   Ticket   string `json:"ticket"`
-  // } `json:"headers"`
-  // Version int `json:"version"`
 }
 
 type InventoryPushInputDataItem struct {
@@ -57,7 +51,9 @@ type InventoryPushV1Output struct {
 
 func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
     var input InventoryPushV1Input
-    // scamp.Info.Printf("json: %s", string(msg.Bytes()))
+    scamp.Info.Printf("json: %s", string(msg.Bytes()))
+
+    //
 
     err := json.Unmarshal(msg.Bytes(), &input)
     if err != nil {
@@ -72,15 +68,26 @@ func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
         }
         return
     } else {
-        //TODO: need to munge actual input data to output format for sdk
         // scamp.Info.Printf("input: %v", &input)
+        handle := input.Channel.Definition.Handle
+        if len(handle) == 0 {
+            scamp.Info.Printf("SDK: handle cannot be blank")
+            return
+        }
+
+        lastIndex := strings.LastIndex(handle, "_")
+        integration_auth_token := handle[lastIndex + 1:len(handle)]
+        // integration_auth_token := "RETAILOPS_SDK"
+        if len(integration_auth_token) == 0 {
+            return //to do return formatted scamp error message
+        }
+
         var output InventoryPushV1Output
         output.Action = msg.Action //input.Action // this may need to be munged
         output.ChannelInfo.ID = input.Channel.ID
         output.ClientID = input.ClientID
-        output.IntegrationAuthToken = msg.Ticket
+        output.IntegrationAuthToken = integration_auth_token
         output.Version = msg.Version
-
 
         //ouput.InventoryUpdates
         inventoryArray := make([]InventoryUpdate, len(input.Inventory.Data), (cap(input.Inventory.Data)+1)*2)
@@ -144,10 +151,34 @@ func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
         scamp.Info.Printf("Making API call to: %s", channelURI)
         response,err := httpClient.Post(channelURI, "application/json", &requestBuffer)
         defer response.Body.Close()
-        if err != nil {
+        if err != nil { //TODO: update all SDK actrions to handle post error
             scamp.Info.Printf("err: %s\n", err)
+            respMsg := scamp.NewResponseMessage()
+            respMsg.SetError(err.Error())
+            respMsg.Write([]byte(err.Error()))
+            respMsg.SetRequestId(msg.RequestId)
+            _,err := client.Send(respMsg)
+            if err != nil {
+                scamp.Info.Printf("SDK: callback_invpush_transmit error %s", err)
+            }
             return
         }
+        //handle 401 and other responses
+        if response.StatusCode != 200 {
+            var errMsg string
+            errMsg = fmt.Sprintf("%s", response.Status)
+            scamp.Info.Printf("%s", response.Status)
+            respMsg := scamp.NewResponseMessage()
+            respMsg.SetError(errMsg)
+            respMsg.Write([]byte(response.Status))
+            respMsg.SetRequestId(msg.RequestId)
+            _,err := client.Send(respMsg)
+            if err != nil {
+                scamp.Info.Printf("SDK: callback_invpush_transmit error %s", err)
+            }
+            return
+        }
+
 
         var apiResp CommonV1Response
         err = json.NewDecoder(response.Body).Decode(&apiResp)
