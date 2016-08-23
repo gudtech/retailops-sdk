@@ -53,8 +53,6 @@ func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
     var input InventoryPushV1Input
     scamp.Info.Printf("json: %s", string(msg.Bytes()))
 
-    //
-
     err := json.Unmarshal(msg.Bytes(), &input)
     if err != nil {
         scamp.Info.Printf("Input Data Error: %+v\n ", err)

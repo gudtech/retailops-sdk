@@ -58,7 +58,7 @@ type ROPInputQtyBreakdownItem struct {
     EstShip         string   `json:"est_ship"`
 	Facility        string   `json:"facility"`
 	ReservingOrders []string `json:"reserving_orders"`
-	Sellable        int      `json:"sellable,string"`
+	Sellable        int      `json:"sellable"`
 	Sku             string   `json:"sku"`
 	Unclaimed       int      `json:"unclaimed"`
 	Vendor          string   `json:"vendor"`
