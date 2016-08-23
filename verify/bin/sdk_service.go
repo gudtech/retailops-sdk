@@ -35,7 +35,7 @@ func main() {
   verify_service.TicketPath = *registrationTicket
   verifierSvc.Register("Integration.Channel.certify", verify_service.VerifyAction)
 
-  callbackSvc,err := scamp.NewService("channelmodule", "127.0.0.1:6000","sdk_service")
+  callbackSvc,err := scamp.NewService("channelmodule", "0.0.0.0:0","sdk_service")
   if err != nil {
     scamp.Error.Printf("could not create serivce: `%s`", err.Error())
     os.Exit(1)
