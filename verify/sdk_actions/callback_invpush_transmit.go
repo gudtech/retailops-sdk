@@ -51,7 +51,7 @@ type InventoryPushV1Output struct {
 
 func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
     var input InventoryPushV1Input
-    scamp.Info.Printf("json: %s", string(msg.Bytes()))
+    // scamp.Info.Printf("json: %s", string(msg.Bytes()))
 
     err := json.Unmarshal(msg.Bytes(), &input)
     if err != nil {
@@ -79,6 +79,7 @@ func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
         if len(integration_auth_token) == 0 {
             return //to do return formatted scamp error message
         }
+
 
         var output InventoryPushV1Output
         output.Action = msg.Action //input.Action // this may need to be munged
@@ -147,6 +148,7 @@ func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
         }
 
         scamp.Info.Printf("Making API call to: %s", channelURI)
+        scamp.Info.Printf("Token: %s", integration_auth_token)
         response,err := httpClient.Post(channelURI, "application/json", &requestBuffer)
         defer response.Body.Close()
         if err != nil { //TODO: update all SDK actrions to handle post error
