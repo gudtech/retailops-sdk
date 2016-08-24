@@ -1,0 +1,27 @@
+{
+    "integration_auth_token": "RETAILOPS_SDK",
+    "action": "inventory_push",
+    "version": 1,
+    "client_id": 497,
+    "channel_info": {
+        "id": 21
+    },
+    "inventory_updates": [
+        {
+            "sku": "S12345",
+            "quantity_available": 24,
+            "quantity_detail": [
+                {
+                    "available_quantity": 1,
+                    "estimated_availability_date": "",
+                    "facility_name": "Antioch",
+                    "po": "",
+                    "po_destination": "",
+                    "quantity_type": "internal",
+                    "total_quantity": 2,
+                    "vendor_name": ""
+                }
+            ]
+        }
+    ]
+}

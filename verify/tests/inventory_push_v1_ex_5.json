@@ -1,0 +1,43 @@
+{
+    "action": "SDK.inventory.invpush_transmit",
+    "channel_info": {
+        "id": 45
+    },
+    "client_id": 2,
+    "integration_auth_token": "uFocQgTCpOu265nmfEt7K51RdXBboIRJ",
+    "inventory_updates": [
+        {
+            "quantity_available": 1,
+            "quantity_detail": [
+                {
+                    "available_quantity": 1,
+                    "estimated_availability_date": "",
+                    "facility_name": "Antioch",
+                    "po": "",
+                    "po_destination": "",
+                    "quantity_type": "internal",
+                    "total_quantity": 2,
+                    "vendor_name": ""
+                }
+            ],
+            "sku": "3782629"
+        },
+        {
+            "quantity_available": 2,
+            "quantity_detail": [
+                {
+                    "available_quantity": 1,
+                    "estimated_availability_date": "",
+                    "facility_name": "Antioch",
+                    "po": "",
+                    "po_destination": "",
+                    "quantity_type": "internal",
+                    "total_quantity": 1,
+                    "vendor_name": ""
+                }
+            ],
+            "sku": "3791084"
+        }
+    ],
+    "version": 1
+}
