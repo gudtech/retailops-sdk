@@ -184,6 +184,7 @@ func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, request
   }
   //set Content-Type
   request.Header.Set("Content-Type", "application/json")
+  fmt.Printf("request: %+v\n", request)
   response,err := client.Do(request)
   if err != nil {
     return err
