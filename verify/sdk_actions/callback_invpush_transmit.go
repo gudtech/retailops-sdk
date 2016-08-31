@@ -76,6 +76,7 @@ func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
         lastIndex := strings.LastIndex(handle, "_")
         integration_auth_token := handle[lastIndex + 1:len(handle)]
         if len(integration_auth_token) == 0 {
+            scamp.Info.Printf("SDK: integration_auth_token could not be extracted from handle")
             return //to do return formatted scamp error message
         }
 
@@ -115,9 +116,6 @@ func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
 
         output.InventoryUpdates = inventoryArray
 
-        // TODO: convert all actions to use code below, baseuri not valid, channel def passes endpointurl for each action
-        // need to search channel.definition.params.Interactions for correct action and
-        // retreive endpointurl
         var endPointURI string
 
         var version int
@@ -137,8 +135,9 @@ func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
         }
         channelURI := BuildURI(endPointURI, version )
 
-        var requestBuffer bytes.Buffer
-        err := json.NewEncoder(&requestBuffer).Encode(output)
+        // var requestBuffer bytes.Buffer
+        // err := json.NewEncoder(&requestBuffer).Encode(output)
+        reqBody, err := json.Marshal(output)
         if err != nil {
             scamp.Info.Printf("err: %s\n", err)
             return
@@ -147,21 +146,13 @@ func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
         var httpClient = &http.Client{
             Timeout: time.Minute * 5,
         }
+        //Accept: application/json
 
         scamp.Info.Printf("Making API call to: %s", channelURI)
         scamp.Info.Printf("Token: %s", integration_auth_token)
-        // scamp.Info.Printf("requestBuffer: %+v\n", &requestBuffer)
-
-        newRequest,err := http.NewRequest("POST", channelURI, &requestBuffer,)
-        if err != nil {
-          return
-        }
-        newRequest.Header.Set("Content-Type", "application/json")
-        scamp.Info.Printf("Request: %+v", newRequest)
-        response,err := httpClient.Do(newRequest)
-        ///
-        // response,err := httpClient.Post(channelURI, "application/json", &requestBuffer)
-        defer response.Body.Close()
+        response,err := httpClient.Post(channelURI, "application/json", bytes.NewBuffer(reqBody))//&requestBuffer)
+        // scamp.Info.Printf("Request: %+v", newRequest)
+        // response,err := httpClient.Do(newRequest)
         if err != nil { //TODO: update all SDK actrions to handle post error
             scamp.Info.Printf("err: %s\n", err)
             respMsg := scamp.NewResponseMessage()
@@ -174,8 +165,11 @@ func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
             }
             return
         }
+        scamp.Info.Printf("response: %+v", response)
+        defer response.Body.Close()
 
         if response.StatusCode != 200 {
+            // scamp.Info.Printf("Request: %s", reqBody)
             var errMsg string
             errMsg = fmt.Sprintf("%s", response.Status)
             scamp.Info.Printf("%s", response.Status)
@@ -193,9 +187,11 @@ func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
         var apiResp CommonV1Response
         err = json.NewDecoder(response.Body).Decode(&apiResp)
         if err != nil {
-            scamp.Info.Printf("Error: %s", err)
+            scamp.Info.Printf("Could not unmarshal SDK response: %s", err)
             return
         }
+
+        scamp.Info.Printf("API response: %+v", apiResp)
 
         validResponse, err := ValidateResponse("./src/github.com/gudtech/retailops-sdk/verify/schema/inventory_push_v1.json", &apiResp )
         if err != nil {
@@ -213,6 +209,7 @@ func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
 
         if !validResponse {
             validationMsg := "API response was invalid"
+            scamp.Info.Printf("%s", validationMsg)
             respMsg := scamp.NewResponseMessage()
             respMsg.SetError(validationMsg)
             respMsg.Write([]byte(validationMsg))
@@ -223,7 +220,7 @@ func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
             }
             return
         }
-        // munge API response back into what perl modules expect and return JSON below.
+        scamp.Info.Printf("Marshalled Channel response: %+v", apiResp)
 
         var invpushResponse InvPushTransmitResponse
         eventArray := make([]InvPushTransmitResponseEvent, len(apiResp.Events), (cap(apiResp.Events)+1)*2)
@@ -246,6 +243,7 @@ func InventoryPushV1(msg *scamp.Message, client *scamp.Client) {
         invpushResponse.Events = eventArray
 
         respMsg := scamp.NewResponseMessage()
+        scamp.Info.Printf("Sent to ROP: %+v", invpushResponse)
         respMsg.WriteJson(invpushResponse)
         respMsg.SetRequestId(msg.RequestId)
 
