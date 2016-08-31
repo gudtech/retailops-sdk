@@ -129,9 +129,10 @@
             },
             "targetSchema": {
                 "type": "object",
+                "minItems": 0,
                 "properties": {
                     "events": {
-                        "type": "array",
+                        "type": ["array","null"],
                         "items": {
                             "type": "object",
                             "description": "event returned in action response",
