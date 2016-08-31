@@ -87,8 +87,9 @@ func ValidateResponse(schemaPath string, jsonBody interface{}) (bool, error) {
     if result.Valid() {
         scamp.Info.Printf("The JSON response is valid\n")
     } else {
-        fmt.Errorf("The document is not valid. see errors :\n")
+        scamp.Info.Printf("The document is not valid. see errors :\n")
         for _, err := range result.Errors() {
+            scamp.Info.Printf("error: %s\n", err)
             fmt.Errorf("- %s\n", err)
         }
         return false, err
