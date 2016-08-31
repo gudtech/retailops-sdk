@@ -18,6 +18,7 @@ type AuthTokenStorage struct {
 }
 
 func NewAuthTokenStorage() (ts *AuthTokenStorage, err error) {
+  //TODO: os/user is not supported for cross compiling, find diff way of doing this    
   user,err := u.Current()
   if err != nil {
     return
