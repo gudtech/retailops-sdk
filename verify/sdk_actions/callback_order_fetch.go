@@ -6,12 +6,15 @@ import (
   "bytes"
   "net/http"
   "time"
+  "fmt"
+  "strings"
+  "strconv"
 )
+//NOTE: We may need to convert Channel. Params to take an interface because params vary widely between channels
 type OrderPullV1Input struct {
 	Channel struct {
 		ID     int `json:"id"`
 		Params struct {
-            BaseURI                    string `json:"base_uri"`//added was not in original perl request
 			StoreID                    string `json:"StoreID"`
 			NextOrderRefnum            int    `json:"next_order_refnum,"`
 			OrderAckStatusID           string `json:"order_ack_status_id"`
@@ -88,8 +91,8 @@ type SpecificOrder struct {
 }
 
 func OrderPullV1(msg *scamp.Message, client *scamp.Client) {
-    scamp.Info.Printf("incoming: %s", string(msg.Bytes()))
     var input OrderPullV1Input
+    // scamp.Info.Printf("incoming: %s", string(msg.Bytes()))
 
     err := json.Unmarshal(msg.Bytes(), &input)
     if err != nil {
@@ -104,20 +107,28 @@ func OrderPullV1(msg *scamp.Message, client *scamp.Client) {
         }
         return
     } else {
+        handle := input.Channel.Definition.Handle
+        if len(handle) == 0 {
+            scamp.Info.Printf("SDK: handle cannot be blank")
+            return
+        }
+
+        lastIndex := strings.LastIndex(handle, "_")
+        integration_auth_token := handle[lastIndex + 1:len(handle)]
+        if len(integration_auth_token) == 0 {
+            scamp.Info.Printf("SDK: integration_auth_token could not be extracted from handle")
+            return //to do return formatted scamp error message
+        }
+
         var output OrderPullV1Output
         //TODO: need to munge actual input data to output format for sdk
         output.Action = msg.Action
         output.ChannelInfo.ID = input.Channel.ID
         output.ClientID = input.ClientID
-        output.IntegrationAuthToken = msg.Ticket
+        output.IntegrationAuthToken = integration_auth_token
         output.Version = msg.Version
         output.PageToken = input.PageState
 
-        // baseURI := input.Channel.Params.BaseURI
-        // if len(baseURI) == 0 {
-        //     return //TODO: return relevant scamp error msg (for all callbacks)
-        // }
-        // channelURI := BuildURI(baseURI, "inventory_push_v1")
 
         var endPointURI string
         var version int
@@ -130,6 +141,7 @@ func OrderPullV1(msg *scamp.Message, client *scamp.Client) {
         }
 
         if len(endPointURI) == 0 || version <= 0 {
+            scamp.Info.Printf("endpoint or version is blank")
             return
         }
         channelURI := BuildURI(endPointURI, version )
@@ -145,19 +157,45 @@ func OrderPullV1(msg *scamp.Message, client *scamp.Client) {
         }
 
         scamp.Info.Printf("Making API call to: %s", channelURI)
+        scamp.Info.Printf("Token: %s", integration_auth_token)
         response,err := httpClient.Post(channelURI, "application/json", &requestBuffer)
-        defer response.Body.Close()
         if err != nil {
+            scamp.Info.Printf("err: %s\n", err)
+            respMsg := scamp.NewResponseMessage()
+            respMsg.SetError(err.Error())
+            respMsg.Write([]byte(err.Error()))
+            respMsg.SetRequestId(msg.RequestId)
+            _,err := client.Send(respMsg)
+            if err != nil {
+                scamp.Info.Printf("SDK: order_pull error %s", err)
+            }
+            return
+        }
+        defer response.Body.Close()
+
+        if response.StatusCode != 200 {
+            // scamp.Info.Printf("Request: %s", reqBody)
+            var errMsg string
+            errMsg = fmt.Sprintf("%s", response.Status)
+            scamp.Info.Printf("%s", response.Status)
+            respMsg := scamp.NewResponseMessage()
+            respMsg.SetError(errMsg)
+            respMsg.Write([]byte(response.Status))
+            respMsg.SetRequestId(msg.RequestId)
+            _,err := client.Send(respMsg)
+            if err != nil {
+                scamp.Info.Printf("SDK: order_pull error %s", err)
+            }
             return
         }
 
-        var apiResp CommonV1Response
+        var apiResp OrderPullSDKResponseV1
         err = json.NewDecoder(response.Body).Decode(&apiResp)
         if err != nil {
+            scamp.Info.Printf("Could not unmarshal SDK response: %s", err)
             return
         }
 
-        // validResponse, err := ValidateResponse("../verify/schema/order_pull_v1.json", &apiResp )
         validResponse, err := ValidateResponse("./src/github.com/gudtech/retailops-sdk/verify/schema/order_pull_v1.json", &apiResp )
         if err != nil {
             scamp.Info.Printf("There was an error validating the response: %+v\n ", err)
@@ -167,10 +205,11 @@ func OrderPullV1(msg *scamp.Message, client *scamp.Client) {
             respMsg.SetRequestId(msg.RequestId)
             _,err := client.Send(respMsg)
             if err != nil {
-                scamp.Info.Printf("SDK: callback_invpush_transmit error %s", err)
+                scamp.Info.Printf("SDK: order_pull error %s", err)
             }
             return
         }
+
         if !validResponse {
             validationMsg := "API response was invalid"
             respMsg := scamp.NewResponseMessage()
@@ -179,15 +218,105 @@ func OrderPullV1(msg *scamp.Message, client *scamp.Client) {
             respMsg.SetRequestId(msg.RequestId)
             _,err := client.Send(respMsg)
             if err != nil {
-                scamp.Info.Printf("SDK: callback_invpush_transmit error %s", err)
+                scamp.Info.Printf("SDK: order_pull error %s", err)
             }
             return
         }
 
-        // TODO: munge API response back into what perl modules expect and return JSON below.
+        var orderFetchResponse OrderPullResponseV1
+        orderFetchResponse.NextOrderRefnum = 0 //this is not defined in API response!!
+        orderFetchResponse.NextPageState = apiResp.NextPageToken
+
+        orderArray := make([]ROPOrder, len(apiResp.Orders), (cap(apiResp.Orders)+1)*2)
+
+        for i := range apiResp.Orders {
+            var tempOrder ROPOrder
+            tempOrder.Attributes = "" //NOTE should attributes be an array? What values are expected for each attribute
+            tempOrder.CalcMode = "" //NOTE: no related/mappable field returned by SDK!
+
+            //convert date to Unix timestamp
+            t, err := time.Parse(time.RFC3339Nano, apiResp.Orders[i].ChannelDateCreated)//Wed, 20 Apr 2016 06:30:01 GMT
+        	if err != nil {
+                scamp.Info.Printf("Could not parse ChannelDateCreated: %s", err)
+        		return
+        	}
+        	unixTime := t.Unix()
+        	//fmt.Println(unixTime)
+            tempOrder.ChannelDateCreated = unixTime
+
+            tempOrder.ChannelRefnum = apiResp.Orders[i].ChannelOrderRefnum
+
+            tempOrder.Customer.EmailAddress = apiResp.Orders[i].CustomerInfo.EmailAddress
+            tempOrder.Customer.PhoneNumber = apiResp.Orders[i].CustomerInfo.PhoneNumber
+            //TODO split full_name returned by sdk, into first and last name
+            // tempOrder.Customer.FirstName = apiResp.Orders[i].CustomerInfo.
+            // tempOrder.Customer.LastName = apiResp.Orders[i].CustomerInfo.
+
+            //TODO: convert DiscountAmt to float in both structs
+            tempOrder.DiscountAmt = apiResp.Orders[i].CurrencyValues.DiscountAmt
+            tempOrder.GiftMessage = apiResp.Orders[i].GiftMessage
+            tempOrder.IPAddress = apiResp.Orders[i].IPAddress
+            tempOrder.Shipcode = apiResp.Orders[i].ShipServiceCode
+
+            tempOrder.ShippingAmt = strconv.FormatFloat(apiResp.Orders[i].CurrencyValues.ShippingAmt, 'f', -1, 32)
+            tempOrder.TaxAmt = strconv.FormatFloat(apiResp.Orders[i].CurrencyValues.TaxAmt, 'f', -1, 32)
+
+            //order items array
+            orderItemsArray := make([]ROPOrderItem, len(apiResp.Orders[i].OrderItems), (cap(apiResp.Orders[i].OrderItems)+1)*2)
+            for j := range apiResp.Orders[i].OrderItems {
+                var tempItem ROPOrderItem
+                tempItem.ChannelRefnum = apiResp.Orders[i].OrderItems[j].ChannelItemRefnum
+                tempItem.Quantity = apiResp.Orders[i].OrderItems[j].Quantity
+                tempItem.Sku = apiResp.Orders[i].OrderItems[j].Sku
+                tempItem.SkuTitle = apiResp.Orders[i].OrderItems[j].SkuDescription
+                tempItem.UnitPrice = strconv.FormatFloat(apiResp.Orders[i].OrderItems[j].CurrencyValues.UnitPrice, 'f', -1, 32)
+                tempItem.UnitTax = apiResp.Orders[i].OrderItems[j].CurrencyValues.UnitTax
+                orderItemsArray[j] = tempItem
+            }
+            tempOrder.Items = orderItemsArray
+
+            //payments array
+            paymentArray := make([]ROPOrderPayment, len(apiResp.Orders[i].PaymentTransactions), (cap(apiResp.Orders[i].PaymentTransactions)+1)*2)
+            for k := range apiResp.Orders[i].PaymentTransactions {
+                var tempPayment ROPOrderPayment
+                tempPayment.Amount = strconv.FormatFloat(apiResp.Orders[i].PaymentTransactions[k].Amount, 'f', -1, 32)
+                tempPayment.Type = apiResp.Orders[i].PaymentTransactions[k].TransactionType
+                tempPayment.Params.ChannelRefnum = apiResp.Orders[i].ChannelOrderRefnum
+                tempPayment.Params.PaymentType = apiResp.Orders[i].PaymentTransactions[k].PaymentType
+                paymentArray[k] = tempPayment
+            }
+            tempOrder.Payment = paymentArray
+
+            //ship_addr
+            tempOrder.ShipAddr.Address1 = apiResp.Orders[i].ShippingAddress.Address1
+            tempOrder.ShipAddr.Address2 = apiResp.Orders[i].ShippingAddress.Address2
+            tempOrder.ShipAddr.City = apiResp.Orders[i].ShippingAddress.City
+            tempOrder.ShipAddr.Company = apiResp.Orders[i].ShippingAddress.Company
+            tempOrder.ShipAddr.CountryMatch = apiResp.Orders[i].ShippingAddress.CountryMatch
+            tempOrder.ShipAddr.FirstName = apiResp.Orders[i].ShippingAddress.FirstName
+            tempOrder.ShipAddr.LastName = apiResp.Orders[i].ShippingAddress.LastName
+            tempOrder.ShipAddr.PostalCode = apiResp.Orders[i].ShippingAddress.PostalCode
+            tempOrder.ShipAddr.StateMatch = apiResp.Orders[i].ShippingAddress.StateMatch
+
+            //billing_address
+            tempOrder.BillAddr.Address1 = apiResp.Orders[i].BillingAddress.Address1
+            tempOrder.BillAddr.Address2 = apiResp.Orders[i].BillingAddress.Address2
+            tempOrder.BillAddr.City = apiResp.Orders[i].BillingAddress.City
+            tempOrder.BillAddr.Company = apiResp.Orders[i].BillingAddress.Company
+            tempOrder.BillAddr.CountryMatch = apiResp.Orders[i].BillingAddress.CountryMatch
+            tempOrder.BillAddr.FirstName = apiResp.Orders[i].BillingAddress.FirstName
+            tempOrder.BillAddr.LastName = apiResp.Orders[i].BillingAddress.LastName
+            tempOrder.BillAddr.PostalCode = apiResp.Orders[i].BillingAddress.PostalCode
+            tempOrder.BillAddr.StateMatch = apiResp.Orders[i].BillingAddress.StateMatch
+
+            orderArray[i] = tempOrder
+        }
+
+        orderFetchResponse.Orders = orderArray
+        // munge data
 
         respMsg := scamp.NewResponseMessage()
-        respMsg.WriteJson(output)
+        respMsg.WriteJson(orderFetchResponse)
         respMsg.SetRequestId(msg.RequestId)
 
         _,err = client.Send(respMsg)
