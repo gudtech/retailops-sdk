@@ -11,13 +11,15 @@ type OrderUpdateV1Response struct {
 }
 
 type CommonV1Response struct {
-	Events []struct {
-		Associations []Association `json:"associations"`
-		Code           string `json:"code"`
-		DiagnosticData string `json:"diagnostic_data"`
-		EventType      string `json:"event_type"`
-		Message        string `json:"message"`
-	} `json:"events"`
+	Events []Event `json:"events"`
+}
+
+type Event struct {
+    Associations []Association `json:"associations"`
+    Code           string `json:"code"`
+    DiagnosticData string `json:"diagnostic_data"`
+    EventType      string `json:"event_type"`
+    Message        string `json:"message"`
 }
 
 type Association struct {
@@ -66,64 +68,154 @@ type CommonResponseSecondary struct { // associations
     ID      string `json:"id"` // identifier
 }
 
-//struct returned to perl service
+type OrderPullSDKResponseV1 struct {
+	NextPageToken int `json:"next_page_token"` //TODO: Update Swagger: currently string, convert to int
+	Orders        []OrderSDK `json:"orders"`
+}
+
+type OrderSDK struct {
+    Attributes []OrderAttributeSDK `json:"attributes"`
+    BillingAddress struct {
+        Address1     string `json:"address1"`
+        Address2     string `json:"address2"`
+        City         string `json:"city"`
+        Company      string `json:"company"`
+        CountryMatch string `json:"country_match"`
+        FirstName    string `json:"first_name"`
+        LastName     string `json:"last_name"`
+        PostalCode   string `json:"postal_code"`
+        StateMatch   string `json:"state_match"`
+    } `json:"billing_address"`
+    ChannelDateCreated string `json:"channel_date_created"`
+    ChannelOrderRefnum string `json:"channel_order_refnum"`
+    CurrencyCode       string `json:"currency_code"`
+    CurrencyValues     struct {
+        DiscountAmt int     `json:"discount_amt"` //TODO: Update Swagger: should be defined as number
+        ShippingAmt float64 `json:"shipping_amt"`//TODO: Update Swagger: should be defined as number
+        TaxAmt      float64 `json:"tax_amt"` //TODO: Update Swagger: should be defined as number
+    } `json:"currency_values"`
+    CustomerInfo struct {
+        EmailAddress string `json:"email_address"`
+        FullName     string `json:"full_name"`
+        PhoneNumber  string `json:"phone_number"`
+    } `json:"customer_info"`
+    GiftMessage string `json:"gift_message"`
+    IPAddress   string `json:"ip_address"`
+    OrderItems  []OrderItemSDK `json:"order_items"`
+    PaymentTransactions []PaymentTransactionSDK `json:"payment_transactions"`
+    ShipServiceCode string `json:"ship_service_code"`
+    ShippingAddress struct {
+        Address1     string `json:"address1"`
+        Address2     string `json:"address2"`
+        City         string `json:"city"`
+        Company      string `json:"company"`
+        CountryMatch string `json:"country_match"`
+        FirstName    string `json:"first_name"`
+        LastName     string `json:"last_name"`
+        PostalCode   string `json:"postal_code"`
+        StateMatch   string `json:"state_match"`
+    } `json:"shipping_address"`
+}
+
+type OrderAttributeSDK struct {
+    AttributeType string `json:"attribute_type"`
+    Handle        string `json:"handle"`
+}
+
+//note some of these ints will need to be redefined as floats (e.g. currency amounts)
+type OrderItemSDK struct {
+    ChannelItemRefnum string `json:"channel_item_refnum"`
+    CurrencyValues    struct {
+        DiscountAmt  float64 `json:"discount_amt"` //TODO: Update Swagger: should be defined as number not int
+        DiscountPct  float64 `json:"discount_pct"` //TODO: Update Swagger: should be defined as number not int
+        RecyclingAmt float64 `json:"recycling_amt"` //TODO: Update Swagger: should be defined as number not int
+        ShipAmt      float64 `json:"ship_amt"` //TODO: Update Swagger: should be defined as number not int
+        ShiptaxAmt   float64 `json:"shiptax_amt"` //TODO: Update Swagger: should be defined as number not int
+        UnitPrice    float64 `json:"unit_price"` //TODO: Update Swagger: should be defined as number not int
+        UnitTax      float64 `json:"unit_tax"` //TODO: Update Swagger: should be defined as number not int
+        UnitTaxPct   float64 `json:"unit_tax_pct"`//TODO: Update Swagger: should be defined as number not int ????
+        VatPct       float64 `json:"vat_pct"` //TODO: Update Swagger: should be defined as number not int ????
+    } `json:"currency_values"`
+    ItemType       string `json:"item_type"`
+    Quantity       int    `json:"quantity"`
+    Sku            string `json:"sku"`
+    SkuDescription string `json:"sku_description"`
+}
+
+type PaymentTransactionSDK struct {
+    Amount                float64 `json:"amount"`
+    PaymentProcessingType string  `json:"payment_processing_type"`
+    PaymentType           string  `json:"payment_type"`
+    TransactionType       string  `json:"transaction_type"`
+}
+
+/*
+* structs returned to RetailOps perl service
+*/
+
 type OrderPullResponseV1  struct {
 	NextOrderRefnum int `json:"next_order_refnum"`
 	NextPageState   int `json:"next_page_state"`
-	Orders          []struct {
-		Attributes struct{} `json:"attributes"`
-		BillAddr   struct {
-			Address1     string `json:"address1"`
-			Address2     string `json:"address2"`
-			City         string `json:"city"`
-			Company      string `json:"company"`
-			CountryMatch string `json:"country_match"`
-			FirstName    string `json:"first_name"`
-			LastName     string `json:"last_name"`
-			PostalCode   string `json:"postal_code"`
-			StateMatch   string `json:"state_match"`
-		} `json:"bill_addr"`
-		CalcMode           string `json:"calc_mode"`
-		ChannelDateCreated int    `json:"channel_date_created"`
-		ChannelRefnum      string `json:"channel_refnum"`
-		Customer           struct {
-			EmailAddress string `json:"email_address"`
-			FirstName    string `json:"first_name"`
-			LastName     string `json:"last_name"`
-			PhoneNumber  string `json:"phone_number"`
-		} `json:"customer"`
-		DiscountAmt int         `json:"discount_amt"`
-		GiftMessage interface{} `json:"gift_message"`
-		IPAddress   string      `json:"ip_address"`
-		Items       []struct {
-			ChannelRefnum string `json:"channel_refnum"`
-			Quantity      int    `json:"quantity"`
-			Sku           string `json:"sku"`
-			SkuTitle      string `json:"sku_title"`
-			UnitPrice     string `json:"unit_price"`
-			UnitTax       int    `json:"unit_tax"`
-		} `json:"items"`
-		Payment []struct {
-			Amount string `json:"amount"`
-			Params struct {
-				ChannelRefnum string `json:"channel_refnum"`
-				PaymentType   string `json:"payment_type"`
-			} `json:"params"`
-			Type string `json:"type"`
-		} `json:"payment"`
-		ShipAddr struct {
-			Address1     string `json:"address1"`
-			Address2     string `json:"address2"`
-			City         string `json:"city"`
-			Company      string `json:"company"`
-			CountryMatch string `json:"country_match"`
-			FirstName    string `json:"first_name"`
-			LastName     string `json:"last_name"`
-			PostalCode   string `json:"postal_code"`
-			StateMatch   string `json:"state_match"`
-		} `json:"ship_addr"`
-		Shipcode    string `json:"shipcode"`
-		ShippingAmt string `json:"shipping_amt"`
-		TaxAmt      string `json:"tax_amt"`
-	} `json:"orders"`
+	Orders          []ROPOrder `json:"orders"`
+}
+
+type ROPOrder struct {
+    Attributes string `json:"attributes"`//use interface{}? //NOTE: Temporary! must determine what ROP needs
+    BillAddr   struct {
+        Address1     string `json:"address1"`
+        Address2     string `json:"address2"`
+        City         string `json:"city"`
+        Company      string `json:"company"`
+        CountryMatch string `json:"country_match"`
+        FirstName    string `json:"first_name"`
+        LastName     string `json:"last_name"`
+        PostalCode   string `json:"postal_code"`
+        StateMatch   string `json:"state_match"`
+    } `json:"bill_addr"`
+    CalcMode           string `json:"calc_mode"`
+    ChannelDateCreated int64  `json:"channel_date_created"`
+    ChannelRefnum      string `json:"channel_refnum"`
+    Customer           struct {
+        EmailAddress string `json:"email_address"`
+        FirstName    string `json:"first_name"`
+        LastName     string `json:"last_name"`
+        PhoneNumber  string `json:"phone_number"`
+    } `json:"customer"`
+    DiscountAmt int         `json:"discount_amt"`
+    GiftMessage string      `json:"gift_message"`
+    IPAddress   string      `json:"ip_address"`
+    Items       []ROPOrderItem `json:"items"`
+    Payment []ROPOrderPayment `json:"payment"`
+    ShipAddr struct {
+        Address1     string `json:"address1"`
+        Address2     string `json:"address2"`
+        City         string `json:"city"`
+        Company      string `json:"company"`
+        CountryMatch string `json:"country_match"`
+        FirstName    string `json:"first_name"`
+        LastName     string `json:"last_name"`
+        PostalCode   string `json:"postal_code"`
+        StateMatch   string `json:"state_match"`
+    } `json:"ship_addr"`
+    Shipcode    string `json:"shipcode"`
+    ShippingAmt string `json:"shipping_amt"`
+    TaxAmt      string `json:"tax_amt"`
+}
+
+type ROPOrderPayment struct {
+    Amount string `json:"amount"`
+    Params struct {
+        ChannelRefnum string `json:"channel_refnum"`
+        PaymentType   string `json:"payment_type"`
+    } `json:"params"`
+    Type string `json:"type"`
+}
+
+type ROPOrderItem struct {
+    ChannelRefnum string `json:"channel_refnum"`
+    Quantity      int    `json:"quantity"`
+    Sku           string `json:"sku"`
+    SkuTitle      string `json:"sku_title"`
+    UnitPrice     string `json:"unit_price"`
+    UnitTax       float64 `json:"unit_tax"`
 }
