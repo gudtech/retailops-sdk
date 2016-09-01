@@ -1194,6 +1194,13 @@
                                             "minLength": 2,
                                             "maxLength": 100,
                                             "example": "customer_rewards_number"
+                                        },
+                                        "value": {
+                                            "type": "string",
+                                            "description": "value of attribute",
+                                            "minLength": 2,
+                                            "maxLength": 100,
+                                            "example": "XXX_XXXXXX_XXX"
                                         }
                                     }
                                 }
