@@ -197,6 +197,7 @@ func requestAgainstLink(v1file V1File, link V1FileLink, basePath string, request
 
   if response.StatusCode != expectedStatusCode {
       err = fmt.Errorf("Incorrect HTTP status code, expected %v but received %v", expectedStatusCode, response.StatusCode)
+      fmt.Println("err: ", response.Status)
       return err
   }
 

@@ -224,18 +224,27 @@ func OrderPullV1(msg *scamp.Message, client *scamp.Client) {
         }
 
         var orderFetchResponse OrderPullResponseV1
-        orderFetchResponse.NextOrderRefnum = 0 //this is not defined in API response!!
-        orderFetchResponse.NextPageState = apiResp.NextPageToken
+        orderFetchResponse.NextOrderRefnum = 0 //this is not currently defined in API response!
+        orderFetchResponse.NextPageState = 1 //temp passing "1"
+        orderFetchResponse.NextPageToken = apiResp.NextPageToken
 
         orderArray := make([]ROPOrder, len(apiResp.Orders), (cap(apiResp.Orders)+1)*2)
 
         for i := range apiResp.Orders {
             var tempOrder ROPOrder
-            tempOrder.Attributes = "" //NOTE should attributes be an array? What values are expected for each attribute
-            tempOrder.CalcMode = "" //NOTE: no related/mappable field returned by SDK!
+            tempOrder.Attributes = ""
+
+            // NOTE send to ROP as single object with unique fields
+            // attributes => {
+            //     <attribute_type>_<handle> => <value>,
+            //     <attribute_type>_<handle> => <value>,
+            //      ...
+            // }
+            
+            tempOrder.CalcMode = ""  //NOTE: see #RO_SDK slack channel for discussion
 
             //convert date to Unix timestamp
-            t, err := time.Parse(time.RFC3339Nano, apiResp.Orders[i].ChannelDateCreated)//Wed, 20 Apr 2016 06:30:01 GMT
+            t, err := time.Parse(time.RFC3339Nano, apiResp.Orders[i].ChannelDateCreated)
         	if err != nil {
                 scamp.Info.Printf("Could not parse ChannelDateCreated: %s", err)
         		return
@@ -248,9 +257,9 @@ func OrderPullV1(msg *scamp.Message, client *scamp.Client) {
 
             tempOrder.Customer.EmailAddress = apiResp.Orders[i].CustomerInfo.EmailAddress
             tempOrder.Customer.PhoneNumber = apiResp.Orders[i].CustomerInfo.PhoneNumber
-            //TODO split full_name returned by sdk, into first and last name
-            // tempOrder.Customer.FirstName = apiResp.Orders[i].CustomerInfo.
-            // tempOrder.Customer.LastName = apiResp.Orders[i].CustomerInfo.
+            //NOTE: ROP is concatinating first + last so just send full in first and empty string in last
+            tempOrder.Customer.FirstName = apiResp.Orders[i].CustomerInfo.FullName
+            tempOrder.Customer.LastName = ""
 
             //TODO: convert DiscountAmt to float in both structs
             tempOrder.DiscountAmt = apiResp.Orders[i].CurrencyValues.DiscountAmt

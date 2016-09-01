@@ -69,12 +69,15 @@ type CommonResponseSecondary struct { // associations
 }
 
 type OrderPullSDKResponseV1 struct {
-	NextPageToken int `json:"next_page_token"` //TODO: Update Swagger: currently string, convert to int
+	NextPageToken string `json:"next_page_token"`
+    // NextPageState string `json:"next_page_state"`
+    NextOrderRefnum int `json:"next_order_refnum"` // TODO: Update swagger: new field X
 	Orders        []OrderSDK `json:"orders"`
 }
 
 type OrderSDK struct {
     Attributes []OrderAttributeSDK `json:"attributes"`
+    CalcMode           string `json:"calc_mode"` //TODO: Update Swagger: new field
     BillingAddress struct {
         Address1     string `json:"address1"`
         Address2     string `json:"address2"`
@@ -90,9 +93,9 @@ type OrderSDK struct {
     ChannelOrderRefnum string `json:"channel_order_refnum"`
     CurrencyCode       string `json:"currency_code"`
     CurrencyValues     struct {
-        DiscountAmt int     `json:"discount_amt"` //TODO: Update Swagger: should be defined as number
-        ShippingAmt float64 `json:"shipping_amt"`//TODO: Update Swagger: should be defined as number
-        TaxAmt      float64 `json:"tax_amt"` //TODO: Update Swagger: should be defined as number
+        DiscountAmt float64 `json:"discount_amt"`
+        ShippingAmt float64 `json:"shipping_amt"`
+        TaxAmt      float64 `json:"tax_amt"`
     } `json:"currency_values"`
     CustomerInfo struct {
         EmailAddress string `json:"email_address"`
@@ -120,21 +123,21 @@ type OrderSDK struct {
 type OrderAttributeSDK struct {
     AttributeType string `json:"attribute_type"`
     Handle        string `json:"handle"`
+    Value         string `json:"value"` //TODO: Update Swagger: new field X
 }
 
-//note some of these ints will need to be redefined as floats (e.g. currency amounts)
 type OrderItemSDK struct {
     ChannelItemRefnum string `json:"channel_item_refnum"`
     CurrencyValues    struct {
-        DiscountAmt  float64 `json:"discount_amt"` //TODO: Update Swagger: should be defined as number not int
-        DiscountPct  float64 `json:"discount_pct"` //TODO: Update Swagger: should be defined as number not int
-        RecyclingAmt float64 `json:"recycling_amt"` //TODO: Update Swagger: should be defined as number not int
-        ShipAmt      float64 `json:"ship_amt"` //TODO: Update Swagger: should be defined as number not int
-        ShiptaxAmt   float64 `json:"shiptax_amt"` //TODO: Update Swagger: should be defined as number not int
-        UnitPrice    float64 `json:"unit_price"` //TODO: Update Swagger: should be defined as number not int
-        UnitTax      float64 `json:"unit_tax"` //TODO: Update Swagger: should be defined as number not int
-        UnitTaxPct   float64 `json:"unit_tax_pct"`//TODO: Update Swagger: should be defined as number not int ????
-        VatPct       float64 `json:"vat_pct"` //TODO: Update Swagger: should be defined as number not int ????
+        DiscountAmt  float64 `json:"discount_amt"`
+        DiscountPct  float64 `json:"discount_pct"`
+        RecyclingAmt float64 `json:"recycling_amt"`
+        ShipAmt      float64 `json:"ship_amt"`
+        ShiptaxAmt   float64 `json:"shiptax_amt"`
+        UnitPrice    float64 `json:"unit_price"`
+        UnitTax      float64 `json:"unit_tax"`
+        UnitTaxPct   float64 `json:"unit_tax_pct"`
+        VatPct       float64 `json:"vat_pct"`
     } `json:"currency_values"`
     ItemType       string `json:"item_type"`
     Quantity       int    `json:"quantity"`
@@ -156,11 +159,12 @@ type PaymentTransactionSDK struct {
 type OrderPullResponseV1  struct {
 	NextOrderRefnum int `json:"next_order_refnum"`
 	NextPageState   int `json:"next_page_state"`
+    NextPageToken   string `json:"next_page_token"` //NOTE: currently ignored by ROP
 	Orders          []ROPOrder `json:"orders"`
 }
 
 type ROPOrder struct {
-    Attributes string `json:"attributes"`//use interface{}? //NOTE: Temporary! must determine what ROP needs
+    Attributes string `json:"attributes"`
     BillAddr   struct {
         Address1     string `json:"address1"`
         Address2     string `json:"address2"`
