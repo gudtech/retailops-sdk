@@ -448,9 +448,9 @@
                                 "example": "return_item 90"
                             },
                             "sku": {
-                                "type": "integer",
+                                "type": "string",
                                 "description": "sku id",
-                                "example": 132
+                                "example": "132"
                             },
                             "quantity": {
                                 "type": "integer",
@@ -1050,7 +1050,7 @@
                                             "example": "496"
                                         },
                                         "sku": {
-                                            "type": "integer",
+                                            "type": "string",
                                             "description": "SKU number to which this order line item is associated",
                                             "example": "S1234"
                                         },
