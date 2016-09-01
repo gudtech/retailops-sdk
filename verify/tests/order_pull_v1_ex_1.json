@@ -1,12 +1,12 @@
 {
-    "integration_auth_token": "RETAILOPS_SDK",
+    "integration_auth_token": "uFocQgTCpOu265nmfEt7K51RdXBboIRJ",
     "action": "order_pull",
     "version": 1,
     "client_id": 497,
     "channel_info": {
         "id": 21
     },
-    "page_token": "string",
+    "page_token": "",
     "specific_orders": [
         {
             "channel_refnum": "141"
