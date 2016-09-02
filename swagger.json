@@ -1183,8 +1183,7 @@
                                                 "text",
                                                 "number",
                                                 "select",
-                                                "multiselect",
-                                                "price"
+                                                "multiselect"
                                             ],
                                             "example": "text"
                                         },
