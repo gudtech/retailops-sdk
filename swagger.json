@@ -968,7 +968,7 @@
             "properties": {
                 "next_page_token": {
                     "type": "string",
-                    "description": "In order to affect retieval of large numbers of orders, pagination is generally required. Your implementation should construct a next_page_token value which contains sufficient state information to retrieve the next 'page' of orders. This value will be passed in to a subsequent order_pull call using the page_token field."
+                    "description": "In order to affect retieval of large numbers of orders, pagination is generally required. Your implementation should construct a next_page_token value which contains sufficient state information to retrieve the next 'page' of orders. This value will be passed in to a subsequent order_pull call using the page_token field. Return an empty string if there are no additional pages"
                 },
                 "orders": {
                     "type": "array",
