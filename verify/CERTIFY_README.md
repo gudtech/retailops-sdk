@@ -9,6 +9,8 @@ with RetailOps.
 > tool is a required prerequisite for certification. Additionally, do not attempt to certify the
 > example application provided with the RetailOps SDK_
 
+(Please do not include underscores "_" in the integration name)
+
 Run the following command to certify your RetailOps Channel Integration:
 
    ```

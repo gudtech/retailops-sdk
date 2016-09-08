@@ -51,12 +51,12 @@ RetailOps then pulls this order information, fulfills said orders, and pushes st
 - [order_settle_payment](http://gudtech.github.io/retailops-sdk/v1/channel/#!/default/post_order_settle_payment_v1) - Cause the channel to collect/capture payment, or otherwise verify payment has been collected
 - [order_returned](http://gudtech.github.io/retailops-sdk/v1/channel/#!/default/post_order_returned_v1) - Notify the channel that a return has been processed against the order
 
-## Tax Calculation Integrations
+## Tax Calculation Integrations 
 
 RetailOps supports integration with third party sales tax management services. RetailOps serves as the system-of-record for
 customer and order data and provides necessary data to third party tax services for calculation of sales tax. 
 
-### Tax Calculation Interactions
+### Tax Calculation Interactions (coming soon)
 - [calculate_order](http://gudtech.github.io/retailops-sdk/v1/tax#!/Tax/post_calculate_order_v1) - Tax Calculation for order
 
 ## Shipping Integrations
@@ -64,7 +64,7 @@ customer and order data and provides necessary data to third party tax services 
 RetailOps supports shipping orders via direct integrations with shipping processors and carriers. RetailOps serves as the system-of-record
 for package/shipment data, and provides this data to shippers for the generation of shipping labels and tracking numbers.
 
-### Shipping Interactions
+### Shipping Interactions (coming soon)
 - [get_labels](http://gudtech.github.io/retailops-sdk/v1/shipping/#!/Shipping_Labels/post_get_labels_v1) - Get shipping labels for ROP shipments
 - [void_label](http://gudtech.github.io/retailops-sdk/v1/shipping/#!/Shipping_Labels/post_void_label_v1) - void shipping label for ROP shipment
 - [get_rate](http://gudtech.github.io/retailops-sdk/v1/shipping/#!/Rate_and_Time/post_get_rate_v1) - Get rate for carrier class
