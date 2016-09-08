@@ -9,7 +9,7 @@ with RetailOps.
 > tool is a required prerequisite for certification. Additionally, do not attempt to certify the
 > example application provided with the RetailOps SDK_
 
-(Please do not include underscores "_" in the integration name)
+Please do not include underscores "_", or blank spaces in your integration name. Use a hyphen between individual words, for example: "Integration-Name".
 
 Run the following command to certify your RetailOps Channel Integration:
 
