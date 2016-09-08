@@ -103,7 +103,7 @@
                                 "ship_service_code": {
                                     "type": "string",
                                     "description": "Code identifying the level of service. Could be generic 'Slow' / 'Fast' or Specific 'Fedex Ground'",
-                                    "minLength": 1,
+                                    "minLength": 0,
                                     "example": "Ground (5-7 days)"
                                 },
                                 "currency_code": {
@@ -403,14 +403,14 @@
                                             "handle": {
                                                 "type": "string",
                                                 "description": "Unique identifier",
-                                                "minLength": 2,
+                                                "minLength": 0,
                                                 "maxLength": 100,
                                                 "example": "customer_rewards_number"
                                             },
                                             "value": {
                                                 "type": "string",
                                                 "description": "value of attribute",
-                                                "minLength": 2,
+                                                "minLength": 0,
                                                 "maxLength": 100,
                                                 "example": "XXX_XXXXX_XXXX"
                                             }
