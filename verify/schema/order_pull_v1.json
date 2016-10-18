@@ -345,7 +345,8 @@
                                                 "description": "",
                                                 "enum": [
                                                     "auth",
-                                                    "charge"
+                                                    "charge",
+                                                    "capture"
                                                 ]
                                             },
                                             "payment_type": {
