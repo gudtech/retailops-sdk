@@ -125,9 +125,9 @@
                                                         "example": "return_item 90"
                                                     },
                                                     "sku": {
-                                                        "type": "integer",
+                                                        "type": "string",
                                                         "description": "sku id",
-                                                        "example": 132
+                                                        "example": "132"
                                                     },
                                                     "quantity": {
                                                         "type": "integer",
@@ -209,6 +209,68 @@
                                     "grand_total": {
                                         "type": "number",
                                         "description": "RetailOps current order grand total"
+                                    },
+                                    "order_items": {
+                                        "type": "array",
+                                        "description": "List of order line items",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "channel_item_refnum": {
+                                                    "type": "string",
+                                                    "description": "channel reference number for order"
+                                                },
+                                                "sku": {
+                                                    "type": "string",
+                                                    "description": "SKU specified by the order item"
+                                                },
+                                                "apportioned_ship_amt": {
+                                                    "type": "number",
+                                                    "description": "Apportioned ship amount"
+                                                },
+                                                "order_item_id": {
+                                                    "type": "integer",
+                                                    "description": "Retail Ops order item ID"
+                                                },
+                                                "direct_ship_amt": {
+                                                    "type": "number",
+                                                    "description": "Direct ship amount"
+                                                },
+                                                "estimated_cost": {
+                                                    "type": "number",
+                                                    "description": "Estimated item cost"
+                                                },
+                                                "estimated_unit_cost": {
+                                                    "type": "number",
+                                                    "description": "Estimated unit cost of item"
+                                                },
+                                                "quantity": {
+                                                    "type": "integer",
+                                                    "description": "Order quantity of item"
+                                                },
+                                                "unit_price": {
+                                                    "type": "number",
+                                                    "description": "base unit price of item"
+                                                },
+                                                "estimated_extended_cost": {
+                                                    "type": "number",
+                                                    "description": "Estimated extended cost of item"
+                                                },
+                                                "estimated_ship_date": {
+                                                    "type": "string",
+                                                    "description": "estimated ship date of item",
+                                                    "example": "2016-04-08T21:13:11Z"
+                                                },
+                                                "removed": {
+                                                    "type": "string",
+                                                    "description": "boolean indicator of whether the item was removed from the order.",
+                                                    "enum": [
+                                                        true,
+                                                        false
+                                                    ]
+                                                }
+                                            }
+                                        }
                                     },
                                     "unshipped_items": {
                                         "type": "array",
@@ -393,6 +455,75 @@
                                         }
                                     }
                                 }
+                            }
+                        }
+                    },
+                    "line_items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "description": "individual writeback line item",
+                            "properties": {
+                                "order_item_id": {
+                                    "type": "integer",
+                                    "description": "RetailOps order item ID (required)"
+                                },
+                                "discount_amt": {
+                                    "type": "number",
+                                    "description": "Item discount amount (if any)"
+                                },
+                                "discount_pct": {
+                                    "type": "number",
+                                    "description": "Item discount percentage"
+                                },
+                                "quantity": {
+                                    "type": "integer",
+                                    "description": "Quantity of line item"
+                                },
+                                "refnum": {
+                                    "type": "string",
+                                    "description": "The channel item refnum (required)"
+                                },
+                                "ship_amt": {
+                                    "type": "number",
+                                    "description": "Item ship amount"
+                                },
+                                "shiptax_amt": {
+                                    "type": "number",
+                                    "description": "item ship tax amount"
+                                },
+                                "unit_tax": {
+                                    "type": "number",
+                                    "description": "item unit tax"
+                                },
+                                "unit_tax_pct": {
+                                    "type": "number",
+                                    "description": "item unit tax percentage"
+                                }
+                            },
+                            "required": [
+                                "order_item_id",
+                                "refnum"
+                            ]
+                        }
+                    },
+                    "values": {
+                        "type": "object",
+                        "properties": {
+                            "discount_amt": {
+                                "type": "number"
+                            },
+                            "discount_pct": {
+                                "type": "number"
+                            },
+                            "shipping_amt": {
+                                "type": "number"
+                            },
+                            "tax_amt": {
+                                "type": "number"
+                            },
+                            "tax_pct": {
+                                "type": "number"
                             }
                         }
                     }
