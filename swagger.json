@@ -750,12 +750,8 @@
                                 "example": "2016-04-08T21:13:11Z"
                             },
                             "removed": {
-                                "type": "string",
-                                "description": "boolean indicator of whether the item was removed from the order.",
-                                "enum": [
-                                    true,
-                                    false
-                                ]
+                                "type": "boolean",
+                                "description": "boolean indicator of whether the item was removed from the order."
                             }
                         }
                     }
