@@ -63,7 +63,7 @@
                 "estimated_ship_date": "2016-04-08T21:13:11Z",
 	            "estimated_unit_cost": 0.00,
                 "quantity":1,
-	            "removed":"true",
+	            "removed":true,
 	            "sku": "AB524235",
                 "unit_price":0.00
             }
