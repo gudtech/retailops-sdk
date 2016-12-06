@@ -9,7 +9,7 @@
     "rmas": [
         {
             "retailops_return_id": 87,
-            "retailops_rma_id": "null",
+            "retailops_rma_id": "123",
             "product_amt": 30,
             "subtotal_amt": 30,
             "discount_amt": 0,
@@ -21,7 +21,7 @@
                 {
                     "retailops_item_id": 7395,
                     "channel_item_refnum": "return_item 90",
-                    "sku": 132,
+                    "sku": "132",
                     "quantity": 1,
                     "reason": "CustomerReturn",
                     "item_shipping_tax_amt": 30,
@@ -45,11 +45,27 @@
         "unshipped_items": [
             {
                 "channel_item_refnum": "string",
-                "sku": "string",
+                "sku": "1235",
                 "ordered_quantity": 0,
                 "unshipped_quantity": 0,
                 "effective_unit_price": 0,
                 "effective_extended_price": 0
+            }
+        ],
+        "order_items": [
+            {
+                "channel_item_refnum": "15252",
+	            "apportioned_ship_amt": 0.00,
+                "order_item_id": 5235,
+	            "direct_ship_amt":0.00,
+	            "estimated_cost":0.00,
+	            "estimated_extended_cost":0.00,
+                "estimated_ship_date": "2016-04-08T21:13:11Z",
+	            "estimated_unit_cost": 0.00,
+                "quantity":1,
+	            "removed":"true",
+	            "sku": "AB524235",
+                "unit_price":0.00
             }
         ],
         "shipments": [
