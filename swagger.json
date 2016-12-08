@@ -1490,6 +1490,16 @@
             "properties": {
                 "events": {
                     "$ref": "#/definitions/ResponseEventArray"
+                },
+                "return": {
+                    "type": "object",
+                    "properties": {
+                        "channel_store_credit_amount": {
+                            "type": "number",
+                            "description": "store credit issued by channel (if any)",
+                            "example": 20
+                        }
+                    }
                 }
             }
         },
