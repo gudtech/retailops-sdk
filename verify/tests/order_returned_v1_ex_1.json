@@ -60,7 +60,7 @@
             {
                 "retailops_item_id": 7395,
                 "channel_item_refnum": "return_item 90",
-                "sku": 132,
+                "sku": "132",
                 "quantity": 1,
                 "reason": "CustomerReturn",
                 "item_shipping_tax_amt": 30,
