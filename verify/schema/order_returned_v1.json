@@ -73,6 +73,68 @@
                                         "type": "number",
                                         "description": "RetailOps current order grand total"
                                     },
+                                    "order_items": {
+                                        "type": "array",
+                                        "description": "List of order line items",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "channel_item_refnum": {
+                                                    "type": "string",
+                                                    "description": "channel reference number for order"
+                                                },
+                                                "sku": {
+                                                    "type": "string",
+                                                    "description": "SKU specified by the order item"
+                                                },
+                                                "apportioned_ship_amt": {
+                                                    "type": "number",
+                                                    "description": "Apportioned ship amount"
+                                                },
+                                                "order_item_id": {
+                                                    "type": "integer",
+                                                    "description": "Retail Ops order item ID"
+                                                },
+                                                "direct_ship_amt": {
+                                                    "type": "number",
+                                                    "description": "Direct ship amount"
+                                                },
+                                                "estimated_cost": {
+                                                    "type": "number",
+                                                    "description": "Estimated item cost"
+                                                },
+                                                "estimated_unit_cost": {
+                                                    "type": "number",
+                                                    "description": "Estimated unit cost of item"
+                                                },
+                                                "quantity": {
+                                                    "type": "integer",
+                                                    "description": "Order quantity of item"
+                                                },
+                                                "unit_price": {
+                                                    "type": "number",
+                                                    "description": "base unit price of item"
+                                                },
+                                                "estimated_extended_cost": {
+                                                    "type": "number",
+                                                    "description": "Estimated extended cost of item"
+                                                },
+                                                "estimated_ship_date": {
+                                                    "type": "string",
+                                                    "description": "estimated ship date of item",
+                                                    "example": "2016-04-08T21:13:11Z"
+                                                },
+                                                "removed": {
+                                                    "type": "string",
+                                                    "description": "boolean indicator of whether the item was removed from the order.",
+                                                    "enum": [
+                                                        true,
+                                                        false
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    },
                                     "unshipped_items": {
                                         "type": "array",
                                         "description": "List of items which were not shipped as of the time of order completion. Presumably these items should be canceled in the channel",
@@ -255,9 +317,9 @@
                                                     "example": "return_item 90"
                                                 },
                                                 "sku": {
-                                                    "type": "integer",
+                                                    "type": "string",
                                                     "description": "sku id",
-                                                    "example": 132
+                                                    "example": "132"
                                                 },
                                                 "quantity": {
                                                     "type": "integer",
@@ -390,6 +452,16 @@
                                         }
                                     }
                                 }
+                            }
+                        }
+                    },
+                    "return": {
+                        "type": "object",
+                        "properties": {
+                            "channel_store_credit_amount": {
+                                "type": "number",
+                                "description": "store credit issued by channel (if any)",
+                                "example": 20
                             }
                         }
                     }
