@@ -27,8 +27,8 @@ All parts of the SDK package are available for Windows, Linux, and OSX. Each rel
 
 ## Interactive Documentation
 - [RetailOps Channel SDK](http://gudtech.github.io/retailops-sdk/v1/channel)
-- [RetailOps Tax Calculation SDK](http://gudtech.github.io/retailops-sdk/v1/tax)
-- [RetailOps Shipment Processor SDK](http://gudtech.github.io/retailops-sdk/v1/shipping)
+- [RetailOps Tax Calculation SDK](http://gudtech.github.io/retailops-sdk/v1/tax) (coming soon)
+- [RetailOps Shipment Processor SDK](http://gudtech.github.io/retailops-sdk/v1/shipping) (coming soon)
 
 ## Channel Integrations
 
