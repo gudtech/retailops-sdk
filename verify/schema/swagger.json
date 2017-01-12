@@ -303,7 +303,7 @@
                 "country_match": {
                     "type": "string",
                     "description": "Country",
-                    "example": "US United States"
+                    "example": "\"US\" or \"United States\""
                 },
                 "last_name": {
                     "type": "string",
