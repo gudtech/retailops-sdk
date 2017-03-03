@@ -1399,6 +1399,11 @@
                                             "type": "number",
                                             "description": "Transaction amount",
                                             "example": 100.32
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Optional message to record info regarding transaction.",
+                                            "example": "Gift card purchase for promotion XYZ"
                                         }
                                     }
                                 }
