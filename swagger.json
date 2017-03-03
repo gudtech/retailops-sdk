@@ -1386,13 +1386,14 @@
                                             "enum": [
                                                 "auth",
                                                 "charge",
-                                                "capture"
+                                                "capture",
+                                                "giftcard"
                                             ]
                                         },
                                         "payment_type": {
                                             "type": "string",
                                             "description": "Payment type for this transaction. Free-form",
-                                            "example": "Visa"
+                                            "example": "Visa or giftcard"
                                         },
                                         "amount": {
                                             "type": "number",
