@@ -1393,7 +1393,7 @@
                                         "payment_type": {
                                             "type": "string",
                                             "description": "Payment type for this transaction. Free-form",
-                                            "example": "Visa (or \"MasterCard\", \"giftcard\", etc...)"
+                                            "example": "Visa (or MasterCard, giftcard, etc...)"
                                         },
                                         "amount": {
                                             "type": "number",
