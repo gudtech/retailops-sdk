@@ -1356,6 +1356,35 @@
                                                     "type": "number"
                                                 }
                                             }
+                                        },
+                                        "options": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "type": {
+                                                        "type": "string",
+                                                        "description": "Type of option, acceptable values are bool, text, and image.  If type is image, you must pass an image url. If type is bool,  pass a string representation of a boolen \"true\" or \"false\"",
+                                                        "enum": [
+                                                            "bool",
+                                                            "text",
+                                                            "image"
+                                                        ]
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "description": "Free form display name (up to 255 characters). If name is blank, RetailOps UI will display the option code"
+                                                    },
+                                                    "value": {
+                                                        "type": "string",
+                                                        "description": "string value of the option, free form up to 255 characters"
+                                                    },
+                                                    "code": {
+                                                        "type": "string",
+                                                        "description": "option code, up to 255 characters. Will be displayed in UI if name is empty"
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -1386,18 +1415,24 @@
                                             "enum": [
                                                 "auth",
                                                 "charge",
-                                                "capture"
+                                                "capture",
+                                                "giftcard"
                                             ]
                                         },
                                         "payment_type": {
                                             "type": "string",
                                             "description": "Payment type for this transaction. Free-form",
-                                            "example": "Visa"
+                                            "example": "Visa (or MasterCard, giftcard, etc...)"
                                         },
                                         "amount": {
                                             "type": "number",
                                             "description": "Transaction amount",
                                             "example": 100.32
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Optional message to record info regarding transaction.",
+                                            "example": "Gift card purchase for promotion XYZ"
                                         }
                                     }
                                 }
