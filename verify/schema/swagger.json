@@ -1366,8 +1366,8 @@
                                                         "type": "string",
                                                         "description": "Type of option, acceptable values are bool, text, and image.  If type is image, you must pass an image url. If type is bool,  pass a string representation of a boolen \"true\" or \"false\"",
                                                         "enum": [
-                                                            "bool",
                                                             "text",
+                                                            "bool",
                                                             "image"
                                                         ]
                                                     },
