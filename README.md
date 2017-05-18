@@ -1,6 +1,22 @@
 [![RetailOps SDK](http://cdn2.hubspot.net/hubfs/530512/Image/logo.png)](http://retailops.com)
 
-### RetailOps SDK
+## RetailOps SDK
+
+The Retailops SDK provides the tools necessary to enable developers to create their own RetailOps integrations.
+
+The SDK is different from the RetailOps API. When integrating with the API, you call the RetailOps servers.
+When integrating with the SDK, the RetailOps servers call your servers. [Click here for more details about the RetailOps API](http://help.retailops.com/hc/en-us/articles/206283535-Getting-Started-with-the-RetailOps-API)
+
+The SDK provides a detailed schema which will describe the interactions between our respective servers.
+Herein, the term "SDK" will be used to refer to RetailOps calling your servers.
+
+#### Why should RetailOps call my servers?
+
+With most of the interactions covered by the SDK, RetailOps is the active system, pushing relevant data outward.
+In a minority of the cases, RetailOps will poll for information which must be retrieved. Because a majority of the interactions are Pushed outward from RetailOps, this approach is generally simpler and more responsive.
+
+On Rare occasions, it may be desirable to combine the RetailOps SDK with a few RetailOps API calls.
+These scenarios are not presently discussed in this documentation, but may be discussed on the [RetailOps community forums](http://help.retailops.com/hc/en-us/community/topics), or via the RetailOps Partner Network.
 
 Using the RetailOps SDK, you can create, test, and certify custom integrations for use with RetailOps.
 
