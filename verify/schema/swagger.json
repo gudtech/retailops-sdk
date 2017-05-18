@@ -1279,6 +1279,11 @@
                                     }
                                 }
                             },
+                            "cancel": {
+                                "type": "boolean",
+                                "description": "Indicates that the order has been cancelled by the channel. Used for cancelling orders in in Retailops that are in 'channel incomplete' status. Default is 'false'",
+                                "example": false
+                            },
                             "channel_date_created": {
                                 "type": "string",
                                 "format": "date-time",
