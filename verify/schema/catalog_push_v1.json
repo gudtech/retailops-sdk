@@ -58,42 +58,9 @@
                     {
                         "type": "object",
                         "properties": {
-                            "catalog_items": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "item_type": {
-                                            "type": "string",
-                                            "description": "The type of RetailOps data item being expressed",
-                                            "enum": [
-                                                "sku",
-                                                "product_family",
-                                                "sku_group",
-                                                "collection"
-                                            ]
-                                        },
-                                        "item_info": {
-                                            "type": "object",
-                                            "description": "Details about the RetailOps data item being expressed",
-                                            "properties": {
-                                                "sku_number": {
-                                                    "type": "string"
-                                                },
-                                                "product_id": {
-                                                    "type": "string"
-                                                },
-                                                "skugroup_number": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        },
-                                        "template_output": {
-                                            "description": "Data structure as provided by the RetailOps feed system template which has been evaluated against the retailops catalog item in question",
-                                            "type": "object"
-                                        }
-                                    }
-                                }
+                            "TemplateOutput": {
+                                "type": "object",
+                                "description": "The raw RetailOps feed template JSON. This will be different for each feed/channel and is determined by the custom feed created with the RetailOps feed system."
                             }
                         }
                     }

@@ -6,15 +6,5 @@
   "channel_info": {
     "id": 21
   },
-  "catalog_items": [
-    {
-      "item_type": "sku",
-      "item_info": {
-        "sku_number": "string",
-        "product_id": "string",
-        "skugroup_number": "string"
-      },
-      "template_output": {}
-    }
-  ]
+  "template_output": {}
 }
