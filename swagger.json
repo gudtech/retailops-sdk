@@ -546,7 +546,7 @@
                 {
                     "type": "object",
                     "properties": {
-                        "TemplateOutput": {
+                        "template_output": {
                             "type": "object",
                             "description": "The raw RetailOps feed template JSON. This will be different for each feed/channel and is determined by the custom feed created with the RetailOps feed system."
                         }
