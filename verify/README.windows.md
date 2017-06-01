@@ -28,9 +28,14 @@ The following instructions will aid you in setting up your local environment, in
  6. From another terminal run the `verify` utility:
 
     ```
-    $ ./verify.exe -schema-path schema/schemata/
+    $ verify.exe 
     11 TESTS TO BE GENERATED
     [[ TRUNCATED OUTPUT ]]
+    ```
+7. Now run the verify utility against your actual endpoints by specifying the '-base-url' flag
+
+    ```
+    verify.exe -base-url 'http://youractualserver.com/'
     ```
 
 After you have completely developed your channel integration, and have successfully used

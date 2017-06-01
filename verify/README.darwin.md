@@ -25,12 +25,17 @@ The following instructions will aid you in setting up your local environment, in
     > the verifier utility, and to provide a suggested starting point for .NET developers. It returns hard-coded JSON
     > responses for testing the verifier utility and does not implement any required integration logic, or authentication._
 
- 6. From another terminal run the `verify` utility:
+ 6. From another terminal run the `verify` utility: (The utility will make test requests against the .NET server)
 
     ```
-    $ ./verify -schema-path schema/schemata/
+    $ ./verify 
     11 TESTS TO BE GENERATED
     [[ TRUNCATED OUTPUT ]]
+    ```
+ 7. Now run the verify utility against your actual endpoints by specifying the '-base-url' flag
+
+    ```
+    ./verify -base-url 'http://youractualserver.com/'
     ```
 
 After you have completely developed your channel integration, and have successfully used
