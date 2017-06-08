@@ -324,7 +324,7 @@
                 "type": "object",
                 "properties": {
                     "events": {
-                        "type": "array",
+                        "type": ["array","null"],
                         "items": {
                             "type": "object",
                             "description": "event returned in action response",
@@ -354,7 +354,7 @@
                                     "description": ""
                                 },
                                 "associations": {
-                                    "type": "array",
+                                    "type": ["array","null"],
                                     "description": "",
                                     "items": {
                                         "type": "object",

@@ -161,7 +161,7 @@
                                     "description": ""
                                 },
                                 "associations": {
-                                    "type": "array",
+                                    "type": ["array","null"],
                                     "description": "",
                                     "items": {
                                         "type": "object",
