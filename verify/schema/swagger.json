@@ -339,6 +339,11 @@
                     "type": "string",
                     "description": "First Name",
                     "example": "John"
+                },
+                "phone_number": {
+                    "type":"string",
+                    "description": "Contact phone number for address",
+                    "example": "(555)-867-5309"
                 }
             }
         },
