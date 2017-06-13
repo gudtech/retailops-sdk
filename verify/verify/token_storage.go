@@ -60,7 +60,7 @@ func (ats *AuthTokenStorage) OverwriteIntegrationAuthKey(token string) (err erro
 
 	n, err := file.WriteString(token)
 	if err != nil {
-		log.Fatal(err.Error())
+		return
 	}
 
 	if n != len(token) {
@@ -72,6 +72,7 @@ func (ats *AuthTokenStorage) OverwriteIntegrationAuthKey(token string) (err erro
 
 func (ats *AuthTokenStorage) GenerateIntegrationAuthToken() (err error) {
 	tokenPath := fp.Join(ats.Path, "integration_auth_token")
+	fmt.Println("Token path: ", tokenPath)
 
 	token, err := randomToken()
 	if err != nil {
@@ -80,10 +81,14 @@ func (ats *AuthTokenStorage) GenerateIntegrationAuthToken() (err error) {
 
 	file, err := os.Create(tokenPath)
 	if err != nil {
+		fmt.Println("Could not create folder: ", err)
 		return
 	}
 
 	_, err = file.WriteString(token)
+	if err != nil {
+		fmt.Println("Could not create file: ", err)
+	}
 
 	return
 }
