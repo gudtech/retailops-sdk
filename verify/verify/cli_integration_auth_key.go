@@ -30,16 +30,19 @@ func doGenerateToken(cliExec CLIExecution) (err error) {
 	fmt.Println("Generating token...")
 	ats, err := NewAuthTokenStorage()
 	if err != nil {
+		fmt.Println(err)
 		return
 	}
 
 	err = ats.CreateDirectoryIfMissing()
 	if err != nil {
+		fmt.Println(err)
 		return
 	}
 
 	err = ats.GenerateIntegrationAuthToken()
 	if err != nil {
+		fmt.Println(err)
 		return
 	}
 
