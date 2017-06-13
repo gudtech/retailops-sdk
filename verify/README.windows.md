@@ -2,43 +2,32 @@
 
 ### RetailOps SDK
 ----
-The RetailOps SDK provides tools to assist you with verifying that your integration service endpoints are returning JSON data that is correctly formatted to meet the requirements of the SDK schema. The the verify utility will validate your service's JSON responses by comparing them directly against the [RetailOps Swagger Schema](http://gudtech.github.io/retailops-sdk/v1/channel). The verify utility will also test that your service only responds when sent a valid [Integration Auth Key](#managing-your-integration-auth-key).
+The RetailOps SDK provides tools to assist you with verifying that your integration service endpoints are returning JSON data that is correctly formatted to meet the requirements of the SDK schema. The verify utility will validate your service's JSON responses by comparing them directly against the [RetailOps Swagger Schema](http://gudtech.github.io/retailops-sdk/v1/channel). The verify utility will also test that your service only responds when sent a valid [Integration Auth Key](#managing-your-integration-auth-key).
 
 The following instructions will aid you in setting up your local environment, installing the SDK verify utility and the example web server, and also running the verify utility against your service endpoints.    
 
- 1. Follow the [prerequisite steps](#windows-prerequisites) below
- 2. Download the `Verify Service` release for your operating system here: [RetailOps SDK Releases Page](https://github.com/gudTECH/retailops-sdk/releases)
- 3. Unzip downloaded file
- 4. Use terminal and enter unzipped directory (e.g., `verify_windows_v0.0.6`)
- 5. Start the example server application
+ 1. Download the `Verify Service` release for your operating system here: [RetailOps SDK Releases Page](https://github.com/gudTECH/retailops-sdk/releases)
+ 2. Unzip downloaded file
+ 3. Use terminal and enter unzipped directory (e.g., `verify_windows_v0.0.6`)
+ 4. Generate an integration-auth-key for the utility and RetailOps. Both the tool and RetailOps will use this 
+ auth key when communicating with your server. Your application must check that it is sent the correct key and return an error when provided with an incorrect key.
+ 5. Now run the verify utility against your actual endpoints by specifying the '-base-url' flag
 
     ```
-    cd retailops-asp-dotnet-api-example
-    dnu restore
-    dnx web
-    ```
-
-    The example web server should now be running on http://0.0.0.0:5000 .
-
-    > _Note: the example application is provided for testing purposes only, and is not a production-ready application.
-    > Do not attempt to use it in place of writing your own channel integration, it exists to help set up and test
-    > the verify utility, and to provide a suggested starting point for .NET developers. It returns hard-coded JSON
-    > responses for testing the verify utility and does not implement any required integration logic, or authentication._   
-
- 6. From another terminal run the `verify` utility:
-
-    ```
-    $ verify.exe 
+     -base-url 'http://youractualserver.com/'
+    
     11 TESTS TO BE GENERATED
     [[ TRUNCATED OUTPUT ]]
-    ```
-7. Now run the verify utility against your actual endpoints by specifying the '-base-url' flag
 
     ```
-    verify.exe -base-url 'http://youractualserver.com/'
+    ```
+    You can test individual actions by passing the '-actions' flag
+
+    ```
+    verify.exe -base-url 'http://youractualserver.com' -actions order_pull
     ```
 
-After you have completely developed your channel integration, and have successfully used
+After you have completely developed your channel integration and have successfully used
 the verifier utility to test that your integration is operating correctly, you are ready to
 attempt certification with RetailOps.
 
@@ -56,6 +45,7 @@ To generate a new key, required for every service:
 ```
 $ ./verify.exe generate-auth-key
 $ ./verify.exe show-auth-key
+
 ==== INTEGRATION AUTH KEY BELOW ====
 dDkma7W9zA/Nd7r3AUcEI/9MA9KWg+Uc
 ==== INTEGRATION AUTH KEY DONE ====
@@ -66,14 +56,10 @@ To install a different auth key, setting it to whatever value you choose:
 ```
 $ ./verify.exe install-auth-key FOOBARBAZ
 $ ./verify.exe show-auth-key
+
 ==== INTEGRATION AUTH KEY BELOW ====
 FOOBARBAZ
 ==== INTEGRATION AUTH KEY DONE ====
 ```
 
 > _Note: the integration auth key generated here is only for verification during use of a production service. This is the key that RetailOps passes to your service to verify that it's RetailOps making an API call to your server. The verification utility will use the test integration_auth_key: "RETAILOPS_SDK". During testing and verification your server should allow the test key, once in production it should only allow API calls made with the actual integration key that you've generated._
-
-Windows Prerequisites
----
-
-  Please follow the official instructions found here: https://github.com/dotnet/coreclr/blob/master/Documentation/install/get-dotnetcore-dnx-windows.md
