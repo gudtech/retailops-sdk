@@ -34,7 +34,7 @@ func NewAuthTokenStorage() (ts *AuthTokenStorage, err error) {
 func (ats *AuthTokenStorage) CreateDirectoryIfMissing() (err error) {
 	_, err = os.Open(ats.Path)
 	if err != nil {
-		if pathErr, ok := err.(*os.PathError); ok && pathErr.Err.Error() == "no such file or directory" {
+		if pathErr, ok := err.(*os.PathError); ok && os.IsNotExist(pathErr) {
 			fmt.Println("Creating directory...")
 			return ats.doFolderCreate()
 		}
