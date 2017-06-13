@@ -122,7 +122,7 @@ func randomToken() (token string, err error) {
 }
 
 func (ats *AuthTokenStorage) doFolderCreate() (err error) {
+	fmt.Println("Creating folder: ", ats.Path)
 	err = os.Mkdir(ats.Path, 0700)
-
 	return
 }
