@@ -27,6 +27,7 @@ func doInstallIntegrationAuthKey(cliExec CLIExecution) (err error) {
 }
 
 func doGenerateToken(cliExec CLIExecution) (err error) {
+	fmt.Println("Generating token...")
 	ats, err := NewAuthTokenStorage()
 	if err != nil {
 		return

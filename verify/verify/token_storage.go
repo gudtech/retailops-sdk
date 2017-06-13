@@ -22,6 +22,7 @@ func NewAuthTokenStorage() (ts *AuthTokenStorage, err error) {
 	//TODO: os/user is not supported for cross compiling, find diff way of doing this
 	user, err := u.Current()
 	if err != nil {
+		fmt.Println("error getting current user: ", err)
 		return
 	}
 
@@ -34,10 +35,10 @@ func (ats *AuthTokenStorage) CreateDirectoryIfMissing() (err error) {
 	_, err = os.Open(ats.Path)
 	if err != nil {
 		if pathErr, ok := err.(*os.PathError); ok && pathErr.Err.Error() == "no such file or directory" {
+			fmt.Println("Creting directory...")
 			return ats.doFolderCreate()
 		}
 		return
-
 	}
 
 	return
