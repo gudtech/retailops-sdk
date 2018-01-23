@@ -1265,13 +1265,6 @@
                             "shipping_address": {
                                 "$ref": "#/definitions/Address"
                             },
-                            "tags": {
-                                "type": "array",
-                                "items": {
-                                    "type": "string",
-                                    "description": "Array of descriptive order tags (strings) applied to the order"
-                                }
-                            },
                             "order_items": {
                                 "type": "array",
                                 "items": {
