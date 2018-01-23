@@ -341,7 +341,7 @@
                     "example": "John"
                 },
                 "phone_number": {
-                    "type":"string",
+                    "type": "string",
                     "description": "Contact phone number for address",
                     "example": "(555)-867-5309"
                 }
@@ -1386,7 +1386,7 @@
                                         "transaction_type": {
                                             "type": "string",
                                             "description": "",
-                                            "example":"charge",
+                                            "example": "charge",
                                             "enum": [
                                                 "auth",
                                                 "charge",
@@ -1409,7 +1409,13 @@
                                             "description": "Optional message to record info regarding transaction.",
                                             "example": "Gift card purchase for promotion XYZ"
                                         }
-                                    }
+                                    },
+                                    "required": [
+                                        "payment_type",
+                                        "amount",
+                                        "transaction_type",
+                                        "payment_processing_type"
+                                    ]
                                 }
                             },
                             "customer_info": {
