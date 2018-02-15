@@ -8,7 +8,7 @@ The following instructions will aid you in setting up your local environment, in
 
  1. Download the `Verify Service` release for your operating system here: [RetailOps SDK Releases Page](https://github.com/gudTECH/retailops-sdk/releases)
  2. Unzip downloaded file
- 3. Use terminal and enter unzipped directory (e.g., `verify_windows_v0.0.6`)
+ 3. Use terminal and enter unzipped directory (for example: `verify_windows_v0.0.6`)
  4. Generate an integration-auth-key for the utility and RetailOps. Both the tool and RetailOps will use this 
  auth key when communicating with your server. Your application must check that it is sent the correct key and return an error when provided with an incorrect key.
  5. Now run the verify utility against your actual endpoints by specifying the '-base-url' flag
