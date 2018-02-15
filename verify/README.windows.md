@@ -20,7 +20,6 @@ The following instructions will aid you in setting up your local environment, in
     [[ TRUNCATED OUTPUT ]]
 
     ```
-    ```
     You can test individual actions by passing the '-actions' flag
 
     ```
