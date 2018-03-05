@@ -1198,6 +1198,15 @@
                     "items": {
                         "type": "object",
                         "properties": {
+                            "tags": {
+                                "type": "array",
+                                "description": "List of text order tags that can be applied to this order (array of strings)",
+                                "example": "['example tag','test']",
+                                "maxItems": 100,
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
                             "channel_order_refnum": {
                                 "type": "string",
                                 "description": "Channel's identifier for this order. This value will be used for acknowledgement, completion, and other interactions",
