@@ -30,10 +30,9 @@ Using the RetailOps SDK, you can create, test, and certify custom integrations f
 
 The SDK includes
 
- * Example ASP.NET web server with samples of all callbacks implemented
- * Verify Service command line tool for exercising callbacks
+ * Verify Service command line tool for exercising callbacks 
 
-All parts of the SDK package are available for Windows, Linux, and OSX. Each release includes specific instructions for your platform.
+The SDK command line tool is available for Windows, Linux, and OSX. Each release includes specific instructions for your platform.
 
 [Read windows verifier instructions here](https://github.com/gudTECH/retailops-sdk/blob/master/verify/README.windows.md)
 
