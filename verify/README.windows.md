@@ -4,31 +4,19 @@
 ----
 The RetailOps SDK provides tools to assist you with verifying that your integration service endpoints are returning JSON data that is correctly formatted to meet the requirements of the SDK schema. The verify utility will validate your service's JSON responses by comparing them directly against the [RetailOps Swagger Schema](http://gudtech.github.io/retailops-sdk/v1/channel). The verify utility will also test that your service only responds when sent a valid [Integration Auth Key](#managing-your-integration-auth-key).
 
-The following instructions will aid you in setting up your local environment, installing the SDK verify utility and the example web server, and also running the verify utility against your service endpoints.    
+The following instructions will aid you in setting up your local environment, installing the SDK verify utility and running the verify utility against your service endpoints.     
 
  1. Download the `Verify Service` release for your operating system here: [RetailOps SDK Releases Page](https://github.com/gudTECH/retailops-sdk/releases)
  2. Unzip downloaded file
- 3. Use terminal and enter unzipped directory (for example: `verify_windows_v0.0.6`)
- 4. Generate an integration-auth-key for the utility and RetailOps. Both the tool and RetailOps will use this 
- auth key when communicating with your server. Your application must check that it is sent the correct key and return an error when provided with an incorrect key.
- 5. Now run the verify utility against your actual endpoints by specifying the '-base-url' flag
+ 3. Use terminal and enter unzipped directory (for example: `verify_windows_v0.0.9.0`)
+ 4. Run the verify utility against your actual endpoints by specifying the '-base-url' flag
 
     ```
-     -base-url 'http://youractualserver.com/'
-    
-    11 TESTS TO BE GENERATED
-    [[ TRUNCATED OUTPUT ]]
-
-    ```
-    You can test individual actions by passing the '-actions' flag
-
-    ```
-    verify.exe -base-url 'http://youractualserver.com' -actions order_pull
+    ./verify -base-url 'http://youractualserver.com/'
     ```
 
-After you have completely developed your channel integration and have successfully used
-the verifier utility to test that your integration is operating correctly, you are ready to
-attempt certification with RetailOps.
+After you have completely developed your channel integration, and have successfully used
+the verifier utility to test that your integration is operating correctly, you are ready to attempt certification with RetailOps.
 
 Follow the instructions here: [Certifying Your RetailOps SDK Channel Integration](https://github.com/gudTECH/retailops-sdk/blob/master/verify/CERTIFY_README.md)
 

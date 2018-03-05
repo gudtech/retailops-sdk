@@ -341,7 +341,7 @@
                     "example": "John"
                 },
                 "phone_number": {
-                    "type":"string",
+                    "type": "string",
                     "description": "Contact phone number for address",
                     "example": "(555)-867-5309"
                 }
@@ -1198,6 +1198,15 @@
                     "items": {
                         "type": "object",
                         "properties": {
+                            "tags": {
+                                "type": "array",
+                                "description": "List of text order tags that can be applied to this order (array of strings)",
+                                "example": "['example tag','test']",
+                                "maxItems": 100,
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
                             "channel_order_refnum": {
                                 "type": "string",
                                 "description": "Channel's identifier for this order. This value will be used for acknowledgement, completion, and other interactions",
@@ -1386,6 +1395,7 @@
                                         "transaction_type": {
                                             "type": "string",
                                             "description": "",
+                                            "example": "charge",
                                             "enum": [
                                                 "auth",
                                                 "charge",
@@ -1408,7 +1418,13 @@
                                             "description": "Optional message to record info regarding transaction.",
                                             "example": "Gift card purchase for promotion XYZ"
                                         }
-                                    }
+                                    },
+                                    "required": [
+                                        "payment_type",
+                                        "amount",
+                                        "transaction_type",
+                                        "payment_processing_type"
+                                    ]
                                 }
                             },
                             "customer_info": {
