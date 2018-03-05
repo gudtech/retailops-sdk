@@ -4,43 +4,19 @@
 ----
 The RetailOps SDK provides tools to assist you with verifying that your integration service endpoints are returning JSON data that is correctly formatted to meet the requirements of the SDK schema. The the verify utility will validate your service's JSON responses by comparing them directly against the [RetailOps Swagger Schema](http://gudtech.github.io/retailops-sdk/v1/channel). The verify utility will also test that your service only responds when sent a valid [Integration Auth Key](#managing-your-integration-auth-key).
 
-The following instructions will aid you in setting up your local environment, installing the SDK verify utility and the example web server, and also running the verify utility against your service endpoints.
+The following instructions will aid you in setting up your local environment, installing the SDK verify utility and running the verify utility against your service endpoints.  
 
- 1. Follow the [prerequisite steps](#osx-prerequisites) below
- 2. Download the `Verify Service` release for your operating system here: [RetailOps SDK Releases Page](https://github.com/gudTECH/retailops-sdk/releases)
- 3. Unzip downloaded file
- 4. Use terminal and enter unzipped directory (e.g., `verify_darwin_v0.0.6`)
- 5. Start the example server application
-
-    ```
-    cd retailops-asp-dotnet-api-example
-    dnu restore
-    dnx web
-    ```
-
-    The example web server should now be running on http://0.0.0.0:5000.
-
-    > _Note: the example application is provided for testing purposes only, and is not a production-ready application.
-    > Do not attempt to use it in place of writing your own channel integration, it exists to help set up and test
-    > the verifier utility, and to provide a suggested starting point for .NET developers. It returns hard-coded JSON
-    > responses for testing the verifier utility and does not implement any required integration logic, or authentication._
-
- 6. From another terminal run the `verify` utility: (The utility will make test requests against the .NET server)
-
-    ```
-    $ ./verify 
-    11 TESTS TO BE GENERATED
-    [[ TRUNCATED OUTPUT ]]
-    ```
- 7. Now run the verify utility against your actual endpoints by specifying the '-base-url' flag
+ 1. Download the `Verify Service` release for your operating system here: [RetailOps SDK Releases Page](https://github.com/gudTECH/retailops-sdk/releases)
+ 2. Unzip downloaded file
+ 3. Use terminal and enter unzipped directory (for example: `verify_darwin_v0.0.6`)
+ 4. Run the verify utility against your actual endpoints by specifying the '-base-url' flag
 
     ```
     ./verify -base-url 'http://youractualserver.com/'
     ```
 
 After you have completely developed your channel integration, and have successfully used
-the verifier utility to test that your integration is operating correctly, you are ready to
-attempt certification with RetailOps.
+the verifier utility to test that your integration is operating correctly, you are ready to attempt certification with RetailOps.
 
 Follow the instructions here: [Certifying Your RetailOps SDK Channel Integration](https://github.com/gudTECH/retailops-sdk/blob/master/verify/CERTIFY_README.md)
 
@@ -73,7 +49,3 @@ FOOBARBAZ
 
 > _Note: the integration auth key generated here is only for verification during use of a production service. This is the key that RetailOps passes to your service to verify that it's RetailOps making an API call to your server. The verification utility will use the test integration_auth_key: "RETAILOPS_SDK". During testing and verification your server should allow the test key, once in production it should only allow API calls made with the actual integration key that you've generated._
 
-OSX Prerequisites
----
-
-  Please follow the official instructions found here: https://github.com/dotnet/coreclr/blob/master/Documentation/install/get-dotnetcore-dnx-osx.md

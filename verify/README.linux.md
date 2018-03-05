@@ -8,7 +8,7 @@ The following instructions will aid you in setting up your local environment, in
 
  1. Download the latest `Verify Service` release for your operating system here: [RetailOps SDK Releases Page](https://github.com/gudTECH/retailops-sdk/releases)
  2. Unzip downloaded file
- 3. Use terminal and enter unzipped directory (e.g., `verify_linux_v0.0.6`)
+ 3. Use terminal and enter unzipped directory (for example: `verify_linux_v0.0.9.0`)
  4. Run the verify utility against your actual endpoints by specifying the `-base-url` flag
 
     ```
@@ -16,8 +16,7 @@ The following instructions will aid you in setting up your local environment, in
     ```    
 
 After you have completely developed your channel integration, and have successfully used
-the verifier utility to test that your integration is operating correctly, you are ready to
-attempt certification with RetailOps.
+the verifier utility to test that your integration is operating correctly, you are ready to attempt certification with RetailOps.
 
 Follow the instructions here: [Certifying Your RetailOps SDK Channel Integration](https://github.com/gudTECH/retailops-sdk/blob/master/verify/CERTIFY_README.md)
 
