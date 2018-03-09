@@ -1215,8 +1215,9 @@
                             },
                             "ship_service_code": {
                                 "type": "string",
-                                "description": "Code identifying the level of service. Could be generic 'Slow' / 'Fast' or Specific 'Fedex Ground'",
+                                "description": "Code identifying the level of service. Could be generic 'Slow' / 'Fast' or Specific 'Fedex Ground' (required)",
                                 "minLength": 1,
+                                "maxlength": 35,
                                 "example": "Ground (5-7 days)"
                             },
                             "currency_code": {
