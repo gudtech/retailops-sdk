@@ -1164,7 +1164,7 @@
                         "page_token": {
                             "type": "string",
                             "description": "Initially blank, subsequent calls will specifiy the value returned from next_page_token. Your implementation should encode any state information required for order retrieval into this value. If your channel order retrival implementation requires the data which is encoded in page_token, it MUST handle a blank page_token gracefully, and respond with a valid and appropriate next_page_token",
-                            "maxLength":35
+                            "maxLength": 35
                         },
                         "specific_orders": {
                             "type": "array",
@@ -1198,6 +1198,13 @@
                     "maxItems": 100,
                     "items": {
                         "type": "object",
+                        "required": [
+                            "channel_order_refnum",
+                            "ship_service_code",
+                            "currency_code",
+                            "billing_address",
+                            "shipping_address"
+                        ],
                         "properties": {
                             "tags": {
                                 "type": "array",
