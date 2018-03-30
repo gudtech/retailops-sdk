@@ -24,8 +24,6 @@ Using the RetailOps SDK, you can create, test, and certify custom integrations f
 - [Shipper Integrations](#shipping-integrations) (coming soon)
 - [Tax Calculation Integrations](#tax-calculation-integrations) (coming soon)
 
-[![Build Status](https://travis-ci.org/gudTECH/retailops-sdk.svg?branch=web-hook-design)](https://travis-ci.org/gudTECH/retailops-sdk)
-
 ### Installation Instructions
 
 The SDK includes
