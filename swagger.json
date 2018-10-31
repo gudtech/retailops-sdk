@@ -1317,7 +1317,7 @@
                                         },
                                         "currency_values": {
                                             "type": "object",
-                                            "description":"Tax should be provided at either the order level (recommended) or the individual item level but not both. Also, at the item level either unit_tax or unit_tax_pct can be provided (if not provided at the order level) but not both. Providing both values will result in incorrect tax calculation."
+                                            "description":"Tax should be provided at either the order level (recommended) or the individual item level but not both. Also, at the item level either unit_tax or unit_tax_pct can be provided (if not provided at the order level) but not both. Providing both values will result in incorrect tax calculation.",
                                             "properties": {
                                                 "discount_amt": {
                                                     "type": "number"
