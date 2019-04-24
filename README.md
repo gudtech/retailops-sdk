@@ -21,8 +21,6 @@ These scenarios are not presently discussed in this documentation, but may be di
 Using the RetailOps SDK, you can create, test, and certify custom integrations for use with RetailOps.
 
 - [Channel Integrations](#channel-integrations)
-- [Shipper Integrations](#shipping-integrations) (coming soon)
-- [Tax Calculation Integrations](#tax-calculation-integrations) (coming soon)
 
 ### Installation Instructions
 
