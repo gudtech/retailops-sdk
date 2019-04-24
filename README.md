@@ -2,7 +2,7 @@
 
 ## RetailOps SDK
 
-The Retailops SDK provides the tools necessary to enable customers to create their own RetailOps SDK channel integrations. The SDK process is not entirely self-service and is intended for channel integrations. Prior to beginning an SDK integration customers must contact RetailOps tech support so that we can add their developers to our Slack channel for SDK support. 
+The Retailops SDK provides the tools necessary to enable customers to create their own RetailOps SDK channel integrations. The SDK process is not entirely self-service, prior to beginning an SDK integration customers must contact RetailOps tech support so that we can add their developers to our Slack channel for SDK support. 
 
 The SDK is different from the RetailOps API. When integrating with the API, you call the RetailOps servers.
 When integrating with the SDK, the RetailOps servers call your servers. [Click here for more details about the RetailOps API](http://help.retailops.com/hc/en-us/articles/206283535-Getting-Started-with-the-RetailOps-API)
