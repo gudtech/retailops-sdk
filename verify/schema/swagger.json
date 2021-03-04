@@ -1193,6 +1193,7 @@
                 },
                 "orders": {
                     "type": "array",
+                    "title": "Order",
                     "description": "List of orders retrieved from the channel. Cannot exceed 100 orders per request. Your implementation MUST NOT consider the order as having been imported until such time as order_acknolwledge is called with the specific order reference numbers.",
                     "maxItems": 100,
                     "items": {
