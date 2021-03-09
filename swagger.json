@@ -5,7 +5,7 @@
         "description": "Integrate a sales channel with RetailOps",
         "version": "1.0.0"
     },
-    "host": "your.servername-here.com",
+    "host": "gudtech.github.io/retailops-sdk",
     "schemes": [
         "https",
         "http"
