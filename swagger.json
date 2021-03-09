@@ -378,6 +378,7 @@
                 },
                 "channel_info": {
                     "type": "object",
+                    "title": "ChannelInfo",
                     "properties": {
                         "id": {
                             "type": "integer",
@@ -438,8 +439,10 @@
                 },
                 "items": {
                     "type": "array",
+                    "title": "CreditItems",
                     "items": {
                         "type": "object",
+                        "title": "CreditItem",
                         "description": "credited item ref",
                         "properties": {
                             "retailops_item_id": {
@@ -550,6 +553,7 @@
                 },
                 {
                     "type": "object",
+                    "title": "TemplateOutput",
                     "properties": {
                         "template_output": {
                             "type": "object",
@@ -577,9 +581,11 @@
                     "properties": {
                         "inventory_updates": {
                             "type": "array",
+                            "title": "InventoryItemUpdates",
                             "description": "List of inventory item updates",
                             "items": {
                                 "type": "object",
+                                "title": "InventoryItemUpdate",
                                 "properties": {
                                     "sku": {
                                         "type": "string",
@@ -593,9 +599,11 @@
                                     },
                                     "quantity_detail": {
                                         "type": "array",
+                                        "title": "QuantityDetails",
                                         "description": "Detailed breakdown of inventory quantities contributing to the top-line numbers",
                                         "items": {
                                             "type": "object",
+                                            "title": "QuantityDetail",
                                             "properties": {
                                                 "quantity_type": {
                                                     "type": "string",
@@ -669,9 +677,11 @@
                 },
                 "order_items": {
                     "type": "array",
+                    "title": "OrderItems",
                     "description": "List of order line items",
                     "items": {
                         "type": "object",
+                        "title": "OrderItem",
                         "properties": {
                             "channel_item_refnum": {
                                 "type": "string",
@@ -727,9 +737,11 @@
                 },
                 "unshipped_items": {
                     "type": "array",
+                    "title": "UnshippedItems",
                     "description": "List of items which were not shipped as of the time of order completion. Presumably these items should be canceled in the channel",
                     "items": {
                         "type": "object",
+                        "title": "UnshippedItem",
                         "properties": {
                             "channel_item_refnum": {
                                 "type": "string",
@@ -760,9 +772,11 @@
                 },
                 "shipments": {
                     "type": "array",
+                    "title": "Shipments",
                     "description": "List of all fulfilled shipments for this order. Each RetailOps shipment corresponds to one portion of the order routing plan, usually one per each facility or vendor. Each fulfilled shipment will contain one or more packages",
                     "items": {
                         "type": "object",
+                        "title": "Shipment",
                         "properties": {
                             "retailops_shipment_id": {
                                 "type": "integer",
@@ -770,8 +784,10 @@
                             },
                             "packages": {
                                 "type": "array",
+                                "title": "Packages",
                                 "items": {
                                     "type": "object",
+                                    "title": "Package",
                                     "description": "a package included in shipment",
                                     "properties": {
                                         "retailops_package_id": {
@@ -808,8 +824,10 @@
                                         },
                                         "package_items": {
                                             "type": "array",
+                                            "title": "PackageItems",
                                             "items": {
                                                 "type": "object",
+                                                "title": "PackageItem",
                                                 "properties": {
                                                     "sku": {
                                                         "type": "string",
@@ -859,9 +877,11 @@
                 },
                 "order_items": {
                     "type": "array",
+                    "title": "OrderItems",
                     "description": "List of order line items",
                     "items": {
                         "type": "object",
+                        "title": "OrderItem",
                         "properties": {
                             "channel_item_refnum": {
                                 "type": "string",
@@ -921,9 +941,11 @@
                 },
                 "unshipped_items": {
                     "type": "array",
+                    "title": "UnshippedItems",
                     "description": "List of items which were not shipped as of the time of order completion. Presumably these items should be canceled in the channel",
                     "items": {
                         "type": "object",
+                        "title": "UnshippedItem",
                         "properties": {
                             "channel_item_refnum": {
                                 "type": "string",
@@ -954,9 +976,11 @@
                 },
                 "shipments": {
                     "type": "array",
+                    "title": "Shipments",
                     "description": "List of all fulfilled shipments for this order. Each RetailOps shipment corresponds to one portion of the order routing plan, usually one per each facility or vendor. Each fulfilled shipment will contain one or more packages",
                     "items": {
                         "type": "object",
+                        "title": "Shipment",
                         "properties": {
                             "retailops_shipment_id": {
                                 "type": "integer",
@@ -964,8 +988,10 @@
                             },
                             "packages": {
                                 "type": "array",
+                                "title": "Packages",
                                 "items": {
                                     "type": "object",
+                                    "title": "Package",
                                     "description": "a package included in shipment",
                                     "properties": {
                                         "retailops_package_id": {
@@ -1002,8 +1028,10 @@
                                         },
                                         "package_items": {
                                             "type": "array",
+                                            "title": "PackageItems",
                                             "items": {
                                                 "type": "object",
+                                                "title": "PackageItem",
                                                 "properties": {
                                                     "sku": {
                                                         "type": "string",
@@ -1046,9 +1074,11 @@
                     "properties": {
                         "orders": {
                             "type": "array",
+                            "title": "Orders",
                             "description": "an array of order information objects",
                             "items": {
                                 "type": "object",
+                                "title": "Order",
                                 "properties": {
                                     "channel_order_refnum": {
                                         "type": "string",
@@ -1084,6 +1114,7 @@
                     "properties": {
                         "order": {
                             "type": "object",
+                            "title": "Order",
                             "properties": {
                                 "retailops_order_id": {
                                     "type": "integer",
@@ -1168,9 +1199,11 @@
                         },
                         "specific_orders": {
                             "type": "array",
+                            "title": "Orders",
                             "description": "RetailOps may occasionally wish to re-fetch a specific order, or small group of orders. When specified, any next_page_token which is provided will be ignored.",
                             "items": {
                                 "type": "object",
+                                "title": "Order",
                                 "description": "List of specific orders which are desired to be fetched or re-fetched. Any filtering of acknolwedged orders should be disabled for this function",
                                 "properties": {
                                     "channel_refnum": {
@@ -1194,11 +1227,12 @@
                 },
                 "orders": {
                     "type": "array",
-                    "title": "Order",
+                    "title": "Orders",
                     "description": "List of orders retrieved from the channel. Cannot exceed 100 orders per request. Your implementation MUST NOT consider the order as having been imported until such time as order_acknolwledge is called with the specific order reference numbers.",
                     "maxItems": 100,
                     "items": {
                         "type": "object",
+                        "title": "Order",
                         "required": [
                             "channel_order_refnum",
                             "ship_service_code",
@@ -1209,6 +1243,7 @@
                         "properties": {
                             "tags": {
                                 "type": "array",
+                                "title": "Tags",
                                 "description": "List of text order tags that can be applied to this order (array of strings)",
                                 "example": "['example tag','test']",
                                 "maxItems": 100,
@@ -1246,6 +1281,7 @@
                             },
                             "currency_values": {
                                 "type": "object",
+                                "title": "CurrencyValue",
                                 "description": "Currency values which pertain to the whole order, but are not included in the respective item values. EG: if the item shipping is $1 for each of 10 items, for a total of $10, the shipping_amt here should be $0, and the per-item shipping_amt should be $1; If the order shipping is $10 none of which is directly attributable to specific items, then shipping_amt here should be $10",
                                 "properties": {
                                     "shipping_amt": {
@@ -1284,8 +1320,10 @@
                             },
                             "order_items": {
                                 "type": "array",
+                                "title": "OrderItems",
                                 "items": {
                                     "type": "object",
+                                    "title": "OrderItem",
                                     "properties": {
                                         "channel_item_refnum": {
                                             "type": "string",
@@ -1318,6 +1356,7 @@
                                         },
                                         "currency_values": {
                                             "type": "object",
+                                            "title": "CurrencyValues",
                                             "description": "Tax should be provided at either the order level (recommended) or the individual item level but not both. Also, at the item level either unit_tax or unit_tax_pct can be provided (if not provided at the order level) but not both. Providing both values will result in incorrect tax calculation.",
                                             "properties": {
                                                 "discount_amt": {
@@ -1351,8 +1390,10 @@
                                         },
                                         "options": {
                                             "type": "array",
+                                            "title": "OrderItemOptions",
                                             "items": {
                                                 "type": "object",
+                                                "title": "OrderItemOption",
                                                 "properties": {
                                                     "type": {
                                                         "type": "string",
@@ -1403,8 +1444,10 @@
                             },
                             "payment_transactions": {
                                 "type": "array",
+                                "title": "PaymentTransactions",
                                 "items": {
                                     "type": "object",
+                                    "title": "PaymentTransaction",
                                     "properties": {
                                         "payment_processing_type": {
                                             "type": "string",
@@ -1453,6 +1496,7 @@
                             },
                             "customer_info": {
                                 "type": "object",
+                                "title": "Customer",
                                 "description": "customer",
                                 "properties": {
                                     "email_address": {
@@ -1474,9 +1518,11 @@
                             },
                             "attributes": {
                                 "type": "array",
+                                "title": "Attributes",
                                 "description": "Attributes which pertain to the order",
                                 "items": {
                                     "type": "object",
+                                    "title": "Attribute",
                                     "properties": {
                                         "attribute_type": {
                                             "type": "string",
@@ -1596,6 +1642,7 @@
                         },
                         "shipment": {
                             "type": "object",
+                            "title": "Shipment",
                             "description": "shipment object",
                             "properties": {
                                 "retailops_shipment_id": {
@@ -1604,8 +1651,10 @@
                                 },
                                 "packages": {
                                     "type": "array",
+                                    "title": "Packages",
                                     "items": {
                                         "type": "object",
+                                        "title": "Package",
                                         "description": "a package included in shipment",
                                         "properties": {
                                             "retailops_package_id": {
@@ -1642,8 +1691,10 @@
                                             },
                                             "package_items": {
                                                 "type": "array",
+                                                "title": "PackageItems",
                                                 "items": {
                                                     "type": "object",
+                                                    "title": "PackageItem",
                                                     "properties": {
                                                         "sku": {
                                                             "type": "string",
@@ -1695,6 +1746,7 @@
                     "properties": {
                         "rmas": {
                             "type": "array",
+                            "title": "RMAs",
                             "items": {
                                 "$ref": "#/definitions/Return"
                             }
@@ -1765,8 +1817,10 @@
                 },
                 "payment_transactions": {
                     "type": "array",
+                    "title": "PaymentTransactions",
                     "items": {
                         "type": "object",
+                        "title": "PaymentTransaction",
                         "properties": {
                             "payment_processing_type": {
                                 "type": "string",
@@ -1803,8 +1857,10 @@
         },
         "ResponseEventArray": {
             "type": "array",
+            "title": "Events",
             "items": {
                 "type": "object",
+                "title": "Event",
                 "description": "event returned in action response",
                 "properties": {
                     "event_type": {
@@ -1833,9 +1889,11 @@
                     },
                     "associations": {
                         "type": "array",
-                        "description": "",
+                        "title": "Associations",
+                        "description": "Objects associated with this event",
                         "items": {
                             "type": "object",
+                            "title": "Association",
                             "properties": {
                                 "identifier_type": {
                                     "type": "string",
@@ -1865,8 +1923,10 @@
         },
         "WritebackLineItems": {
             "type": "array",
+            "title": "LineItems",
             "items": {
                 "type": "object",
+                "title": "LineItem",
                 "description": "individual writeback line item",
                 "properties": {
                     "order_item_id": {
