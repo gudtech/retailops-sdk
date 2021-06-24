@@ -1433,6 +1433,9 @@
                                             "type": "integer",
                                             "description": "The RetailOps fulfillment actor ID",
                                             "example": 1
+                                        },
+                                        "attributes": {
+                                            "$ref": "#/definitions/Attributes"
                                         }
                                     }
                                 }
@@ -1468,40 +1471,7 @@
                                 }
                             },
                             "attributes": {
-                                "type": "array",
-                                "title": "Attributes",
-                                "description": "Attributes which pertain to the order",
-                                "items": {
-                                    "type": "object",
-                                    "title": "Attribute",
-                                    "properties": {
-                                        "attribute_type": {
-                                            "type": "string",
-                                            "description": "Type of attribute being specified",
-                                            "enum": [
-                                                "text",
-                                                "number",
-                                                "select",
-                                                "multiselect"
-                                            ],
-                                            "example": "text"
-                                        },
-                                        "handle": {
-                                            "type": "string",
-                                            "description": "Unique identifier",
-                                            "minLength": 2,
-                                            "maxLength": 100,
-                                            "example": "customer_rewards_number"
-                                        },
-                                        "value": {
-                                            "type": "string",
-                                            "description": "value of attribute",
-                                            "minLength": 2,
-                                            "maxLength": 100,
-                                            "example": "XXX_XXXXXX_XXX"
-                                        }
-                                    }
-                                }
+                                "$ref": "#/definitions/Attributes"
                             },
                             "ip_address": {
                                 "type": "string",
@@ -1940,6 +1910,41 @@
                     "transaction_type",
                     "payment_processing_type"
                 ]
+            }
+        },
+        "Attributes": {
+            "type": "array",
+            "description": "Attributes which pertain to the record",
+            "items": {
+                "type": "object",
+                "title": "Attribute",
+                "properties": {
+                    "attribute_type": {
+                        "type": "string",
+                        "description": "Type of attribute being specified",
+                        "enum": [
+                            "text",
+                            "number",
+                            "select",
+                            "multiselect"
+                        ],
+                        "example": "text"
+                    },
+                    "handle": {
+                        "type": "string",
+                        "description": "Unique identifier",
+                        "minLength": 2,
+                        "maxLength": 100,
+                        "example": "customer_rewards_number"
+                    },
+                    "value": {
+                        "type": "string",
+                        "description": "value of attribute",
+                        "minLength": 2,
+                        "maxLength": 100,
+                        "example": "XXX_XXXXXX_XXX"
+                    }
+                }
             }
         }
     }
