@@ -1242,14 +1242,7 @@
                         ],
                         "properties": {
                             "tags": {
-                                "type": "array",
-                                "title": "Tags",
-                                "description": "List of text order tags that can be applied to this order (array of strings)",
-                                "example": "['example tag','test']",
-                                "maxItems": 100,
-                                "items": {
-                                    "type": "string"
-                                }
+                                "$ref": "#/definitions/Tags"
                             },
                             "channel_order_refnum": {
                                 "type": "string",
@@ -1436,6 +1429,9 @@
                                         },
                                         "attributes": {
                                             "$ref": "#/definitions/Attributes"
+                                        },
+                                        "tags": {
+                                            "$ref": "#/definitions/Tags"
                                         }
                                     }
                                 }
@@ -1945,6 +1941,16 @@
                         "example": "XXX_XXXXXX_XXX"
                     }
                 }
+            }
+        },
+        "Tags": {
+            "type": "array",
+            "title": "Tags",
+            "description": "List of text tags that can be applied to this record (array of strings)",
+            "example": "['example tag','test']",
+            "maxItems": 100,
+            "items": {
+                "type": "string"
             }
         }
     }
