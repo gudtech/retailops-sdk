@@ -289,6 +289,31 @@
                 },
                 "tags": []
             }
+        },
+        "/payment_credit_v1": {
+            "post": {
+                "summary": "payment_credit_v1",
+                "description": "Requested payment credit",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "request body.",
+                        "schema": {
+                            "$ref": "#/definitions/PaymentCreditRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/PaymentCreditResponse"
+                        }
+                    }
+                },
+                "tags": []
+            }
         }
     },
     "definitions": {
@@ -659,6 +684,35 @@
                     "$ref": "#/definitions/ResponseEventArray"
                 }
             }
+        },
+        "PaymentCreditRequest": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BaseRequest"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "credit": {
+                            "type": "object",
+                            "title": "Credit request",
+                            "description": "Data relevant to requested payment credit",
+                            "properties": {
+                                "amount": {
+                                    "type": "number",
+                                    "description": "Amount of requested credit"
+                                },
+                                "parent_payment_transactions": {
+                                    "$ref": "#/definitions/PaymentTransactions"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "PaymentCreditResponse": {
+            "$ref": "#/definitions/PaymentTransaction"
         },
         "WritebackOrder": {
             "type": "object",
@@ -1860,53 +1914,68 @@
         "PaymentTransactions": {
             "type": "array",
             "items": {
-                "type": "object",
-                "title": "PaymentTransaction",
-                "properties": {
-                    "payment_processing_type": {
-                        "type": "string",
-                        "description": "Indicates what type of payment RetailOps should record in its payment system. types beginning with channel_ are delegated to the channel for processing. Other types may be handled directly with the payment processor, if the account is on file",
-                        "enum": [
-                            "channel_payment",
-                            "channel_storecredit",
-                            "channel_giftcert",
-                            "authorize.net"
-                        ]
-                    },
-                    "transaction_type": {
-                        "type": "string",
-                        "description": "",
-                        "example": "charge",
-                        "enum": [
-                            "auth",
-                            "charge",
-                            "capture",
-                            "giftcard"
-                        ]
-                    },
-                    "payment_type": {
-                        "type": "string",
-                        "description": "Payment type for this transaction. Free-form",
-                        "example": "Visa (or MasterCard, giftcard, etc...)"
-                    },
-                    "amount": {
-                        "type": "number",
-                        "description": "Transaction amount",
-                        "example": 100.32
-                    },
-                    "message": {
-                        "type": "string",
-                        "description": "Optional message to record info regarding transaction.",
-                        "example": "Gift card purchase for promotion XYZ"
-                    }
-                },
-                "required": [
-                    "payment_type",
-                    "amount",
-                    "transaction_type",
-                    "payment_processing_type"
-                ]
+                "$ref": "#/definitions/PaymentTransaction"
             }
+        },
+        "PaymentTransaction": {
+            "type": "object",
+            "title": "PaymentTransaction",
+            "properties": {
+                "payment_processing_type": {
+                    "type": "string",
+                    "description": "Indicates what type of payment RetailOps should record in its payment system. types beginning with channel_ are delegated to the channel for processing. Other types may be handled directly with the payment processor, if the account is on file",
+                    "enum": [
+                        "channel_payment",
+                        "channel_storecredit",
+                        "channel_giftcert",
+                        "authorize.net"
+                    ]
+                },
+                "transaction_type": {
+                    "type": "string",
+                    "description": "",
+                    "example": "charge",
+                    "enum": [
+                        "auth",
+                        "charge",
+                        "capture",
+                        "credit"
+                    ]
+                },
+                "payment_type": {
+                    "type": "string",
+                    "description": "Payment type for this transaction. Free-form",
+                    "example": "Visa (or MasterCard, giftcard, etc...)"
+                },
+                "amount": {
+                    "type": "number",
+                    "description": "Transaction amount",
+                    "example": 100.32
+                },
+                "message": {
+                    "type": "string",
+                    "description": "Optional message to record info regarding transaction.",
+                    "example": "Gift card purchase for promotion XYZ"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Status of the payment transaction",
+                    "example": "success",
+                    "enum": [
+                        "canceled",
+                        "success",
+                        "fail",
+                        "decline",
+                        "timeout"
+                    ]
+                }
+            },
+            "required": [
+                "payment_type",
+                "amount",
+                "transaction_type",
+                "payment_processing_type"
+            ]
         },
         "Attributes": {
             "type": "array",
