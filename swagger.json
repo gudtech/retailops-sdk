@@ -1960,7 +1960,7 @@
                 },
                 "status": {
                     "type": "string",
-                    "description": "Status of the payment transaction",
+                    "description": "Status of the payment transaction (defaults to success)",
                     "example": "success",
                     "enum": [
                         "canceled",
