@@ -695,7 +695,7 @@
                     "properties": {
                         "credit": {
                             "type": "object",
-                            "title": "Credit request",
+                            "title": "CreditRequest",
                             "description": "Data relevant to requested payment credit",
                             "properties": {
                                 "amount": {
