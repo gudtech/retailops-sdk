@@ -700,7 +700,8 @@
                             "properties": {
                                 "amount": {
                                     "type": "number",
-                                    "description": "Amount of requested credit"
+                                    "description": "Amount of requested credit",
+                                    "example": 100.32
                                 },
                                 "parent_payment_transactions": {
                                     "$ref": "#/definitions/PaymentTransactions"
