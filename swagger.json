@@ -1927,9 +1927,7 @@
                     "description": "Indicates what type of payment RetailOps should record in its payment system. types beginning with channel_ are delegated to the channel for processing. Other types may be handled directly with the payment processor, if the account is on file",
                     "enum": [
                         "channel_payment",
-                        "channel_storecredit",
-                        "channel_giftcert",
-                        "authorize.net"
+                        "channel_giftcert"
                     ]
                 },
                 "transaction_type": {
