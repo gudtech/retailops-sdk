@@ -1969,6 +1969,11 @@
                         "decline",
                         "timeout"
                     ]
+                },
+                "refnum": {
+                    "type": "string",
+                    "description": "Reference number for payment transaction",
+                    "example": "104298"
                 }
             },
             "required": [
