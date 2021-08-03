@@ -1558,7 +1558,7 @@
                 "events": {
                     "$ref": "#/definitions/ResponseEventArray"
                 },
-                "channel_transactions": {
+                "payment_transactions": {
                     "$ref": "#/definitions/PaymentTransactions"
                 },
                 "return": {
