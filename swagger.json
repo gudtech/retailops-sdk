@@ -1801,7 +1801,7 @@
             "items": {
                 "type": "object",
                 "title": "Event",
-                "description": "event returned in action response",
+                "description": "Event which occurred in processing the request. Usually used to log errors, but can be used to log other event information that may be relevant.",
                 "properties": {
                     "event_type": {
                         "type": "string",
