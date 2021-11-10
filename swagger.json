@@ -1487,6 +1487,16 @@
                                         },
                                         "tags": {
                                             "$ref": "#/definitions/Tags"
+                                        },
+                                        "expected_ship_date": {
+                                            "type": "string",
+                                            "description": "Date order item is expected to be shipped",
+                                            "example": "2021-10-01T00:00:00-0700"
+                                        },
+                                        "expected_arrival_date": {
+                                            "type": "string",
+                                            "description": "Date order item is expected to arrive at the customer's address",
+                                            "example": "2021-10-01T00:00:00-0700"
                                         }
                                     }
                                 }
