@@ -369,6 +369,9 @@
                     "type": "string",
                     "description": "Contact phone number for address",
                     "example": "(555)-867-5309"
+                },
+                "attributes": {
+                    "$ref": "#/definitions/Attributes"
                 }
             }
         },
