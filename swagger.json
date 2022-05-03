@@ -400,7 +400,7 @@
                     "example": 1
                 },
                 "client_id": {
-                    "description": "RetailOPS client id",
+                    "description": "RetailOPS client ID",
                     "type": "integer",
                     "example": 497
                 },
@@ -410,7 +410,7 @@
                     "properties": {
                         "id": {
                             "type": "integer",
-                            "description": "channel id",
+                            "description": "channel ID",
                             "example": 21
                         }
                     }
@@ -422,12 +422,12 @@
             "properties": {
                 "retailops_return_id": {
                     "type": "integer",
-                    "description": "RetailOps Order return id",
+                    "description": "RetailOps Order return ID",
                     "example": 87
                 },
                 "retailops_rma_id": {
+                    "description": "RetailOps RMA ID",
                     "type": "string",
-                    "description": "RetailOps RMA id",
                     "example": "null"
                 },
                 "product_amt": {
@@ -475,7 +475,7 @@
                         "properties": {
                             "retailops_item_id": {
                                 "type": "integer",
-                                "description": "order item id",
+                                "description": "order item ID",
                                 "example": 7395
                             },
                             "channel_item_refnum": {
@@ -485,7 +485,7 @@
                             },
                             "sku": {
                                 "type": "string",
-                                "description": "sku id",
+                                "description": "sku ID",
                                 "example": "132"
                             },
                             "quantity": {
