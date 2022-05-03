@@ -426,8 +426,13 @@
                     "example": 87
                 },
                 "retailops_rma_id": {
+                    "type": "integer",
                     "description": "RetailOps RMA ID",
+                    "example": "null"
+                },
+                "external_rma_refnum": {
                     "type": "string",
+                    "description": "Reference number to externally-originated RMA",
                     "example": "null"
                 },
                 "product_amt": {
